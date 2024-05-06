@@ -1,4 +1,4 @@
-package com.example.zeldalike;
+package com.example.zeldalike.controlleurs;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
