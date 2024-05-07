@@ -4,14 +4,14 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="com.example.zeldalike.controlleurs.Controlleur" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <top>
             <Label alignment="CENTER" text="KILL KILL DEATH KILL DIE" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <TilePane fx:id="terrain_affichage" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <TilePane fx:id="terrain_affichage" prefHeight="80.0" prefWidth="80.0" maxHeight="80" maxWidth="80" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
