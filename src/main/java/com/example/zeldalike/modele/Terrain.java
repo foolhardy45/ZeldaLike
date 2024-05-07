@@ -6,4 +6,8 @@ public class Terrain {
     public Terrain(int[] map) {
         this.map = map;
     }
+
+    public int[] getMap() {
+        return map;
+    }
 }
