@@ -11,10 +11,10 @@ public class JoueurVue {
         public JoueurVue(Joueur j){
             this.j = j;
             this.r = new Circle(3);
-            r.setFill(Color.BLUE);
+            r.setFill(Color.RED);
             r.setTranslateX(j.getX());
             r.setTranslateY(j.getY());
-            System.out.println("cercle est jouer créer");
+            System.out.println("cercle et joueur créer");
         }
 
     public Circle getR() {
