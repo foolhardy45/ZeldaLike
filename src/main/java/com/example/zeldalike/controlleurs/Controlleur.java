@@ -49,7 +49,7 @@ public class Controlleur implements Initializable {
 
     public void moveUp(){
         System.out.println("move up");
-
+        this.joueurVue.getR().relocate(this.joueurVue.getR().getLayoutX(),this.joueurVue.getR().getLayoutY()-5);
     }
     public void moveDown(){
         System.out.println("move Down");
