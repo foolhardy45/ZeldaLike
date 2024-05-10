@@ -1,6 +1,7 @@
 module com.example.zeldalike {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.example.zeldalike to javafx.fxml;

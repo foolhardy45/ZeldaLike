@@ -1,4 +1,37 @@
 package com.example.zeldalike.modele;
 
 public class Environnement {
+    private Joueur j1;
+    private Ennemis ennemis;
+    private int height;
+    private  int width;
+    private Terrain terrain;
+
+    public Environnement( int height, int width) {
+        this.j1 = new Joueur(1,1,1,0,0,this);
+        this.ennemis = new Ennemis(1,1,0,1,1,this);
+        this.height = height;
+        this.width = width;
+        this.terrain = new Terrain();
+    }
+
+    public Joueur getJ1() {
+        return j1;
+    }
+
+    public Ennemis getEnnemis() {
+        return ennemis;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
 }

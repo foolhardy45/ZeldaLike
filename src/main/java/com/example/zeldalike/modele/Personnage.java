@@ -1,14 +1,34 @@
 package com.example.zeldalike.modele;
 
-public class Personnage {
-    int hp;
-    int def;
-    int vitesse;
+public abstract class Personnage  {
+    private int hp;
+    private int def;
+    private int vitesse;
+    private int x;
+    private int y;
+    private Environnement env;
 
-    public Personnage(int hp, int def, int vitesse) {
+
+
+    public Personnage(int hp, int def, int vitesse, int x, int y,Environnement env) {
         this.hp = hp;
         this.def = def;
         this.vitesse = vitesse;
+        this.x = x;
+        this.y = y;
+        this.env = env;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public Environnement getEnv() {
+        return env;
     }
 
     public int getHp() {
@@ -34,7 +54,5 @@ public class Personnage {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-
-
 
 }
