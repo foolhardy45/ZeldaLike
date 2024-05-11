@@ -8,8 +8,9 @@ public class Environnement {
     private Terrain terrain;
 
     public Environnement( int height, int width) {
-        this.j1 = new Joueur(1,1,1,300,300,this);
-        this.ennemis = new Ennemis(1,1,0,1,1,this);
+        Position p = new Position(100,100);
+        this.j1 = new Joueur(1,1,1,p,this);
+        this.ennemis = new Ennemis(1,1,0,p,this);
         this.height = height;
         this.width = width;
         this.terrain = new Terrain();

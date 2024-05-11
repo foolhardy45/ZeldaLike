@@ -10,7 +10,7 @@
             <Label alignment="CENTER" text="KILL KILL DEATH KILL DIE" BorderPane.alignment="CENTER" />
          </top>
          <center>
-            <TilePane fx:id="terrain_affichage" alignment="CENTER" minHeight="0.0" />
+            <TilePane fx:id="terrain_affichage" alignment="CENTER" maxHeight="320.0" maxWidth="480.0" minHeight="320.0" minWidth="480.0" prefHeight="320.0" prefWidth="480.0" />
          </center>
       </BorderPane>
    </children>
