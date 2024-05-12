@@ -12,11 +12,11 @@ public class JoueurVue {
 
         public JoueurVue(Joueur j, TilePane tilePane){
             this.j = j;
-            this.r = new Circle(50);
+            this.r = new Circle(10);
             this.tilePane = tilePane;
             r.setFill(Color.RED);
-            r.setTranslateX(j.getP().getX());
-            r.setTranslateY(j.getP().getY());
+           r.centerXProperty().bind(j.getP().xProperty());
+           r.centerYProperty().bind(j.getP().yProperty());
             System.out.println("cercle et joueur créer");
         }
     public void ajouterAuTilePane() {
@@ -30,23 +30,5 @@ public class JoueurVue {
     public Joueur getJ() {
         return j;
     }
-    // Méthode pour déplacer le cercle vers le haut
-    public void deplacerHaut(double deltaY) {
-        r.setCenterY(r.getCenterY() - deltaY);
-    }
 
-    // Méthode pour déplacer le cercle vers le bas
-    public void deplacerBas(double deltaY) {
-        r.setCenterY(r.getCenterY() + deltaY);
-    }
-
-    // Méthode pour déplacer le cercle vers la gauche
-    public void deplacerGauche(double deltaX) {
-        r.setCenterX(r.getCenterX() - deltaX);
-    }
-
-    // Méthode pour déplacer le cercle vers la droite
-    public void deplacerDroite(double deltaX) {
-        r.setCenterX(r.getCenterX() + deltaX);
-    }
 }

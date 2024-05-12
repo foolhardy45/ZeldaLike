@@ -89,17 +89,18 @@ public class Controlleur implements Initializable {
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),(ev ->{
+                    j.moveUp();
 
         })
         );
         gameLoop.getKeyFrames().add(kf);
     }
 
-    private void updateGame(){
+    /*private void updateGame(){
         //this.onKeyPresse();
     }
 
     private void drawGame(){
         //joueurVue.update;
-    }
+    }*/
 }
