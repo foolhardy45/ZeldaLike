@@ -48,7 +48,9 @@ public class Controlleur implements Initializable {
         joueurVue = new JoueurVue(this.env.getJ1());
 
         terrain_affichage.getChildren().add(terrrainVue.creeMap(terrain.getMap()));
-        carte_interaction.getChildren().add(joueurVue.getR());
+
+        //carte_interaction.getChildren().add(joueurVue.getR());
+        carte_interaction.getChildren().add(joueurVue.getMac());
 
 
 
