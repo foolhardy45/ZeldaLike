@@ -21,14 +21,14 @@ public class Environnement {
     }
 
     public void encoreSurJeu(Personnage personnage){
-        if (personnage.getP().getY() > this.height ){
+        if (personnage.getP().getY() + 32 > this.height ){
             personnage.getP().setY(personnage.getP().getY()-5);
         }
-        if (personnage.getP().getX() > this.width ){
+        if (personnage.getP().getX() + 32 > this.width ){
             personnage.getP().setX(personnage.getP().getX()-5);
         }
 
-        if (personnage.getP().getY()  <  0 ){
+        if (personnage.getP().getY() + 16  <  0 ){
             personnage.getP().setY(personnage.getP().getY() +5);
         }
         if (personnage.getP().getX() < 0 ){
