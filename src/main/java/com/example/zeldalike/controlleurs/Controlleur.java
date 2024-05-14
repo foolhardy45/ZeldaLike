@@ -39,7 +39,7 @@ public class Controlleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.env = new Environnement(416, 384);
+        this.env = new Environnement(832, 768);
         Terrain terrain = new Terrain();
         TerrrainVue terrrainVue = new TerrrainVue();
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);

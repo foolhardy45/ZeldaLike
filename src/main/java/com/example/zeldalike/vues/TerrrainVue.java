@@ -15,9 +15,9 @@ public class TerrrainVue {
     public TilePane creeMap(int[] tab) {
 
 
-        Image eau = new Image(String.valueOf(Main.class.getResource("images/eau.png")));
-        Image trou = new Image(String.valueOf(Main.class.getResource("images/trou.png")));
-        Image terre = new Image(String.valueOf(Main.class.getResource("images/terre.png")));
+        Image eau = new Image(String.valueOf(Main.class.getResource("images/eau2.png")));
+        Image trou = new Image(String.valueOf(Main.class.getResource("images/trou2.png")));
+        Image terre = new Image(String.valueOf(Main.class.getResource("images/terre2.png")));
         this.map.setPrefColumns(24); //TAILLE DU TERRAIN EN LARGEUR
         for (int i = 0; i < tab.length; i++) {
             switch (tab[i]){
