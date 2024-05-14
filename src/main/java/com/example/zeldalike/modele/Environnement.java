@@ -8,7 +8,7 @@ public class Environnement {
     private Terrain terrain;
 
     public Environnement( int height, int width) {
-        Position p = new Position(100,100);
+        Position p = new Position(0,0);
         this.j1 = new Joueur(1,1,1,p,this);
         this.ennemis = new Ennemis(1,1,0,p,this);
         this.height = height;
@@ -18,6 +18,23 @@ public class Environnement {
 
     public Joueur getJ1() {
         return j1;
+    }
+
+    public void encoreSurJeu(Personnage personnage){
+        if (personnage.getP().getY() > this.height ){
+            personnage.getP().setY(personnage.getP().getY()-5);
+        }
+        if (personnage.getP().getX() > this.width ){
+            personnage.getP().setX(personnage.getP().getX()-5);
+        }
+
+        if (personnage.getP().getY()  <  0 ){
+            personnage.getP().setY(personnage.getP().getY() +5);
+        }
+        if (personnage.getP().getX() < 0 ){
+            personnage.getP().setX(personnage.getP().getX()+5);
+        }
+
     }
 
     public Ennemis getEnnemis() {

@@ -16,7 +16,7 @@ public class JoueurVue {
 
     public JoueurVue(Joueur j) {
         this.j = j;
-        this.r = new Circle(10);
+        this.r = new Circle(6);
         r.setFill(Color.RED);
         r.translateXProperty().bind(j.getP().xProperty());
         r.translateYProperty().bind(j.getP().yProperty());
