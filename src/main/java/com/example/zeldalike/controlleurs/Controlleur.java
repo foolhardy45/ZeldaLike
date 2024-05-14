@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -23,8 +24,11 @@ public class Controlleur implements Initializable {
 
     @FXML
     private TilePane terrain_affichage;
-    private Terrain T;
-    private Scene scene;
+    @FXML
+    private Pane carte_interaction;
+
+
+
     private JoueurVue joueurVue;
     private Environnement env;
     private Timeline gameLoop;
@@ -35,16 +39,19 @@ public class Controlleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.env = new Environnement(320, 420);
+        this.env = new Environnement(416, 384);
         Terrain terrain = new Terrain();
         TerrrainVue terrrainVue = new TerrrainVue();
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);
         terrain_affichage.setFocusTraversable(true);
 
         joueurVue = new JoueurVue(this.env.getJ1());
-        terrain_affichage.getChildren().add(joueurVue.getR());
 
         terrain_affichage.getChildren().add(terrrainVue.creeMap(terrain.getMap()));
+        carte_interaction.getChildren().add(joueurVue.getR());
+
+
+
         terrain_affichage.requestFocus();
 
         initAnimation();
