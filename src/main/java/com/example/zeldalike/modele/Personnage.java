@@ -1,14 +1,35 @@
 package com.example.zeldalike.modele;
 
-public class Personnage {
-    int hp;
-    int def;
-    int vitesse;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
-    public Personnage(int hp, int def, int vitesse) {
+public abstract class Personnage  {
+    private int hp;
+    private int def;
+    private int vitesse;
+   private Position p;
+    private Environnement env;
+
+
+
+    public Personnage(int hp, int def, int vitesse, Position p, Environnement env) {
         this.hp = hp;
         this.def = def;
         this.vitesse = vitesse;
+        this.p = p;
+        this.env = env;
+    }
+
+    public Position getP() {
+        return p;
+    }
+
+    public void setP(Position p) {
+        this.p = p;
+    }
+
+    public Environnement getEnv() {
+        return env;
     }
 
     public int getHp() {
@@ -34,7 +55,5 @@ public class Personnage {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-
-
 
 }
