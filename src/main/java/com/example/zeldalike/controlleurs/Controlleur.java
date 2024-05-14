@@ -86,6 +86,7 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017), (ev) -> {
             //drawGame();
+            this.env.encoreSurJeu(this.env.getJ1());
 
         });
         gameLoop.getKeyFrames().add(kf);
