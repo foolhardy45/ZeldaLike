@@ -25,7 +25,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 600, 600);
         stage.setScene(scene);
         stage.setTitle("KKDK!");
-        controlleur.setStage(stage);
+
 
         // Afficher la scène
         stage.show();

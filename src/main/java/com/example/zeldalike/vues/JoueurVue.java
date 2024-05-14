@@ -5,23 +5,25 @@ import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class JoueurVue {
-        private Joueur j;
-        private Circle r;
-        private TilePane tilePane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.layout.TilePane;
 
-        public JoueurVue(Joueur j, TilePane tilePane){
-            this.j = j;
-            this.r = new Circle(10);
-            this.tilePane = tilePane;
-            r.setFill(Color.RED);
-           r.centerXProperty().bind(j.getP().xProperty());
-           r.centerYProperty().bind(j.getP().yProperty());
-            System.out.println("cercle et joueur créer");
-        }
-    public void ajouterAuTilePane() {
-        tilePane.getChildren().add(r);
+public class JoueurVue {
+    private Joueur j;
+    private Circle r;
+
+
+    public JoueurVue(Joueur j) {
+        this.j = j;
+        this.r = new Circle(10);
+        r.setFill(Color.RED);
+        r.translateXProperty().bind(j.getP().xProperty());
+        r.translateYProperty().bind(j.getP().yProperty());
+        System.out.println("cercle et joueur créer");
     }
+
+
 
     public Circle getR() {
         return r;
@@ -31,4 +33,8 @@ public class JoueurVue {
         return j;
     }
 
+    /*public void update() {
+        r.setCenterX(getJ().getP().getX());
+        r.setCenterY(getJ().getP().getY());
+    }*/
 }

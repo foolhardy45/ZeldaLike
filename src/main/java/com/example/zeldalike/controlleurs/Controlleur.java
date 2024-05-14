@@ -22,85 +22,73 @@ import java.util.ResourceBundle;
 public class Controlleur implements Initializable {
 
     @FXML
-    TilePane terrain_affichage;
+    private TilePane terrain_affichage;
     private Terrain T;
     private Scene scene;
     private JoueurVue joueurVue;
-    private Joueur j;
     private Environnement env;
     private Timeline gameLoop;
-    private Stage stage;
 
 
 
 
 
-    @FXML
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.env = new Environnement(320,420);
+        this.env = new Environnement(320, 420);
         Terrain terrain = new Terrain();
         TerrrainVue terrrainVue = new TerrrainVue();
-        terrain_affichage.setOnKeyPressed(this::onKeyPresse);
+        terrain_affichage.setOnKeyPressed(this::onKeyPressed);
         terrain_affichage.setFocusTraversable(true);
 
-        joueurVue = new JoueurVue(this.env.getJ1(),terrain_affichage);
-        joueurVue.ajouterAuTilePane();
-        j = this.env.getJ1();
+        joueurVue = new JoueurVue(this.env.getJ1());
+        terrain_affichage.getChildren().add(joueurVue.getR());
 
         terrain_affichage.getChildren().add(terrrainVue.creeMap(terrain.getMap()));
+        terrain_affichage.requestFocus();
 
         initAnimation();
         gameLoop.play();
     }
 
-    private void onKeyPresse(KeyEvent event){
-        switch(event.getCode()){
+    private void onKeyPressed(KeyEvent event) {
+        switch (event.getCode()) {
             case UP:
                 System.out.println("on");
-                j.moveUp();
+                this.joueurVue.getJ().moveUp();
+                System.out.println(this.env.getJ1().getP().getX() + "" + this.env.getJ1().getP().getY());;
                 break;
             case DOWN:
-                j.moveDown();
+                this.joueurVue.getJ().moveDown();
                 break;
             case LEFT:
-                j.moveLeft();
+                this.joueurVue.getJ().moveLeft();
                 break;
             case RIGHT:
-                j.moveRight();
+                this.joueurVue.getJ().moveRight();
                 break;
             default:
                 break;
         }
     }
 
-
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void  setScene (Scene scene){
-        this.scene = scene;
-    }
-
-    void initAnimation(){
+    void initAnimation() {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
 
         KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.017),(ev ->{
-                    j.moveUp();
+                Duration.seconds(0.017), (ev) -> {
+            //drawGame();
 
-        })
-        );
+        });
         gameLoop.getKeyFrames().add(kf);
     }
 
-    /*private void updateGame(){
-        //this.onKeyPresse();
-    }
 
-    private void drawGame(){
-        //joueurVue.update;
+
+    /*private void drawGame() {
+        joueurVue.update();
     }*/
+
+
 }

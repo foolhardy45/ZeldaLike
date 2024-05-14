@@ -35,4 +35,8 @@ public class Environnement {
     public Terrain getTerrain() {
         return terrain;
     }
+
+    public void unTour(){
+        this.getJ1().moveUp();
+    }
 }
