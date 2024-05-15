@@ -1,18 +1,20 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 
 public class TerrrainVue {
     private final TilePane map;
+    private Terrain terrrain; // TODO terminer
 
-    public TerrrainVue() {
-        this.map = new TilePane();
+    public TerrrainVue(TilePane map) {
+        this.map = map;
     }
 
-    public TilePane creeMap(int[] tab) {
+    public void creeMap(int[] tab) {
 
 
         Image eau = new Image(String.valueOf(Main.class.getResource("images/eau.png")));
@@ -33,7 +35,6 @@ public class TerrrainVue {
             }
         }
 
-        return map;
     }
 }
 

@@ -56,23 +56,38 @@ public abstract class Personnage  {
         this.vitesse = vitesse;
     }
     public void moveUp() {
-        System.out.println("move up");
-        this.getP().setY(this.getP().getY() - 5);
+        if (this.verifieDeplacementPossible(0,-5)) {
+            System.out.println("move up");
+            this.getP().setY(this.getP().getY() - 5);
+        }
     }
 
     public void moveDown() {
-        System.out.println("move Down");
-        this.getP().setY(this.getP().getY() + 5);
+        if (this.verifieDeplacementPossible(0,5)) {
+            System.out.println("move Down");
+            this.getP().setY(this.getP().getY() + 5);
+        }
     }
 
     public void moveLeft() {
-        System.out.println("move Left");
-        this.getP().setX(this.getP().getX() - 5);
+        if (this.verifieDeplacementPossible(-5,0)) {
+            System.out.println("move Left");
+            this.getP().setX(this.getP().getX() - 5);
+        }
     }
 
     public void moveRight() {
-        System.out.println("move Right");
-        this.getP().setX(this.getP().getX() + 5);
+        if (this.verifieDeplacementPossible(5,0)) {
+            System.out.println("move Right");
+            this.getP().setX(this.getP().getX() + 5);
+        }
+    }
+
+    public boolean verifieDeplacementPossible(int valeurx, int valeury){
+        boolean deplacementpossible = this.env.encoreSurleJeu(this.p);
+        Position ptest = new Position(this.p.getX()+valeurx, this.p.getY()+valeury);
+        deplacementpossible = deplacementpossible && this.env.encoreSurleJeu(ptest);
+        return deplacementpossible;
     }
 
 }

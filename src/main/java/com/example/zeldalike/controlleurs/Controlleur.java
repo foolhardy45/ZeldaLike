@@ -41,14 +41,13 @@ public class Controlleur implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.env = new Environnement(416, 384);
         Terrain terrain = new Terrain();
-        TerrrainVue terrrainVue = new TerrrainVue();
+        TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage);
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);
         terrain_affichage.setFocusTraversable(true);
-
+        terrrainVue.creeMap(terrain.getMap());
         joueurVue = new JoueurVue(this.env.getJ1());
 
-        terrain_affichage.getChildren().add(terrrainVue.creeMap(terrain.getMap()));
-        carte_interaction.getChildren().add(joueurVue.getR());
+         carte_interaction.getChildren().add(joueurVue.getR());
 
 
 
@@ -86,7 +85,6 @@ public class Controlleur implements Initializable {
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017), (ev) -> {
             //drawGame();
-            this.env.encoreSurJeu(this.env.getJ1());
 
         });
         gameLoop.getKeyFrames().add(kf);

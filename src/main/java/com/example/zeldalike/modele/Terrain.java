@@ -1,7 +1,7 @@
 package com.example.zeldalike.modele;
 
 public class Terrain {
-    int[] map;
+    private int[] map;
 
     public Terrain() {
         this.map = new int[]{
@@ -36,4 +36,7 @@ public class Terrain {
     public int[] getMap() {
         return map;
     }
+
+    // TODO rmeplacer par deux méthodes pour envoyer longueur et code de case i
+
 }
