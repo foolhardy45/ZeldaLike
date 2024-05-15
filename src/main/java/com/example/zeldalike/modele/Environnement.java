@@ -1,8 +1,11 @@
 package com.example.zeldalike.modele;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Environnement {
     private Joueur j1;
-    private Ennemis ennemis;
+    private ObservableList<Ennemis> ennemis;
     private int height;
     private  int width;
     private Terrain terrain;
@@ -10,7 +13,7 @@ public class Environnement {
     public Environnement( int height, int width) {
         Position p = new Position(0,0);
         this.j1 = new Joueur(1,1,1,p,this);
-        this.ennemis = new Ennemis(1,1,0,p,this);
+        this.ennemis = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
         this.terrain = new Terrain();
@@ -37,7 +40,7 @@ public class Environnement {
 
     }
 
-    public Ennemis getEnnemis() {
+    public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
     }
 
