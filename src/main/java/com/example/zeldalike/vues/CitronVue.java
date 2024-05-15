@@ -21,4 +21,8 @@ public class CitronVue {
     public Citron getCitron(){
         return this.citron;
     }
+
+    public Circle getR() {
+        return r;
+    }
 }
