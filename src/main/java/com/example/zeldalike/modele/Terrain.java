@@ -1,10 +1,10 @@
 package com.example.zeldalike.modele;
 
 public class Terrain {
-    private int[] map;
+    private int[] carte_terrain;
 
     public Terrain() {
-        this.map = new int[]{
+        this.carte_terrain = new int[]{
                 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
                 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
                 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
@@ -33,10 +33,16 @@ public class Terrain {
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2};
     }
 
-    public int[] getMap() {
-        return map;
+    /*public int[] getCarte_terrain() {
+        return carte_terrain;
+    }*/
+
+    public int tailleTerrain(){
+        return this.carte_terrain.length;
     }
 
-    // TODO rmeplacer par deux méthodes pour envoyer longueur et code de case i
+    public int codeCaseI(int i){
+        return this.carte_terrain[i];
+    }
 
 }

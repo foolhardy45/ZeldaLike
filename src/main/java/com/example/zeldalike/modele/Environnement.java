@@ -23,22 +23,6 @@ public class Environnement {
         return j1;
     }
 
-    /*public void encoreSurJeu(Personnage personnage){ //TODO à revoir : il ne faut pas sortir du terrain pour y rentrer
-        if (personnage.getP().getY() > this.height ){
-            personnage.getP().setY(personnage.getP().getY()-5);
-        }
-        if (personnage.getP().getX() > this.width ){
-            personnage.getP().setX(personnage.getP().getX()-5);
-        }
-
-        if (personnage.getP().getY()  <  0 ){
-            personnage.getP().setY(personnage.getP().getY() +5);
-        }
-        if (personnage.getP().getX() < 0 ){
-            personnage.getP().setX(personnage.getP().getX()+5);
-        }
-    }*/
-
     public boolean encoreSurleJeu(Position p){
         boolean surlejeu = true;
         if (p.getY() > this.height || p.getY() < 0 || p.getX() > this.width || p.getX() < 0){
@@ -46,9 +30,6 @@ public class Environnement {
         }
         return surlejeu;
     }
-
-
-
 
 
     public ObservableList<Ennemis> getEnnemis() {
