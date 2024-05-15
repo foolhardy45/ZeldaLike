@@ -55,24 +55,61 @@ public abstract class Personnage  {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-    public void moveUp() {
-        System.out.println("move up");
-        this.getP().setY(this.getP().getY() - 5);
+
+    public boolean encoreSurEnvY(int nouvellePosY) {
+        if (nouvellePosY < 0 || nouvellePosY > this.env.getHeight()) {
+            return false;
+        }
+        return true;
     }
 
+    public boolean encoreSurEnvX(int nouvellePosX) {
+        if (nouvellePosX < 0 || nouvellePosX > this.env.getWidth()) {
+            return false;
+        }
+        return true;
+    }
+
+    public void moveUp(){
+        int nouvellePosY = this.getP().getY() - vitesse;
+        if (encoreSurEnvY(nouvellePosY)) {
+            System.out.println("move Down");
+            this.getP().setY(nouvellePosY);
+        } else {
+            System.out.println("stop");
+        }
+    }
+
+
     public void moveDown() {
-        System.out.println("move Down");
-        this.getP().setY(this.getP().getY() + 5);
+        int nouvellePosY = this.getP().getY() + vitesse;
+        if (encoreSurEnvY(nouvellePosY)) {
+            System.out.println("move Down");
+            this.getP().setY(nouvellePosY);
+        } else {
+            System.out.println("stop");
+        }
     }
 
     public void moveLeft() {
-        System.out.println("move Left");
-        this.getP().setX(this.getP().getX() - 5);
+        int nouvellePosX = this.getP().getX() - vitesse;
+        if (encoreSurEnvX(nouvellePosX)) {
+            System.out.println("move Left");
+            this.getP().setX(nouvellePosX);
+        } else {
+            System.out.println("stop");
+        }
     }
 
     public void moveRight() {
-        System.out.println("move Right");
-        this.getP().setX(this.getP().getX() + 5);
+        int nouvellePosX = this.getP().getX() + vitesse;
+        if (encoreSurEnvX(nouvellePosX)) {
+            System.out.println("move Right");
+            this.getP().setX(nouvellePosX);
+        } else {
+            System.out.println("stop");
+        }
     }
+
 
 }

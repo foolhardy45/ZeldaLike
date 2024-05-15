@@ -6,34 +6,34 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 
 public class TerrrainVue {
-    private final TilePane map;
+    private final TilePane terrain;
 
     public TerrrainVue() {
-        this.map = new TilePane();
+        this.terrain = new TilePane();
     }
 
-    public TilePane creeMap(int[] tab) {
+    public TilePane creeTerrain(int[] tab) {
 
 
         Image eau = new Image(String.valueOf(Main.class.getResource("images/eau.png")));
         Image trou = new Image(String.valueOf(Main.class.getResource("images/trou.png")));
         Image terre = new Image(String.valueOf(Main.class.getResource("images/terre.png")));
-        this.map.setPrefColumns(24); //TAILLE DU TERRAIN EN LARGEUR
+        this.terrain.setPrefColumns(24); //TAILLE DU TERRAIN EN LARGEUR
         for (int i = 0; i < tab.length; i++) {
             switch (tab[i]){
 
-                case 1: map.getChildren().add(new ImageView(eau));
+                case 1: terrain.getChildren().add(new ImageView(eau));
                 break;
 
-                case 2: map.getChildren().add(new ImageView(terre));
+                case 2: terrain.getChildren().add(new ImageView(terre));
                 break;
 
-                case 3: map.getChildren().add(new ImageView(trou));
+                case 3: terrain.getChildren().add(new ImageView(trou));
                 break;
             }
         }
 
-        return map;
+        return terrain;
     }
 }
 

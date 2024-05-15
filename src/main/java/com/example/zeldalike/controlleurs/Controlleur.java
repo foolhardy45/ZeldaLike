@@ -1,5 +1,6 @@
 package com.example.zeldalike.controlleurs;
 
+import com.example.zeldalike.modele.Ennemis;
 import com.example.zeldalike.modele.Environnement;
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Terrain;
@@ -61,18 +62,16 @@ public class Controlleur implements Initializable {
     private void onKeyPressed(KeyEvent event) {
         switch (event.getCode()) {
             case UP:
-                System.out.println("on");
-                this.joueurVue.getJ().moveUp();
-                System.out.println(this.env.getJ1().getP().getX() + "" + this.env.getJ1().getP().getY());;
+               this.env.getJ1().moveUp();
                 break;
             case DOWN:
-                this.joueurVue.getJ().moveDown();
+                this.env.getJ1().moveDown();
                 break;
             case LEFT:
-                this.joueurVue.getJ().moveLeft();
+                this.env.getJ1().moveLeft();
                 break;
             case RIGHT:
-                this.joueurVue.getJ().moveRight();
+                this.env.getJ1().moveRight();
                 break;
             default:
                 break;
@@ -85,8 +84,6 @@ public class Controlleur implements Initializable {
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017), (ev) -> {
-            //drawGame();
-            this.env.encoreSurJeu(this.env.getJ1());
 
         });
         gameLoop.getKeyFrames().add(kf);
