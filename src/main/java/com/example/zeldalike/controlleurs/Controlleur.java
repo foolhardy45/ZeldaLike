@@ -39,14 +39,14 @@ public class Controlleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.env = new Environnement(416, 384);
+        this.env = new Environnement(832, 768);
         TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage, this.env.getTerrain());
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);
         terrain_affichage.setFocusTraversable(true);
         terrrainVue.creeMap();
         joueurVue = new JoueurVue(this.env.getJ1());
 
-         carte_interaction.getChildren().add(joueurVue.getR());
+         carte_interaction.getChildren().add(joueurVue.getMac());
 
 
 

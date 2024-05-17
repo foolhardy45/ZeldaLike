@@ -22,7 +22,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("terrain2.fxml"));
         Parent root = fxmlLoader.load();
         Controlleur controlleur = fxmlLoader.getController();
-        Scene scene = new Scene(root, 600, 600);
+        Scene scene = new Scene(root, 900, 900);
         stage.setScene(scene);
         stage.setTitle("KKDK!");
 
