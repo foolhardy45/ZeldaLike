@@ -2,6 +2,7 @@ package com.example.zeldalike.modele;
 
 public class Terrain {
     private int[] carte_terrain;
+    private int tailleLargeur;
 
     public Terrain() {
         this.carte_terrain = new int[]{
@@ -31,11 +32,10 @@ public class Terrain {
                 3, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
                 3, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2};
+
+        this.tailleLargeur = 24;
     }
 
-    /*public int[] getCarte_terrain() {
-        return carte_terrain;
-    }*/
 
     public int tailleTerrain(){
         return this.carte_terrain.length;
@@ -45,4 +45,7 @@ public class Terrain {
         return this.carte_terrain[i];
     }
 
+    public int getTailleLargeur() {
+        return tailleLargeur;
+    }
 }

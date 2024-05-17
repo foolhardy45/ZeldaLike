@@ -21,7 +21,7 @@ public class TerrrainVue {
         Image eau = new Image(String.valueOf(Main.class.getResource("images/eau.png")));
         Image trou = new Image(String.valueOf(Main.class.getResource("images/trou.png")));
         Image terre = new Image(String.valueOf(Main.class.getResource("images/terre.png")));
-        this.affichage.setPrefColumns(24); //TAILLE DU TERRAIN EN LARGEUR
+        this.affichage.setPrefColumns(this.terrrain.getTailleLargeur()); //TAILLE DU TERRAIN EN LARGEUR
         for (int i = 0; i < this.terrrain.tailleTerrain(); i++) {
             switch (this.terrrain.codeCaseI(i)){
 

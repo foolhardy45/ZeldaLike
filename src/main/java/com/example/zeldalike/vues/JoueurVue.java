@@ -29,9 +29,6 @@ public class JoueurVue {
         return r;
     }
 
-    public Joueur getJ() {
-        return j;
-    }
 
     /*public void update() {
         r.setCenterX(getJ().getP().getX());
