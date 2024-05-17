@@ -1,39 +1,41 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 
 public class TerrrainVue {
-    private final TilePane terrain;
+    private  TilePane affichage;
+    private Terrain terrrain;
 
-    public TerrrainVue() {
-        this.terrain = new TilePane();
+    public TerrrainVue(TilePane affichage, Terrain terrrain) {
+        this.affichage = affichage;
+        this.terrrain = terrrain;
     }
 
-    public TilePane creeTerrain(int[] tab) {
+    public void creeMap() {
 
 
         Image eau = new Image(String.valueOf(Main.class.getResource("images/eau.png")));
         Image trou = new Image(String.valueOf(Main.class.getResource("images/trou.png")));
         Image terre = new Image(String.valueOf(Main.class.getResource("images/terre.png")));
-        this.terrain.setPrefColumns(24); //TAILLE DU TERRAIN EN LARGEUR
-        for (int i = 0; i < tab.length; i++) {
-            switch (tab[i]){
+        this.affichage.setPrefColumns(this.terrrain.getTailleLargeur()); //TAILLE DU TERRAIN EN LARGEUR
+        for (int i = 0; i < this.terrrain.tailleTerrain(); i++) {
+            switch (this.terrrain.codeCaseI(i)){
 
-                case 1: terrain.getChildren().add(new ImageView(eau));
+                case 1: affichage.getChildren().add(new ImageView(eau));
                 break;
 
-                case 2: terrain.getChildren().add(new ImageView(terre));
+                case 2: affichage.getChildren().add(new ImageView(terre));
                 break;
 
-                case 3: terrain.getChildren().add(new ImageView(trou));
+                case 3: affichage.getChildren().add(new ImageView(trou));
                 break;
             }
         }
 
-        return terrain;
     }
 }
 

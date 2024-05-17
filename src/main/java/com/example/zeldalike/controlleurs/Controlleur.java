@@ -1,6 +1,5 @@
 package com.example.zeldalike.controlleurs;
 
-import com.example.zeldalike.modele.Ennemis;
 import com.example.zeldalike.modele.Environnement;
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Terrain;
@@ -41,15 +40,13 @@ public class Controlleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.env = new Environnement(416, 384);
-        Terrain terrain = new Terrain();
-        TerrrainVue terrrainVue = new TerrrainVue();
+        TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage, this.env.getTerrain());
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);
         terrain_affichage.setFocusTraversable(true);
-
+        terrrainVue.creeMap();
         joueurVue = new JoueurVue(this.env.getJ1());
 
-        terrain_affichage.getChildren().add(terrrainVue.creeMap(terrain.getMap()));
-        carte_interaction.getChildren().add(joueurVue.getR());
+         carte_interaction.getChildren().add(joueurVue.getR());
 
 
 
@@ -62,7 +59,7 @@ public class Controlleur implements Initializable {
     private void onKeyPressed(KeyEvent event) {
         switch (event.getCode()) {
             case UP:
-               this.env.getJ1().moveUp();
+                this.env.getJ1().moveUp();
                 break;
             case DOWN:
                 this.env.getJ1().moveDown();
@@ -84,6 +81,7 @@ public class Controlleur implements Initializable {
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017), (ev) -> {
+            //drawGame();
 
         });
         gameLoop.getKeyFrames().add(kf);
