@@ -65,35 +65,35 @@ public abstract class Personnage  {
         return true;
     }
 
-    public boolean encoreSurEnvX(int nouvellePosX) {
+    public boolean encoreSurEnvX(int nouvellePosX) { //TODO déplacer dans Terrain
         if (nouvellePosX < 0 || nouvellePosX > this.env.getWidth()) {
             return false;
         }
         return true;
     }
     public boolean collisionGauche (int PosX,int PosY) {
-        if (terrain.codeCaseI((this.env.getWidth()*(PosY/32)+(PosX))/32)!=2){
-            return false;
+        if (terrain.codeCaseI((this.env.getWidth()*(PosY/32)+(PosX))/32)==2){
+            return true;
         }
-        return true;
+        return false;
     }
     public boolean collisionDroite (int PosX,int PosY) {
-        if (terrain.codeCaseI((this.env.getWidth()*(PosY/32)+(PosX)+31)/32)!=2){
-            return false;
+        if (terrain.codeCaseI((this.env.getWidth()*(PosY/32)+(PosX)+31)/32) == 2){
+            return true;
         }
-        return true;
+        return false;
     }
-    public boolean collisionHaut (int PosX,int PosY) {
-        if (terrain.codeCaseI((this.env.getWidth()*(PosX/32)+(PosY))/32)!=2){
-            return false;
+    public boolean collisionHaut(int PosX, int PosY) {
+        if (terrain.codeCaseI((this.env.getWidth()*((PosY-1)/32)+(PosX))/32) == 2) {
+            return true;
         }
-        return true;
+        return false;
     }
-    public boolean collisionBas (int PosX,int PosY) {
-        if (terrain.codeCaseI((this.env.getWidth()*(PosY)+31)/32+(PosX)/32)!=2){
-            return false;
+    public boolean collisionBas(int PosX, int PosY) {
+        if (terrain.codeCaseI((this.terrain.getTailleLargeur()+(PosY+PosX)/32)) == 2) {
+            return true;
         }
-        return true;
+        return false;
     }
 
 
@@ -101,7 +101,7 @@ public abstract class Personnage  {
         int nouvellePosY = this.getP().getY() - vitesse;
         int PosX = this.getP().getY();
         if (encoreSurEnvY(nouvellePosY)/*&&collisionHaut(PosX+31, nouvellePosY)*/) {
-            System.out.println("move Down");
+            System.out.println("move Up");
             this.getP().setY(nouvellePosY);
         } else {
             System.out.println("stop");
@@ -112,10 +112,14 @@ public abstract class Personnage  {
     public void moveDown() {
         int nouvellePosY = this.getP().getY() + vitesse;
         int PosX = this.getP().getX();
-        if (encoreSurEnvY(nouvellePosY)&&collisionBas(PosX+31, nouvellePosY)) {
+        if (encoreSurEnvY(nouvellePosY)&&collisionBas(PosX, nouvellePosY)) {
             System.out.println("move Down");
+            System.out.println(nouvellePosY);
+            System.out.println(PosX);
             this.getP().setY(nouvellePosY);
         } else {
+            System.out.println(nouvellePosY);
+            System.out.println(PosX);
             System.out.println("stop");
         }
     }
@@ -123,7 +127,7 @@ public abstract class Personnage  {
     public void moveLeft() {
         int nouvellePosX = this.getP().getX() - vitesse;
         int PosY = this.getP().getY();
-        if (encoreSurEnvX(nouvellePosX)&&collisionGauche(nouvellePosX,PosY+31)) {
+        if (encoreSurEnvX(nouvellePosX) && collisionGauche(nouvellePosX,PosY+31)) {
             System.out.println("move Left");
             this.getP().setX(nouvellePosX);
         } else {
@@ -134,7 +138,7 @@ public abstract class Personnage  {
     public void moveRight() {
         int nouvellePosX = this.getP().getX() + vitesse;
         int PosY = this.getP().getY();
-        if (encoreSurEnvX(nouvellePosX)&&collisionDroite(nouvellePosX,PosY+31)) {
+        if (encoreSurEnvX(nouvellePosX) && collisionDroite(nouvellePosX,PosY+31)) {
             System.out.println("move Right");
             this.getP().setX(nouvellePosX);
         } else {

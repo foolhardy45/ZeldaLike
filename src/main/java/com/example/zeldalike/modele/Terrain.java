@@ -45,6 +45,17 @@ public class Terrain {
         return this.carte_terrain[i];
     }
 
+    /*
+    Retourne true si la tuile sur laquelle est le point (x,y) est une tuile sur laquelle on a le droit de marcher.
+     */
+    public boolean estAutorisé(int x, int y) {
+        return true; //TODO
+    }
+
+    public boolean estDansTerrain(int x, int y) {
+        return true;
+    }
+
     public int getTailleLargeur() {
         return tailleLargeur;
     }
