@@ -91,16 +91,9 @@ public class Controlleur implements Initializable {
                 (ev -> {
                 //drawGame();
                     //TEST BOUGER CITRON
-                if (temps_gameloop%100 == 0){
-                    System.out.println("temps+100");
-
-
-                } else if (temps_gameloop%10 == 0) {
-                    Random a = new Random();
+                    if (temps_gameloop%10 == 0) {
                     for (Ennemis ennemi : this.env.getEnnemis()){
-                        if (a.nextInt()< 500){
-                            ennemi.deplacementAleatoire();
-                        }
+                        ennemi.deplacementAleatoire();
                     }
                 }
                 temps_gameloop++;
