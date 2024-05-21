@@ -73,7 +73,7 @@ public abstract class Personnage  {
     public void moveUp(){
         int nouvellePosY = this.getP().getY() - vitesse;
         if (encoreSurEnvY(nouvellePosY)) {
-            System.out.println("move Down");
+            System.out.println("move Up");
             this.getP().setY(nouvellePosY);
         } else {
             System.out.println("stop");

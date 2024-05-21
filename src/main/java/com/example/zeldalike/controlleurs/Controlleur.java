@@ -95,12 +95,11 @@ public class Controlleur implements Initializable {
                     System.out.println("temps+100");
 
 
-                } else if (temps_gameloop%5 == 0) {
+                } else if (temps_gameloop%10 == 0) {
                     Random a = new Random();
                     for (Ennemis ennemi : this.env.getEnnemis()){
                         if (a.nextInt()< 500){
-                            System.out.println("NEW KITCHEN GUN");
-                            ennemi.moveLeft();
+                            ennemi.deplacementAleatoire();
                         }
                     }
                 }
