@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Controlleur implements Initializable {
@@ -30,6 +31,7 @@ public class Controlleur implements Initializable {
     private JoueurVue joueurVue;
     private Environnement env;
     private Timeline gameLoop;
+    private int temps_gameloop;
 
 
 
@@ -82,12 +84,31 @@ public class Controlleur implements Initializable {
     void initAnimation() {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
+        temps_gameloop = 0;
 
         KeyFrame kf = new KeyFrame(
-                Duration.seconds(0.017), (ev) -> {
-            //drawGame();
+                Duration.seconds(0.017),
+                (ev -> {
+                //drawGame();
+                    //TEST BOUGER CITRON
+                if (temps_gameloop%100 == 0){
+                    System.out.println("temps+100");
 
-        });
+
+                } else if (temps_gameloop%5 == 0) {
+                    Random a = new Random();
+                    for (Ennemis ennemi : this.env.getEnnemis()){
+                        if (a.nextInt()< 500){
+                            System.out.println("NEW KITCHEN GUN");
+                            ennemi.moveLeft();
+                        }
+                    }
+                }
+                temps_gameloop++;
+
+
+                })
+        );
         gameLoop.getKeyFrames().add(kf);
     }
 
