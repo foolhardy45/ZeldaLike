@@ -22,6 +22,7 @@ public class Ennemis extends Personnage{
     public void deplacementAleatoire(){
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(400);
+        //todo : bouge tout le temps MAIS change de direction de temps en temps
         System.out.println(t);
         if (t < 100){
             moveUp();
