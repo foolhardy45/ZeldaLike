@@ -1,5 +1,6 @@
 package com.example.zeldalike.controlleurs;
 
+import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.Citron;
 import com.example.zeldalike.modele.Ennemis;
 import com.example.zeldalike.vues.EnnemisVue;
@@ -21,7 +22,8 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
         while(change.next()){
             for (Ennemis e : change.getAddedSubList()){
                 if (e instanceof Citron){
-                    ennemisVue = new EnnemisVue(e,"citron.png");
+                    ennemisVue = new EnnemisVue(e,String.valueOf(Main.class.getResource("images/citron.png")));
+                    this.panneauDeJeu.getChildren().add(ennemisVue.getI());
                 }
 
             }

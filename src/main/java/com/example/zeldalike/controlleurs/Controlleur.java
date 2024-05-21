@@ -1,8 +1,6 @@
 package com.example.zeldalike.controlleurs;
 
-import com.example.zeldalike.modele.Environnement;
-import com.example.zeldalike.modele.Joueur;
-import com.example.zeldalike.modele.Terrain;
+import com.example.zeldalike.modele.*;
 import com.example.zeldalike.vues.JoueurVue;
 import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
@@ -47,6 +45,12 @@ public class Controlleur implements Initializable {
         joueurVue = new JoueurVue(this.env.getJ1());
 
          carte_interaction.getChildren().add(joueurVue.getMac());
+
+         //AJOUT DU CITRON DANS LE JEU
+        MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
+        this.env.getEnnemis().addListener(observateurlisteennemi);
+        Citron ennemipuissant = new Citron(new Position(320,320), this.env);
+        this.env.ajouterEnnemis(ennemipuissant);
 
 
 
