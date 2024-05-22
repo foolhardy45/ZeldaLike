@@ -112,18 +112,12 @@ public class Controlleur implements Initializable {
                     lastTime = currentTime;
 
                     handleMovement(deltaTime);
+
                     this.env.unTour();
 
                     //TEST BOUGER CITRON
-                    if (temps_gameloop % 100 == 0) {
-                        //System.out.println("temps+100");
-                    } else if (temps_gameloop % 10 == 0) {
-                        Random a = new Random();
-                        for (Ennemis ennemi : this.env.getEnnemis()) {
-                            if (a.nextInt() < 500) {
-                                ennemi.deplacementAleatoire(deltaTime);
-                            }
-                        }
+                    for (Ennemis ennemi : this.env.getEnnemis()) {
+                       ennemi.deplacementAleatoire(deltaTime);
                     }
                     temps_gameloop++;
 
