@@ -16,8 +16,10 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.net.URL;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class Controlleur implements Initializable {
 
@@ -27,12 +29,12 @@ public class Controlleur implements Initializable {
     private Pane carte_interaction;
 
 
-
+    private long lastTime;
     private JoueurVue joueurVue;
     private Environnement env;
     private Timeline gameLoop;
     private int temps_gameloop;
-
+    private final Set<String> pressedKeys = new HashSet<>();
 
 
 
@@ -42,6 +44,7 @@ public class Controlleur implements Initializable {
         this.env = new Environnement(832, 768);
         TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage, this.env.getTerrain());
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);
+        terrain_affichage.setOnKeyReleased(this::onKeyReleased);
         terrain_affichage.setFocusTraversable(true);
         terrrainVue.creeMap();
         joueurVue = new JoueurVue(this.env.getJ1());
@@ -63,44 +66,64 @@ public class Controlleur implements Initializable {
     }
 
     private void onKeyPressed(KeyEvent event) {
-        switch (event.getCode()) {
-            case UP:
-                this.env.getJ1().moveUp();
-                break;
-            case DOWN:
-                this.env.getJ1().moveDown();
-                break;
-            case LEFT:
-                this.env.getJ1().moveLeft();
-                break;
-            case RIGHT:
-                this.env.getJ1().moveRight();
-                break;
-            default:
-                break;
-        }
+        pressedKeys.add(event.getCode().toString());
     }
 
-    void initAnimation() {
+    private void onKeyReleased(KeyEvent event) {
+        pressedKeys.remove(event.getCode().toString());
+    }
+
+    private void handleMovement(long deltaTime) {
+        boolean movingUp = pressedKeys.contains("UP");
+        boolean movingDown = pressedKeys.contains("DOWN");
+        boolean movingLeft = pressedKeys.contains("LEFT");
+        boolean movingRight = pressedKeys.contains("RIGHT");
+
+        if (movingUp) {
+            System.out.println("haut");
+            this.env.getJ1().moveUp(deltaTime);
+        }
+        if (movingDown) {
+            System.out.println("bas");
+            this.env.getJ1().moveDown(deltaTime);
+        }
+        if (movingLeft) {
+            System.out.println("gauche");
+            this.env.getJ1().moveLeft(deltaTime);
+        }
+        if (movingRight) {
+            System.out.println("droite");
+            this.env.getJ1().moveRight(deltaTime);
+        }
+
+    }
+
+    private void initAnimation() {
         gameLoop = new Timeline();
         gameLoop.setCycleCount(Timeline.INDEFINITE);
         temps_gameloop = 0;
+        lastTime = System.currentTimeMillis();
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),
-                (ev -> {
-                //drawGame();
+                ev -> {
+                    long currentTime = System.currentTimeMillis();
+                    long deltaTime = currentTime - lastTime;
+                    lastTime = currentTime;
+
+                    handleMovement(deltaTime);
+
+                    this.env.unTour();
+
                     //TEST BOUGER CITRON
-                    if (temps_gameloop%10 == 0) {
-                    for (Ennemis ennemi : this.env.getEnnemis()){
-                        ennemi.deplacementAleatoire();
+                    for (Ennemis ennemi : this.env.getEnnemis()) {
+                       ennemi.deplacementAleatoire(deltaTime);
                     }
+                    temps_gameloop++;
+
                 }
-                temps_gameloop++;
-
-
-                })
         );
+
         gameLoop.getKeyFrames().add(kf);
     }
 

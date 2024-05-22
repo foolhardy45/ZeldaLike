@@ -3,13 +3,12 @@ package com.example.zeldalike.modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public abstract class Personnage  {
+public abstract class Personnage {
     private int hp;
     private int def;
     private int vitesse;
-   private Position p;
+    private Position p;
     private Environnement env;
-
 
 
     public Personnage(int hp, int def, int vitesse, Position p, Environnement env) {
@@ -71,44 +70,39 @@ public abstract class Personnage  {
         return true;
     }
 
-    public void moveUp(){
-        int nouvellePosY = this.getP().getY() - vitesse;
-        if (encoreSurEnvY(nouvellePosY)) {
-            System.out.println("move Up");
-            this.getP().setY(nouvellePosY);
-        } else {
-            System.out.println("stop");
+    public void moveUp(long deltaTime) {
+        double nouvellePosY = this.getP().getY() - (this.getVitesse() * (deltaTime / 1000.0));
+
+        int newY = (int) Math.round(nouvellePosY);
+        if (encoreSurEnvY(newY)) {
+            this.getP().setY(newY);
         }
     }
 
-
-    public void moveDown() {
-        int nouvellePosY = this.getP().getY() + vitesse;
-        if (encoreSurEnvY(nouvellePosY)) {
-            System.out.println("move Down");
-            this.getP().setY(nouvellePosY);
-        } else {
-            System.out.println("stop");
+    public void moveDown(long deltaTime) {
+        double nouvellePosY = this.getP().getY() + (this.getVitesse() * (deltaTime / 1000.0));
+        System.out.println(nouvellePosY);
+        int newY = (int) Math.round(nouvellePosY);
+        System.out.println(newY);
+        if (encoreSurEnvY(newY)) {
+            this.getP().setY(newY);
         }
     }
 
-    public void moveLeft() {
-        int nouvellePosX = this.getP().getX() - vitesse;
-        if (encoreSurEnvX(nouvellePosX)) {
-            System.out.println("move Left");
-            this.getP().setX(nouvellePosX);
-        } else {
-            System.out.println("stop");
+    public void moveLeft(long deltaTime) {
+        double nouvellePosX = this.getP().getX() - (this.getVitesse() * (deltaTime / 1000.0));
+        int newX = (int) Math.round(nouvellePosX);
+        if (encoreSurEnvX(newX)) {
+            System.out.println("mouvement");
+            this.getP().setX(newX);
         }
     }
 
-    public void moveRight() {
-        int nouvellePosX = this.getP().getX() + vitesse;
-        if (encoreSurEnvX(nouvellePosX)) {
-            System.out.println("move Right");
-            this.getP().setX(nouvellePosX);
-        } else {
-            System.out.println("stop");
+    public void moveRight(long deltaTime) {
+        double nouvellePosX = this.getP().getX() + (this.getVitesse() * (deltaTime / 1000.0));
+        int newX = (int) Math.round(nouvellePosX);
+        if (encoreSurEnvX(newX)) {
+            this.getP().setX(newX);
         }
     }
     //todo: interaction entre deux personnages (collision)

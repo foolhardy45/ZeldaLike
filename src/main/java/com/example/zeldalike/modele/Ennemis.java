@@ -6,10 +6,11 @@ public abstract class Ennemis extends Personnage{
     private static int id = 0;
     private String idEnnemi;
     private int direction;
-    public Ennemis(int hp, int def, int vitesse,Position p,Environnement env) {
-        super(hp, def, vitesse, p,env);
+
+    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env) {
+        super(hp, def, vitesse, p, env);
         id++;
-        this.idEnnemi = "E"+id;
+        this.idEnnemi = "E" + id;
         this.direction = 0; // 0 = haut, 1 = gauche, 2 = bas, 3 = droite
     }
 
@@ -21,10 +22,7 @@ public abstract class Ennemis extends Personnage{
         return idEnnemi;
     }
 
-    public void deplacementAleatoire(){
-        // TEST POUR VOIR SI IL Y A UNE COLLISION
-        this.verificationCollision(this.getEnv().getJ1());
-        // TEMPORAIRE
+    public void deplacementAleatoire(long deltaTime) {
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
         if (t < 50) {
@@ -38,12 +36,21 @@ public abstract class Ennemis extends Personnage{
             } else {
                 this.direction = 3;
             }
+
         }
-        switch (this.direction){
-            case 0 : moveUp(); break;
-            case 1 : moveLeft(); break;
-            case 2 : moveDown(); break;
-            case 3 : moveRight(); break;
+        switch (this.direction) {
+            case 0:
+                moveUp(deltaTime);
+                break;
+            case 1:
+                moveLeft(deltaTime);
+                break;
+            case 2:
+                moveDown(deltaTime);
+                break;
+            case 3:
+                moveRight(deltaTime);
+                break;
         }
     }
 }
