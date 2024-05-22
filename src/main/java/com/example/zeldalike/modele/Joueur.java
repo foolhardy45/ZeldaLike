@@ -13,6 +13,7 @@ public class Joueur extends Personnage {
 
     public void personnageTouche() {
         System.out.println("Personnage Touché - Joueur");
+
     }
 
 }

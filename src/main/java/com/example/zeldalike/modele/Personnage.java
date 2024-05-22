@@ -1,14 +1,13 @@
 package com.example.zeldalike.modele;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 public abstract class Personnage {
     private int hp;
     private int def;
     private int vitesse;
     private Position p;
     private Environnement env;
+    private char direction;
+
 
 
     public Personnage(int hp, int def, int vitesse, Position p, Environnement env) {
@@ -17,14 +16,11 @@ public abstract class Personnage {
         this.vitesse = vitesse;
         this.p = p;
         this.env = env;
+        this.direction = ' ';
     }
 
     public Position getP() {
         return p;
-    }
-
-    public void setP(Position p) {
-        this.p = p;
     }
 
     public Environnement getEnv() {
@@ -54,6 +50,7 @@ public abstract class Personnage {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
+
     public abstract void personnageTouche();
 
     public boolean encoreSurEnvY(int nouvellePosY) {
@@ -72,29 +69,31 @@ public abstract class Personnage {
 
     public void moveUp(long deltaTime) {
         double nouvellePosY = this.getP().getY() - (this.getVitesse() * (deltaTime / 1000.0));
-
+        System.out.println(nouvellePosY);
         int newY = (int) Math.round(nouvellePosY);
         if (encoreSurEnvY(newY)) {
             this.getP().setY(newY);
+            this.direction = 'N';
         }
+
     }
 
     public void moveDown(long deltaTime) {
         double nouvellePosY = this.getP().getY() + (this.getVitesse() * (deltaTime / 1000.0));
-        System.out.println(nouvellePosY);
         int newY = (int) Math.round(nouvellePosY);
-        System.out.println(newY);
         if (encoreSurEnvY(newY)) {
             this.getP().setY(newY);
+            this.direction = 'S';
         }
+
     }
 
     public void moveLeft(long deltaTime) {
         double nouvellePosX = this.getP().getX() - (this.getVitesse() * (deltaTime / 1000.0));
         int newX = (int) Math.round(nouvellePosX);
         if (encoreSurEnvX(newX)) {
-            System.out.println("mouvement");
             this.getP().setX(newX);
+            this.direction = 'O';
         }
     }
 
@@ -103,6 +102,7 @@ public abstract class Personnage {
         int newX = (int) Math.round(nouvellePosX);
         if (encoreSurEnvX(newX)) {
             this.getP().setX(newX);
+            this.direction = 'E';
         }
     }
     //todo: interaction entre deux personnages (collision)
@@ -110,7 +110,6 @@ public abstract class Personnage {
     *  Si oui, appliquer une fonction speciale de chaque personnage pour réagir
     *  Si non, ne rien faire
     * */
-
     public boolean verificationCollision(Personnage perso){
         boolean touche = false;
         //verification touché droite
