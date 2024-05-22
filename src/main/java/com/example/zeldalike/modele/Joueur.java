@@ -11,13 +11,8 @@ public class Joueur extends Personnage {
         this.déplacement = new LinkedList<>();
     }
 
-    public void personnageTouche(){
+    public void personnageTouche() {
         System.out.println("Personnage Touché - Joueur");
     }
 
-    public void afficheDeplacement() {
-        for (Character c : déplacement) {
-            System.out.print(c + " ");
-        }
-        System.out.println();
-    }
+}

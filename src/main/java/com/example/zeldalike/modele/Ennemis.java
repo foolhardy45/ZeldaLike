@@ -38,6 +38,7 @@ public abstract class Ennemis extends Personnage{
             }
 
         }
+        this.verificationCollision(this.getEnv().getJ1());
         switch (this.direction) {
             case 0:
                 moveUp(deltaTime);
