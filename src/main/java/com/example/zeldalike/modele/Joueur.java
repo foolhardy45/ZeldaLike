@@ -5,5 +5,9 @@ public class Joueur extends Personnage {
         super(hp, def, 5, p, env);
     }
 
+    public void personnageTouche(){
+        System.out.println("Personnage Touché - Joueur");
+    }
+
 
 }

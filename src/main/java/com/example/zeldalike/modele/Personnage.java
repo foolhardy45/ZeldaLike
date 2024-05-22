@@ -110,5 +110,14 @@ public abstract class Personnage  {
             System.out.println("stop");
         }
     }
+    //todo: interaction entre deux personnages (collision)
+    /* Recupere les coordonnees d'un personnage et teste  s'il le touche
+    *  Si oui, appliquer une fonction speciale de chaque personnage pour réagir
+    *  Si non, ne rien faire
+    * */
 
+
+    public abstract void personnageTouche();
 }
+
+

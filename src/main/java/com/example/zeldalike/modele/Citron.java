@@ -5,4 +5,8 @@ public class Citron extends Ennemis{
     public Citron(Position p, Environnement env){
         super(700, 25,4,p, env);
     }
+
+    public void personnageTouche(){
+        System.out.println("Personnage Touché - Citron");
+    }
 }

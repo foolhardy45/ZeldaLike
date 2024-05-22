@@ -2,7 +2,7 @@ package com.example.zeldalike.modele;
 
 import java.util.Random;
 
-public class Ennemis extends Personnage{
+public abstract class Ennemis extends Personnage{
     private static int id = 0;
     private String idEnnemi;
     private int direction;
