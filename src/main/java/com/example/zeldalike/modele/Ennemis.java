@@ -7,8 +7,8 @@ public abstract class Ennemis extends Personnage{
     private String idEnnemi;
     private int direction;
 
-    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env) {
-        super(hp, def, vitesse, p, env);
+    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env,Terrain terrain) {
+        super(hp, def, vitesse, p, env,terrain);
         id++;
         this.idEnnemi = "E" + id;
         this.direction = 0; // 0 = haut, 1 = gauche, 2 = bas, 3 = droite
@@ -23,7 +23,7 @@ public abstract class Ennemis extends Personnage{
     }
 
     public void deplacementAleatoire(long deltaTime) {
-        Random quelleDirection = new Random();
+        /*Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
         if (t < 50) {
             t = quelleDirection.nextInt(400);
@@ -52,6 +52,6 @@ public abstract class Ennemis extends Personnage{
             case 3:
                 moveRight(deltaTime);
                 break;
-        }
+        }*/
     }
 }

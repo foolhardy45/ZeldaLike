@@ -59,46 +59,54 @@ public abstract class Personnage  {
     public abstract void personnageTouche();
 
 
-    public void moveUp(){
-        int nouvellePosY = this.getP().getY() - vitesse;
+    public void moveUp(long deltaTime){
+        double nouvellePosY = this.getP().getY() - (this.getVitesse() *(deltaTime/1000.0));
+        int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
-        if (this.terrain.estDansTerrain(PosX, nouvellePosY) && terrain.estAutorisé(PosX+1,nouvellePosY+hitbox)&& terrain.estAutorisé(PosX+hitbox,nouvellePosY+hitbox)) {
+        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox)&& terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
             System.out.println("move Up");
-            this.getP().setY(nouvellePosY);
+            this.getP().setY(newY);
         } else {
             System.out.println("stop");
         }
     }
 
 
-    public void moveDown() {
-        int nouvellePosY = this.getP().getY() + vitesse;
+    public void moveDown(long deltaTime) {
+        double nouvellePosY = this.getP().getY() + (this.getVitesse()*(deltaTime/1000.0));
+        int newY = (int) Math.round(nouvellePosY);
+        System.out.println(nouvellePosY);
+        System.out.println(newY);
         int PosX = this.getP().getX();
-        if (this.terrain.estDansTerrain(PosX, nouvellePosY) && terrain.estAutorisé(PosX+1,nouvellePosY+hitbox) && terrain.estAutorisé(PosX+hitbox,nouvellePosY+hitbox)) {
+        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox) && terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
             System.out.println("move Down");
-            this.getP().setY(nouvellePosY);
+            this.getP().setY(newY);
         } else {
             System.out.println("stop");
         }
     }
 
-    public void moveLeft() {
-        int nouvellePosX = this.getP().getX() - vitesse;
+    public void moveLeft(long deltaTime) {
+        double nouvellePosX = this.getP().getX() - (this.getVitesse()*(deltaTime/1000.0));
+        int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        if (this.terrain.estDansTerrain(nouvellePosX, PosY) && this.terrain.estAutorisé(nouvellePosX, PosY+hitbox)) {
+        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX, PosY+hitbox)) {
             System.out.println("move Left");
-            this.getP().setX(nouvellePosX);
+            this.getP().setX(newX);
         } else {
             System.out.println("stop");
         }
     }
 
-    public void moveRight() {
-        int nouvellePosX = this.getP().getX() + vitesse;
+    public void moveRight(long deltaTime) {
+        double nouvellePosX = this.getP().getX() + (this.getVitesse() *(deltaTime/1000.0));
+        int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        if (this.terrain.estDansTerrain(nouvellePosX, PosY) && this.terrain.estAutorisé(nouvellePosX+ hitbox, PosY+hitbox)) {
+        System.out.println(deltaTime);
+        System.out.println(this.getVitesse());
+        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX+ hitbox, PosY+hitbox)) {
             System.out.println("move Right");
-            this.getP().setX(nouvellePosX);
+            this.getP().setX(newX);
         } else {
             System.out.println("stop");
         }
