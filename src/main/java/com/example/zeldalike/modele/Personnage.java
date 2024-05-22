@@ -1,8 +1,5 @@
 package com.example.zeldalike.modele;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
 public abstract class Personnage  {
     private int hp;
     private int def;
@@ -10,6 +7,7 @@ public abstract class Personnage  {
    private Position p;
     private Environnement env;
     private Terrain terrain;
+    private int hitbox;
 
 
 
@@ -20,6 +18,7 @@ public abstract class Personnage  {
         this.p = p;
         this.env = env;
         this.terrain = terrain;
+        this.hitbox =31;
     }
 
     public Position getP() {
@@ -58,49 +57,11 @@ public abstract class Personnage  {
         this.vitesse = vitesse;
     }
 
-    public boolean encoreSurEnvY(int nouvellePosY) {
-        if (nouvellePosY < 0 || nouvellePosY > this.env.getHeight()) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean encoreSurEnvX(int nouvellePosX) { //TODO déplacer dans Terrain
-        if (nouvellePosX < 0 || nouvellePosX > this.env.getWidth()) {
-            return false;
-        }
-        return true;
-    }
-    public boolean collisionGauche (int PosX,int PosY) {
-        if (terrain.codeCaseI((this.env.getWidth()*(PosY/32)+(PosX))/32)==2){
-            return true;
-        }
-        return false;
-    }
-    public boolean collisionDroite (int PosX,int PosY) {
-        if (terrain.codeCaseI((this.env.getWidth()*(PosY/32)+(PosX)+31)/32) == 2){
-            return true;
-        }
-        return false;
-    }
-    public boolean collisionHaut(int PosX, int PosY) {
-        if (terrain.codeCaseI((this.env.getWidth()*((PosY-1)/32)+(PosX))/32) == 2) {
-            return true;
-        }
-        return false;
-    }
-    public boolean collisionBas(int PosX, int PosY) {
-        if (terrain.codeCaseI((this.terrain.getTailleLargeur()+(PosY+PosX)/32)) == 2) {
-            return true;
-        }
-        return false;
-    }
-
 
     public void moveUp(){
         int nouvellePosY = this.getP().getY() - vitesse;
-        int PosX = this.getP().getY();
-        if (encoreSurEnvY(nouvellePosY)/*&&collisionHaut(PosX+31, nouvellePosY)*/) {
+        int PosX = this.getP().getX();
+        if (this.terrain.estDansTerrain(PosX, nouvellePosY) && terrain.estAutorisé(PosX+1,nouvellePosY+hitbox)&& terrain.estAutorisé(PosX+hitbox,nouvellePosY+hitbox)) {
             System.out.println("move Up");
             this.getP().setY(nouvellePosY);
         } else {
@@ -112,14 +73,10 @@ public abstract class Personnage  {
     public void moveDown() {
         int nouvellePosY = this.getP().getY() + vitesse;
         int PosX = this.getP().getX();
-        if (encoreSurEnvY(nouvellePosY)&&collisionBas(PosX, nouvellePosY)) {
+        if (this.terrain.estDansTerrain(PosX, nouvellePosY) && terrain.estAutorisé(PosX+1,nouvellePosY+hitbox) && terrain.estAutorisé(PosX+hitbox,nouvellePosY+hitbox)) {
             System.out.println("move Down");
-            System.out.println(nouvellePosY);
-            System.out.println(PosX);
             this.getP().setY(nouvellePosY);
         } else {
-            System.out.println(nouvellePosY);
-            System.out.println(PosX);
             System.out.println("stop");
         }
     }
@@ -127,7 +84,7 @@ public abstract class Personnage  {
     public void moveLeft() {
         int nouvellePosX = this.getP().getX() - vitesse;
         int PosY = this.getP().getY();
-        if (encoreSurEnvX(nouvellePosX) && collisionGauche(nouvellePosX,PosY+31)) {
+        if (this.terrain.estDansTerrain(nouvellePosX, PosY) && this.terrain.estAutorisé(nouvellePosX, PosY+hitbox)) {
             System.out.println("move Left");
             this.getP().setX(nouvellePosX);
         } else {
@@ -138,12 +95,11 @@ public abstract class Personnage  {
     public void moveRight() {
         int nouvellePosX = this.getP().getX() + vitesse;
         int PosY = this.getP().getY();
-        if (encoreSurEnvX(nouvellePosX) && collisionDroite(nouvellePosX,PosY+31)) {
+        if (this.terrain.estDansTerrain(nouvellePosX, PosY) && this.terrain.estAutorisé(nouvellePosX+ hitbox, PosY+hitbox)) {
             System.out.println("move Right");
             this.getP().setX(nouvellePosX);
         } else {
             System.out.println("stop");
-            System.out.println(nouvellePosX);
         }
     }
 
