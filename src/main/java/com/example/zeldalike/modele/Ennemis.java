@@ -22,6 +22,9 @@ public abstract class Ennemis extends Personnage{
     }
 
     public void deplacementAleatoire(){
+        // TEST POUR VOIR SI IL Y A UNE COLLISION
+        this.verificationCollision(this.getEnv().getJ1());
+        // TEMPORAIRE
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
         if (t < 50) {

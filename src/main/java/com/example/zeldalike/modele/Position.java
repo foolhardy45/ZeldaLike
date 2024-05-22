@@ -35,4 +35,8 @@ public class Position {
     public void setY(int y) {
         this.y.set(y);
     }
+
+    public boolean collisionEntreSprites(Position p){
+        return (this.x.get() +31 >= p.getX()) && (this.x.get() <= p.getX() + 31) && (this.y.get() + 31 >= p.getY()) && (this.y.get() <= p.getY()+31);
+        }
 }

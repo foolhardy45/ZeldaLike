@@ -55,6 +55,7 @@ public abstract class Personnage  {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
+    public abstract void personnageTouche();
 
     public boolean encoreSurEnvY(int nouvellePosY) {
         if (nouvellePosY < 0 || nouvellePosY > this.env.getHeight()) {
@@ -116,8 +117,19 @@ public abstract class Personnage  {
     *  Si non, ne rien faire
     * */
 
-
-    public abstract void personnageTouche();
+    public boolean verificationCollision(Personnage perso){
+        boolean touche = false;
+        //verification touché droite
+        if (this.p.collisionEntreSprites(perso.getP())){
+            this.personnageTouche();
+            perso.personnageTouche();
+            touche = true;
+        }
+        //verification touché gauche
+        //verification touché haut
+        //verification touché bas
+        return touche;
+    }
 }
 
 
