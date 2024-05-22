@@ -13,11 +13,11 @@ public class Environnement {
 
     public Environnement( int height, int width) {
         Position p = new Position(0,0);
-        this.j1 = new Joueur(1,1,p,this);
+        this.terrain = new Terrain();
+        this.j1 = new Joueur(1,1,p,this,terrain);
         this.ennemis = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
-        this.terrain = new Terrain();
         this.deltaTime = 0;
     }
 
