@@ -19,18 +19,17 @@ public class Ennemis extends Personnage{
         return idEnnemi;
     }
 
-    public void deplacementAleatoire(){
+    public void deplacementAleatoire(long deltaTime){
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(400);
-        System.out.println(t);
         if (t < 100){
-            moveUp();
+            moveUp(deltaTime);
         } else if (t < 200){
-            moveLeft();
+            moveLeft(deltaTime);
         } else if (t < 300) {
-            moveDown();
+            moveDown(deltaTime);
         } else {
-            moveRight();
+            moveRight(deltaTime);
         }
     }
 }

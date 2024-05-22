@@ -3,6 +3,6 @@ package com.example.zeldalike.modele;
 public class Citron extends Ennemis{
 
     public Citron(Position p, Environnement env){
-        super(700, 25,2,p, env);
+        super(700, 25,100,p, env);
     }
 }

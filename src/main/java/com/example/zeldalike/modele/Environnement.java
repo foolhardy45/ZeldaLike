@@ -9,6 +9,7 @@ public class Environnement {
     private int height;
     private  int width;
     private Terrain terrain;
+    private   int deltaTime;
 
     public Environnement( int height, int width) {
         Position p = new Position(0,0);
@@ -17,6 +18,7 @@ public class Environnement {
         this.height = height;
         this.width = width;
         this.terrain = new Terrain();
+        this.deltaTime = 0;
     }
 
     public Joueur getJ1() {
@@ -41,8 +43,8 @@ public class Environnement {
     public Terrain getTerrain() {
         return terrain;
     }
-
     public void unTour(){
-        this.getJ1().moveUp();
+        //this.getJ1().faireUnDeplacement(deltaTime);
+        deltaTime++;
     }
 }
