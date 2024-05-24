@@ -1,26 +1,32 @@
 package com.example.zeldalike.modele;
 
-public abstract class Personnage {
+public abstract class Personnage  {
     private int hp;
     private int def;
     private int vitesse;
     private Position p;
     private Environnement env;
-    private char direction;
+    private Terrain terrain;
+    private int hitbox;
 
 
 
-    public Personnage(int hp, int def, int vitesse, Position p, Environnement env) {
+    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
         this.hp = hp;
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
         this.env = env;
-        this.direction = ' ';
+        this.terrain = terrain;
+        this.hitbox =31;
     }
 
     public Position getP() {
         return p;
+    }
+
+    public void setP(Position p) {
+        this.p = p;
     }
 
     public Environnement getEnv() {
@@ -50,59 +56,59 @@ public abstract class Personnage {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-
     public abstract void personnageTouche();
 
-    public boolean encoreSurEnvY(int nouvellePosY) {
-        if (nouvellePosY < 0 || nouvellePosY > this.env.getHeight()) {
-            return false;
-        }
-        return true;
-    }
 
-    public boolean encoreSurEnvX(int nouvellePosX) {
-        if (nouvellePosX < 0 || nouvellePosX > this.env.getWidth()) {
-            return false;
-        }
-        return true;
-    }
-
-    public void moveUp(long deltaTime) {
-        double nouvellePosY = this.getP().getY() - (this.getVitesse() * (deltaTime / 1000.0));
-        System.out.println(nouvellePosY);
+    public void moveUp(long deltaTime){
+        double nouvellePosY = this.getP().getY() - (this.getVitesse() *(deltaTime/1000.0));
         int newY = (int) Math.round(nouvellePosY);
-        if (encoreSurEnvY(newY)) {
+        int PosX = this.getP().getX();
+        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox)&& terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
+            System.out.println("move Up");
             this.getP().setY(newY);
-            this.direction = 'N';
+        } else {
+            System.out.println("stop");
         }
-
     }
+
 
     public void moveDown(long deltaTime) {
-        double nouvellePosY = this.getP().getY() + (this.getVitesse() * (deltaTime / 1000.0));
+        double nouvellePosY = this.getP().getY() + (this.getVitesse()*(deltaTime/1000.0));
         int newY = (int) Math.round(nouvellePosY);
-        if (encoreSurEnvY(newY)) {
+        System.out.println(nouvellePosY);
+        System.out.println(newY);
+        int PosX = this.getP().getX();
+        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox) && terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
+            System.out.println("move Down");
             this.getP().setY(newY);
-            this.direction = 'S';
+        } else {
+            System.out.println("stop");
         }
-
     }
 
     public void moveLeft(long deltaTime) {
-        double nouvellePosX = this.getP().getX() - (this.getVitesse() * (deltaTime / 1000.0));
+        double nouvellePosX = this.getP().getX() - (this.getVitesse()*(deltaTime/1000.0));
         int newX = (int) Math.round(nouvellePosX);
-        if (encoreSurEnvX(newX)) {
+        int PosY = this.getP().getY();
+        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX, PosY+hitbox)) {
+            System.out.println("move Left");
             this.getP().setX(newX);
-            this.direction = 'O';
+        } else {
+            System.out.println("stop");
         }
     }
 
     public void moveRight(long deltaTime) {
-        double nouvellePosX = this.getP().getX() + (this.getVitesse() * (deltaTime / 1000.0));
+        double nouvellePosX = this.getP().getX() + (this.getVitesse() *(deltaTime/1000.0));
         int newX = (int) Math.round(nouvellePosX);
-        if (encoreSurEnvX(newX)) {
+        int PosY = this.getP().getY();
+        System.out.println(deltaTime);
+        System.out.println(this.getVitesse());
+        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX+ hitbox, PosY+hitbox)) {
+            System.out.println("move Right");
             this.getP().setX(newX);
-            this.direction = 'E';
+        } else {
+            System.out.println("stop");
         }
     }
     //todo: interaction entre deux personnages (collision)
@@ -110,6 +116,7 @@ public abstract class Personnage {
     *  Si oui, appliquer une fonction speciale de chaque personnage pour réagir
     *  Si non, ne rien faire
     * */
+
     public boolean verificationCollision(Personnage perso){
         boolean touche = false;
         //verification touché droite
