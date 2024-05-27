@@ -53,8 +53,10 @@ public class Terrain {
     Retourne true si la tuile sur laquelle est le point (x,y) est une tuile sur laquelle on a le droit de marcher.
      */
     public boolean estAutorisé(int x, int y) {
-        if (codeCaseI(x/tailleTuile+(y/tailleTuile)*tailleLargeur)==2){
-            return true;
+        if (estDansTerrain(x, y)) {
+            if (codeCaseI(x / tailleTuile + (y / tailleTuile) * tailleLargeur) == 2) {
+                return true;
+            }
         }
         return false;
     }

@@ -125,9 +125,6 @@ public abstract class Personnage  {
             perso.personnageTouche();
             touche = true;
         }
-        //verification touché gauche
-        //verification touché haut
-        //verification touché bas
         return touche;
     }
 }
