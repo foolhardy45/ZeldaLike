@@ -8,6 +8,7 @@ public abstract class Personnage  {
     private Environnement env;
     private Terrain terrain;
     private int hitbox;
+    private char direction;
 
 
 
@@ -19,6 +20,11 @@ public abstract class Personnage  {
         this.env = env;
         this.terrain = terrain;
         this.hitbox =31;
+        this.direction = ' ';
+    }
+
+    public char getDirection() {
+        return direction;
     }
 
     public Position getP() {
@@ -56,7 +62,7 @@ public abstract class Personnage  {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-    public abstract void personnageTouche();
+    public abstract void personnageTouche(Personnage p);
 
 
     public void moveUp(long deltaTime){
@@ -66,6 +72,7 @@ public abstract class Personnage  {
         if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox)&& terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
             System.out.println("move Up");
             this.getP().setY(newY);
+            this.direction = 'N';
         } else {
             System.out.println("stop");
         }
@@ -81,6 +88,7 @@ public abstract class Personnage  {
         if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox) && terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
             System.out.println("move Down");
             this.getP().setY(newY);
+            this.direction = 'S';
         } else {
             System.out.println("stop");
         }
@@ -93,6 +101,7 @@ public abstract class Personnage  {
         if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX, PosY+hitbox)) {
             System.out.println("move Left");
             this.getP().setX(newX);
+            this.direction = 'O';
         } else {
             System.out.println("stop");
         }
@@ -107,6 +116,7 @@ public abstract class Personnage  {
         if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX+ hitbox, PosY+hitbox)) {
             System.out.println("move Right");
             this.getP().setX(newX);
+            this.direction = 'E';
         } else {
             System.out.println("stop");
         }
@@ -121,11 +131,27 @@ public abstract class Personnage  {
         boolean touche = false;
         //verification touché droite
         if (this.p.collisionEntreSprites(perso.getP())){
-            this.personnageTouche();
-            perso.personnageTouche();
+            this.personnageTouche(perso);
+            perso.personnageTouche(this);
             touche = true;
         }
         return touche;
+    }
+
+    public void projection (Personnage perso,long deltaTime){
+        switch (this.direction){
+            case 'N' :
+                if(this.terrain.estDansTerrain(perso.getP().getX(), perso.getP().getY()+ vitesse)) {
+                    perso.getP().setY(this.getP().getY() + vitesse);
+                }
+            break;
+            case 'S' : perso.getP().setY(this.getP().getY() - vitesse);
+                break;
+            case 'O' : perso.getP().setX(this.getP().getX() - vitesse);
+                break;
+            case 'E' : perso.getP().setX(this.getP().getX() + vitesse);
+                break;
+        }
     }
 }
 

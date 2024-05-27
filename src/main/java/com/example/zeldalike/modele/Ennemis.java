@@ -23,7 +23,7 @@ public abstract class Ennemis extends Personnage{
     }
 
     public void deplacementAleatoire(long deltaTime) {
-        /*Random quelleDirection = new Random();
+        Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
         if (t < 50) {
             t = quelleDirection.nextInt(400);
@@ -38,7 +38,6 @@ public abstract class Ennemis extends Personnage{
             }
 
         }
-        this.verificationCollision(this.getEnv().getJ1());
         switch (this.direction) {
             case 0:
                 moveUp(deltaTime);
@@ -52,6 +51,6 @@ public abstract class Ennemis extends Personnage{
             case 3:
                 moveRight(deltaTime);
                 break;
-        }*/
+        }
     }
 }

@@ -45,6 +45,11 @@ public class Environnement {
     }
     public void unTour(){
         //this.getJ1().faireUnDeplacement(deltaTime);
+        for (Ennemis ennemis : ennemis) {
+            if (ennemis.verificationCollision(this.getJ1())){
+                ennemis.projection(this.getJ1(),deltaTime);
+            }
+        }
         deltaTime++;
     }
 }

@@ -11,9 +11,8 @@ public class Joueur extends Personnage {
         this.déplacement = new LinkedList<>();
     }
 
-    public void personnageTouche() {
+    @Override
+    public void personnageTouche(Personnage p) {
         System.out.println("Personnage Touché - Joueur");
-
     }
-
 }
