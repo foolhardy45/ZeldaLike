@@ -44,10 +44,10 @@ public class Environnement {
         return terrain;
     }
     public void unTour(){
-        //this.getJ1().faireUnDeplacement(deltaTime);
+        this.getJ1().move(deltaTime);
         for (Ennemis ennemis : ennemis) {
             if (ennemis.verificationCollision(this.getJ1())){
-                ennemis.projection(this.getJ1(),deltaTime);
+                //ennemis.projection(this.getJ1(),deltaTime);
             }
         }
         deltaTime++;

@@ -67,19 +67,48 @@ public class Controlleur implements Initializable {
 
     private void onKeyPressed(KeyEvent event) {
         pressedKeys.add(event.getCode().toString());
+        System.out.println("je suis dans onKeyPressed");
+        handleMovement();
+
     }
 
     private void onKeyReleased(KeyEvent event) {
         pressedKeys.remove(event.getCode().toString());
+        System.out.println("je suis dans onKeyReleased");
+        this.env.getJ1().ajouterDirection(5);
+
+        //handleMovement();
     }
 
-    private void handleMovement(long deltaTime) {
+    private void handleMovement() {
         boolean movingUp = pressedKeys.contains("UP");
         boolean movingDown = pressedKeys.contains("DOWN");
         boolean movingLeft = pressedKeys.contains("LEFT");
         boolean movingRight = pressedKeys.contains("RIGHT");
 
-        if (movingUp) {
+        if (movingRight && movingLeft ||movingDown && movingUp){
+            this.env.getJ1().ajouterDirection(5);
+        } else if (movingUp && movingRight) {
+            this.env.getJ1().ajouterDirection(9);
+        } else if (movingUp && movingLeft) {
+            this.env.getJ1().ajouterDirection(7);
+        }  else if (movingDown && movingLeft) {
+            this.env.getJ1().ajouterDirection(1);
+        } else if (movingDown && movingRight) {
+            this.env.getJ1().ajouterDirection(3);
+        } else if (movingUp){
+            this.env.getJ1().ajouterDirection(8);
+        } else if (movingRight) {
+            this.env.getJ1().ajouterDirection(6);
+        } else if (movingDown) {
+            this.env.getJ1().ajouterDirection(2);
+        } else if (movingLeft) {
+            this.env.getJ1().ajouterDirection(4);
+        }
+
+
+
+        /*if (movingUp) {
             System.out.println("haut");
             this.env.getJ1().moveUp(deltaTime);
         }
@@ -94,7 +123,8 @@ public class Controlleur implements Initializable {
         if (movingRight) {
             System.out.println("droite");
             this.env.getJ1().moveRight(deltaTime);
-        }
+        }*/
+
 
     }
 
@@ -111,13 +141,14 @@ public class Controlleur implements Initializable {
                     long deltaTime = currentTime - lastTime;
                     lastTime = currentTime;
 
-                    handleMovement(deltaTime);
+                    //handleMovement(deltaTime);
 
                     this.env.unTour();
 
+
                     //TEST BOUGER CITRON
                     for (Ennemis ennemi : this.env.getEnnemis()) {
-                       ennemi.deplacementAleatoire(deltaTime);
+                       //ennemi.deplacementAleatoire(deltaTime);
                     }
                     temps_gameloop++;
 
