@@ -67,7 +67,7 @@ public class Controlleur implements Initializable {
     private void onKeyPressed(KeyEvent event) {
         pressedKeys.add(event.getCode().toString());
         System.out.println("je suis dans onKeyPressed");
-        handleMovement();
+        //handleMovement();
 
     }
 
@@ -121,7 +121,7 @@ public class Controlleur implements Initializable {
                     long currentTime = System.currentTimeMillis();
                     lastTime = currentTime;
 
-                    //handleMovement(deltaTime);
+                    handleMovement();
 
                     this.env.unTour();
 
