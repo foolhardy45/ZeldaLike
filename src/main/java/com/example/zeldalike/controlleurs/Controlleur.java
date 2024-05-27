@@ -7,17 +7,16 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
+
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
+
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.HashSet;
-import java.util.Random;
+
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -75,6 +74,7 @@ public class Controlleur implements Initializable {
     private void onKeyReleased(KeyEvent event) {
         pressedKeys.remove(event.getCode().toString());
         System.out.println("je suis dans onKeyReleased");
+
         this.env.getJ1().ajouterDirection(5);
 
         //handleMovement();
@@ -105,26 +105,7 @@ public class Controlleur implements Initializable {
         } else if (movingLeft) {
             this.env.getJ1().ajouterDirection(4);
         }
-
-
-
-        /*if (movingUp) {
-            System.out.println("haut");
-            this.env.getJ1().moveUp(deltaTime);
-        }
-        if (movingDown) {
-            System.out.println("bas");
-            this.env.getJ1().moveDown(deltaTime);
-        }
-        if (movingLeft) {
-            System.out.println("gauche");
-            this.env.getJ1().moveLeft(deltaTime);
-        }
-        if (movingRight) {
-            System.out.println("droite");
-            this.env.getJ1().moveRight(deltaTime);
-        }*/
-
+        this.joueurVue.updateSprite(this.env.getJ1().getDirection());
 
     }
 
@@ -138,7 +119,6 @@ public class Controlleur implements Initializable {
                 Duration.seconds(0.017),
                 ev -> {
                     long currentTime = System.currentTimeMillis();
-                    long deltaTime = currentTime - lastTime;
                     lastTime = currentTime;
 
                     //handleMovement(deltaTime);
@@ -146,10 +126,11 @@ public class Controlleur implements Initializable {
                     this.env.unTour();
 
 
+
                     //TEST BOUGER CITRON
-                    for (Ennemis ennemi : this.env.getEnnemis()) {
+                    /*for (Ennemis ennemi : this.env.getEnnemis()) {
                        //ennemi.deplacementAleatoire(deltaTime);
-                    }
+                    }*/
                     temps_gameloop++;
 
                 }
@@ -157,12 +138,4 @@ public class Controlleur implements Initializable {
 
         gameLoop.getKeyFrames().add(kf);
     }
-
-
-
-    /*private void drawGame() {
-        joueurVue.update();
-    }*/
-
-
 }
