@@ -1,6 +1,7 @@
 package com.example.zeldalike;
 
-import com.example.zeldalike.controlleurs.Controlleur;
+//import com.example.zeldalike.controlleurs.Controlleur;
+import com.example.zeldalike.controlleurs.Menu_Controlleur;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
+    public static  Stage stg;
 
 
     public static void main(String[] args) {
@@ -19,12 +20,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("terrain2.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/zeldalike/Menu.fxml"));
         Parent root = fxmlLoader.load();
-        Controlleur controlleur = fxmlLoader.getController();
+        Menu_Controlleur controlleur = fxmlLoader.getController();
         Scene scene = new Scene(root, 900, 900);
         stage.setScene(scene);
         stage.setTitle("KKDK!");
+        stg = stage;
 
 
         // Afficher la scène
