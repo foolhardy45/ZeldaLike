@@ -17,4 +17,13 @@ public class ArticleInventaire {
     public ObjetRecuperables getObj() {
         return obj;
     }
+
+    public void incremente(){this.quantite++;}
+
+    @Override
+    public String toString() {
+        String article = "";
+        article += this.obj + " : " + this.quantite;
+        return article;
+    }
 }

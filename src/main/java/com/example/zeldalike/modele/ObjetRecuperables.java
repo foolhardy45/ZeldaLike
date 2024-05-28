@@ -14,12 +14,6 @@ public abstract class ObjetRecuperables {
         id++;
     }
 
-    public void ajoutInventaire(Joueur j) {
-        if (j.verifieObjetPresent(this)){
-
-        }
-    }
-
     public String getIdObjet(){
         return this.idObjet;
     }
@@ -36,6 +30,8 @@ public abstract class ObjetRecuperables {
         return this.type == obj.getType();
     }
 
-
-
+    @Override
+    public String toString() {
+        return this.idObjet;
+    }
 }
