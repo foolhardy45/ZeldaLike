@@ -37,7 +37,7 @@ public class JoueurVue extends JPanel {
         spriteRight = new Image(String.valueOf(Main.class.getResource("images/gressif_droite.png")));
 
 
-        Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_mouvement0.png")));
+        Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_bas.png")));
         this.mac = new ImageView(gressif_neutral);
 
         mac.translateXProperty().bind(j.getP().xProperty());

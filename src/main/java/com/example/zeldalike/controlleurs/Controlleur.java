@@ -57,6 +57,11 @@ public class Controlleur implements Initializable {
         Citron ennemipuissant = new Citron(new Position(320,320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
 
+        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5,5)));
+        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5,5)));
+
+        System.out.println(this.env.getJ1().getSac().toString());
+
 
 
         terrain_affichage.requestFocus();
