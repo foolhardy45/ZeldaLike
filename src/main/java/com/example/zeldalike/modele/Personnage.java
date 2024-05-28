@@ -3,7 +3,6 @@ package com.example.zeldalike.modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import javax.crypto.KEMSpi;
 import java.awt.event.KeyEvent;
 
 public abstract class Personnage  {
