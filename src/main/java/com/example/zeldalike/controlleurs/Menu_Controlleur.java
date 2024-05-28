@@ -33,7 +33,7 @@ public class Menu_Controlleur implements Initializable {
         System.out.println("menu controller");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/zeldalike/terrain2.fxml"));
         root = fxmlLoader.load();
-        Main.stg.setScene(new Scene(root));
+        Main.stg.setScene(new Scene(root, 900, 900));
         Main.stg.show();
     }
 }
