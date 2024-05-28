@@ -65,9 +65,22 @@ public class JoueurVue extends JPanel {
         }
     }
 
-    /*public Circle getR() {
-        return r;
-    }*/
+
+    public Image getSpriteUp() {
+        return spriteUp;
+    }
+
+    public Image getSpriteDown() {
+        return spriteDown;
+    }
+
+    public Image getSpriteLeft() {
+        return spriteLeft;
+    }
+
+    public Image getSpriteRight() {
+        return spriteRight;
+    }
 
     public ImageView getMac() {
         return mac;
