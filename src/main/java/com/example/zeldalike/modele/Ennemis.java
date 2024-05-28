@@ -22,7 +22,7 @@ public abstract class Ennemis extends Personnage{
         return idEnnemi;
     }
 
-    public void deplacementAleatoire(long deltaTime) {
+    /*public void deplacementAleatoire(long deltaTime) {
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
         if (t < 50) {
@@ -52,5 +52,5 @@ public abstract class Ennemis extends Personnage{
                 moveRight(deltaTime);
                 break;
         }
-    }
+    }*/
 }

@@ -1,5 +1,10 @@
 package com.example.zeldalike.modele;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
+import java.awt.event.KeyEvent;
+
 public abstract class Personnage  {
     private int hp;
     private int def;
@@ -8,7 +13,7 @@ public abstract class Personnage  {
     private Environnement env;
     private Terrain terrain;
     private int hitbox;
-    private char direction;
+    private IntegerProperty direction;
 
 
 
@@ -20,10 +25,18 @@ public abstract class Personnage  {
         this.env = env;
         this.terrain = terrain;
         this.hitbox =31;
-        this.direction = ' ';
+        this.direction = new SimpleIntegerProperty();
     }
 
-    public char getDirection() {
+    public int getDirection() {
+        return direction.get();
+    }
+
+    public void ajouterDirection(int direction) {
+        this.direction.set(direction);
+    }
+
+    public IntegerProperty directionProperty() {
         return direction;
     }
 
@@ -64,61 +77,71 @@ public abstract class Personnage  {
     }
     public abstract void personnageTouche(Personnage p);
 
+    public void  move(long deltaTime) {
+        if(this.getDirection() ==  1){
+            moveDown(deltaTime);
+            moveLeft(deltaTime);
+        }else if(this.getDirection() == 2){
+            moveDown(deltaTime);
+        }else if(this.getDirection() == 3){
+            moveDown(deltaTime);
+            moveRight(deltaTime);
+        } else if (this.getDirection() == 4) {
+            moveLeft(deltaTime);
+        }else if(this.getDirection() == 5){
 
-    public void moveUp(long deltaTime){
-        double nouvellePosY = this.getP().getY() - (this.getVitesse() *(deltaTime/1000.0));
-        int newY = (int) Math.round(nouvellePosY);
-        int PosX = this.getP().getX();
-        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox)&& terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
-            System.out.println("move Up");
-            this.getP().setY(newY);
-            this.direction = 'N';
-        } else {
-            System.out.println("stop");
+        }else if(this.getDirection() == 6){
+            moveRight(deltaTime);
+        }else if(this.getDirection() == 7){
+            moveUp(deltaTime);
+            moveLeft(deltaTime);
+        }else if(this.getDirection() == 8){
+            moveUp(deltaTime);
+        } else if(this.getDirection() == 9) {
+            moveUp(deltaTime);
+            moveRight(deltaTime);
+
         }
     }
 
 
-    public void moveDown(long deltaTime) {
-        double nouvellePosY = this.getP().getY() + (this.getVitesse()*(deltaTime/1000.0));
+    private void moveUp(long deltaTime){
+        double nouvellePosY = this.getP().getY() - this.getVitesse();//(this.getVitesse() *(deltaTime/1000.0));
+        int newY = (int) Math.round(nouvellePosY);
+        int PosX = this.getP().getX();
+        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox)&& terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
+            this.getP().setY(newY);
+        }
+    }
+
+
+    private void moveDown(long deltaTime) {
+        double nouvellePosY = this.getP().getY() + this.getVitesse();//(this.getVitesse()*(deltaTime/1000.0));
         int newY = (int) Math.round(nouvellePosY);
         System.out.println(nouvellePosY);
         System.out.println(newY);
         int PosX = this.getP().getX();
         if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox) && terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
-            System.out.println("move Down");
             this.getP().setY(newY);
-            this.direction = 'S';
-        } else {
-            System.out.println("stop");
         }
     }
 
-    public void moveLeft(long deltaTime) {
-        double nouvellePosX = this.getP().getX() - (this.getVitesse()*(deltaTime/1000.0));
+    private void moveLeft(long deltaTime) {
+        double nouvellePosX = this.getP().getX() - this.getVitesse();//(this.getVitesse()*(deltaTime/1000.0));
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
         if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX, PosY+hitbox)) {
-            System.out.println("move Left");
             this.getP().setX(newX);
-            this.direction = 'O';
-        } else {
-            System.out.println("stop");
         }
     }
 
-    public void moveRight(long deltaTime) {
-        double nouvellePosX = this.getP().getX() + (this.getVitesse() *(deltaTime/1000.0));
+    private void moveRight(long deltaTime) {
+        double nouvellePosX = this.getP().getX() + this.getVitesse();//(this.getVitesse() *(deltaTime/1000.0));
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        System.out.println(deltaTime);
         System.out.println(this.getVitesse());
         if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX+ hitbox, PosY+hitbox)) {
-            System.out.println("move Right");
             this.getP().setX(newX);
-            this.direction = 'E';
-        } else {
-            System.out.println("stop");
         }
     }
     //todo: interaction entre deux personnages (collision)
@@ -138,7 +161,7 @@ public abstract class Personnage  {
         return touche;
     }
 
-    public void projection (Personnage perso,long deltaTime){
+    /*public void projection (Personnage perso,long deltaTime){
         switch (this.direction){
             case 'N' :
                 if(this.terrain.estDansTerrain(perso.getP().getX(), perso.getP().getY()+ vitesse)) {
@@ -152,7 +175,7 @@ public abstract class Personnage  {
             case 'E' : perso.getP().setX(this.getP().getX() + vitesse);
                 break;
         }
-    }
+    }*/
 }
 
 

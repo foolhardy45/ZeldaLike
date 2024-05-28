@@ -12,10 +12,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.layout.TilePane;
 
-public class JoueurVue {
+import javax.swing.*;
+
+public class JoueurVue extends JPanel {
     private Joueur j;
     private Circle r;
     private ImageView mac;
+    private Image spriteUp;
+    private Image spriteDown;
+    private Image spriteLeft;
+    private Image spriteRight;
+
 
 
     public JoueurVue(Joueur j) {
@@ -24,8 +31,15 @@ public class JoueurVue {
         //r.setFill(Color.RED);
         //r.translateXProperty().bind(j.getP().xProperty());
         //r.translateYProperty().bind(j.getP().yProperty());
-        Image gressif = new Image(String.valueOf(Main.class.getResource("images/gressif_mouvement0.png")));
-        this.mac = new ImageView(gressif);
+        spriteUp = new Image(String.valueOf(Main.class.getResource("images/gressif_haut.png")));
+        spriteDown = new Image(String.valueOf(Main.class.getResource("images/gressif_bas.png")));
+        spriteLeft = new Image(String.valueOf(Main.class.getResource("images/gressif_gauche.png")));
+        spriteRight = new Image(String.valueOf(Main.class.getResource("images/gressif_droite.png")));
+
+
+        Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_mouvement0.png")));
+        this.mac = new ImageView(gressif_neutral);
+
         mac.translateXProperty().bind(j.getP().xProperty());
         mac.translateYProperty().bind(j.getP().yProperty());
 
@@ -33,13 +47,34 @@ public class JoueurVue {
         System.out.println("cercle et joueur créer");
     }
 
-
+    // Méthode pour mettre à jour le sprite en fonction de la direction
+    public void updateSprite(int direction) {
+        switch (direction) {
+            case 8:
+                mac.setImage(spriteUp);
+                break;
+            case 2:
+                mac.setImage(spriteDown);
+                break;
+            case 4:
+                mac.setImage(spriteLeft);
+                break;
+            case 6:
+                mac.setImage(spriteRight);
+                break;
+        }
+    }
 
     /*public Circle getR() {
         return r;
     }*/
 
     public ImageView getMac() {
+        return mac;
+    }
+
+    public ImageView setMac(ImageView mac) {
+        this.mac = mac;
         return mac;
     }
 
