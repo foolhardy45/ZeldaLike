@@ -15,6 +15,7 @@ public abstract class Personnage  {
     private Terrain terrain;
     private int hitbox;
     private IntegerProperty direction;
+    private Arme arme;
 
 
 
@@ -22,11 +23,16 @@ public abstract class Personnage  {
         this.hp = hp;
         this.def = def;
         this.vitesse = vitesse;
+        this.arme = new Poing(10000);
         this.p = p;
         this.env = env;
         this.terrain = terrain;
         this.hitbox =31;
         this.direction = new SimpleIntegerProperty();
+    }
+
+    public Arme getArme() {
+        return arme;
     }
 
     public int getDirection() {
@@ -36,6 +42,30 @@ public abstract class Personnage  {
     public void ajouterDirection(int direction) {
         this.direction.set(direction);
     }
+
+
+    public void attaquer(Personnage p) {
+        if (enVie() && p.enVie()) {
+            int degats = this.getArme().getAttaque();
+            if (p.getDef() < degats) {
+                degats -= p.getDef();
+            } else {
+                degats = 0;
+            }
+            p.setHp(p.getHp() - degats);
+            System.out.println("Dégâts infligés: " + degats);
+        } else {
+            System.out.println("T'es mort, le gâté !");
+        }
+    }
+
+
+    /*public void recoitDegats(int degats){
+        this.hp -= degats - this.getDef();
+        if (!this.enVie()){
+            this.hp = 0;
+        }
+    }*/
 
     public IntegerProperty directionProperty() {
         return direction;
@@ -76,38 +106,38 @@ public abstract class Personnage  {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-    public abstract void personnageTouche(Personnage p);
+   
 
-    public void  move(long deltaTime) {
+    public void  move() {
         if(this.getDirection() ==  1){
-            moveDown(deltaTime);
-            moveLeft(deltaTime);
+            moveDown( );
+            moveLeft( );
         }else if(this.getDirection() == 2){
-            moveDown(deltaTime);
+            moveDown( );
         }else if(this.getDirection() == 3){
-            moveDown(deltaTime);
-            moveRight(deltaTime);
+            moveDown( );
+            moveRight( );
         } else if (this.getDirection() == 4) {
-            moveLeft(deltaTime);
+            moveLeft( );
         }else if(this.getDirection() == 5){
 
         }else if(this.getDirection() == 6){
-            moveRight(deltaTime);
+            moveRight( );
         }else if(this.getDirection() == 7){
-            moveUp(deltaTime);
-            moveLeft(deltaTime);
+            moveUp( );
+            moveLeft( );
         }else if(this.getDirection() == 8){
-            moveUp(deltaTime);
+            moveUp( );
         } else if(this.getDirection() == 9) {
-            moveUp(deltaTime);
-            moveRight(deltaTime);
+            moveUp( );
+            moveRight( );
 
         }
     }
 
 
-    private void moveUp(long deltaTime){
-        double nouvellePosY = this.getP().getY() - this.getVitesse();//(this.getVitesse() *(deltaTime/1000.0));
+    private void moveUp( ){
+        double nouvellePosY = this.getP().getY() - this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
         if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox)&& terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
@@ -116,8 +146,8 @@ public abstract class Personnage  {
     }
 
 
-    private void moveDown(long deltaTime) {
-        double nouvellePosY = this.getP().getY() + this.getVitesse();//(this.getVitesse()*(deltaTime/1000.0));
+    private void moveDown(  ) {
+        double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         System.out.println(nouvellePosY);
         System.out.println(newY);
@@ -127,8 +157,8 @@ public abstract class Personnage  {
         }
     }
 
-    private void moveLeft(long deltaTime) {
-        double nouvellePosX = this.getP().getX() - this.getVitesse();//(this.getVitesse()*(deltaTime/1000.0));
+    private void moveLeft(  ) {
+        double nouvellePosX = this.getP().getX() - this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
         if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX, PosY+hitbox)) {
@@ -136,8 +166,8 @@ public abstract class Personnage  {
         }
     }
 
-    private void moveRight(long deltaTime) {
-        double nouvellePosX = this.getP().getX() + this.getVitesse();//(this.getVitesse() *(deltaTime/1000.0));
+    private void moveRight(  ) {
+        double nouvellePosX = this.getP().getX() + this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
         System.out.println(this.getVitesse());
@@ -161,22 +191,13 @@ public abstract class Personnage  {
         }
         return touche;
     }
-
-    /*public void projection (Personnage perso,long deltaTime){
-        switch (this.direction){
-            case 'N' :
-                if(this.terrain.estDansTerrain(perso.getP().getX(), perso.getP().getY()+ vitesse)) {
-                    perso.getP().setY(this.getP().getY() + vitesse);
-                }
-            break;
-            case 'S' : perso.getP().setY(this.getP().getY() - vitesse);
-                break;
-            case 'O' : perso.getP().setX(this.getP().getX() - vitesse);
-                break;
-            case 'E' : perso.getP().setX(this.getP().getX() + vitesse);
-                break;
-        }
-    }*/
+    
+    public boolean enVie(){
+        return this.hp >0;
+    }
+    
+    public abstract void personnageTouche(Personnage p);
+    
 }
 
 
