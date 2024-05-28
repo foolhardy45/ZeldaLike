@@ -22,11 +22,11 @@ public class TerrrainVue {
     public void creeMap() {
 
 
-        Image eau = new Image(String.valueOf(Main.class.getResource("images/eau2.png")));
-        Image trou = new Image(String.valueOf(Main.class.getResource("images/trou2.png")));
-        Image terre = new Image(String.valueOf(Main.class.getResource("images/terre2.png")));
-        Image eau2 = new Image(String.valueOf(Main.class.getResource("images/eau3.png")));
-        Image terre2 = new Image(String.valueOf(Main.class.getResource("images/terre3.png")));
+        Image eau = new Image(String.valueOf(Main.class.getResource("images/terrain/eau2.png")));
+        Image trou = new Image(String.valueOf(Main.class.getResource("images/terrain/trou2.png")));
+        Image terre = new Image(String.valueOf(Main.class.getResource("images/terrain/terre2.png")));
+        Image eau2 = new Image(String.valueOf(Main.class.getResource("images/terrain/eau3.png")));
+        Image terre2 = new Image(String.valueOf(Main.class.getResource("images/terrain/terre3.png")));
         Random random = new Random(67890);
         this.affichage.setPrefColumns(this.terrrain.getTailleLargeur());
         int diftuiles;
