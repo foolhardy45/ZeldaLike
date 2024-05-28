@@ -14,7 +14,7 @@ public class Environnement {
     public Environnement( int height, int width) {
         Position p = new Position(0,0);
         this.terrain = new Terrain();
-        this.j1 = new Joueur(1,1,p,this,terrain);
+        this.j1 = new Joueur(10,0,p,this,terrain);
         this.ennemis = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
@@ -26,6 +26,9 @@ public class Environnement {
     }
     public void ajouterEnnemis(Ennemis ennemis) {
         this.ennemis.add(ennemis);
+    }
+    public void sortirEnnemis(Ennemis ennemis){
+        this.ennemis.remove(ennemis);
     }
 
     public ObservableList<Ennemis> getEnnemis() {
@@ -44,10 +47,15 @@ public class Environnement {
         return terrain;
     }
     public void unTour(){
-        this.getJ1().move(deltaTime);
-        for (Ennemis ennemis : ennemis) {
-            if (ennemis.verificationCollision(this.getJ1())){
-                //ennemis.projection(this.getJ1(),deltaTime);
+        this.getJ1().move();
+        if(!ennemis.isEmpty()) {
+            for (int i = 0; i < ennemis.size(); i++) {
+                if (ennemis.get(i).verificationCollision(this.getJ1())) {
+                    //ennemis.projection(this.getJ1(),deltaTime);
+                }
+                if (!ennemis.get(i).enVie()) {
+                    sortirEnnemis(ennemis.get(i));
+                }
             }
         }
         deltaTime++;

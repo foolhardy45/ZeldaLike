@@ -11,14 +11,12 @@ public class Joueur extends Personnage {
         super(hp, def, 4, p, env,terrain);
     }
 
-    /*public void mouvement (long deltaTime , String direction){
-        switch(direction)){
-
-        }
-    }*/
-
     @Override
     public void personnageTouche(Personnage p) {
         System.out.println("Personnage Touché - Joueur");
+        if (p instanceof Ennemis){
+            System.out.println(" ayyyyyyyaaaaaaaa");
+            this.attaquer(p);
+        }
     }
 }
