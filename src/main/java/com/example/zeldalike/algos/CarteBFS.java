@@ -48,7 +48,6 @@ public class CarteBFS {
                 System.out.println("A1");
                 this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y+(distance*tailletuile))] = distance;
 
-
             }if (t.estAutorisé(x-(distance*tailletuile),y+(distance*tailletuile))){ // en bas à gauche
                 System.out.println("A2");
                 this.carte[t.getIndiceCaseSousPosition(x-(distance*tailletuile),y+(distance*tailletuile))] = distance;
@@ -62,6 +61,13 @@ public class CarteBFS {
                 this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y-(distance*tailletuile))] = distance;
             }
             System.out.println("génial");
+
+            //4 directions
+            for (int i=0; i<distance*2-1; )
+            if (t.estAutorisé(x+(distance*tailletuile), y)){ // à droite
+
+            }
+
 
             distance++;
         }
