@@ -54,7 +54,7 @@ public class Terrain {
      */
     public boolean estAutorisé(int x, int y) {
         if (estDansTerrain(x, y)) {
-            if (codeCaseI(x / tailleTuile + (y / tailleTuile) * tailleLargeur) == 2) {
+            if (getCaseSousPosition(x,y) == 2) {
                 return true;
             }
         }
@@ -66,6 +66,10 @@ public class Terrain {
             return true;
         }
         return false;
+    }
+
+    public int getCaseSousPosition(int x, int y){
+        return codeCaseI((x / tailleTuile + (y / tailleTuile) * tailleLargeur));
     }
 
     public int getTailleLargeur() {
