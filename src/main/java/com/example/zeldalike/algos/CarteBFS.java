@@ -9,16 +9,23 @@ public class CarteBFS {
     private int[] carte;
     private Joueur j;
     private int largeur;
-
-    public static int passageinterdit = 64;
+    private int distancemax;
+    private Terrain t;
+    private static int passageinterdit = 64;
 
     public CarteBFS(Terrain t, Joueur j){
         this.j = j;
+        this.t = t;
         this.carte = new int[t.tailleTerrain()];
+        this.distancemax = 5;
         this.largeur = t.getTailleLargeur();
+        reinitCarte();
+    }
+
+    public void reinitCarte(){
         for (int i = 0; i < this.carte.length; i++) {
             if (t.codeCaseI(i) == 2){
-                this.carte[i] = 0;
+                this.carte[i] = 32;
             }
             else {
                 this.carte[i] = passageinterdit;
@@ -26,8 +33,37 @@ public class CarteBFS {
         }
     }
 
-    public void rapportposition(){
+    public void miseAJourCarte(){
 
+        int distance = 1;
+        int x = this.j.getP().getX();
+        int y = this.j.getP().getY();
+        int tailletuile = this.j.getEnv().getTerrain().getTailleTuile();
+        reinitCarte();
+
+        this.carte[t.getIndiceCaseSousPosition(x,y)] = 0;
+        while (distance < distancemax){
+            //4 diagonales
+            if (t.estDansTerrain(x+(distance*tailletuile),y+(distance*tailletuile))){ // en bas à droite
+                System.out.println("A1");
+                this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y+(distance*tailletuile))] = distance;
+
+
+            }if (t.estDansTerrain(x-(distance*tailletuile),y+(distance*tailletuile))){ // en bas à gauche
+                System.out.println("A2");
+                this.carte[t.getIndiceCaseSousPosition(x-(distance*tailletuile),y+(distance*tailletuile))] = distance;
+            }if (t.estDansTerrain(x-(distance*tailletuile),y-(distance*tailletuile))){ // en haut à gauche
+                System.out.println("A3");
+                this.carte[t.getIndiceCaseSousPosition(x-(distance*tailletuile),y-(distance*tailletuile))] = distance;
+            }if (t.estDansTerrain(x+(distance*tailletuile),y-(distance*tailletuile))){ // en haut à droite
+                System.out.println("A4");
+                this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y-(distance*tailletuile))] = distance;
+            }
+            System.out.println("génial");
+
+            distance++;
+        }
+        System.out.println("super");
     }
 
     @Override
@@ -35,7 +71,7 @@ public class CarteBFS {
         String texte = "";
         for (int i = 0; i < this.carte.length; i++) {
             texte += " " + this.carte[i] + ",";
-            if (i % this.largeur == 0){
+            if ((i+1) % this.largeur == 0){
                 texte += "\n";
             }
         }

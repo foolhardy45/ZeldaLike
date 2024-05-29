@@ -101,7 +101,7 @@ public class Controlleur implements Initializable {
 
         this.env.getJ1().ajouterDirection(5);
         handleMovement();
-
+        //
     }
 
     private void handleMovement() {

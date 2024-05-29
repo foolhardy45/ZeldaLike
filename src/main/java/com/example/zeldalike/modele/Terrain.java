@@ -54,7 +54,7 @@ public class Terrain {
      */
     public boolean estAutorisé(int x, int y) {
         if (estDansTerrain(x, y)) {
-            return getCaseSousPosition(x, y) == 2;
+            return getIndiceCaseSousPosition(x, y) == 2;
         }
         return false;
     }
@@ -63,11 +63,15 @@ public class Terrain {
         return (x >= 0 && x < tailleLargeur * tailleTuile) && (y >= 0 && y < tailleHauteur * tailleTuile);
     }
 
-    public int getCaseSousPosition(int x, int y){
+    public int getIndiceCaseSousPosition(int x, int y){
         return codeCaseI((x / tailleTuile + (y / tailleTuile) * tailleLargeur));
     }
 
     public int getTailleLargeur() {
         return tailleLargeur;
+    }
+
+    public int getTailleTuile(){
+        return tailleTuile;
     }
 }
