@@ -54,18 +54,13 @@ public class Terrain {
      */
     public boolean estAutorisé(int x, int y) {
         if (estDansTerrain(x, y)) {
-            if (getCaseSousPosition(x,y) == 2) {
-                return true;
-            }
+            return getCaseSousPosition(x, y) == 2;
         }
         return false;
     }
 
     public boolean estDansTerrain(int x, int y) {
-        if ( ( x >= 0 && x < tailleLargeur * tailleTuile) && ( y >= 0 && y < tailleHauteur * tailleTuile ) ) {
-            return true;
-        }
-        return false;
+        return (x >= 0 && x < tailleLargeur * tailleTuile) && (y >= 0 && y < tailleHauteur * tailleTuile);
     }
 
     public int getCaseSousPosition(int x, int y){
