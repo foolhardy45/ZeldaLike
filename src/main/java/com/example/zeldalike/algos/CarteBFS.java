@@ -44,18 +44,20 @@ public class CarteBFS {
         this.carte[t.getIndiceCaseSousPosition(x,y)] = 0;
         while (distance < distancemax){
             //4 diagonales
-            if (t.estDansTerrain(x+(distance*tailletuile),y+(distance*tailletuile))){ // en bas à droite
+            if (t.estAutorisé(x+(distance*tailletuile),y+(distance*tailletuile))){ // en bas à droite
                 System.out.println("A1");
                 this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y+(distance*tailletuile))] = distance;
 
 
-            }if (t.estDansTerrain(x-(distance*tailletuile),y+(distance*tailletuile))){ // en bas à gauche
+            }if (t.estAutorisé(x-(distance*tailletuile),y+(distance*tailletuile))){ // en bas à gauche
                 System.out.println("A2");
                 this.carte[t.getIndiceCaseSousPosition(x-(distance*tailletuile),y+(distance*tailletuile))] = distance;
-            }if (t.estDansTerrain(x-(distance*tailletuile),y-(distance*tailletuile))){ // en haut à gauche
+            }
+            if (t.estAutorisé(x-(distance*tailletuile),y-(distance*tailletuile))){ // en haut à gauche
                 System.out.println("A3");
                 this.carte[t.getIndiceCaseSousPosition(x-(distance*tailletuile),y-(distance*tailletuile))] = distance;
-            }if (t.estDansTerrain(x+(distance*tailletuile),y-(distance*tailletuile))){ // en haut à droite
+            }
+            if (t.estAutorisé(x+(distance*tailletuile),y-(distance*tailletuile))){ // en haut à droite
                 System.out.println("A4");
                 this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y-(distance*tailletuile))] = distance;
             }
