@@ -56,7 +56,6 @@ public class Environnement {
     public void unTour(){
         this.getJ1().move();
         this.bfs_joueur.miseAJourCarte();
-        System.out.println(this.getBfs_joueur());
         if(!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 if (ennemis.get(i).verificationCollision(this.getJ1())) {

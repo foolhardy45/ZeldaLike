@@ -63,14 +63,16 @@ public class CarteBFS {
             System.out.println("génial");
 
             //4 directions
-            for (int i=0; i<distance*2-1; )
-            if (t.estAutorisé(x+(distance*tailletuile), y)){ // à droite
+            for (int i=0; i<distance*2-1;i++)
+                if (t.estAutorisé(x+(distance*tailletuile), y+tailletuile*(distance-i-1) )){ // à droite
+                    this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile), y+tailletuile*(distance-i-1))] = distance;
 
-            }
+                }
 
 
             distance++;
         }
+        System.out.println(this);
         System.out.println("super");
     }
 

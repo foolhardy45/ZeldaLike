@@ -50,7 +50,6 @@ public class Controlleur implements Initializable {
         joueurVue = new JoueurVue(this.env.getJ1());
 
          carte_interaction.getChildren().add(joueurVue.getMac());
-        System.out.println(this.env.getBfs_joueur());
 
          this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
              switch ((int) newValue){
