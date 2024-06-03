@@ -122,12 +122,16 @@ public class Terrain {
 
     public ArrayList<Integer> getIndicesAdjacentsAutorises(int x, int y){
         ArrayList<Integer> adjacents = getIndicesAdjacent(x, y);
+        ArrayList<Integer> adjacentsautorises = new ArrayList<>();
         for (int i : adjacents){
-            if (estAutoriséIndice(i)){
-
+            if (!estAutoriséIndice(i)){
+                adjacentsautorises.add(i);
             }
         }
+        return adjacentsautorises;
+    }
 
-        return adjacents;
+    public ArrayList<Integer> getIndicesAdjacentsAvecIndice(int indice){
+        return getIndicesAdjacent((indice % this.tailleLargeur)*this.tailleTuile, (indice / this.tailleLargeur + 1 )*tailleTuile);
     }
 }

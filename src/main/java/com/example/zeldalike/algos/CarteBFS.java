@@ -4,6 +4,9 @@ import com.example.zeldalike.modele.Environnement;
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Terrain;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class CarteBFS {
 
     private int[] carte;
@@ -17,7 +20,7 @@ public class CarteBFS {
         this.j = j;
         this.t = t;
         this.carte = new int[t.tailleTerrain()];
-        this.distancemax = 5;
+        this.distancemax = 10;
         this.largeur = t.getTailleLargeur();
         reinitCarte();
     }
@@ -25,7 +28,7 @@ public class CarteBFS {
     public void reinitCarte(){
         for (int i = 0; i < this.carte.length; i++) {
             if (t.codeCaseI(i) == 2){
-                this.carte[i] = 32;
+                this.carte[i] = distancemax+1;
             }
             else {
                 this.carte[i] = passageinterdit;
@@ -35,15 +38,28 @@ public class CarteBFS {
 
     public void miseAJourCarte(){
 
-        int distance = 1;
+
         int x = this.j.getP().getX();
         int y = this.j.getP().getY();
         int tailletuile = this.j.getEnv().getTerrain().getTailleTuile();
         reinitCarte();
+        LinkedList<Integer> marques = new LinkedList<>();
 
         this.carte[t.getIndiceCaseSousPosition(x,y)] = 0;
-        while (distance < distancemax){
-            //4 diagonales
+        marques.addFirst(t.getIndiceCaseSousPosition(x,y));
+        int actuel;
+
+        int distance = 1;
+        while (distance < distancemax && !marques.isEmpty()){
+            actuel = marques.pollLast();
+            for (int indice : t.getIndicesAdjacentsAvecIndice(actuel)){
+                if (this.carte[indice] < passageinterdit && !marques.contains(indice)){
+                    marques.addFirst(indice);
+                    this.carte[indice] = distance;
+                }
+            }
+            distance++;
+            /*//4 diagonales
             if (t.estAutorisé(x+(distance*tailletuile),y+(distance*tailletuile))){ // en bas à droite
                 System.out.println("A1");
                 this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y+(distance*tailletuile))] = distance;
@@ -68,9 +84,7 @@ public class CarteBFS {
                     this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile), y+tailletuile*(distance-i-1))] = distance;
 
                 }
-
-
-            distance++;
+             */
         }
         System.out.println(this);
         System.out.println("super");
