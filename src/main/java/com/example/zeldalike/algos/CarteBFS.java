@@ -65,35 +65,11 @@ public class CarteBFS {
                 }
             }
             distance++;
-            /*//4 diagonales
-            if (t.estAutorisé(x+(distance*tailletuile),y+(distance*tailletuile))){ // en bas à droite
-                System.out.println("A1");
-                this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y+(distance*tailletuile))] = distance;
-
-            }if (t.estAutorisé(x-(distance*tailletuile),y+(distance*tailletuile))){ // en bas à gauche
-                System.out.println("A2");
-                this.carte[t.getIndiceCaseSousPosition(x-(distance*tailletuile),y+(distance*tailletuile))] = distance;
-            }
-            if (t.estAutorisé(x-(distance*tailletuile),y-(distance*tailletuile))){ // en haut à gauche
-                System.out.println("A3");
-                this.carte[t.getIndiceCaseSousPosition(x-(distance*tailletuile),y-(distance*tailletuile))] = distance;
-            }
-            if (t.estAutorisé(x+(distance*tailletuile),y-(distance*tailletuile))){ // en haut à droite
-                System.out.println("A4");
-                this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile),y-(distance*tailletuile))] = distance;
-            }
-            System.out.println("génial");
-
-            //4 directions
-            for (int i=0; i<distance*2-1;i++)
-                if (t.estAutorisé(x+(distance*tailletuile), y+tailletuile*(distance-i-1) )){ // à droite
-                    this.carte[t.getIndiceCaseSousPosition(x+(distance*tailletuile), y+tailletuile*(distance-i-1))] = distance;
-
-                }
-             */
         }
-        System.out.println(this);
-        System.out.println("super");
+    }
+
+    public int getValeurCaseI(int i){
+            return this.carte[i];
     }
 
     @Override

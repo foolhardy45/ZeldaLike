@@ -58,6 +58,7 @@ public class Environnement {
         this.bfs_joueur.miseAJourCarte();
         if(!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
+                ennemis.get(i).deplacementBFS();
                 if (ennemis.get(i).verificationCollision(this.getJ1())) {
                     //ennemis.projection(this.getJ1(),deltaTime);
                 }

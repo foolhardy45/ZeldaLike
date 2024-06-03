@@ -94,35 +94,27 @@ public class Terrain {
         if (estDansTerrain(x, y)){
             if (estDansTerrain(x+tailleTuile,y)){
                 adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y));
-                System.out.println(6);
             }
             if (estDansTerrain(x+tailleTuile, y+tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y+tailleTuile));
-                System.out.println(3);
             }
             if (estDansTerrain(x+tailleTuile, y-tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y-tailleTuile));
-                System.out.println(9);
             }
             if (estDansTerrain(x, y-tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x,y-tailleTuile));
-                System.out.println(8);
             }
             if (estDansTerrain(x, y+tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x,y+tailleTuile));
-                System.out.println(2);
             }
             if (estDansTerrain(x-tailleTuile, y-tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y-tailleTuile));
-                System.out.println(7);
             }
             if (estDansTerrain(x-tailleTuile, y)){
                 adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y));
-                System.out.println(4);
             }
             if (estDansTerrain(x-tailleTuile, y+tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y+tailleTuile));
-                System.out.println(1);
             }
         }
 
@@ -142,5 +134,41 @@ public class Terrain {
 
     public ArrayList<Integer> getIndicesAdjacentsAvecIndice(int indice){
         return getIndicesAdjacent((indice % this.tailleLargeur)*this.tailleTuile, (indice / this.tailleLargeur )*tailleTuile);
+    }
+
+    public int getDirectionI1versI2(int indice1, int indice2){
+        boolean directiontrouvee = false;
+        int direction = 0;
+        int difference = indice1-indice2;
+        switch (difference){
+            case -1:
+                direction = 6;
+                break;
+            case 1:
+                direction = 4;
+                break;
+            case 23:
+                direction = 9;
+                break;
+            case 24:
+                direction = 8;
+                break;
+            case 25:
+                direction = 7;
+                break;
+            case -23:
+                direction = 1;
+                break;
+            case -24:
+                direction = 2;
+                break;
+            case -25:
+                direction = 3;
+                break;
+            default: direction = 0;
+        }
+
+
+        return direction;
     }
 }
