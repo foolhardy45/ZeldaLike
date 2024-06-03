@@ -130,8 +130,8 @@ public abstract class Personnage  {
         } else if(this.getDirection() == 9) {
             moveUp( );
             moveRight( );
-
         }
+
     }
 
 

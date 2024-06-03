@@ -1,5 +1,6 @@
 package com.example.zeldalike.modele;
 
+import com.example.zeldalike.algos.CarteBFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -7,14 +8,17 @@ public class Environnement {
     private Joueur j1;
     private ObservableList<Ennemis> ennemis;
     private int height;
-    private  int width;
+    private int width;
     private Terrain terrain;
-    private   int deltaTime;
+    private CarteBFS bfs_joueur;
+    private int deltaTime;
+
 
     public Environnement( int height, int width) {
         Position p = new Position(0,0);
         this.terrain = new Terrain();
         this.j1 = new Joueur(10,0,p,this,terrain);
+        this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
         this.ennemis = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
@@ -23,6 +27,9 @@ public class Environnement {
 
     public Joueur getJ1() {
         return j1;
+    }
+    public CarteBFS getBfs_joueur(){
+        return bfs_joueur;
     }
     public void ajouterEnnemis(Ennemis ennemis) {
         this.ennemis.add(ennemis);
@@ -48,6 +55,7 @@ public class Environnement {
     }
     public void unTour(){
         this.getJ1().move();
+        this.bfs_joueur.miseAJourCarte();
         if(!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 if (ennemis.get(i).verificationCollision(this.getJ1())) {

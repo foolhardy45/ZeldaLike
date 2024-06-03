@@ -51,7 +51,24 @@ public class Controlleur implements Initializable {
 
          carte_interaction.getChildren().add(joueurVue.getMac());
 
-         //AJOUT DU CITRON DANS LE JEU
+         this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
+             switch ((int) newValue){
+                 case 8:
+                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
+                     break;
+                 case 2:
+                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
+                     break;
+                 case 4:
+                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
+                     break;
+                 case 6:
+                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
+                     break;
+             }
+         }));
+
+
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
         Citron ennemipuissant = new Citron(new Position(320,320), this.env);
@@ -73,7 +90,7 @@ public class Controlleur implements Initializable {
     private void onKeyPressed(KeyEvent event) {
         pressedKeys.add(event.getCode().toString());
         System.out.println("je suis dans onKeyPressed");
-        //handleMovement();
+        handleMovement();
 
     }
 
@@ -82,7 +99,8 @@ public class Controlleur implements Initializable {
         System.out.println("je suis dans onKeyReleased");
 
         this.env.getJ1().ajouterDirection(5);
-
+        handleMovement();
+        //
     }
 
     private void handleMovement() {
@@ -110,7 +128,7 @@ public class Controlleur implements Initializable {
         } else if (movingLeft) {
             this.env.getJ1().ajouterDirection(4);
         }
-        this.joueurVue.updateSprite(this.env.getJ1().getDirection());
+
 
     }
 
@@ -129,8 +147,6 @@ public class Controlleur implements Initializable {
                     handleMovement();
 
                     this.env.unTour();
-
-
 
                     //TEST BOUGER CITRON
                     /*for (Ennemis ennemi : this.env.getEnnemis()) {
