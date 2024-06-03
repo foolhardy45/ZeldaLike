@@ -1,43 +1,38 @@
 package com.example.zeldalike.controlleurs;
 
-import com.example.zeldalike.modele.*;
+import com.example.zeldalike.modele.Citron;
+import com.example.zeldalike.modele.Environnement;
+import com.example.zeldalike.modele.Position;
+import com.example.zeldalike.modele.PotionVitale;
 import com.example.zeldalike.vues.JoueurVue;
 import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-
 import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.HashSet;
-
 import java.util.ResourceBundle;
 import java.util.Set;
 
 
 public class Controlleur implements Initializable {
 
+    private final Set<String> pressedKeys = new HashSet<>();
     @FXML
     private TilePane terrain_affichage;
     @FXML
     private Pane carte_interaction;
-
-
     private long lastTime;
     private JoueurVue joueurVue;
     private Environnement env;
     private Timeline gameLoop;
     private int temps_gameloop;
-    private final Set<String> pressedKeys = new HashSet<>();
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,40 +42,38 @@ public class Controlleur implements Initializable {
         terrain_affichage.setOnKeyReleased(this::onKeyReleased);
         terrain_affichage.setFocusTraversable(true);
         terrrainVue.creeMap();
-        joueurVue = new JoueurVue(this.env.getJ1(),this.env.getJ1().getArme());
+        joueurVue = new JoueurVue(this.env.getJ1(), this.env.getJ1().getArme());
 
-         carte_interaction.getChildren().add(joueurVue.getMac());
-         carte_interaction.getChildren().add(joueurVue.getArmeView());
+        carte_interaction.getChildren().add(joueurVue.getMac());
+        carte_interaction.getChildren().add(joueurVue.getArmeView());
 
-         this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
-             switch ((int) newValue){
-                 case 8:
-                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
-                     break;
-                 case 2:
-                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
-                     break;
-                 case 4:
-                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
-                     break;
-                 case 6:
-                     this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
-                     break;
-             }
-         }));
-
+        this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
+            switch ((int) newValue) {
+                case 8:
+                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
+                    break;
+                case 2:
+                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
+                    break;
+                case 4:
+                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
+                    break;
+                case 6:
+                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
+                    break;
+            }
+        }));
 
 
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
-        Citron ennemipuissant = new Citron(new Position(320,320), this.env);
+        Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
 
-        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5,5)));
-        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5,5)));
+        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
+        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
 
         System.out.println(this.env.getJ1().getSac().toString());
-
 
 
         terrain_affichage.requestFocus();
@@ -112,17 +105,17 @@ public class Controlleur implements Initializable {
         boolean movingRight = pressedKeys.contains("RIGHT");
         boolean attaque = pressedKeys.contains("X");
 
-        if (movingRight && movingLeft ||movingDown && movingUp){
+        if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
             this.env.getJ1().ajouterDirection(9);
         } else if (movingUp && movingLeft) {
             this.env.getJ1().ajouterDirection(7);
-        }  else if (movingDown && movingLeft) {
+        } else if (movingDown && movingLeft) {
             this.env.getJ1().ajouterDirection(1);
         } else if (movingDown && movingRight) {
             this.env.getJ1().ajouterDirection(3);
-        } else if (movingUp){
+        } else if (movingUp) {
             this.env.getJ1().ajouterDirection(8);
         } else if (movingRight) {
             this.env.getJ1().ajouterDirection(6);
@@ -132,8 +125,9 @@ public class Controlleur implements Initializable {
             this.env.getJ1().ajouterDirection(4);
         }
 
-        if (attaque){
+        if (attaque) {
             System.out.println("faire une attauque");
+            this.joueurVue.afficherArmeView();
             this.env.getJ1().attaquer();
         }
 
@@ -172,6 +166,12 @@ public class Controlleur implements Initializable {
                     /*for (Ennemis ennemi : this.env.getEnnemis()) {
                        //ennemi.deplacementAleatoire(deltaTime);
                     }*/
+
+                    if (this.joueurVue.isVisible()){
+                        if (temps_gameloop %70 == 0){
+                            this.joueurVue.getArmeView().setVisible(false);
+                        }
+                    }
                     temps_gameloop++;
 
                 }

@@ -8,10 +8,10 @@ import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
 
 public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
-    private Pane panneauDeJeu;
+    private final Pane panneauDeJeu;
     private EnnemisVue ennemisVue;
 
-    public MonObservateurEnnemis(Pane panneauDeJeu){
+    public MonObservateurEnnemis(Pane panneauDeJeu) {
         this.panneauDeJeu = panneauDeJeu;
         this.ennemisVue = null;
     }
@@ -19,16 +19,16 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
 
     @Override
     public void onChanged(Change<? extends Ennemis> change) {
-        while(change.next()){
-            for (Ennemis e : change.getAddedSubList()){
-                if (e instanceof Citron){
-                    ennemisVue = new EnnemisVue(e,String.valueOf(Main.class.getResource("images/citron.png")));
+        while (change.next()) {
+            for (Ennemis e : change.getAddedSubList()) {
+                if (e instanceof Citron) {
+                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/citron.png")));
                 }
                 this.panneauDeJeu.getChildren().add(ennemisVue.getI());
 
             }
-            for (Ennemis mort : change.getRemoved()){
-                this.panneauDeJeu.getChildren().remove(this.panneauDeJeu.lookup("#"+mort.getIdEnnemi()));
+            for (Ennemis mort : change.getRemoved()) {
+                this.panneauDeJeu.getChildren().remove(this.panneauDeJeu.lookup("#" + mort.getIdEnnemi()));
             }
         }
     }

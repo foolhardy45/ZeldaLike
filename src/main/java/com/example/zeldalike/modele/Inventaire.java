@@ -1,20 +1,19 @@
 package com.example.zeldalike.modele;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Inventaire {
-    private ArrayList<ArticleInventaire> articles;
+    private final ArrayList<ArticleInventaire> articles;
 
 
-    public Inventaire(){
+    public Inventaire() {
         this.articles = new ArrayList<>();
     }
 
-    public int indiceInventaire(ObjetRecuperables obj){
+    public int indiceInventaire(ObjetRecuperables obj) {
         boolean present = false;
         int i = 0;
-        if (this.articles.size()>0) {
+        if (this.articles.size() > 0) {
             while (!present && i < this.articles.size()) {
                 present = this.articles.get(i).getObj().deMemeType(obj);
                 i++;
@@ -27,12 +26,11 @@ public class Inventaire {
         return -1;
     }
 
-    public void ajoutInventaire(ObjetRecuperables obj){
+    public void ajoutInventaire(ObjetRecuperables obj) {
         int indice = indiceInventaire(obj);
-        if (indice >= 0){
+        if (indice >= 0) {
             this.articles.get(indice).incremente();
-        }
-        else {
+        } else {
             ArticleInventaire nouvelobjet = new ArticleInventaire(obj);
             this.articles.add(nouvelobjet);
         }
@@ -42,9 +40,9 @@ public class Inventaire {
     @Override
     public String toString() {
         String tout = "";
-        for (ArticleInventaire a: this.articles) {
-            tout+= a.toString();
-            tout+="\n";
+        for (ArticleInventaire a : this.articles) {
+            tout += a.toString();
+            tout += "\n";
         }
         return tout;
     }

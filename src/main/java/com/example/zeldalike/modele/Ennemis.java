@@ -1,14 +1,12 @@
 package com.example.zeldalike.modele;
 
-import java.util.Random;
-
-public abstract class Ennemis extends Personnage{
+public abstract class Ennemis extends Personnage {
     private static int id = 0;
-    private String idEnnemi;
-    private int direction;
+    private final String idEnnemi;
+    private final int direction;
 
-    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env,Terrain terrain) {
-        super(hp, def, vitesse, p, env,terrain);
+    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
+        super(hp, def, vitesse, p, env, terrain);
         id++;
         this.idEnnemi = "E" + id;
         this.direction = 0; // 0 = haut, 1 = gauche, 2 = bas, 3 = droite

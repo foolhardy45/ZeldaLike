@@ -4,9 +4,9 @@ import com.example.zeldalike.modele.Ennemis;
 import javafx.scene.image.ImageView;
 
 public class EnnemisVue {
-    private Ennemis ennemis;
-    private String file;
-    private ImageView i;
+    private final Ennemis ennemis;
+    private final String file;
+    private final ImageView i;
 
     public EnnemisVue(Ennemis ennemis, String file) {
         this.ennemis = ennemis;
@@ -18,7 +18,7 @@ public class EnnemisVue {
 
     }
 
-    public ImageView getI(){
-        return  i;
+    public ImageView getI() {
+        return i;
     }
 }

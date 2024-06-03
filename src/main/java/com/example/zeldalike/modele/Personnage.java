@@ -2,20 +2,17 @@ package com.example.zeldalike.modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
-public abstract class Personnage  {
+public abstract class Personnage {
     private int hp;
     private int def;
     private int vitesse;
     private Position p;
-    private Environnement env;
-    private Terrain terrain;
-    private int hitbox;
-    private IntegerProperty direction;
+    private final Environnement env;
+    private final Terrain terrain;
+    private final int hitbox;
+    private final IntegerProperty direction;
     private Arme arme;
-
 
 
     public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
@@ -26,7 +23,7 @@ public abstract class Personnage  {
         this.env = env;
         this.arme = new Poing();
         this.terrain = terrain;
-        this.hitbox =31;
+        this.hitbox = 31;
         this.direction = new SimpleIntegerProperty();
 
     }
@@ -34,6 +31,7 @@ public abstract class Personnage  {
     public Arme getArme() {
         return arme;
     }
+
     public void setArme(Arme arme) {
         this.arme = arme;
     }
@@ -60,7 +58,7 @@ public abstract class Personnage  {
         }
     }
 
-    public int  distanceEntreDeuxPersonnages(Personnage p1, Personnage p2){
+    public int distanceEntreDeuxPersonnages(Personnage p1, Personnage p2) {
         int super_x;
         int super_y;
         int distance;
@@ -115,102 +113,102 @@ public abstract class Personnage  {
         this.vitesse = vitesse;
     }
 
-    public void  move() {
-        switch (this.getDirection()){
+    public void move() {
+        switch (this.getDirection()) {
             case 1:
-                moveDown( );
-                moveLeft( );
+                moveDown();
+                moveLeft();
                 break;
             case 2:
-                moveDown( );
+                moveDown();
                 break;
             case 3:
-                moveDown( );
-                moveRight( );
+                moveDown();
+                moveRight();
                 break;
             case 4:
-                moveLeft( );
+                moveLeft();
                 break;
             case 5:
                 break;
             case 6:
-                moveRight( );
+                moveRight();
                 break;
             case 7:
-                moveUp( );
-                moveLeft( );
+                moveUp();
+                moveLeft();
                 break;
             case 8:
-                moveUp( );
+                moveUp();
                 break;
             case 9:
-                moveUp( );
-                moveRight( );
+                moveUp();
+                moveRight();
                 break;
         }
     }
 
-    private void moveUp( ){
+    private void moveUp() {
         double nouvellePosY = this.getP().getY() - this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
-        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox)&& terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
+        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX + 1, newY + hitbox) && terrain.estAutorisé(PosX + hitbox, newY + hitbox)) {
             this.getP().setY(newY);
         }
     }
 
-    private void moveDown(  ) {
+    private void moveDown() {
         double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         System.out.println(nouvellePosY);
         System.out.println(newY);
         int PosX = this.getP().getX();
-        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX+1,newY+hitbox) && terrain.estAutorisé(PosX+hitbox,newY+hitbox)) {
+        if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX + 1, newY + hitbox) && terrain.estAutorisé(PosX + hitbox, newY + hitbox)) {
             this.getP().setY(newY);
         }
     }
 
-    private void moveLeft(  ) {
+    private void moveLeft() {
         double nouvellePosX = this.getP().getX() - this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX, PosY+hitbox)) {
+        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX, PosY + hitbox)) {
             this.getP().setX(newX);
         }
     }
 
-    private void moveRight(  ) {
+    private void moveRight() {
         double nouvellePosX = this.getP().getX() + this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
         System.out.println(this.getVitesse());
-        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX+ hitbox, PosY+hitbox)) {
+        if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX + hitbox, PosY + hitbox)) {
             this.getP().setX(newX);
         }
     }
     //todo: interaction entre deux personnages (collision)
     /* Recupere les coordonnees d'un personnage et teste  s'il le touche
-    *  Si oui, appliquer une fonction speciale de chaque personnage pour réagir
-    *  Si non, ne rien faire
-    * */
+     *  Si oui, appliquer une fonction speciale de chaque personnage pour réagir
+     *  Si non, ne rien faire
+     * */
 
-    public boolean verificationCollision(Personnage perso){
+    public boolean verificationCollision(Personnage perso) {
         boolean touche = false;
         //verification touché droite
-        if (this.p.collisionEntreSprites(perso.getP())){
+        if (this.p.collisionEntreSprites(perso.getP())) {
             this.personnageTouche(perso);
             perso.personnageTouche(this);
             touche = true;
         }
         return touche;
     }
-    
-    public boolean enVie(){
-        return this.hp >0;
+
+    public boolean enVie() {
+        return this.hp > 0;
     }
-    
+
     public abstract void personnageTouche(Personnage p);
-    
+
 }
 
 

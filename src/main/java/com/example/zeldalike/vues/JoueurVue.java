@@ -10,21 +10,22 @@ import javafx.scene.image.ImageView;
 import javax.swing.*;
 
 public class JoueurVue extends JPanel {
-    private Joueur j;
-    private Arme a;
-    private ImageView mac;
+    private boolean visible;
+    private final Joueur j;
+    private final Arme a;
+    private final ImageView mac;
     private ImageView armeView;
-    private Image spriteUp;
-    private Image spriteDown;
-    private Image spriteLeft;
-    private Image spriteRight;
-    private Image poing;
-
+    private final Image spriteUp;
+    private final Image spriteDown;
+    private final Image spriteLeft;
+    private final Image spriteRight;
+    private final Image poing;
 
 
     public JoueurVue(Joueur j, Arme a) {
         this.j = j;
         this.a = a;
+        this.visible = true;
         //sprite du joueur
         spriteUp = new Image(String.valueOf(Main.class.getResource("images/gressif_haut.png")));
         spriteDown = new Image(String.valueOf(Main.class.getResource("images/gressif_bas.png")));
@@ -37,33 +38,29 @@ public class JoueurVue extends JPanel {
         //Image par defaut du joueur
         Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_bas.png")));
 
-        //Image par defaut de l'arme
-
-
-
-        this.mac = new ImageView(gressif_neutral);
         this.armeView = new ImageView();
-        //armeView.setVisible(false);
+        this.mac = new ImageView(gressif_neutral);
+
+        //armeView.setVisible(true);
 
         //position du joueur
         mac.translateXProperty().bind(j.getP().xProperty());
         mac.translateYProperty().bind(j.getP().yProperty());
+        armeView.translateXProperty().bind(mac.translateXProperty());
+        armeView.translateYProperty().bind(mac.translateYProperty());
 
     }
 
-    public void afficherArmeView(){
-        if (this.j.getArme() == null) {
-            System.out.println("tu n'a pas d'arme");
+    @Override
+    public boolean isVisible() {
+        return visible;
+    }
 
-        }else {
-            if (this.j.getArme() instanceof Poing) {
-                armeView = new ImageView(poing);
-            }
-            armeView.setVisible(true);
-            armeView.setX(this.j.getP().getX());
-            armeView.setY(this.j.getP().getY());
-
-            }
+    public void afficherArmeView() {
+        if (this.j.getArme() instanceof Poing) {
+           this.armeView.setImage(poing);
+        }
+        armeView.setVisible(true);
 
     }
 
@@ -88,12 +85,7 @@ public class JoueurVue extends JPanel {
         return mac;
     }
 
-    public ImageView setMac(ImageView mac) {
-        this.mac = mac;
-        return mac;
-    }
-
-    public ImageView getArmeView(){
+    public ImageView getArmeView() {
         return armeView;
     }
 

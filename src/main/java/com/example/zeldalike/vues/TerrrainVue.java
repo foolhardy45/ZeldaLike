@@ -8,11 +8,9 @@ import javafx.scene.layout.TilePane;
 
 import java.util.Random;
 
-import java.util.Random;
-
 public class TerrrainVue {
-    private  TilePane affichage;
-    private Terrain terrrain;
+    private final TilePane affichage;
+    private final Terrain terrrain;
 
     public TerrrainVue(TilePane affichage, Terrain terrrain) {
         this.affichage = affichage;
@@ -32,23 +30,26 @@ public class TerrrainVue {
         int diftuiles;
         for (int i = 0; i < this.terrrain.tailleTerrain(); i++) {
             diftuiles = random.nextInt();
-            switch (this.terrrain.codeCaseI(i)){
-                case 1:if (diftuiles < 4096) {
-                    affichage.getChildren().add(new ImageView(eau));
+            switch (this.terrrain.codeCaseI(i)) {
+                case 1:
+                    if (diftuiles < 4096) {
+                        affichage.getChildren().add(new ImageView(eau));
                     } else {
-                    affichage.getChildren().add(new ImageView(eau2));
+                        affichage.getChildren().add(new ImageView(eau2));
                     }
-                break;
+                    break;
 
-                case 2: if (diftuiles < 4096) {
-                    affichage.getChildren().add(new ImageView(terre));
-                } else {
-                    affichage.getChildren().add(new ImageView(terre2));
-                }
-                break;
+                case 2:
+                    if (diftuiles < 4096) {
+                        affichage.getChildren().add(new ImageView(terre));
+                    } else {
+                        affichage.getChildren().add(new ImageView(terre2));
+                    }
+                    break;
 
-                case 3: affichage.getChildren().add(new ImageView(trou));
-                break;
+                case 3:
+                    affichage.getChildren().add(new ImageView(trou));
+                    break;
             }
         }
 

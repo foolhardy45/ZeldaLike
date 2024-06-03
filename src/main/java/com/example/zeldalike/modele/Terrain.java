@@ -1,10 +1,10 @@
 package com.example.zeldalike.modele;
 
 public class Terrain {
-    private int[] carte_terrain;
-    private int tailleLargeur;
-    private int tailleTuile;
-    private int tailleHauteur;
+    private final int[] carte_terrain;
+    private final int tailleLargeur;
+    private final int tailleTuile;
+    private final int tailleHauteur;
 
     public Terrain() {
         this.carte_terrain = new int[]{
@@ -41,11 +41,11 @@ public class Terrain {
     }
 
 
-    public int tailleTerrain(){
+    public int tailleTerrain() {
         return this.carte_terrain.length;
     }
 
-    public int codeCaseI(int i){
+    public int codeCaseI(int i) {
         return this.carte_terrain[i];
     }
 
@@ -54,18 +54,13 @@ public class Terrain {
      */
     public boolean estAutorisé(int x, int y) {
         if (estDansTerrain(x, y)) {
-            if (codeCaseI(x / tailleTuile + (y / tailleTuile) * tailleLargeur) == 2) {
-                return true;
-            }
+            return codeCaseI(x / tailleTuile + (y / tailleTuile) * tailleLargeur) == 2;
         }
         return false;
     }
 
     public boolean estDansTerrain(int x, int y) {
-        if ( ( x >= 0 && x < tailleLargeur * tailleTuile) && ( y >= 0 && y < tailleHauteur * tailleTuile ) ) {
-            return true;
-        }
-        return false;
+        return (x >= 0 && x < tailleLargeur * tailleTuile) && (y >= 0 && y < tailleHauteur * tailleTuile);
     }
 
     public int getTailleLargeur() {

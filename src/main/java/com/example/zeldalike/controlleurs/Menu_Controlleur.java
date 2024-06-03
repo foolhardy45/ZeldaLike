@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,10 +22,10 @@ public class Menu_Controlleur implements Initializable {
 
     @FXML
     private Button optionsButton;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
     }
-
 
 
     public void jouer(javafx.event.ActionEvent actionEvent) throws IOException {
