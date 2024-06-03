@@ -20,7 +20,7 @@ public class CarteBFS {
         this.j = j;
         this.t = t;
         this.carte = new int[t.tailleTerrain()];
-        this.distancemax = 5;
+        this.distancemax = 9;
         this.largeur = t.getTailleLargeur();
         reinitCarte();
     }
@@ -59,7 +59,7 @@ public class CarteBFS {
                 actuel = temp.pollLast();
                 this.carte[actuel] = distance;
                 for (int indice : t.getIndicesAdjacentsAvecIndice(actuel)) {
-                    if (!marques.contains(indice) && !temp.contains(indice) && this.carte[indice] > distance) {
+                    if (!marques.contains(indice) && !temp.contains(indice) && this.carte[indice] > distance && this.carte[indice] != passageinterdit) {
                         marques.addFirst(indice);
                     }
                 }
