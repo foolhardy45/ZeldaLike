@@ -20,7 +20,7 @@ public class CarteBFS {
         this.j = j;
         this.t = t;
         this.carte = new int[t.tailleTerrain()];
-        this.distancemax = 10;
+        this.distancemax = 9;
         this.largeur = t.getTailleLargeur();
         reinitCarte();
     }
@@ -44,18 +44,24 @@ public class CarteBFS {
         int tailletuile = this.j.getEnv().getTerrain().getTailleTuile();
         reinitCarte();
         LinkedList<Integer> marques = new LinkedList<>();
+        LinkedList<Integer> temp = new LinkedList<>();
 
-        this.carte[t.getIndiceCaseSousPosition(x,y)] = 0;
+        //this.carte[t.getIndiceCaseSousPosition(x,y)] = 0;
         marques.addFirst(t.getIndiceCaseSousPosition(x,y));
         int actuel;
 
-        int distance = 1;
-        while (distance < distancemax && !marques.isEmpty()){
-            actuel = marques.pollLast();
-            for (int indice : t.getIndicesAdjacentsAvecIndice(actuel)){
-                if (this.carte[indice] < passageinterdit && !marques.contains(indice)){
-                    marques.addFirst(indice);
-                    this.carte[indice] = distance;
+        int distance = 0;
+        while (distance < distancemax){
+            while (!marques.isEmpty()) {
+                temp.add(marques.pollLast());
+            }
+            while(!temp.isEmpty()) {
+                actuel = temp.pollLast();
+                this.carte[actuel] = distance;
+                for (int indice : t.getIndicesAdjacentsAvecIndice(actuel)) {
+                    if (this.carte[indice] < passageinterdit && this.carte[indice] > distance && !marques.contains(indice)) {
+                        marques.addFirst(indice);
+                    }
                 }
             }
             distance++;
@@ -94,7 +100,11 @@ public class CarteBFS {
     public String toString() {
         String texte = "";
         for (int i = 0; i < this.carte.length; i++) {
-            texte += " " + this.carte[i] + ",";
+            texte +=" ";
+            if (this.carte[i]<10){
+                texte+= "0";
+            }
+            texte += this.carte[i] + ",";
             if ((i+1) % this.largeur == 0){
                 texte += "\n";
             }

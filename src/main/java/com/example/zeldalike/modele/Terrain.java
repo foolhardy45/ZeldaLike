@@ -9,7 +9,7 @@ public class Terrain {
     private int tailleHauteur;
 
     public Terrain() {
-        this.carte_terrain = new int[]{
+         this.carte_terrain = new int[]{
                 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
                 1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 3, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
                 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 2, 3, 3, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2,
@@ -77,7 +77,7 @@ public class Terrain {
     }
 
     public int getIndiceCaseSousPosition(int x, int y){
-        return (x / tailleTuile + (y / tailleTuile) * tailleLargeur);
+        return (x / tailleTuile + (y / tailleTuile) * (tailleLargeur));
     }
 
     public int getTailleLargeur() {
@@ -90,30 +90,39 @@ public class Terrain {
 
     public ArrayList<Integer> getIndicesAdjacent(int x, int y){
         ArrayList<Integer> adjacents = new ArrayList<>();
+
         if (estDansTerrain(x, y)){
             if (estDansTerrain(x+tailleTuile,y)){
                 adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y));
+                System.out.println(6);
             }
             if (estDansTerrain(x+tailleTuile, y+tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y+tailleTuile));
+                System.out.println(3);
             }
             if (estDansTerrain(x+tailleTuile, y-tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y-tailleTuile));
+                System.out.println(9);
             }
             if (estDansTerrain(x, y-tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x,y-tailleTuile));
+                System.out.println(8);
             }
             if (estDansTerrain(x, y+tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x,y+tailleTuile));
+                System.out.println(2);
             }
             if (estDansTerrain(x-tailleTuile, y-tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y-tailleTuile));
+                System.out.println(7);
             }
             if (estDansTerrain(x-tailleTuile, y)){
                 adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y));
+                System.out.println(4);
             }
             if (estDansTerrain(x-tailleTuile, y+tailleTuile)){
                 adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y+tailleTuile));
+                System.out.println(1);
             }
         }
 
@@ -132,6 +141,6 @@ public class Terrain {
     }
 
     public ArrayList<Integer> getIndicesAdjacentsAvecIndice(int indice){
-        return getIndicesAdjacent((indice % this.tailleLargeur)*this.tailleTuile, (indice / this.tailleLargeur + 1 )*tailleTuile);
+        return getIndicesAdjacent((indice % this.tailleLargeur)*this.tailleTuile, (indice / this.tailleLargeur )*tailleTuile);
     }
 }
