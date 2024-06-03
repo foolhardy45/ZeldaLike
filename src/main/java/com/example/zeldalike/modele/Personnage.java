@@ -2,8 +2,8 @@ package com.example.zeldalike.modele;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
-import java.awt.event.KeyEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public abstract class Personnage  {
     private int hp;
@@ -22,16 +22,20 @@ public abstract class Personnage  {
         this.hp = hp;
         this.def = def;
         this.vitesse = vitesse;
-        this.arme = new Poing(10000);
         this.p = p;
         this.env = env;
+        this.arme = new Poing();
         this.terrain = terrain;
         this.hitbox =31;
         this.direction = new SimpleIntegerProperty();
+
     }
 
     public Arme getArme() {
         return arme;
+    }
+    public void setArme(Arme arme) {
+        this.arme = arme;
     }
 
     public int getDirection() {
@@ -43,9 +47,9 @@ public abstract class Personnage  {
     }
 
 
-    public void attaquer(Personnage p) {
+    public void frapper(Personnage p) {
         if (enVie() && p.enVie()) {
-            int degats = this.getArme().getAttaque();
+            int degats = this.arme.getAttaque();
             if (p.getDef() < degats) {
                 degats -= p.getDef();
             } else {
@@ -53,18 +57,23 @@ public abstract class Personnage  {
             }
             p.setHp(p.getHp() - degats);
             System.out.println("Dégâts infligés: " + degats);
-        } else {
-            System.out.println("T'es mort, le gâté !");
         }
     }
 
+    public int  distanceEntreDeuxPersonnages(Personnage p1, Personnage p2){
+        int super_x;
+        int super_y;
+        int distance;
 
-    /*public void recoitDegats(int degats){
-        this.hp -= degats - this.getDef();
-        if (!this.enVie()){
-            this.hp = 0;
-        }
-    }*/
+        super_x = (p1.getP().getX() - p2.getP().getX()) * (p1.getP().getX() - p2.getP().getX());
+        super_y = (p1.getP().getY() - p2.getP().getY()) * (p1.getP().getY() - p2.getP().getY());
+
+        distance = (int) Math.sqrt(super_x + super_y);
+
+
+        return distance;
+    }
+
 
     public IntegerProperty directionProperty() {
         return direction;
@@ -105,35 +114,41 @@ public abstract class Personnage  {
     public void setVitesse(int vitesse) {
         this.vitesse = vitesse;
     }
-   
 
     public void  move() {
-        if(this.getDirection() ==  1){
-            moveDown( );
-            moveLeft( );
-        }else if(this.getDirection() == 2){
-            moveDown( );
-        }else if(this.getDirection() == 3){
-            moveDown( );
-            moveRight( );
-        } else if (this.getDirection() == 4) {
-            moveLeft( );
-        }else if(this.getDirection() == 5){
-
-        }else if(this.getDirection() == 6){
-            moveRight( );
-        }else if(this.getDirection() == 7){
-            moveUp( );
-            moveLeft( );
-        }else if(this.getDirection() == 8){
-            moveUp( );
-        } else if(this.getDirection() == 9) {
-            moveUp( );
-            moveRight( );
-
+        switch (this.getDirection()){
+            case 1:
+                moveDown( );
+                moveLeft( );
+                break;
+            case 2:
+                moveDown( );
+                break;
+            case 3:
+                moveDown( );
+                moveRight( );
+                break;
+            case 4:
+                moveLeft( );
+                break;
+            case 5:
+                break;
+            case 6:
+                moveRight( );
+                break;
+            case 7:
+                moveUp( );
+                moveLeft( );
+                break;
+            case 8:
+                moveUp( );
+                break;
+            case 9:
+                moveUp( );
+                moveRight( );
+                break;
         }
     }
-
 
     private void moveUp( ){
         double nouvellePosY = this.getP().getY() - this.getVitesse();
@@ -143,7 +158,6 @@ public abstract class Personnage  {
             this.getP().setY(newY);
         }
     }
-
 
     private void moveDown(  ) {
         double nouvellePosY = this.getP().getY() + this.getVitesse();

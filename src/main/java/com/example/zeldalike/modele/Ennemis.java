@@ -22,6 +22,14 @@ public abstract class Ennemis extends Personnage{
         return idEnnemi;
     }
 
+    @Override
+    public String toString() {
+        return "Ennemis{" +
+                "idEnnemi='" + idEnnemi + '\'' +
+                ", direction=" + direction +
+                '}';
+    }
+
     /*public void deplacementAleatoire(long deltaTime) {
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);

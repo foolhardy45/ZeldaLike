@@ -47,9 +47,10 @@ public class Controlleur implements Initializable {
         terrain_affichage.setOnKeyReleased(this::onKeyReleased);
         terrain_affichage.setFocusTraversable(true);
         terrrainVue.creeMap();
-        joueurVue = new JoueurVue(this.env.getJ1());
+        joueurVue = new JoueurVue(this.env.getJ1(),this.env.getJ1().getArme());
 
          carte_interaction.getChildren().add(joueurVue.getMac());
+         carte_interaction.getChildren().add(joueurVue.getArmeView());
 
          this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
              switch ((int) newValue){
@@ -67,6 +68,7 @@ public class Controlleur implements Initializable {
                      break;
              }
          }));
+
 
 
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
@@ -108,6 +110,7 @@ public class Controlleur implements Initializable {
         boolean movingDown = pressedKeys.contains("DOWN");
         boolean movingLeft = pressedKeys.contains("LEFT");
         boolean movingRight = pressedKeys.contains("RIGHT");
+        boolean attaque = pressedKeys.contains("X");
 
         if (movingRight && movingLeft ||movingDown && movingUp){
             this.env.getJ1().ajouterDirection(5);
@@ -129,8 +132,25 @@ public class Controlleur implements Initializable {
             this.env.getJ1().ajouterDirection(4);
         }
 
+        if (attaque){
+            System.out.println("faire une attauque");
+            this.env.getJ1().attaquer();
+        }
+
 
     }
+
+    /*private void afficherEffetAttaque() {
+        // Positionner l'effet d'attaque sur le joueur
+        attackEffect.setX(joueurVue.getMac().getLayoutX());
+        attackEffect.setY(joueurVue.getMac().getLayoutY());
+        attackEffect.setVisible(true);
+
+        // Cacher l'effet après un court laps de temps
+        Timeline hideEffect = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> attackEffect.setVisible(false)));
+        hideEffect.setCycleCount(1);
+        hideEffect.play();
+    }*/
 
     private void initAnimation() {
         gameLoop = new Timeline();

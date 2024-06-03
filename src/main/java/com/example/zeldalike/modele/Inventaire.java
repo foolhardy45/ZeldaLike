@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Inventaire {
     private ArrayList<ArticleInventaire> articles;
 
+
     public Inventaire(){
         this.articles = new ArrayList<>();
     }
