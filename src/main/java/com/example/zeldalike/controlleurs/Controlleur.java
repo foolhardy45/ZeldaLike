@@ -71,6 +71,11 @@ public class Controlleur implements Initializable {
         this.env.getEnnemis().addListener(observateurlisteennemi);
         Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
+        MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
+        this.env.getObjet().addListener(observateurlisteobjet);
+        Position PP1 = new Position(310,310);
+        PotionVitale p1 = new PotionVitale(PP1);
+        this.env.ajouterObjet(p1);
 
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
@@ -105,21 +110,22 @@ public class Controlleur implements Initializable {
         boolean movingDown = pressedKeys.contains("DOWN");
         boolean movingLeft = pressedKeys.contains("LEFT");
         boolean movingRight = pressedKeys.contains("RIGHT");
+        boolean interact = pressedKeys.contains("E");
         boolean attaque = pressedKeys.contains("X");
 
 
 
-        if (movingRight && movingLeft || movingDown && movingUp) {
+        if (movingRight && movingLeft ||movingDown && movingUp){
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
             this.env.getJ1().ajouterDirection(9);
         } else if (movingUp && movingLeft) {
             this.env.getJ1().ajouterDirection(7);
-        } else if (movingDown && movingLeft) {
+        }  else if (movingDown && movingLeft) {
             this.env.getJ1().ajouterDirection(1);
         } else if (movingDown && movingRight) {
             this.env.getJ1().ajouterDirection(3);
-        } else if (movingUp) {
+        } else if (movingUp){
             this.env.getJ1().ajouterDirection(8);
         } else if (movingRight) {
             this.env.getJ1().ajouterDirection(6);
@@ -136,6 +142,10 @@ public class Controlleur implements Initializable {
             cooldown = false;
         }
 
+        if (interact){
+            this.env.getJ1().setInteraction(true);
+        }
+        this.joueurVue.updateSprite(this.env.getJ1().getDirection());
 
     }
 
