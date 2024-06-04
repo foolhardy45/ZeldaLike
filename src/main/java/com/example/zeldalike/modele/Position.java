@@ -37,6 +37,10 @@ public class Position {
     }
 
     public boolean collisionEntreSprites(Position p){
-        return (this.x.get() +31 >= p.getX()) && (this.x.get() <= p.getX() + 31) && (this.y.get() + 31 >= p.getY()) && (this.y.get() <= p.getY()+31);
-        }
+        int PBasDroite = 31;
+        return (this.x.get() + PBasDroite >= p.getX()) && (this.x.get() <= p.getX() + PBasDroite) && (this.y.get() + PBasDroite >= p.getY()) && (this.y.get() <= p.getY()+PBasDroite);
+    }
+    public boolean surSprites(Position p){
+        return (this.x.get()>= p.getX()) && (this.x.get() <= p.getX()) && (this.y.get() >= p.getY()) && (this.y.get() <= p.getY());
+    }
 }

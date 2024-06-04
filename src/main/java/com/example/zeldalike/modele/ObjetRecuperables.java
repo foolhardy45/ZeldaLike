@@ -8,12 +8,19 @@ public abstract class ObjetRecuperables {
 
 
     public ObjetRecuperables(Position p, int type){
-        this.idObjet = "Objet "+id;
+        this.idObjet = "Objet"+id;
         this.p = p;
         this.type = type;
         id++;
     }
 
+    public Position getP() {
+        return p;
+    }
+
+    public void setP(Position p) {
+        this.p = p;
+    }
     public String getIdObjet(){
         return this.idObjet;
     }

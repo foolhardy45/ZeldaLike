@@ -134,7 +134,6 @@ public abstract class Personnage  {
         }
     }
 
-
     private void moveUp( ){
         double nouvellePosY = this.getP().getY() - this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 public class Environnement {
     private Joueur j1;
     private ObservableList<Ennemis> ennemis;
+    private ObservableList<ObjetRecuperables> objet;
     private int height;
     private  int width;
     private Terrain terrain;
@@ -16,6 +17,7 @@ public class Environnement {
         this.terrain = new Terrain();
         this.j1 = new Joueur(10,0,p,this,terrain);
         this.ennemis = FXCollections.observableArrayList();
+        this.objet = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
         this.deltaTime = 0;
@@ -34,6 +36,16 @@ public class Environnement {
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
     }
+    public void ajouterObjet(ObjetRecuperables objet) {
+        this.objet.add(objet);
+    }
+    public void sortirObjet(ObjetRecuperables objet){
+        this.objet.remove(objet);
+    }
+
+    public ObservableList<ObjetRecuperables> getObjet() {
+        return objet;
+    }
 
     public int getHeight() {
         return height;
@@ -48,6 +60,7 @@ public class Environnement {
     }
     public void unTour(){
         this.getJ1().move();
+        this.getJ1().interact();
         if(!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 if (ennemis.get(i).verificationCollision(this.getJ1())) {
