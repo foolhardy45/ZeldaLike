@@ -1,9 +1,6 @@
 package com.example.zeldalike.controlleurs;
 
-import com.example.zeldalike.modele.Citron;
-import com.example.zeldalike.modele.Environnement;
-import com.example.zeldalike.modele.Position;
-import com.example.zeldalike.modele.PotionVitale;
+import com.example.zeldalike.modele.*;
 import com.example.zeldalike.vues.JoueurVue;
 import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
@@ -71,6 +68,8 @@ public class Controlleur implements Initializable {
         this.env.getEnnemis().addListener(observateurlisteennemi);
         Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
+        BusinessMan man = new BusinessMan(new Position(640,640), this.env);
+        this.env.ajouterEnnemis(man);
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(310,310);
@@ -145,7 +144,6 @@ public class Controlleur implements Initializable {
         if (interact){
             this.env.getJ1().setInteraction(true);
         }
-        this.joueurVue.updateSprite(this.env.getJ1().getDirection());
 
     }
 

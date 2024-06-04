@@ -20,7 +20,7 @@ public class CarteBFS {
         this.j = j;
         this.t = t;
         this.carte = new int[t.tailleTerrain()];
-        this.distancemax = 9;
+        this.distancemax = 11;
         this.largeur = t.getTailleLargeur();
         reinitCarte();
     }

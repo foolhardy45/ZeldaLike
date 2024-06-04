@@ -9,11 +9,14 @@ public abstract class Ennemis extends Personnage{
     private static int id = 0;
     private final String idEnnemi;
 
-    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
+    private final int aireDetection;
+
+    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain, int detection) {
         super(hp, def, vitesse, p, env, terrain);
         id++;
         this.idEnnemi = "E" + id;
         this.setValeurDirection(8); // 8 = haut, 4 = gauche, 2 = bas, 6 = droite
+        this.aireDetection = detection;
     }
 
     public static int getId() {
@@ -53,7 +56,7 @@ public abstract class Ennemis extends Personnage{
             indice = adjacent.get(i);
 
             // Si la valeur de la case actuelle est plus grande que celle d'une case à proximité
-            if (this.getEnv().getBfs_joueur().getValeurCaseI(indice)<this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition) ){
+            if (this.getEnv().getBfs_joueur().getValeurCaseI(indice)<this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition) && this.getEnv().getBfs_joueur().getValeurCaseI(indice)<this.aireDetection){
                 int direction = this.getEnv().getTerrain().getDirectionI1versI2(indiceposition, indice);
                 bfstrouve = true;
                 //todo ajouter une condition pour qu'il se prenne pas les murs
