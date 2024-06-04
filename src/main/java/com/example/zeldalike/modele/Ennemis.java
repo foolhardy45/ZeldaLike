@@ -54,8 +54,10 @@ public abstract class Ennemis extends Personnage{
 
             // Si la valeur de la case actuelle est plus grande que celle d'une case à proximité
             if (this.getEnv().getBfs_joueur().getValeurCaseI(indice)<this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition) ){
-                this.setValeurDirection(this.getEnv().getTerrain().getDirectionI1versI2(indiceposition, indice));
+                int direction = this.getEnv().getTerrain().getDirectionI1versI2(indiceposition, indice);
                 bfstrouve = true;
+                //todo ajouter une condition pour qu'il se prenne pas les murs
+                this.setValeurDirection(direction);
                 move();
             }
             i++;

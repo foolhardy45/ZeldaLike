@@ -93,28 +93,28 @@ public class Terrain {
 
         if (estDansTerrain(x, y)){
             if (estDansTerrain(x+tailleTuile,y)){
-                adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y));
-            }
-            if (estDansTerrain(x+tailleTuile, y+tailleTuile)){
-                adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y+tailleTuile));
-            }
-            if (estDansTerrain(x+tailleTuile, y-tailleTuile)){
-                adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y-tailleTuile));
-            }
-            if (estDansTerrain(x, y-tailleTuile)){
-                adjacents.add(getIndiceCaseSousPosition(x,y-tailleTuile));
+                adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y));//6
             }
             if (estDansTerrain(x, y+tailleTuile)){
-                adjacents.add(getIndiceCaseSousPosition(x,y+tailleTuile));
-            }
-            if (estDansTerrain(x-tailleTuile, y-tailleTuile)){
-                adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y-tailleTuile));
+                adjacents.add(getIndiceCaseSousPosition(x,y+tailleTuile));//2
             }
             if (estDansTerrain(x-tailleTuile, y)){
-                adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y));
+                adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y));//4
+            }
+            if (estDansTerrain(x, y-tailleTuile)){
+                adjacents.add(getIndiceCaseSousPosition(x,y-tailleTuile));//8
+            }
+            if (estDansTerrain(x+tailleTuile, y-tailleTuile)){
+                adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y-tailleTuile));//9
+            }
+            if (estDansTerrain(x+tailleTuile, y+tailleTuile)){
+                adjacents.add(getIndiceCaseSousPosition(x+tailleTuile,y+tailleTuile));//3
             }
             if (estDansTerrain(x-tailleTuile, y+tailleTuile)){
-                adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y+tailleTuile));
+                adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y+tailleTuile));//1
+            }
+            if (estDansTerrain(x-tailleTuile, y-tailleTuile)){
+                adjacents.add(getIndiceCaseSousPosition(x-tailleTuile,y-tailleTuile));//7
             }
         }
 
