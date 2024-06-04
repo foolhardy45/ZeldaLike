@@ -1,20 +1,24 @@
 package com.example.zeldalike.modele;
 
+import com.example.zeldalike.algos.CarteBFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Environnement {
-    private final Joueur j1;
-    private final ObservableList<Ennemis> ennemis;
-    private final int height;
-    private final int width;
-    private final Terrain terrain;
+    private Joueur j1;
+    private ObservableList<Ennemis> ennemis;
+    private int height;
+    private int width;
+    private Terrain terrain;
+    private CarteBFS bfs_joueur;
     private int deltaTime;
 
-    public Environnement(int height, int width) {
-        Position p = new Position(0, 0);
+
+    public Environnement( int height, int width) {
+        Position p = new Position(0,0);
         this.terrain = new Terrain();
-        this.j1 = new Joueur(10, 0, p, this, terrain);
+        this.j1 = new Joueur(10,0,p,this,terrain);
+        this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
         this.ennemis = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
@@ -24,7 +28,9 @@ public class Environnement {
     public Joueur getJ1() {
         return j1;
     }
-
+    public CarteBFS getBfs_joueur(){
+        return bfs_joueur;
+    }
     public void ajouterEnnemis(Ennemis ennemis) {
         this.ennemis.add(ennemis);
     }
@@ -48,11 +54,12 @@ public class Environnement {
     public Terrain getTerrain() {
         return terrain;
     }
-
-    public void unTour() {
+    public void unTour(){
         this.getJ1().move();
-        if (!ennemis.isEmpty()) {
+        this.bfs_joueur.miseAJourCarte();
+        if(!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
+                ennemis.get(i).deplacementBFS();
                 if (ennemis.get(i).verificationCollision(this.getJ1())) {
                     //ennemis.projection(this.getJ1(),deltaTime);
                 }

@@ -76,6 +76,7 @@ public abstract class Personnage {
     public IntegerProperty directionProperty() {
         return direction;
     }
+    public void setValeurDirection(int d){this.direction.set(d);}
 
     public Position getP() {
         return p;
@@ -146,6 +147,7 @@ public abstract class Personnage {
                 moveRight();
                 break;
         }
+
     }
 
     private void moveUp() {

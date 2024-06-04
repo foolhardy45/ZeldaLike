@@ -1,15 +1,19 @@
 package com.example.zeldalike.modele;
 
-public abstract class Ennemis extends Personnage {
+import javafx.beans.property.IntegerProperty;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public abstract class Ennemis extends Personnage{
     private static int id = 0;
     private final String idEnnemi;
-    private final int direction;
 
     public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
         super(hp, def, vitesse, p, env, terrain);
         id++;
         this.idEnnemi = "E" + id;
-        this.direction = 0; // 0 = haut, 1 = gauche, 2 = bas, 3 = droite
+        this.setValeurDirection(8); // 8 = haut, 4 = gauche, 2 = bas, 6 = droite
     }
 
     public static int getId() {
@@ -20,43 +24,46 @@ public abstract class Ennemis extends Personnage {
         return idEnnemi;
     }
 
-    @Override
-    public String toString() {
-        return "Ennemis{" +
-                "idEnnemi='" + idEnnemi + '\'' +
-                ", direction=" + direction +
-                '}';
-    }
-
-    /*public void deplacementAleatoire(long deltaTime) {
+    public void deplacementAleatoire() {
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
         if (t < 50) {
             t = quelleDirection.nextInt(400);
             if (t < 100) {
-                this.direction = 0;
+                this.setValeurDirection(8);
             } else if (t < 200) {
-                this.direction = 1;
+                this.setValeurDirection(4);
             } else if (t < 300) {
-                this.direction = 2;
+                this.setValeurDirection(2);
             } else {
-                this.direction = 3;
+                this.setValeurDirection(6);
             }
 
         }
-        switch (this.direction) {
-            case 0:
-                moveUp(deltaTime);
-                break;
-            case 1:
-                moveLeft(deltaTime);
-                break;
-            case 2:
-                moveDown(deltaTime);
-                break;
-            case 3:
-                moveRight(deltaTime);
-                break;
+        this.move();
+    }
+
+    public void deplacementBFS(){
+        ArrayList<Integer> adjacent = this.getEnv().getTerrain().getIndicesAdjacent(this.getP().getX(), this.getP().getY());
+        int indiceposition = this.getEnv().getTerrain().getIndiceCaseSousPosition(this.getP().getX(), this.getP().getY());
+        int i=0;
+        int indice;
+        boolean bfstrouve = false;
+        while (i < adjacent.size() && !bfstrouve){
+            indice = adjacent.get(i);
+
+            // Si la valeur de la case actuelle est plus grande que celle d'une case à proximité
+            if (this.getEnv().getBfs_joueur().getValeurCaseI(indice)<this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition) ){
+                int direction = this.getEnv().getTerrain().getDirectionI1versI2(indiceposition, indice);
+                bfstrouve = true;
+                //todo ajouter une condition pour qu'il se prenne pas les murs
+                this.setValeurDirection(direction);
+                move();
+            }
+            i++;
         }
-    }*/
+        if (!bfstrouve){
+            deplacementAleatoire();
+        }
+    }
 }
