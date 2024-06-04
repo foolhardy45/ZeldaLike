@@ -33,6 +33,8 @@ public class Controlleur implements Initializable {
     private Environnement env;
     private Timeline gameLoop;
     private int temps_gameloop;
+    private boolean cooldown = true;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -105,6 +107,8 @@ public class Controlleur implements Initializable {
         boolean movingRight = pressedKeys.contains("RIGHT");
         boolean attaque = pressedKeys.contains("X");
 
+
+
         if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
@@ -125,26 +129,15 @@ public class Controlleur implements Initializable {
             this.env.getJ1().ajouterDirection(4);
         }
 
-        if (attaque) {
+        if (attaque && cooldown) {
             System.out.println("faire une attauque");
             this.joueurVue.afficherArmeView();
             this.env.getJ1().attaquer();
+            cooldown = false;
         }
 
 
     }
-
-    /*private void afficherEffetAttaque() {
-        // Positionner l'effet d'attaque sur le joueur
-        attackEffect.setX(joueurVue.getMac().getLayoutX());
-        attackEffect.setY(joueurVue.getMac().getLayoutY());
-        attackEffect.setVisible(true);
-
-        // Cacher l'effet après un court laps de temps
-        Timeline hideEffect = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> attackEffect.setVisible(false)));
-        hideEffect.setCycleCount(1);
-        hideEffect.play();
-    }*/
 
     private void initAnimation() {
         gameLoop = new Timeline();
@@ -158,18 +151,12 @@ public class Controlleur implements Initializable {
                     long currentTime = System.currentTimeMillis();
                     lastTime = currentTime;
 
-                    handleMovement();
-
                     this.env.unTour();
-
-                    //TEST BOUGER CITRON
-                    /*for (Ennemis ennemi : this.env.getEnnemis()) {
-                       //ennemi.deplacementAleatoire(deltaTime);
-                    }*/
 
                     if (this.joueurVue.isVisible()){
                         if (temps_gameloop %70 == 0){
                             this.joueurVue.getArmeView().setVisible(false);
+                            cooldown = true;
                         }
                     }
                     temps_gameloop++;

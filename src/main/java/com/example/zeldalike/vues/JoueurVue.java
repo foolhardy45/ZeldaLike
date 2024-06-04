@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class JoueurVue extends JPanel {
     private boolean visible;
@@ -19,7 +20,11 @@ public class JoueurVue extends JPanel {
     private final Image spriteDown;
     private final Image spriteLeft;
     private final Image spriteRight;
-    private final Image poing;
+    private final Image poingDroit;
+    private Image poingGauche;
+    private Image poingHaut;
+    private Image poingBas;
+    
 
 
     public JoueurVue(Joueur j, Arme a) {
@@ -33,7 +38,10 @@ public class JoueurVue extends JPanel {
         spriteRight = new Image(String.valueOf(Main.class.getResource("images/gressif_droite.png")));
 
         //sprite des armes
-        poing = new Image(String.valueOf(Main.class.getResource("images/poinGressif.png")));
+        poingDroit = new Image(String.valueOf(Main.class.getResource("images/poinGressifDroite.png")));
+        poingGauche = new Image(String.valueOf(Main.class.getResource("images/poinGressifGauche.png")));
+        poingHaut = new Image(String.valueOf(Main.class.getResource("images/poinGressifHaut.png")));
+        poingBas = new Image(String.valueOf(Main.class.getResource("images/poinGressifBas.png")));
 
         //Image par defaut du joueur
         Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_bas.png")));
@@ -46,8 +54,7 @@ public class JoueurVue extends JPanel {
         //position du joueur
         mac.translateXProperty().bind(j.getP().xProperty());
         mac.translateYProperty().bind(j.getP().yProperty());
-        armeView.translateXProperty().bind(mac.translateXProperty());
-        armeView.translateYProperty().bind(mac.translateYProperty());
+
 
     }
 
@@ -57,10 +64,20 @@ public class JoueurVue extends JPanel {
     }
 
     public void afficherArmeView() {
-        if (this.j.getArme() instanceof Poing) {
-           this.armeView.setImage(poing);
+        Image arme = null;
+        if(this.mac.getImage().equals(spriteUp)) {
+            arme = poingHaut;
+        }else if(this.mac.getImage().equals(spriteDown)) {
+            arme = poingBas;
+        } else if (this.mac.getImage().equals(spriteLeft)) {
+            arme = poingGauche;
+        } else if (this.mac.getImage().equals(spriteRight)) {
+            arme = poingDroit;
         }
+        armeView.setImage(arme);
         armeView.setVisible(true);
+        armeView.setX(this.j.getP().xProperty().get());
+        armeView.setY(this.j.getP().yProperty().get());
 
     }
 
