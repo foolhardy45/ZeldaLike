@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.awt.*;
 
 public abstract class Personnage {
-    private int hp;
+    private IntegerProperty hp;
     private int def;
     private int vitesse;
     private Position p;
@@ -17,7 +17,7 @@ public abstract class Personnage {
     private Arme arme;
 
     public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
-        this.hp = hp;
+        this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
@@ -85,11 +85,15 @@ public abstract class Personnage {
     }
 
     public int getHp() {
-        return hp;
+        return hp.get();
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp.set(hp);
+    }
+
+    public IntegerProperty hpProperty() {
+        return hp;
     }
 
     public int getDef() {
@@ -205,7 +209,7 @@ public abstract class Personnage {
     }
 
     public boolean enVie() {
-        return this.hp > 0;
+        return this.getHp() > 0;
     }
     
     public abstract void personnageTouche(Personnage p);
