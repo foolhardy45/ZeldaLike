@@ -91,7 +91,7 @@ public class Environnement {
         int distance = (int) Math.sqrt(dx * dx + dy * dy);
         if (distance == 0) return;
 
-        int repulsionForce = 10;
+        int repulsionForce = 12;
         int repulsionX = (dx / distance) * repulsionForce;
         int repulsionY = (dy / distance) * repulsionForce;
 
