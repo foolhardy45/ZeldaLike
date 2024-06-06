@@ -138,6 +138,7 @@ public class Controlleur implements Initializable {
         if (attaque && cooldown) {
             System.out.println("faire une attauque");
             this.joueurVue.afficherArmeView();
+            System.out.println(this.env.getBfs_joueur());
             this.env.getJ1().attaquer();
             cooldown = false;
         }
@@ -145,7 +146,6 @@ public class Controlleur implements Initializable {
         if (interact){
             this.env.getJ1().setInteraction(true);
         }
-        this.joueurVue.updateSprite(this.env.getJ1().getDirection());
 
     }
 

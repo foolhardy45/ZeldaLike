@@ -39,8 +39,8 @@ public class CarteBFS {
     public void miseAJourCarte(){
 
 
-        int x = this.j.getP().getX();
-        int y = this.j.getP().getY();
+        int x = this.j.getP().getX()+this.j.getHitbox();
+        int y = this.j.getP().getY()+this.j.getHitbox();
         int tailletuile = this.j.getEnv().getTerrain().getTailleTuile();
         reinitCarte();
         LinkedList<Integer> marques = new LinkedList<>();
@@ -86,5 +86,22 @@ public class CarteBFS {
             }
         }
         return texte;
+    }
+
+
+    public int indiceMinimumVal(int indiceposition){
+        ArrayList<Integer> adj = this.j.getEnv().getTerrain().getIndicesAdjacentsAvecIndice(indiceposition);
+        int indicepluspetit = -1;
+        if (!adj.isEmpty()) {
+            int minimum = this.carte[adj.get(0)];
+            indicepluspetit = adj.get(0);
+            for (int i=1 ; i<adj.size() ; i++){
+                if (minimum > this.carte[adj.get(i)]){
+                    minimum = this.carte[adj.get(i)];
+                    indicepluspetit = adj.get(i);
+                }
+            }
+        }
+        return indicepluspetit;
     }
 }

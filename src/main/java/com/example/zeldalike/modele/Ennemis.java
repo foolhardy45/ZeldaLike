@@ -10,7 +10,7 @@ public abstract class Ennemis extends Personnage{
     private final String idEnnemi;
 
     public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
-        super(hp, def, vitesse, p, env, terrain);
+        super(hp, def, vitesse, new Position(p.getX()+30, p.getY()+30), 16, env, terrain);
         id++;
         this.idEnnemi = "E" + id;
         this.setValeurDirection(8); // 8 = haut, 4 = gauche, 2 = bas, 6 = droite
@@ -45,25 +45,54 @@ public abstract class Ennemis extends Personnage{
 
     public void deplacementBFS(){
         ArrayList<Integer> adjacent = this.getEnv().getTerrain().getIndicesAdjacent(this.getP().getX(), this.getP().getY());
-        int indiceposition = this.getEnv().getTerrain().getIndiceCaseSousPosition(this.getP().getX(), this.getP().getY());
-        int i=0;
-        int indice;
+
+        int indiceposition = this.getEnv().getTerrain().getIndiceCaseSousPosition(this.getP().getX()+getHitbox(), this.getP().getY()+getHitbox());
+        int indicevalmin = this.getEnv().getBfs_joueur().indiceMinimumVal(indiceposition);
         boolean bfstrouve = false;
-        while (i < adjacent.size() && !bfstrouve){
-            indice = adjacent.get(i);
 
             // Si la valeur de la case actuelle est plus grande que celle d'une case à proximité
-            if (this.getEnv().getBfs_joueur().getValeurCaseI(indice)<this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition) ){
-                int direction = this.getEnv().getTerrain().getDirectionI1versI2(indiceposition, indice);
+            if (this.getEnv().getBfs_joueur().getValeurCaseI(indicevalmin) < this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition) ){
+                int direction = this.getEnv().getTerrain().getDirectionI1versI2(indiceposition, indicevalmin);
                 bfstrouve = true;
-                //todo ajouter une condition pour qu'il se prenne pas les murs
+                System.out.println("distance: "+this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition));
+                //todo ajouter une condition pour qu'il se prenne pas les murs // fait ?
+                if (direction%2 == 1){
+                    switch (direction){
+                        case 1:
+                            this.setValeurDirection(2);
+                            move();
+                            System.out.println(2);
+                            direction = 4;
+                            break;
+                        case 3:
+                            this.setValeurDirection(6);
+                            move();
+                            System.out.println(6);
+                            direction = 2;
+                            break;
+                        case 7:
+                            this.setValeurDirection(8);
+                            move();
+                            System.out.println(8);
+                            direction = 4;
+                            break;
+                        case 9:
+                            this.setValeurDirection(8);
+                            move();
+                            System.out.println(8);
+                            direction = 6;
+                            break;
+                    }
+                }
                 this.setValeurDirection(direction);
+                System.out.println(direction);
                 move();
             }
-            i++;
-        }
+
         if (!bfstrouve){
             deplacementAleatoire();
         }
+
     }
+
 }

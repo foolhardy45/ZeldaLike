@@ -15,7 +15,7 @@ public abstract class Personnage {
     private Arme arme;
 
 
-    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
+    public Personnage(int hp, int def, int vitesse, Position p, int hitbox, Environnement env, Terrain terrain) {
         this.hp = hp;
         this.def = def;
         this.vitesse = vitesse;
@@ -203,6 +203,10 @@ public abstract class Personnage {
             touche = true;
         }
         return touche;
+    }
+
+    public int getHitbox(){
+        return this.hitbox;
     }
 
     public boolean enVie() {
