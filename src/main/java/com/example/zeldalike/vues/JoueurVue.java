@@ -66,18 +66,28 @@ public class JoueurVue extends JPanel {
     public void afficherArmeView() {
         Image arme = null;
         if(this.mac.getImage().equals(spriteUp)) {
-            arme = poingHaut;
+            armeView.setImage(poingHaut);
+            armeView.setVisible(true);
+            armeView.setX(this.j.getP().xProperty().get());
+            armeView.setY(this.j.getP().yProperty().get() - 32);
+
         }else if(this.mac.getImage().equals(spriteDown)) {
-            arme = poingBas;
+            armeView.setImage(poingBas);
+            armeView.setVisible(true);
+            armeView.setX(this.j.getP().xProperty().get() );
+            armeView.setY(this.j.getP().yProperty().get() + 32);
         } else if (this.mac.getImage().equals(spriteLeft)) {
-            arme = poingGauche;
+            armeView.setImage(poingGauche);
+            armeView.setVisible(true);
+            armeView.setX(this.j.getP().xProperty().get()-32);
+            armeView.setY(this.j.getP().yProperty().get() );
         } else if (this.mac.getImage().equals(spriteRight)) {
-            arme = poingDroit;
+            armeView.setImage(poingDroit);
+            armeView.setVisible(true);
+            armeView.setX(this.j.getP().xProperty().get()+32);
+            armeView.setY(this.j.getP().yProperty().get() );
         }
-        armeView.setImage(arme);
-        armeView.setVisible(true);
-        armeView.setX(this.j.getP().xProperty().get());
-        armeView.setY(this.j.getP().yProperty().get());
+
 
     }
 
