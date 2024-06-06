@@ -63,6 +63,37 @@ public abstract class Personnage {
         int super_y = (p1.getP().getY() - p2.getP().getY()) * (p1.getP().getY() - p2.getP().getY());
         return (int) Math.sqrt(super_x + super_y);
     }
+    public void repousserPersonnages(Personnage p1, Personnage p2) {
+        int dx = p1.getP().getX() - p2.getP().getX();
+        int dy = p1.getP().getY() - p2.getP().getY();
+        int distance = p1.distanceEntreDeuxPersonnages(p1,p2);
+        if (distance == 0) return;
+
+        int repulsionForce = 12;
+        int repulsionX = (dx / distance) * repulsionForce;
+        int repulsionY = (dy / distance) * repulsionForce;
+
+        boolean p1CanMove =
+                terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX() + p1.getHitbox() + repulsionX, p1.getP().getY() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY()+ p1.getHitbox() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX()+ p1.getHitbox() + repulsionX, p1.getP().getY() +p1.getHitbox()+ repulsionY);
+        boolean p2CanMove =
+                terrain.estAutorisé(p2.getP().getX() - repulsionX, p2.getP().getY() - repulsionY) &&
+                        terrain.estAutorisé(p2.getP().getX()+ p2.getHitbox()-repulsionX,p2.getP().getY() - repulsionY ) &&
+                        terrain.estAutorisé(p2.getP().getX()-repulsionX,p2.getP().getY()+ p2.getHitbox() - repulsionY ) &&
+                        terrain.estAutorisé(p2.getP().getX()+p2.getHitbox()-repulsionX,p2.getP().getY() + p2.getHitbox()-repulsionY);
+
+
+        if (p1CanMove && p2CanMove) {
+            p1.moveDe(repulsionX, repulsionY);
+            p2.moveDe(-repulsionX, -repulsionY);
+        } else if (p1CanMove) {
+            p1.moveDe(repulsionX, repulsionY);
+        } else if (p2CanMove) {
+            p2.moveDe(-repulsionX, -repulsionY);
+        }
+    }
 
     public IntegerProperty directionProperty() {
         return direction;
