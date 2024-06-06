@@ -43,7 +43,7 @@ public class Joueur extends Personnage {
 
     public Personnage getEnnemiProche() {
         Personnage ennemiProche = null;
-        int distanceMin = 38;
+        int distanceMin = 50;
 
         for (Personnage ennemi : this.getEnv().getEnnemis()) {
             if (ennemi.enVie()) {
