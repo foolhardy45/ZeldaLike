@@ -145,7 +145,6 @@ public class Controlleur implements Initializable {
         if (interact){
             this.env.getJ1().setInteraction(true);
         }
-        this.joueurVue.updateSprite(this.env.getJ1().getDirection());
 
     }
 
