@@ -109,58 +109,48 @@ public class JoueurVue extends JPanel {
     }
     private void updateHeartImage() {
         int hp = j.getHp();
-        if (hp == 12) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur4);
-            coeurN3.setImage(coeur4);
-        } else if (hp == 11) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur4);
-            coeurN3.setImage(coeur3);
-        } else if (hp == 10) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur4);
-            coeurN3.setImage(coeur2);
-        } else if (hp == 9) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur4);
-            coeurN3.setImage(coeur1);
-        } else if (hp == 8) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur4);
-            coeurN3.setImage(coeur0);
-        } else if (hp == 7) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur3);
-            coeurN3.setImage(coeur0);
-        } else if (hp == 6) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur2);
-            coeurN3.setImage(coeur0);
-        } else if (hp == 5) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur1);
-            coeurN3.setImage(coeur0);
-        } else if (hp == 4) {
-            coeurN1.setImage(coeur4);
-            coeurN2.setImage(coeur0);
-            coeurN3.setImage(coeur0);
-        } else if (hp == 3) {
-            coeurN1.setImage(coeur3);
-            coeurN2.setImage(coeur0);
-            coeurN3.setImage(coeur0);
-        } else if (hp == 2) {
-            coeurN1.setImage(coeur2);
-            coeurN2.setImage(coeur0);
-            coeurN3.setImage(coeur0);
-        } else if (hp == 1) {
-            coeurN1.setImage(coeur1);
-            coeurN2.setImage(coeur0);
-            coeurN3.setImage(coeur0);
-        } else {
-            coeurN1.setImage(coeur0);
-            coeurN2.setImage(coeur0);
-            coeurN3.setImage(coeur0);
+        switch (hp){
+            case 12 ->{ coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur4);
+                coeurN3.setImage(coeur4);
+            }
+            case 11 ->{coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur4);
+                coeurN3.setImage(coeur3);}
+            case 10 ->{coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur4);
+                coeurN3.setImage(coeur2);}
+            case 9 ->{coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur4);
+                coeurN3.setImage(coeur1);}
+            case 8 ->{coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur4);
+                coeurN3.setImage(coeur0);}
+            case 7 ->{coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur3);
+                coeurN3.setImage(coeur0);}
+            case 6 ->{ coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur2);
+                coeurN3.setImage(coeur0);}
+            case 5 ->{ coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur1);
+                coeurN3.setImage(coeur0);}
+            case 4 ->{coeurN1.setImage(coeur4);
+                coeurN2.setImage(coeur0);
+                coeurN3.setImage(coeur0);}
+            case 3 ->{coeurN1.setImage(coeur3);
+                coeurN2.setImage(coeur0);
+                coeurN3.setImage(coeur0);}
+            case 2 ->{ coeurN1.setImage(coeur2);
+                coeurN2.setImage(coeur0);
+                coeurN3.setImage(coeur0);}
+            case 1 ->{coeurN1.setImage(coeur1);
+                coeurN2.setImage(coeur0);
+                coeurN3.setImage(coeur0);}
+            case 0 ->{coeurN1.setImage(coeur0);
+                coeurN2.setImage(coeur0);
+                coeurN3.setImage(coeur0);}
+
         }
     }
 

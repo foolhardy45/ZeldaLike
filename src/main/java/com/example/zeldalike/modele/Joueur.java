@@ -18,7 +18,7 @@ public class Joueur extends Personnage {
     }
 
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
-        super(12, def, 4, p, env, terrain);
+        super(2, def, 4,0, p, env, terrain);
         this.sac = new Inventaire();
 
     }
