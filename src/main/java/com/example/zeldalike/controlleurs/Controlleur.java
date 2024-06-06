@@ -11,6 +11,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
@@ -23,6 +24,8 @@ import java.util.Set;
 public class Controlleur implements Initializable {
 
     private final Set<String> pressedKeys = new HashSet<>();
+    @FXML
+    private HBox info_joueur;
     @FXML
     private TilePane terrain_affichage;
     @FXML
@@ -43,6 +46,10 @@ public class Controlleur implements Initializable {
         terrain_affichage.setFocusTraversable(true);
         terrrainVue.creeMap();
         joueurVue = new JoueurVue(this.env.getJ1(), this.env.getJ1().getArme());
+
+        info_joueur.getChildren().add(joueurVue.getCoeurN1());
+        info_joueur.getChildren().add(joueurVue.getCoeurN2());
+        info_joueur.getChildren().add(joueurVue.getCoeurN3());
 
         carte_interaction.getChildren().add(joueurVue.getMac());
         carte_interaction.getChildren().add(joueurVue.getArmeView());
