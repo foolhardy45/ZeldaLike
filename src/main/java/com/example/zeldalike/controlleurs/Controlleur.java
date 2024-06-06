@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-
 public class Controlleur implements Initializable {
 
     private final Set<String> pressedKeys = new HashSet<>();
@@ -34,7 +33,6 @@ public class Controlleur implements Initializable {
     private Timeline gameLoop;
     private int temps_gameloop;
     private boolean cooldown = true;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,14 +64,13 @@ public class Controlleur implements Initializable {
             }
         }));
 
-
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
         Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
-        Position PP1 = new Position(310,310);
+        Position PP1 = new Position(310, 310);
         PotionVitale p1 = new PotionVitale(PP1);
         this.env.ajouterObjet(p1);
 
@@ -81,7 +78,6 @@ public class Controlleur implements Initializable {
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
 
         System.out.println(this.env.getJ1().getSac().toString());
-
 
         terrain_affichage.requestFocus();
 
@@ -91,18 +87,13 @@ public class Controlleur implements Initializable {
 
     private void onKeyPressed(KeyEvent event) {
         pressedKeys.add(event.getCode().toString());
-        System.out.println("je suis dans onKeyPressed");
         handleMovement();
-
     }
 
     private void onKeyReleased(KeyEvent event) {
         pressedKeys.remove(event.getCode().toString());
-        System.out.println("je suis dans onKeyReleased");
-
         this.env.getJ1().ajouterDirection(5);
         handleMovement();
-        //
     }
 
     private void handleMovement() {
@@ -113,19 +104,17 @@ public class Controlleur implements Initializable {
         boolean interact = pressedKeys.contains("E");
         boolean attaque = pressedKeys.contains("X");
 
-
-
-        if (movingRight && movingLeft ||movingDown && movingUp){
+        if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
             this.env.getJ1().ajouterDirection(9);
         } else if (movingUp && movingLeft) {
             this.env.getJ1().ajouterDirection(7);
-        }  else if (movingDown && movingLeft) {
+        } else if (movingDown && movingLeft) {
             this.env.getJ1().ajouterDirection(1);
         } else if (movingDown && movingRight) {
             this.env.getJ1().ajouterDirection(3);
-        } else if (movingUp){
+        } else if (movingUp) {
             this.env.getJ1().ajouterDirection(8);
         } else if (movingRight) {
             this.env.getJ1().ajouterDirection(6);
@@ -136,13 +125,10 @@ public class Controlleur implements Initializable {
         }
 
         if (attaque && cooldown) {
-            System.out.println("faire une attauque");
             this.joueurVue.afficherArmeView();
             this.env.getJ1().attaquer();
             cooldown = false;
-        }
-
-        if (interact){
+        } else if (interact) {
             this.env.getJ1().setInteraction(true);
         }
 
@@ -162,14 +148,13 @@ public class Controlleur implements Initializable {
 
                     this.env.unTour();
 
-                    if (this.joueurVue.isVisible()){
-                        if (temps_gameloop %70 == 0){
+                    if (this.joueurVue.isVisible()) {
+                        if (temps_gameloop % 30 == 0) {
                             this.joueurVue.getArmeView().setVisible(false);
                             cooldown = true;
                         }
                     }
                     temps_gameloop++;
-
                 }
         );
 
