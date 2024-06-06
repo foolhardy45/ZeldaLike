@@ -72,13 +72,6 @@ public class Environnement {
 
     public void verifierCollisions() {
         for (int i = 0; i < ennemis.size(); i++) {
-            for (int j = i + 1; j < ennemis.size(); j++) {
-                /*Personnage p1 = ennemis.get(i);
-                Personnage p2 = ennemis.get(j);
-                if (p1.collidesWith(p2)) {
-                    repousserPersonnages(p1, p2);
-                }*/
-            }
             if (ennemis.get(i).collidesWith(j1)) {
                 repousserPersonnages(j1, ennemis.get(i));
             }
@@ -88,7 +81,7 @@ public class Environnement {
     private void repousserPersonnages(Personnage p1, Personnage p2) {
         int dx = p1.getP().getX() - p2.getP().getX();
         int dy = p1.getP().getY() - p2.getP().getY();
-        int distance = (int) Math.sqrt(dx * dx + dy * dy);
+        int distance = p1.distanceEntreDeuxPersonnages(p1,p2);
         if (distance == 0) return;
 
         int repulsionForce = 12;
@@ -108,12 +101,12 @@ public class Environnement {
 
 
         if (p1CanMove && p2CanMove) {
-            p1.move(repulsionX, repulsionY);
-            p2.move(-repulsionX, -repulsionY);
+            p1.moveDe(repulsionX, repulsionY);
+            p2.moveDe(-repulsionX, -repulsionY);
         } else if (p1CanMove) {
-            p1.move(repulsionX, repulsionY);
+            p1.moveDe(repulsionX, repulsionY);
         } else if (p2CanMove) {
-            p2.move(-repulsionX, -repulsionY);
+            p2.moveDe(-repulsionX, -repulsionY);
         }
     }
 

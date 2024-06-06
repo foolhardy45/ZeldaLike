@@ -181,7 +181,7 @@ public abstract class Personnage {
         return new Rectangle(this.getP().getX(), this.getP().getY(), this.getWidth(), this.getHeight());
     }
 
-    public void move(int dx, int dy) {
+    public void moveDe(int dx, int dy) {
         this.getP().setX(this.getP().getX() + dx);
         this.getP().setY(this.getP().getY() + dy);
     }
