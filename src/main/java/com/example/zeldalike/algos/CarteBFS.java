@@ -104,4 +104,26 @@ public class CarteBFS {
         }
         return indicepluspetit;
     }
+
+    public int minimumValdesCases(ArrayList<Integer> cases){
+        if (!cases.isEmpty()) {
+            int minimum = this.carte[cases.get(0)];
+            for (int i = 1; i < cases.size(); i++) {
+                if (minimum > this.carte[cases.get(i)]) {
+                    minimum = this.carte[cases.get(i)];
+                }
+            }
+        }
+        return 64;
+    }
+    public ArrayList<Integer> tousIndicesMinimum(ArrayList<Integer> adj){
+        ArrayList<Integer> pluspetits = new ArrayList<>();
+        int min = minimumValdesCases(adj);
+        for (int val : adj) {
+            if (this.carte[val] == min){
+                pluspetits.add(val);
+            }
+        }
+        return pluspetits;
+    }
 }

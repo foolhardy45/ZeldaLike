@@ -10,7 +10,7 @@ public abstract class Ennemis extends Personnage{
     private final String idEnnemi;
 
     public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
-        super(hp, def, vitesse, new Position(p.getX()+30, p.getY()+30), 16, env, terrain);
+        super(hp, def, vitesse, new Position(p.getX(), p.getY()), 31, env, terrain);
         id++;
         this.idEnnemi = "E" + id;
         this.setValeurDirection(8); // 8 = haut, 4 = gauche, 2 = bas, 6 = droite
@@ -44,18 +44,23 @@ public abstract class Ennemis extends Personnage{
     }
 
     public void deplacementBFS(){
-        ArrayList<Integer> adjacent = this.getEnv().getTerrain().getIndicesAdjacent(this.getP().getX(), this.getP().getY());
+        //ArrayList<Integer> adjacent = this.getEnv().getTerrain().getIndicesAdjacent(this.getP().getX(), this.getP().getY());
 
         int indiceposition = this.getEnv().getTerrain().getIndiceCaseSousPosition(this.getP().getX()+getHitbox(), this.getP().getY()+getHitbox());
+        //ArrayList<Integer> pluspetits = this.getEnv().getBfs_joueur().tousIndicesMinimum(adjacent);
         int indicevalmin = this.getEnv().getBfs_joueur().indiceMinimumVal(indiceposition);
+        System.out.println("IP : " + indiceposition);
+        System.out.println("IVLM : " + indicevalmin);
         boolean bfstrouve = false;
 
             // Si la valeur de la case actuelle est plus grande que celle d'une case à proximité
             if (this.getEnv().getBfs_joueur().getValeurCaseI(indicevalmin) < this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition) ){
+
                 int direction = this.getEnv().getTerrain().getDirectionI1versI2(indiceposition, indicevalmin);
                 bfstrouve = true;
                 System.out.println("distance: "+this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition));
                 //todo ajouter une condition pour qu'il se prenne pas les murs // fait ?
+                System.out.println("direction : " + direction);
                 if (direction%2 == 1){
                     switch (direction){
                         case 1:
