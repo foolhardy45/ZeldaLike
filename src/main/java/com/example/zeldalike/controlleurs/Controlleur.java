@@ -104,9 +104,8 @@ public class Controlleur implements Initializable {
         boolean movingRight = pressedKeys.contains("RIGHT");
         boolean interact = pressedKeys.contains("E");
         boolean attaque = pressedKeys.contains("X");
-        if (this.env.getJ1().isFaitUnAttaque()) {
 
-        }else if (movingRight && movingLeft || movingDown && movingUp) {
+        if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
             this.env.getJ1().ajouterDirection(9);
@@ -124,19 +123,17 @@ public class Controlleur implements Initializable {
             this.env.getJ1().ajouterDirection(2);
         } else if (movingLeft) {
             this.env.getJ1().ajouterDirection(4);
-        }
 
+
+        }
         if (attaque && cooldown) {
+            this.env.getJ1().ajouterDirection(5);
             this.joueurVue.afficherArmeView();
             this.env.getJ1().attaquer();
             cooldown = false;
-
         } else if (interact) {
             this.env.getJ1().setInteraction(true);
         }
-
-
-
     }
 
 
@@ -154,7 +151,7 @@ public class Controlleur implements Initializable {
 
                     this.env.unTour();
 
-                    if (this.joueurVue.isVisible()) {
+                    if (this.joueurVue.isVisible()) { // Si le joueur fait une attaque alors pendant qu"elle que seconde l'arme s'affichera
                         if (temps_gameloop % 30 == 0) {
                             this.joueurVue.getArmeView().setVisible(false);
                             cooldown = true;

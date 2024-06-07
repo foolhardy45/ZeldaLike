@@ -51,9 +51,8 @@ public class Joueur extends Personnage {
     }
 
     public void attaquer() {
-
-            this.getArme().faireUneAttaque();
-        }
+        this.getArme().faireUneAttaque();
+    }
 
     public Personnage getEnnemiProche() {
         Personnage ennemiProche = null;
