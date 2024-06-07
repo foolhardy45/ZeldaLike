@@ -1,7 +1,6 @@
 package com.example.zeldalike.modele;
 
 import com.example.zeldalike.modele.Arme.Arme;
-import com.example.zeldalike.modele.Arme.Chargeur;
 import com.example.zeldalike.modele.Arme.Poing;
 
 import java.util.Queue;
@@ -18,7 +17,7 @@ public class Joueur extends Personnage {
     }
 
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
-        super(2, def, 4,0, p, env, terrain);
+        super(2, def, 4, p, env, terrain);
         this.sac = new Inventaire();
         this.arme = new Poing(this);
 
@@ -26,6 +25,10 @@ public class Joueur extends Personnage {
 
     public Arme getArme() {
         return arme;
+    }
+
+    public void setArme(Arme arme) {
+        this.arme = arme;
     }
 
 
@@ -77,7 +80,7 @@ public class Joueur extends Personnage {
                     objet=o;
                 }
             }
-            if (objet instanceof PotionVitale || objet instanceof cle){
+            if (objet instanceof PotionVitale || objet instanceof Cle){
                 this.getSac().ajoutInventaire(objet);
                 this.getEnv().sortirObjet(objet);
             }

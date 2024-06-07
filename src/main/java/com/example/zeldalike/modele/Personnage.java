@@ -16,7 +16,7 @@ public abstract class Personnage {
     private final IntegerProperty direction;
 
 
-    public Personnage(int hp, int def, int vitesse,int atk, Position p, Environnement env, Terrain terrain) {
+    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
         this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;

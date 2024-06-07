@@ -20,6 +20,18 @@ public class Inventaire {
         return quantite;
     }
 
+    public int getQuantiteCle() {
+        int quantite = 0;
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof Cle){
+                quantite++;
+            }
+        }
+        return quantite;
+    }
+
+
+
 
  /*   public int indiceInventaire(ObjetRecuperables obj) {
         boolean present = false;
