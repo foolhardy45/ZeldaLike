@@ -23,7 +23,7 @@ public class MonObservateurObjet implements ListChangeListener<ObjetRecuperables
         while(change.next()){
             for (ObjetRecuperables o : change.getAddedSubList()){
                 if (o instanceof PotionVitale){
-                    objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/potion.png")));
+                    objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/objets/potion.png")));
                 }
                 this.panneauDeJeu.getChildren().add(objetVue.getI());
 

@@ -32,19 +32,19 @@ public class JoueurVue extends JPanel {
         this.a = a;
         this.visible = true;
         //sprite du joueur
-        spriteUp = new Image(String.valueOf(Main.class.getResource("images/gressif_haut.png")));
-        spriteDown = new Image(String.valueOf(Main.class.getResource("images/gressif_bas.png")));
-        spriteLeft = new Image(String.valueOf(Main.class.getResource("images/gressif_gauche.png")));
-        spriteRight = new Image(String.valueOf(Main.class.getResource("images/gressif_droite.png")));
+        spriteUp = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_haut.png")));
+        spriteDown = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_bas.png")));
+        spriteLeft = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_gauche.png")));
+        spriteRight = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_droite.png")));
 
         //sprite des armes
-        poingDroit = new Image(String.valueOf(Main.class.getResource("images/poinGressifDroite.png")));
-        poingGauche = new Image(String.valueOf(Main.class.getResource("images/poinGressifGauche.png")));
-        poingHaut = new Image(String.valueOf(Main.class.getResource("images/poinGressifHaut.png")));
-        poingBas = new Image(String.valueOf(Main.class.getResource("images/poinGressifBas.png")));
+        poingDroit = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/poinGressifDroite.png")));
+        poingGauche = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/poinGressifGauche.png")));
+        poingHaut = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/poinGressifHaut.png")));
+        poingBas = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/poinGressifBas.png")));
 
         //Image par defaut du joueur
-        Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_bas.png")));
+        Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_bas.png")));
 
         this.armeView = new ImageView();
         this.mac = new ImageView(gressif_neutral);
