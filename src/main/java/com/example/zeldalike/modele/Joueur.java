@@ -9,6 +9,8 @@ import java.util.Queue;
 import com.example.zeldalike.vues.JoueurVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.util.Duration;
 
 public class Joueur extends Personnage {
@@ -16,6 +18,7 @@ public class Joueur extends Personnage {
     private boolean interaction;
     private Inventaire sac;
     private boolean faitUneAttaque = false;
+    private IntegerProperty argent;
 
     public void setInteraction(boolean interaction) {
         this.interaction = interaction;
@@ -24,7 +27,19 @@ public class Joueur extends Personnage {
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
         super(2, def, 4,0, p, env, terrain);
         this.sac = new Inventaire();
+        this.argent = new SimpleIntegerProperty(5);
 
+    }
+    public IntegerProperty argentProperty() {
+        return argent;
+    }
+
+    public int getArgent() {
+        return argent.get();
+    }
+
+    public void setArgent(int argent) {
+        this.argent.set(argent);
     }
 
     public boolean isFaitUnAttaque() {
