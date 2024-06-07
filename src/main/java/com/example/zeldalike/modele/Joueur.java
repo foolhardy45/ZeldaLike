@@ -21,8 +21,8 @@ public class Joueur extends Personnage {
         this.interaction = interaction;
     }
 
-    public Joueur(int hp, int def, Position p, Environnement env, Terrain terrain) {
-        super(hp, def, 4, p, env, terrain);
+    public Joueur(int def, Position p, Environnement env, Terrain terrain) {
+        super(2, def, 4,0, p, env, terrain);
         this.sac = new Inventaire();
 
     }

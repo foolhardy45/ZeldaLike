@@ -7,7 +7,8 @@
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <top>
-            <Label alignment="CENTER" prefHeight="42.0" prefWidth="194.0" text="KILL KILL DEATH KILL DIE" BorderPane.alignment="CENTER" />
+            <HBox fx:id="info_joueur" alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+            </HBox>
          </top>
          <center>
             <Pane fx:id="carte_interaction" maxHeight="416.0" maxWidth="384.0" minHeight="416.0" minWidth="384.0" prefHeight="416.0" prefWidth="384.0">
