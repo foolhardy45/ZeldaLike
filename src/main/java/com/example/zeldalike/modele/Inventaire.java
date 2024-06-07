@@ -1,6 +1,7 @@
 package com.example.zeldalike.modele;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Inventaire {
     private final ArrayList<ObjetRecuperables> articles;
@@ -18,6 +19,13 @@ public class Inventaire {
             }
         }
         return quantite;
+    }
+
+    public HashMap<ObjetRecuperables, Integer> getQuantiteTout(){
+        HashMap<ObjetRecuperables, Integer> quantites = new HashMap<>();
+        quantites.put(new PotionVitale(new Position(0,0)), getQuantitePotion());
+
+        return quantites;
     }
 
 
@@ -45,11 +53,11 @@ public class Inventaire {
 
     @Override
     public String toString() {
-        String tout = "";
-        for (ObjetRecuperables a : this.articles) {
-            tout += a.toString();
-            tout += "\n";
+        HashMap<ObjetRecuperables, Integer> tout = getQuantiteTout();
+        String texte = "";
+        for (ObjetRecuperables o : tout.keySet()){
+            texte += o +" : "+ tout.get(o) + "\n";
         }
-        return tout;
+        return texte;
     }
 }

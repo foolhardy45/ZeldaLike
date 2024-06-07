@@ -6,10 +6,14 @@ public abstract class ObjetRecuperables {
     private Position p;
 
 
-    public ObjetRecuperables(Position p, int type){
+    public ObjetRecuperables(Position p){
         this.idObjet = "Objet"+id;
         this.p = p;
         id++;
+    }
+
+    public ObjetRecuperables(){
+        this(new Position(0,0));
     }
 
     public Position getP() {
