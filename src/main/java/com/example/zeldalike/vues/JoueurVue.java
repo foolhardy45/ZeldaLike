@@ -1,14 +1,12 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.Main;
-import com.example.zeldalike.modele.Arme;
+import com.example.zeldalike.modele.Arme.Arme;
 import com.example.zeldalike.modele.Joueur;
-import com.example.zeldalike.modele.Poing;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import javax.swing.*;
-import java.util.Objects;
 
 public class JoueurVue extends JPanel {
     private boolean visible;

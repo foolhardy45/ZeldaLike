@@ -1,4 +1,7 @@
-package com.example.zeldalike.modele;
+package com.example.zeldalike.modele.Arme;
+
+import com.example.zeldalike.modele.Joueur;
+import com.example.zeldalike.modele.Personnage;
 
 public abstract class Arme {
     private final int attaque;

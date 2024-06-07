@@ -1,15 +1,10 @@
 package com.example.zeldalike.modele;
 
-import com.example.zeldalike.vues.ObjetVue;
+import com.example.zeldalike.modele.Arme.Arme;
+import com.example.zeldalike.modele.Arme.Chargeur;
+import com.example.zeldalike.modele.Arme.Poing;
 
-import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Queue;
-import com.example.zeldalike.vues.JoueurVue;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
 
 public class Joueur extends Personnage {
     private Queue<Character> déplacement;
