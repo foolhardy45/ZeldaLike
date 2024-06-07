@@ -1,5 +1,6 @@
 package com.example.zeldalike.controlleurs;
 
+import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.Citron;
 import com.example.zeldalike.modele.Environnement;
 import com.example.zeldalike.modele.Position;
@@ -9,16 +10,24 @@ import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+
+import static com.example.zeldalike.Main.main;
+import static com.example.zeldalike.Main.stg;
 
 public class Controlleur implements Initializable {
 
@@ -103,6 +112,7 @@ public class Controlleur implements Initializable {
         boolean movingRight = pressedKeys.contains("RIGHT");
         boolean interact = pressedKeys.contains("E");
         boolean attaque = pressedKeys.contains("X");
+        boolean inventaire = pressedKeys.contains("A");
 
         if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
@@ -130,8 +140,24 @@ public class Controlleur implements Initializable {
             cooldown = false;
         } else if (interact) {
             this.env.getJ1().setInteraction(true);
+        } else if (inventaire){
+            pressedKeys.remove("A");
+            lanceMenuPause();
         }
 
+    }
+
+    private void lanceMenuPause(){
+        System.out.println("menu pause");
+        Main.stg.setScene(Main.pause);
+        Main.stg.show();
+        /*while (!Main.stg.getScene().equals(Main.jeu)) {
+            try {
+                Main.stg.getOwner().wait();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }*/
     }
 
     private void initAnimation() {
