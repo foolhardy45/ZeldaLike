@@ -8,12 +8,14 @@ import java.util.Random;
 public abstract class Ennemis extends Personnage{
     private static int id = 0;
     private final String idEnnemi;
+    private int degats;
 
-    public Ennemis(int hp, int def, int vitesse,int atk, Position p, Environnement env, Terrain terrain) {
-        super(hp, def, vitesse,atk, p, env, terrain);
+    public Ennemis(int hp, int def, int vitesse,int degats, Position p, Environnement env, Terrain terrain) {
+        super(hp, def, vitesse, p, env, terrain);
         id++;
         this.idEnnemi = "E" + id;
         this.setValeurDirection(8); // 8 = haut, 4 = gauche, 2 = bas, 6 = droite
+        this.degats = degats;
     }
 
     public static int getId() {
