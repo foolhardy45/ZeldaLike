@@ -1,4 +1,4 @@
-package com.example.zeldalike.modele;
+/*package com.example.zeldalike.modele;
 
 public class ArticleInventaire {
 
@@ -28,4 +28,4 @@ public class ArticleInventaire {
         article += this.obj + " : " + this.quantite;
         return article;
     }
-}
+}*/

@@ -3,14 +3,25 @@ package com.example.zeldalike.modele;
 import java.util.ArrayList;
 
 public class Inventaire {
-    private final ArrayList<ArticleInventaire> articles;
+    private final ArrayList<ObjetRecuperables> articles;
 
 
     public Inventaire() {
         this.articles = new ArrayList<>();
     }
 
-    public int indiceInventaire(ObjetRecuperables obj) {
+    public int getQuantitePotion() {
+        int quantite = 0;
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof PotionVitale){
+                quantite++;
+            }
+        }
+        return quantite;
+    }
+
+
+ /*   public int indiceInventaire(ObjetRecuperables obj) {
         boolean present = false;
         int i = 0;
         if (this.articles.size() > 0) {
@@ -24,23 +35,16 @@ public class Inventaire {
             }
         }
         return -1;
-    }
+    }*/
 
     public void ajoutInventaire(ObjetRecuperables obj) {
-        int indice = indiceInventaire(obj);
-        if (indice >= 0) {
-            this.articles.get(indice).incremente();
-        } else {
-            ArticleInventaire nouvelobjet = new ArticleInventaire(obj);
-            this.articles.add(nouvelobjet);
-        }
-    }
+        this.articles.add(obj);}
 
 
     @Override
     public String toString() {
         String tout = "";
-        for (ArticleInventaire a : this.articles) {
+        for (ObjetRecuperables a : this.articles) {
             tout += a.toString();
             tout += "\n";
         }
