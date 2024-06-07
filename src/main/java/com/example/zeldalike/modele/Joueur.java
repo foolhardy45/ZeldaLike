@@ -15,6 +15,7 @@ public class Joueur extends Personnage {
     private Queue<Character> déplacement;
     private boolean interaction;
     private Inventaire sac;
+    private Arme arme;
     private boolean faitUneAttaque = false;
 
     public void setInteraction(boolean interaction) {
@@ -24,8 +25,14 @@ public class Joueur extends Personnage {
     public Joueur(int hp, int def, Position p, Environnement env, Terrain terrain) {
         super(hp, def, 4, p, env, terrain);
         this.sac = new Inventaire();
+        this.arme = new Poing(this);
 
     }
+
+    public Arme getArme() {
+        return arme;
+    }
+
 
     public boolean isFaitUnAttaque() {
         return faitUneAttaque;
@@ -40,26 +47,13 @@ public class Joueur extends Personnage {
         //System.out.println("Personnage Touché - Joueur");
         if (p instanceof Ennemis) {
             //System.out.println(" ayyyyyyyaaaaaaaa");
-            this.frapper(p);
         }
     }
 
     public void attaquer() {
-        if (!isFaitUnAttaque()) {
-            setFaitUnAttaque(true);
-            Personnage ennemi = this.getEnnemiProche();
-            if (ennemi != null) {
-                frapper(ennemi);
-            }
 
-            Timeline timeline = new Timeline(new KeyFrame(
-                    Duration.millis(500), // Durée de l'animation d'attaque
-                    ae -> setFaitUnAttaque(false)
-            ));
-            timeline.play();
-
+            this.getArme().faireUneAttaque();
         }
-    }
 
     public Personnage getEnnemiProche() {
         Personnage ennemiProche = null;
@@ -68,11 +62,13 @@ public class Joueur extends Personnage {
         for (Personnage ennemi : this.getEnv().getEnnemis()) {
             if (ennemi.enVie()) {
                 int distance = distanceEntreDeuxPersonnages(this, ennemi);
-                if (distance < distanceMin) {
+                if(ennemi instanceof Ennemis) {
+                    if (distance < distanceMin) {
 
-                    System.out.println("il est a " + distance);
-                    distanceMin = distance;
-                    ennemiProche = ennemi;
+                        System.out.println("il est a " + distance);
+                        distanceMin = distance;
+                        ennemiProche = ennemi;
+                    }
                 }
             }
         }
