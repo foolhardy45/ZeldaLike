@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.awt.*;
 
 public abstract class Personnage {
-    private int hp;
+    private IntegerProperty hp;
     private int def;
     private int vitesse;
     private Position p;
@@ -15,12 +15,14 @@ public abstract class Personnage {
     private final int hitbox;
     private final IntegerProperty direction;
     private Arme arme;
+    private int atk;
 
-    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
-        this.hp = hp;
+    public Personnage(int hp, int def, int vitesse,int atk, Position p, Environnement env, Terrain terrain) {
+        this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
+        this.atk = atk;
         this.env = env;
         this.arme = new Poing();
         this.terrain = terrain;
@@ -116,11 +118,15 @@ public abstract class Personnage {
     }
 
     public int getHp() {
-        return hp;
+        return hp.get();
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp.set(hp);
+    }
+
+    public IntegerProperty hpProperty() {
+        return hp;
     }
 
     public int getDef() {
@@ -225,7 +231,7 @@ public abstract class Personnage {
         return 32; // Ajuster selon vos dimensions
     }
 
-    public boolean verificationCollision(Personnage perso) {
+    /*public boolean verificationCollision(Personnage perso) {
         boolean touche = false;
         if (this.p.collisionEntreSprites(perso.getP())) {
             this.personnageTouche(perso);
@@ -233,10 +239,10 @@ public abstract class Personnage {
             touche = true;
         }
         return touche;
-    }
+    }*/
 
     public boolean enVie() {
-        return this.hp > 0;
+        return this.getHp() > 0;
     }
     
     public abstract void personnageTouche(Personnage p);
