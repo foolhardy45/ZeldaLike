@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.awt.*;
 
 public abstract class Personnage {
-    private int hp;
+    private IntegerProperty hp;
     private int def;
     private int vitesse;
     private Position p;
@@ -15,12 +15,14 @@ public abstract class Personnage {
     private final int hitbox;
     private final IntegerProperty direction;
     private Arme arme;
+    private int atk;
 
-    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
-        this.hp = hp;
+    public Personnage(int hp, int def, int vitesse,int atk, Position p, Environnement env, Terrain terrain) {
+        this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
+        this.atk = atk;
         this.env = env;
         this.arme = new Poing();
         this.terrain = terrain;
@@ -63,6 +65,37 @@ public abstract class Personnage {
         int super_y = (p1.getP().getY() - p2.getP().getY()) * (p1.getP().getY() - p2.getP().getY());
         return (int) Math.sqrt(super_x + super_y);
     }
+    public void repousserPersonnages(Personnage p1, Personnage p2) {
+        int dx = p1.getP().getX() - p2.getP().getX();
+        int dy = p1.getP().getY() - p2.getP().getY();
+        int distance = p1.distanceEntreDeuxPersonnages(p1,p2);
+        if (distance == 0) return;
+
+        int repulsionForce = 12;
+        int repulsionX = (dx / distance) * repulsionForce;
+        int repulsionY = (dy / distance) * repulsionForce;
+
+        boolean p1CanMove =
+                terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX() + p1.getHitbox() + repulsionX, p1.getP().getY() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY()+ p1.getHitbox() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX()+ p1.getHitbox() + repulsionX, p1.getP().getY() +p1.getHitbox()+ repulsionY);
+        boolean p2CanMove =
+                terrain.estAutorisé(p2.getP().getX() - repulsionX, p2.getP().getY() - repulsionY) &&
+                        terrain.estAutorisé(p2.getP().getX()+ p2.getHitbox()-repulsionX,p2.getP().getY() - repulsionY ) &&
+                        terrain.estAutorisé(p2.getP().getX()-repulsionX,p2.getP().getY()+ p2.getHitbox() - repulsionY ) &&
+                        terrain.estAutorisé(p2.getP().getX()+p2.getHitbox()-repulsionX,p2.getP().getY() + p2.getHitbox()-repulsionY);
+
+
+        if (p1CanMove && p2CanMove) {
+            p1.moveDe(repulsionX, repulsionY);
+            p2.moveDe(-repulsionX, -repulsionY);
+        } else if (p1CanMove) {
+            p1.moveDe(repulsionX, repulsionY);
+        } else if (p2CanMove) {
+            p2.moveDe(-repulsionX, -repulsionY);
+        }
+    }
 
     public IntegerProperty directionProperty() {
         return direction;
@@ -85,11 +118,15 @@ public abstract class Personnage {
     }
 
     public int getHp() {
-        return hp;
+        return hp.get();
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp.set(hp);
+    }
+
+    public IntegerProperty hpProperty() {
+        return hp;
     }
 
     public int getDef() {
@@ -181,7 +218,7 @@ public abstract class Personnage {
         return new Rectangle(this.getP().getX(), this.getP().getY(), this.getWidth(), this.getHeight());
     }
 
-    public void move(int dx, int dy) {
+    public void moveDe(int dx, int dy) {
         this.getP().setX(this.getP().getX() + dx);
         this.getP().setY(this.getP().getY() + dy);
     }
@@ -194,7 +231,7 @@ public abstract class Personnage {
         return 32; // Ajuster selon vos dimensions
     }
 
-    public boolean verificationCollision(Personnage perso) {
+    /*public boolean verificationCollision(Personnage perso) {
         boolean touche = false;
         if (this.p.collisionEntreSprites(perso.getP())) {
             this.personnageTouche(perso);
@@ -202,10 +239,10 @@ public abstract class Personnage {
             touche = true;
         }
         return touche;
-    }
+    }*/
 
     public boolean enVie() {
-        return this.hp > 0;
+        return this.getHp() > 0;
     }
     
     public abstract void personnageTouche(Personnage p);

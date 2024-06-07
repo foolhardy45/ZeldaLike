@@ -7,22 +7,33 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import com.example.zeldalike.vues.JoueurVue;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class Joueur extends Personnage {
     private Queue<Character> déplacement;
     private boolean interaction;
     private Inventaire sac;
+    private boolean faitUneAttaque = false;
 
     public void setInteraction(boolean interaction) {
         this.interaction = interaction;
     }
 
-    public Joueur(int hp, int def, Position p, Environnement env, Terrain terrain) {
-        super(hp, def, 4, p, env, terrain);
+    public Joueur(int def, Position p, Environnement env, Terrain terrain) {
+        super(2, def, 4,0, p, env, terrain);
         this.sac = new Inventaire();
 
     }
 
+    public boolean isFaitUnAttaque() {
+        return faitUneAttaque;
+    }
+
+    public void setFaitUnAttaque(boolean faitUnAttaque) {
+        this.faitUneAttaque = faitUnAttaque;
+    }
 
     @Override
     public void personnageTouche(Personnage p) {
@@ -33,11 +44,20 @@ public class Joueur extends Personnage {
         }
     }
 
-
     public void attaquer() {
-        Personnage ennemi = this.getEnnemiProche();
-        if (ennemi != null) {
-            frapper(ennemi);
+        if (!isFaitUnAttaque()) {
+            setFaitUnAttaque(true);
+            Personnage ennemi = this.getEnnemiProche();
+            if (ennemi != null) {
+                frapper(ennemi);
+            }
+
+            Timeline timeline = new Timeline(new KeyFrame(
+                    Duration.millis(500), // Durée de l'animation d'attaque
+                    ae -> setFaitUnAttaque(false)
+            ));
+            timeline.play();
+
         }
     }
 
@@ -49,6 +69,7 @@ public class Joueur extends Personnage {
             if (ennemi.enVie()) {
                 int distance = distanceEntreDeuxPersonnages(this, ennemi);
                 if (distance < distanceMin) {
+
                     System.out.println("il est a " + distance);
                     distanceMin = distance;
                     ennemiProche = ennemi;

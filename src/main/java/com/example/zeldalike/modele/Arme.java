@@ -5,7 +5,6 @@ public abstract class Arme {
 
     public Arme(int attaque) {
         this.attaque = attaque;
-
     }
 
     public int getAttaque() {

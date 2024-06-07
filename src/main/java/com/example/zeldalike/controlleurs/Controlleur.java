@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
@@ -32,6 +33,8 @@ import static com.example.zeldalike.Main.stg;
 public class Controlleur implements Initializable {
 
     private final Set<String> pressedKeys = new HashSet<>();
+    @FXML
+    private HBox info_joueur;
     @FXML
     private TilePane terrain_affichage;
     @FXML
@@ -52,6 +55,10 @@ public class Controlleur implements Initializable {
         terrain_affichage.setFocusTraversable(true);
         terrrainVue.creeMap();
         joueurVue = new JoueurVue(this.env.getJ1(), this.env.getJ1().getArme());
+
+        info_joueur.getChildren().add(joueurVue.getCoeurN1());
+        info_joueur.getChildren().add(joueurVue.getCoeurN2());
+        info_joueur.getChildren().add(joueurVue.getCoeurN3());
 
         carte_interaction.getChildren().add(joueurVue.getMac());
         carte_interaction.getChildren().add(joueurVue.getArmeView());
@@ -105,6 +112,7 @@ public class Controlleur implements Initializable {
         handleMovement();
     }
 
+
     private void handleMovement() {
         boolean movingUp = pressedKeys.contains("UP");
         boolean movingDown = pressedKeys.contains("DOWN");
@@ -113,8 +121,9 @@ public class Controlleur implements Initializable {
         boolean interact = pressedKeys.contains("E");
         boolean attaque = pressedKeys.contains("X");
         boolean inventaire = pressedKeys.contains("A");
+        if (this.env.getJ1().isFaitUnAttaque()) {
 
-        if (movingRight && movingLeft || movingDown && movingUp) {
+        }else if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
             this.env.getJ1().ajouterDirection(9);
@@ -138,6 +147,7 @@ public class Controlleur implements Initializable {
             this.joueurVue.afficherArmeView();
             this.env.getJ1().attaquer();
             cooldown = false;
+
         } else if (interact) {
             this.env.getJ1().setInteraction(true);
         } else if (inventaire){
@@ -146,6 +156,8 @@ public class Controlleur implements Initializable {
         }
 
     }
+
+
 
     private void lanceMenuPause(){
         System.out.println("menu pause");
@@ -159,6 +171,7 @@ public class Controlleur implements Initializable {
             }
         }*/
     }
+
 
     private void initAnimation() {
         gameLoop = new Timeline();
