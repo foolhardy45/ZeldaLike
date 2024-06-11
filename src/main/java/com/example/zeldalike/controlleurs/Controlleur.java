@@ -10,6 +10,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,6 +27,10 @@ public class Controlleur implements Initializable {
     private final Set<String> pressedKeys = new HashSet<>();
     @FXML
     private HBox info_joueur;
+    @FXML
+    private HBox coeurBox;
+    @FXML
+    private Label nbArgent;
     @FXML
     private TilePane terrain_affichage;
     @FXML
@@ -47,9 +52,12 @@ public class Controlleur implements Initializable {
         terrrainVue.creeMap();
         joueurVue = new JoueurVue(this.env.getJ1(), this.env.getJ1().getArme());
 
-        info_joueur.getChildren().add(joueurVue.getCoeurN1());
-        info_joueur.getChildren().add(joueurVue.getCoeurN2());
-        info_joueur.getChildren().add(joueurVue.getCoeurN3());
+        coeurBox.getChildren().add(joueurVue.getCoeurN1());
+        coeurBox.getChildren().add(joueurVue.getCoeurN2());
+        coeurBox.getChildren().add(joueurVue.getCoeurN3());
+
+        // Lier la propriété argent avec le texte du Label
+        nbArgent.textProperty().bind(env.getJ1().argentProperty().asString());
 
         carte_interaction.getChildren().add(joueurVue.getMac());
         carte_interaction.getChildren().add(joueurVue.getArmeView());

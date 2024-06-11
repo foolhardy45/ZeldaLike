@@ -3,7 +3,16 @@ package com.example.zeldalike.modele;
 import com.example.zeldalike.modele.Arme.Arme;
 import com.example.zeldalike.modele.Arme.Poing;
 
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Queue;
+import com.example.zeldalike.vues.JoueurVue;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.util.Duration;
 
 public class Joueur extends Personnage {
     private Queue<Character> déplacement;
@@ -11,6 +20,7 @@ public class Joueur extends Personnage {
     private Inventaire sac;
     private Arme arme;
     private boolean faitUneAttaque = false;
+    private IntegerProperty argent;
 
     public void setInteraction(boolean interaction) {
         this.interaction = interaction;
@@ -20,11 +30,22 @@ public class Joueur extends Personnage {
         super(2, def, 4, p, env, terrain);
         this.sac = new Inventaire();
         this.arme = new Poing(this);
+        this.argent = new SimpleIntegerProperty(5);
+    }
 
+    public IntegerProperty argentProperty() {
+        return argent;
     }
 
     public Arme getArme() {
         return arme;
+    }
+    public int getArgent() {
+        return argent.get();
+    }
+
+    public void setArgent(int argent) {
+        this.argent.set(argent);
     }
 
     public void setArme(Arme arme) {
