@@ -1,10 +1,8 @@
 package com.example.zeldalike.controlleurs;
 
 import com.example.zeldalike.Main;
-import com.example.zeldalike.modele.Citron;
-import com.example.zeldalike.modele.Environnement;
-import com.example.zeldalike.modele.Position;
-import com.example.zeldalike.modele.PotionVitale;
+import com.example.zeldalike.modele.*;
+import com.example.zeldalike.vues.InventaireVue;
 import com.example.zeldalike.vues.JoueurVue;
 import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
@@ -37,6 +35,13 @@ public class Controlleur implements Initializable {
     private HBox info_joueur;
     @FXML
     private TilePane terrain_affichage;
+
+    @FXML
+    private TilePane inventairepane;
+    @FXML
+    private TilePane inventaireobjets;
+    private InventaireVue inv;
+
     @FXML
     private Pane carte_interaction;
     private long lastTime;
@@ -45,6 +50,7 @@ public class Controlleur implements Initializable {
     private Timeline gameLoop;
     private int temps_gameloop;
     private boolean cooldown = true;
+    private boolean inventaire_ouvert = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -92,6 +98,11 @@ public class Controlleur implements Initializable {
 
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
+        this.env.getJ1().getSac().ajoutInventaire(new cle(new Position(0,0)));
+        this.inventairepane.setVisible(false);
+        this.inv = new InventaireVue(inventairepane, inventaireobjets, env.getJ1().getSac());
+        inv.creeAffichage();
+
 
         System.out.println(this.env.getJ1().getSac().toString());
 
@@ -152,25 +163,12 @@ public class Controlleur implements Initializable {
             this.env.getJ1().setInteraction(true);
         } else if (inventaire){
             pressedKeys.remove("A");
-            lanceMenuPause();
+            //lanceMenuPause();
+            inventaire_ouvert = this.inv.ouvrirInventaire();
         }
 
     }
 
-
-
-    private void lanceMenuPause(){
-        System.out.println("menu pause");
-        Main.stg.setScene(Main.pause);
-        Main.stg.show();
-        /*while (!Main.stg.getScene().equals(Main.jeu)) {
-            try {
-                Main.stg.getOwner().wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }*/
-    }
 
 
     private void initAnimation() {
@@ -185,13 +183,15 @@ public class Controlleur implements Initializable {
                     long currentTime = System.currentTimeMillis();
                     lastTime = currentTime;
 
-                    this.env.unTour();
+                    if (!inventaire_ouvert){
+                        this.env.unTour();
 
-                    if (this.joueurVue.isVisible()) {
-                        if (temps_gameloop % 30 == 0) {
-                            this.joueurVue.getArmeView().setVisible(false);
-                            cooldown = true;
+                        if (this.joueurVue.isVisible()) {
+                            if (temps_gameloop % 30 == 0) {
+                                this.joueurVue.getArmeView().setVisible(false);
+                                cooldown = true;
                         }
+                    }
                     }
                     temps_gameloop++;
                 }

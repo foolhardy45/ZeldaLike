@@ -147,22 +147,22 @@ public class Terrain {
             case 1:
                 direction = 4;
                 break;
-            case 23:
+            case 23: // 128-1
                 direction = 9;
                 break;
-            case 24:
+            case 24: //128
                 direction = 8;
                 break;
-            case 25:
+            case 25: //128+1
                 direction = 7;
                 break;
-            case -23:
+            case -23: //-128+1
                 direction = 1;
                 break;
-            case -24:
+            case -24:// -128
                 direction = 2;
                 break;
-            case -25:
+            case -25:// -128-1
                 direction = 3;
                 break;
             default: direction = 0;

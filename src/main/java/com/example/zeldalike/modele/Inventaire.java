@@ -21,9 +21,20 @@ public class Inventaire {
         return quantite;
     }
 
+    public int getQuantitecle() {
+        int quantite = 0;
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof cle){
+                quantite++;
+            }
+        }
+        return quantite;
+    }
+
     public HashMap<ObjetRecuperables, Integer> getQuantiteTout(){
         HashMap<ObjetRecuperables, Integer> quantites = new HashMap<>();
         quantites.put(new PotionVitale(new Position(0,0)), getQuantitePotion());
+        quantites.put(new cle(new Position(0,0)), getQuantitePotion());
 
         return quantites;
     }

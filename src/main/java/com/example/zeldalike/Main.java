@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static Stage stg;
-    public static Scene pause;
     public static Scene jeu ;
 
 
@@ -25,11 +24,6 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         //Menu_Controlleur controlleur = fxmlLoader.getController();
         Scene menu = new Scene(root, 900, 900);
-
-        //init de la scene pause
-        FXMLLoader fxmlLoaderpause = new FXMLLoader(Main.class.getResource("/com/example/zeldalike/pausemenu.fxml"));
-        Parent rootpause = fxmlLoaderpause.load();
-        pause = new Scene(rootpause, 900, 900);
 
         //init de la scene jeu
         FXMLLoader fxmlLoaderjeu = new FXMLLoader(Main.class.getResource("/com/example/zeldalike/terrain2.fxml"));

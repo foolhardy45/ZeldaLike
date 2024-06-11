@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zeldalike.controlleurs.Controlleur">
@@ -11,9 +10,15 @@
             </HBox>
          </top>
          <center>
-            <Pane fx:id="carte_interaction" maxHeight="416.0" maxWidth="384.0" minHeight="416.0" minWidth="384.0" prefHeight="416.0" prefWidth="384.0">
+            <Pane fx:id="carte_interaction" maxHeight="416.0" maxWidth="384.0" minHeight="416.0" minWidth="384.0" prefHeight="416.0" prefWidth="384.0" BorderPane.alignment="CENTER">
                <children>
                   <TilePane fx:id="terrain_affichage" alignment="BOTTOM_CENTER" maxHeight="832.0" maxWidth="768.0" minHeight="416.0" minWidth="384.0" prefHeight="832.0" prefWidth="768.0" />
+                  <Pane layoutY="-1.0" opacity="0.8">
+                     <children>
+                        <TilePane fx:id="inventairepane" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" />
+                        <TilePane fx:id="inventaireobjets" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </Pane>
                </children>
             </Pane>
          </center>
