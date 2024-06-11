@@ -5,7 +5,7 @@ public class PotionVitale extends ObjetRecuperables {
     private final int pouvoir = 2; //soin 2 coeurs
 
     public PotionVitale(Position p) {
-        super(p, 1);
+        super(p);
     }
 
     public boolean collisionJoueur(Joueur j) {

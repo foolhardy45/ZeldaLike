@@ -27,7 +27,7 @@ public abstract class Ennemis extends Personnage{
     }
 
     public void deplacementAleatoire() {
-        Random quelleDirection = new Random();
+       /* Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
         if (t < 50) {
             t = quelleDirection.nextInt(400);
@@ -42,11 +42,11 @@ public abstract class Ennemis extends Personnage{
             }
 
         }
-        this.move();
+        this.move();*/
     }
 
     public void deplacementBFS(){
-        ArrayList<Integer> adjacent = this.getEnv().getTerrain().getIndicesAdjacent(this.getP().getX(), this.getP().getY());
+        /*ArrayList<Integer> adjacent = this.getEnv().getTerrain().getIndicesAdjacent(this.getP().getX(), this.getP().getY());
         int indiceposition = this.getEnv().getTerrain().getIndiceCaseSousPosition(this.getP().getX(), this.getP().getY());
         int i=0;
         int indice;
@@ -66,6 +66,6 @@ public abstract class Ennemis extends Personnage{
         }
         if (!bfstrouve){
             deplacementAleatoire();
-        }
+        }*/
     }
 }

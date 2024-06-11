@@ -1,4 +1,4 @@
-package com.example.zeldalike.modele.Arme;
+package com.example.zeldalike.modele.Arme.gun;
 
 public class Chargeur {
     private Munition[] capacité;
@@ -10,6 +10,7 @@ public class Chargeur {
     public Munition[] getCapacité() {
         return capacité;
     }
+
     public void ajouterMunition(Munition munition) {
         for (int i = 0; i < this.capacité.length; i++) {
             if(this.capacité[i] != null){

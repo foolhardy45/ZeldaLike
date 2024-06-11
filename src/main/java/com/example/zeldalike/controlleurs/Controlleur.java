@@ -99,7 +99,7 @@ public class Controlleur implements Initializable {
 
     private void onKeyReleased(KeyEvent event) {
         pressedKeys.remove(event.getCode().toString());
-        this.env.getJ1().ajouterDirection(5);
+        this.env.getJ1().ajouterDirection(0);
         handleMovement();
     }
 
@@ -141,6 +141,7 @@ public class Controlleur implements Initializable {
         } else if (interact) {
             this.env.getJ1().setInteraction(true);
         }
+
     }
 
 

@@ -4,7 +4,7 @@ public class Cle extends ObjetRecuperables{
 
 
         public Cle(Position p){
-            super(p,2);
+            super(p);
         }
         public boolean collisionJoueur(Joueur j){
             return false;

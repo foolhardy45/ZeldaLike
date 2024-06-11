@@ -1,5 +1,7 @@
 package com.example.zeldalike.modele;
 
+import com.example.zeldalike.modele.Arme.gun.Munition;
+
 import java.util.ArrayList;
 
 public class Inventaire {
@@ -24,6 +26,16 @@ public class Inventaire {
         int quantite = 0;
         for (ObjetRecuperables obj : this.articles){
             if (obj instanceof Cle){
+                quantite++;
+            }
+        }
+        return quantite;
+    }
+
+    public int getQuantiteMunition() {
+        int quantite = 0;
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof Munition){
                 quantite++;
             }
         }

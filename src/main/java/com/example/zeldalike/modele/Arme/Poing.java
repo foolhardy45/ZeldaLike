@@ -2,6 +2,7 @@ package com.example.zeldalike.modele.Arme;
 
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Personnage;
+import com.example.zeldalike.modele.Position;
 
 public class Poing extends Arme {
     public Poing(Joueur joueur) {
@@ -11,10 +12,9 @@ public class Poing extends Arme {
 
     @Override
     public void faireUneAttaque() {
-        Personnage ennemisProche = this.getJoueur().getEnnemiProche();
+        Personnage ennemisProche = this.toucherPersonnage();
         if (ennemisProche != null) {
             hit(ennemisProche);
-
         }
     }
 
