@@ -12,6 +12,8 @@ public abstract class ObjetRecuperables {
         id++;
     }
 
+
+
     public Position getP() {
         return p;
     }
@@ -31,4 +33,5 @@ public abstract class ObjetRecuperables {
     public String toString() {
         return this.idObjet;
     }
+
 }

@@ -1,5 +1,8 @@
 package com.example.zeldalike.controlleurs;
 
+import com.example.zeldalike.modele.Arme.Poing;
+import com.example.zeldalike.modele.Arme.gun.Gun;
+import com.example.zeldalike.modele.Arme.gun.Munition;
 import com.example.zeldalike.modele.Citron;
 import com.example.zeldalike.modele.Environnement;
 import com.example.zeldalike.modele.Position;
@@ -55,19 +58,35 @@ public class Controlleur implements Initializable {
         carte_interaction.getChildren().add(joueurVue.getArmeView());
 
         this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
-            switch ((int) newValue) {
-                case 8:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
+            if (this.env.getJ1().getArme() instanceof Poing) {
+                switch ((int) newValue) {
+                    case 8:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
+                        break;
+                    case 2:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
+                        break;
+                    case 4:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
+                        break;
+                    case 6:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
+                        break;
+                }
+            } else if (this.env.getJ1().getArme() instanceof Gun) {
+                switch ((int) newValue) {
+
+                    case 8: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunUp());
+                        System.out.println("la");
                     break;
-                case 2:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
+                    case 2: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunDown());
                     break;
-                case 4:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
+                    case 4: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunLeft());
                     break;
-                case 6:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
-                    break;
+                    case 6 : this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunRight());
+
+                }
+
             }
         }));
 
@@ -78,7 +97,7 @@ public class Controlleur implements Initializable {
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(310, 310);
-        PotionVitale p1 = new PotionVitale(PP1);
+        Munition p1 = new Munition(PP1,0);
         this.env.ajouterObjet(p1);
 
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));

@@ -33,6 +33,10 @@ public abstract class Personnage {
         return positionPre;
     }
 
+    public Terrain getTerrain() {
+        return terrain;
+    }
+
     public int getHitbox() {
         return hitbox;
     }
