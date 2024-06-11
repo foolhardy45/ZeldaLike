@@ -15,7 +15,7 @@ public class Environnement {
     private int deltaTime;
 
     public Environnement(int height, int width) {
-        Position p = new Position(0, 0);
+        Position p = new Position(50, 50);
         this.terrain = new Terrain();
         this.j1 = new Joueur(10,p,this, terrain);
         this.bfs_joueur = new CarteBFS(this.terrain, this.j1);

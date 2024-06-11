@@ -67,8 +67,13 @@ public class JoueurVue extends JPanel {
         //armeView.setVisible(true);
 
         //position du joueur
-        mac.translateXProperty().bind(j.getP().xProperty());
-        mac.translateYProperty().bind(j.getP().yProperty());
+
+        j.getP().xProperty().addListener((obs,old,n)->{
+            mac.setTranslateX((int)n % 2048);
+        });
+        j.getP().yProperty().addListener((obs,old,n)->{
+            mac.setTranslateY((int)n % 1024);
+        });
         j.hpProperty().addListener((observable, oldValue, newValue) -> updateHeartImage());
         updateHeartImage();
 

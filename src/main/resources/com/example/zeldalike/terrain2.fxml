@@ -19,9 +19,9 @@
             </HBox>
          </top>
          <center>
-            <Pane fx:id="carte_interaction" maxHeight="416.0" maxWidth="384.0" minHeight="416.0" minWidth="384.0" prefHeight="416.0" prefWidth="384.0">
+            <Pane fx:id="carte_interaction" maxHeight="1024.0" maxWidth="2048.0" minHeight="1024.0" minWidth="2048.0" prefHeight="1024.0" prefWidth="2048.0">
                <children>
-                  <TilePane fx:id="terrain_affichage" alignment="BOTTOM_CENTER" maxHeight="832.0" maxWidth="768.0" minHeight="416.0" minWidth="384.0" prefHeight="832.0" prefWidth="768.0" />
+                  <TilePane fx:id="terrain_affichage" alignment="BOTTOM_CENTER" maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0" />
                </children>
             </Pane>
          </center>

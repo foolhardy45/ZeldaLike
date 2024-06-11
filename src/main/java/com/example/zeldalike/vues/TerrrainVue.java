@@ -1,6 +1,7 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Terrain;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,9 +13,34 @@ public class TerrrainVue {
     private final TilePane affichage;
     private final Terrain terrrain;
 
-    public TerrrainVue(TilePane affichage, Terrain terrrain) {
+    public TerrrainVue(TilePane affichage, Terrain terrrain, Joueur mac) {
         this.affichage = affichage;
         this.terrrain = terrrain;
+
+        final int zoneTemp=33;
+        final int decalageX=2048;
+        final int decalageY=1024;
+
+        mac.getP().xProperty().addListener((obs,old,n)->{
+            if ((int)n % decalageX> decalageX-zoneTemp ) {
+                affichage.setTranslateX(affichage.getTranslateX()-decalageX);
+                mac.getP().setX(mac.getP().getX()+2*zoneTemp);
+            }
+            else if ((int)n>decalageX && (int)n % decalageX < zoneTemp ) {
+                affichage.setTranslateX(affichage.getTranslateX()+decalageX);
+                mac.getP().setX(mac.getP().getX()-2*zoneTemp);
+            }
+        });
+        mac.getP().yProperty().addListener((obs,old,n)->{
+            if ((int)n % decalageY > decalageY-zoneTemp) {
+                affichage.setTranslateY(affichage.getTranslateY()-decalageY);
+                mac.getP().setY(mac.getP().getY()+2*zoneTemp);
+            }
+            else if ((int)n > decalageY && (int)n % decalageY < zoneTemp) {
+                affichage.setTranslateY(affichage.getTranslateY()+decalageY);
+                mac.getP().setY(mac.getP().getY()-2*zoneTemp);
+            }
+        });;
     }
 
     public void creeMap() {
