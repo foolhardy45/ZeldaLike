@@ -14,11 +14,10 @@ public class Environnement {
     private CarteBFS bfs_joueur;
     private int deltaTime;
 
-
-    public Environnement( int height, int width) {
-        Position p = new Position(0,0);
+    public Environnement(int height, int width) {
+        Position p = new Position(0, 0);
         this.terrain = new Terrain();
-        this.j1 = new Joueur(10,0,p,this,terrain);
+        this.j1 = new Joueur(10,p,this, terrain);
         this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
         this.ennemis = FXCollections.observableArrayList();
         this.objet = FXCollections.observableArrayList();
@@ -30,9 +29,11 @@ public class Environnement {
     public Joueur getJ1() {
         return j1;
     }
-    public CarteBFS getBfs_joueur(){
+
+    public CarteBFS getBfs_joueur() {
         return bfs_joueur;
     }
+
     public void ajouterEnnemis(Ennemis ennemis) {
         this.ennemis.add(ennemis);
     }
@@ -44,10 +45,12 @@ public class Environnement {
     public ObservableList<Ennemis> getEnnemis() {
         return ennemis;
     }
+
     public void ajouterObjet(ObjetRecuperables objet) {
         this.objet.add(objet);
     }
-    public void sortirObjet(ObjetRecuperables objet){
+
+    public void sortirObjet(ObjetRecuperables objet) {
         this.objet.remove(objet);
     }
 
@@ -66,21 +69,31 @@ public class Environnement {
     public Terrain getTerrain() {
         return terrain;
     }
-    public void unTour(){
+
+    public void verifierCollisions() {
+        for (int i = 0; i < ennemis.size(); i++) {
+            if (ennemis.get(i).collidesWith(j1)) {
+                ennemis.get(i).repousserPersonnages(j1, ennemis.get(i));
+            }
+        }
+    }
+
+
+
+    public void unTour() {
         this.getJ1().move();
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
-        if(!ennemis.isEmpty()) {
+        if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 ennemis.get(i).deplacementBFS();
-                if (ennemis.get(i).verificationCollision(this.getJ1())) {
-                    //ennemis.projection(this.getJ1(),deltaTime);
-                }
+
                 if (!ennemis.get(i).enVie()) {
                     sortirEnnemis(ennemis.get(i));
                 }
             }
         }
+        verifierCollisions();
         deltaTime++;
     }
 }

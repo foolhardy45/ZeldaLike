@@ -10,4 +10,6 @@ module com.example.zeldalike {
     opens com.example.zeldalike.controlleurs to javafx.fxml;
     exports com.example.zeldalike.modele;
     opens com.example.zeldalike.modele to javafx.fxml;
+    exports com.example.zeldalike.modele.Arme;
+    opens com.example.zeldalike.modele.Arme to javafx.fxml;
 }
