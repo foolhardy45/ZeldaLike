@@ -162,8 +162,6 @@ public abstract class Personnage {
     private void moveDown() {
         double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
-        System.out.println(nouvellePosY);
-        System.out.println(newY);
         int PosX = this.getP().getX();
         if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX + 1, newY + hitbox) && terrain.estAutorisé(PosX + hitbox, newY + hitbox)) {
             this.getP().setY(newY);
@@ -183,7 +181,6 @@ public abstract class Personnage {
         double nouvellePosX = this.getP().getX() + this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        System.out.println(this.getVitesse());
         if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX + hitbox, PosY + hitbox)) {
             this.getP().setX(newX);
         }
