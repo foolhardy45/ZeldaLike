@@ -96,12 +96,11 @@ public class Controlleur implements Initializable {
         PotionVitale p1 = new PotionVitale(PP1);
         this.env.ajouterObjet(p1);
 
-        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
-        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
+        //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
+        //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
         this.env.getJ1().getSac().ajoutInventaire(new cle(new Position(0,0)));
         this.inventairepane.setVisible(false);
         this.inv = new InventaireVue(inventairepane, inventaireobjets, env.getJ1().getSac());
-        inv.creeAffichage();
 
 
         System.out.println(this.env.getJ1().getSac().toString());

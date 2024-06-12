@@ -33,9 +33,12 @@ public class Inventaire {
 
     public HashMap<ObjetRecuperables, Integer> getQuantiteTout(){
         HashMap<ObjetRecuperables, Integer> quantites = new HashMap<>();
-        quantites.put(new PotionVitale(new Position(0,0)), getQuantitePotion());
-        quantites.put(new cle(new Position(0,0)), getQuantitePotion());
-
+        if (getQuantitePotion()>0){
+            quantites.put(new PotionVitale(), getQuantitePotion());
+        }
+        if (getQuantitecle()>0) {
+            quantites.put(new cle(new Position(0, 0)), getQuantitePotion());
+        }
         return quantites;
     }
 
