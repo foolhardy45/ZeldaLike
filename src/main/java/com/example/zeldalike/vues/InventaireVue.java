@@ -1,10 +1,10 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.Cle;
 import com.example.zeldalike.modele.Inventaire;
 import com.example.zeldalike.modele.ObjetRecuperables;
 import com.example.zeldalike.modele.PotionVitale;
-import com.example.zeldalike.modele.cle;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -30,7 +30,7 @@ public class InventaireVue {
         if (objet instanceof PotionVitale){
             image = String.valueOf(Main.class.getResource("images/objets/potion.png"));
         }
-        else if (objet instanceof cle){
+        else if (objet instanceof Cle){
             image = String.valueOf(Main.class.getResource("images/coins.gif"));
         }
 

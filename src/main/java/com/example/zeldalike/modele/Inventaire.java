@@ -31,7 +31,7 @@ public class Inventaire {
         int i = 0;
         while (!obtenu && i< this.articles.size()){
             cle = this.articles.get(i);
-            if (cle instanceof cle){
+            if (cle instanceof Cle){
                 obtenu = true;
             }
             i++;
@@ -65,8 +65,8 @@ public class Inventaire {
         if (getQuantitePotion()>0){
             quantites.put(getUnePotion(), getQuantitePotion());
         }
-        if (getQuantitecle()>0) {
-            quantites.put(getUneCle(), getQuantitecle());
+        if (getQuantiteCle()>0) {
+            quantites.put(getUneCle(), getQuantiteCle());
         }
         return quantites;
     }

@@ -107,7 +107,7 @@ public class Controlleur implements Initializable {
 
         //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
         //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
-        this.env.getJ1().getSac().ajoutInventaire(new cle(new Position(0,0)));
+        this.env.getJ1().getSac().ajoutInventaire(new Cle(new Position(0,0)));
         this.inventairepane.setVisible(false);
         this.inv = new InventaireVue(inventairepane, inventaireobjets, env.getJ1().getSac());
 
@@ -140,8 +140,9 @@ public class Controlleur implements Initializable {
         boolean interact = pressedKeys.contains("E");
         boolean attaque = pressedKeys.contains("X");
         boolean inventaire = pressedKeys.contains("A");
-        if (this.env.getJ1().isFaitUnAttaque()) {
 
+        if (this.env.getJ1().isFaitUnAttaque()) {
+        }
         if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
@@ -168,7 +169,7 @@ public class Controlleur implements Initializable {
             cooldown = false;
         } else if (interact) {
             this.env.getJ1().setInteraction(true);
-        } else if (inventaire){
+        } else if (inventaire) {
             pressedKeys.remove("A");
             //lanceMenuPause();
             inventaire_ouvert = this.inv.ouvrirInventaire();
@@ -198,6 +199,8 @@ public class Controlleur implements Initializable {
                             if (temps_gameloop % 30 == 0) {
                                 this.joueurVue.getArmeView().setVisible(false);
                                 cooldown = true;
+                            }
+                        }
                     if (this.joueurVue.isVisible()) { // Si le joueur fait une attaque alors pendant qu"elle que seconde l'arme s'affichera
                         if (temps_gameloop % 30 == 0) {
                             this.joueurVue.getArmeView().setVisible(false);
