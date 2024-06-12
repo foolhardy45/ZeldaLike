@@ -28,11 +28,6 @@ public abstract class Personnage {
     }
 
 
-
-    public int getHitbox() {
-        return hitbox;
-    }
-
     public int getDirection() {
         return direction.get();
     }
