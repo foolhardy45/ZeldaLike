@@ -17,7 +17,7 @@ public class TerrrainVue {
         this.affichage = affichage;
         this.terrrain = terrrain;
 
-        final int zoneTemp=33;
+        final int zoneTemp=32;
         final int decalageX=2048;
         final int decalageY=1024;
 
@@ -28,15 +28,15 @@ public class TerrrainVue {
             }
             else if ((int)n>decalageX && (int)n % decalageX < zoneTemp ) {
                 affichage.setTranslateX(affichage.getTranslateX()+decalageX);
-                mac.getP().setX(mac.getP().getX()-2*zoneTemp);
+                mac.getP().setX(mac.getP().getX()-6*zoneTemp);
             }
         });
         mac.getP().yProperty().addListener((obs,old,n)->{
-            if ((int)n % decalageY > decalageY-zoneTemp) {
+            if ((int)n % decalageY > decalageY-5) {
                 affichage.setTranslateY(affichage.getTranslateY()-decalageY);
                 mac.getP().setY(mac.getP().getY()+2*zoneTemp);
             }
-            else if ((int)n > decalageY && (int)n % decalageY < zoneTemp) {
+            else if ((int)n > decalageY && (int)n % decalageY < 5) {
                 affichage.setTranslateY(affichage.getTranslateY()+decalageY);
                 mac.getP().setY(mac.getP().getY()-2*zoneTemp);
             }
