@@ -23,9 +23,9 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
         while (change.next()) {
             for (Ennemis e : change.getAddedSubList()) {
                 if (e instanceof Citron) {
-                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/citron.png")));
+                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/citron.png")));
                 } else if (e instanceof BusinessMan) {
-                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/businessman2.png")));
+                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/businessman2.png")));
                 }
                 this.panneauDeJeu.getChildren().add(ennemisVue.getI());
 

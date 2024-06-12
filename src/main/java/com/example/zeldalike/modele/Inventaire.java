@@ -1,16 +1,75 @@
 package com.example.zeldalike.modele;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Inventaire {
-    private final ArrayList<ArticleInventaire> articles;
+    private final ArrayList<ObjetRecuperables> articles;
 
 
     public Inventaire() {
         this.articles = new ArrayList<>();
     }
 
-    public int indiceInventaire(ObjetRecuperables obj) {
+
+
+    public ArrayList<ObjetRecuperables> getListePotion(){
+        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof PotionVitale){
+                liste.add(obj);
+            }
+        }
+        return liste;
+    }
+
+    public ArrayList<ObjetRecuperables> getListeCle(){
+        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof Cle){
+                liste.add(obj);
+            }
+        }
+        return liste;
+    }
+
+
+    public ObjetRecuperables getUnePotion(){
+        ArrayList<ObjetRecuperables> liste = getListePotion();
+        if (!liste.isEmpty()){
+            return getListePotion().get(0);
+        }
+        return null;
+    }
+    public int getQuantitePotion() {
+        return getListePotion().size();
+    }
+
+    public ObjetRecuperables getUneCle(){
+        ArrayList<ObjetRecuperables> liste = getListeCle();
+        if (!liste.isEmpty()){
+            return getListeCle().get(0);
+        }
+        return null;
+    }
+    public int getQuantiteCle() {
+        return getListeCle().size();
+    }
+
+    public HashMap<ObjetRecuperables, Integer> getQuantiteTout(){
+        HashMap<ObjetRecuperables, Integer> quantites = new HashMap<>();
+        ObjetRecuperables objet;
+        if (getQuantitePotion()>0){
+            quantites.put(getUnePotion(), getQuantitePotion());
+        }
+        if (getQuantiteCle()>0) {
+            quantites.put(getUneCle(), getQuantiteCle());
+        }
+        return quantites;
+    }
+
+
+ /*   public int indiceInventaire(ObjetRecuperables obj) {
         boolean present = false;
         int i = 0;
         if (this.articles.size() > 0) {
@@ -24,26 +83,23 @@ public class Inventaire {
             }
         }
         return -1;
-    }
+    }*/
 
     public void ajoutInventaire(ObjetRecuperables obj) {
-        int indice = indiceInventaire(obj);
-        if (indice >= 0) {
-            this.articles.get(indice).incremente();
-        } else {
-            ArticleInventaire nouvelobjet = new ArticleInventaire(obj);
-            this.articles.add(nouvelobjet);
-        }
+        obj.setP(new Position(0,0));
+        this.articles.add(obj);
     }
+
+
 
 
     @Override
     public String toString() {
-        String tout = "";
-        for (ArticleInventaire a : this.articles) {
-            tout += a.toString();
-            tout += "\n";
+        HashMap<ObjetRecuperables, Integer> tout = getQuantiteTout();
+        String texte = "";
+        for (ObjetRecuperables o : tout.keySet()){
+            texte += o +" : "+ tout.get(o) + "\n";
         }
-        return tout;
+        return texte;
     }
 }

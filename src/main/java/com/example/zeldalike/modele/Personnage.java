@@ -3,8 +3,10 @@ package com.example.zeldalike.modele;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.awt.*;
+
 public abstract class Personnage {
-    private int hp;
+    private IntegerProperty hp;
     private int def;
     private int vitesse;
     private Position p;
@@ -12,29 +14,19 @@ public abstract class Personnage {
     private final Terrain terrain;
     private final int hitbox;
     private final IntegerProperty direction;
-    private Arme arme;
 
 
     public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
-        this.hp = hp;
+        this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
         this.env = env;
-        this.arme = new Poing();
         this.terrain = terrain;
         this.hitbox = 31;
         this.direction = new SimpleIntegerProperty();
-
     }
 
-    public Arme getArme() {
-        return arme;
-    }
-
-    public void setArme(Arme arme) {
-        this.arme = arme;
-    }
 
     public int getDirection() {
         return direction.get();
@@ -44,39 +36,51 @@ public abstract class Personnage {
         this.direction.set(direction);
     }
 
+    public int distanceEntreDeuxPersonnages(Personnage p1, Personnage p2) {
+        int super_x = (p1.getP().getX() - p2.getP().getX()) * (p1.getP().getX() - p2.getP().getX());
+        int super_y = (p1.getP().getY() - p2.getP().getY()) * (p1.getP().getY() - p2.getP().getY());
+        return (int) Math.sqrt(super_x + super_y);
+    }
 
-    public void frapper(Personnage p) {
-        if (enVie() && p.enVie()) {
-            int degats = this.arme.getAttaque();
-            if (p.getDef() < degats) {
-                degats -= p.getDef();
-            } else {
-                degats = 0;
-            }
-            p.setHp(p.getHp() - degats);
-            System.out.println("Dégâts infligés: " + degats);
+    public void repousserPersonnages(Personnage p1, Personnage p2) {
+        int dx = p1.getP().getX() - p2.getP().getX();
+        int dy = p1.getP().getY() - p2.getP().getY();
+        int distance = p1.distanceEntreDeuxPersonnages(p1,p2);
+        if (distance == 0) return;
+
+        int repulsionForce = 12;
+        int repulsionX = (dx / distance) * repulsionForce;
+        int repulsionY = (dy / distance) * repulsionForce;
+
+        boolean p1CanMove =
+                terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX() + p1.getHitbox() + repulsionX, p1.getP().getY() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY()+ p1.getHitbox() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX()+ p1.getHitbox() + repulsionX, p1.getP().getY() +p1.getHitbox()+ repulsionY);
+        boolean p2CanMove =
+                terrain.estAutorisé(p2.getP().getX() - repulsionX, p2.getP().getY() - repulsionY) &&
+                        terrain.estAutorisé(p2.getP().getX()+ p2.getHitbox()-repulsionX,p2.getP().getY() - repulsionY ) &&
+                        terrain.estAutorisé(p2.getP().getX()-repulsionX,p2.getP().getY()+ p2.getHitbox() - repulsionY ) &&
+                        terrain.estAutorisé(p2.getP().getX()+p2.getHitbox()-repulsionX,p2.getP().getY() + p2.getHitbox()-repulsionY);
+
+
+        if (p1CanMove && p2CanMove) {
+            p1.moveDe(repulsionX, repulsionY);
+            p2.moveDe(-repulsionX, -repulsionY);
+        } else if (p1CanMove) {
+            p1.moveDe(repulsionX, repulsionY);
+        } else if (p2CanMove) {
+            p2.moveDe(-repulsionX, -repulsionY);
         }
     }
-
-    public int distanceEntreDeuxPersonnages(Personnage p1, Personnage p2) {
-        int super_x;
-        int super_y;
-        int distance;
-
-        super_x = (p1.getP().getX() - p2.getP().getX()) * (p1.getP().getX() - p2.getP().getX());
-        super_y = (p1.getP().getY() - p2.getP().getY()) * (p1.getP().getY() - p2.getP().getY());
-
-        distance = (int) Math.sqrt(super_x + super_y);
-
-
-        return distance;
-    }
-
 
     public IntegerProperty directionProperty() {
         return direction;
     }
-    public void setValeurDirection(int d){this.direction.set(d);}
+
+    public void setValeurDirection(int d) {
+        this.direction.set(d);
+    }
 
     public Position getP() {
         return p;
@@ -91,28 +95,26 @@ public abstract class Personnage {
     }
 
     public int getHp() {
-        return hp;
+        return hp.get();
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp.set(hp);
+    }
+
+    public IntegerProperty hpProperty() {
+        return hp;
     }
 
     public int getDef() {
         return def;
     }
 
-    public void setDef(int def) {
-        this.def = def;
-    }
 
     public int getVitesse() {
         return vitesse;
     }
 
-    public void setVitesse(int vitesse) {
-        this.vitesse = vitesse;
-    }
 
     public void move() {
         switch (this.getDirection()) {
@@ -147,7 +149,6 @@ public abstract class Personnage {
                 moveRight();
                 break;
         }
-
     }
 
     private void moveUp() {
@@ -162,8 +163,6 @@ public abstract class Personnage {
     private void moveDown() {
         double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
-        System.out.println(nouvellePosY);
-        System.out.println(newY);
         int PosX = this.getP().getX();
         if (this.terrain.estDansTerrain(PosX, newY) && terrain.estAutorisé(PosX + 1, newY + hitbox) && terrain.estAutorisé(PosX + hitbox, newY + hitbox)) {
             this.getP().setY(newY);
@@ -183,20 +182,34 @@ public abstract class Personnage {
         double nouvellePosX = this.getP().getX() + this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        System.out.println(this.getVitesse());
         if (this.terrain.estDansTerrain(newX, PosY) && this.terrain.estAutorisé(newX + hitbox, PosY + hitbox)) {
             this.getP().setX(newX);
         }
     }
-    //todo: interaction entre deux personnages (collision)
-    /* Recupere les coordonnees d'un personnage et teste  s'il le touche
-     *  Si oui, appliquer une fonction speciale de chaque personnage pour réagir
-     *  Si non, ne rien faire
-     * */
+
+    public boolean collidesWith(Personnage other) {
+        return this.getBounds().intersects(other.getBounds());
+    }
+
+    private Rectangle getBounds() {
+        return new Rectangle(this.getP().getX(), this.getP().getY(), this.getWidth(), this.getHeight());
+    }
+
+    public void moveDe(int dx, int dy) {
+        this.getP().setX(this.getP().getX() + dx);
+        this.getP().setY(this.getP().getY() + dy);
+    }
+
+    private int getWidth() {
+        return 32;
+    }
+
+    private int getHeight() {
+        return 32;
+    }
 
     public boolean verificationCollision(Personnage perso) {
         boolean touche = false;
-        //verification touché droite
         if (this.p.collisionEntreSprites(perso.getP())) {
             this.personnageTouche(perso);
             perso.personnageTouche(this);
@@ -205,12 +218,13 @@ public abstract class Personnage {
         return touche;
     }
 
+    public int getHitbox(){
+        return this.hitbox;
+    }
+
     public boolean enVie() {
-        return this.hp > 0;
+        return this.getHp() > 0;
     }
 
     public abstract void personnageTouche(Personnage p);
-
 }
-
-

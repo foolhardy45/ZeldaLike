@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static Stage stg;
+    public static Scene jeu ;
 
 
     public static void main(String[] args) {
@@ -21,9 +22,15 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/zeldalike/Menu.fxml"));
         Parent root = fxmlLoader.load();
-        Menu_Controlleur controlleur = fxmlLoader.getController();
-        Scene scene = new Scene(root, 900, 900);
-        stage.setScene(scene);
+        //Menu_Controlleur controlleur = fxmlLoader.getController();
+        Scene menu = new Scene(root, 900, 900);
+
+        //init de la scene jeu
+        FXMLLoader fxmlLoaderjeu = new FXMLLoader(Main.class.getResource("/com/example/zeldalike/terrain2.fxml"));
+        Parent rootjeu = fxmlLoaderjeu.load();
+        jeu = new Scene(rootjeu, 900, 900);
+
+        stage.setScene(menu);
         stage.setTitle("KKDK!");
         stg = stage;
 

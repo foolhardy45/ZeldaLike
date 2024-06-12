@@ -4,14 +4,16 @@ public abstract class ObjetRecuperables {
     private static int id = 0;
     private String idObjet;
     private Position p;
-    private int type;
 
 
-    public ObjetRecuperables(Position p, int type){
+    public ObjetRecuperables(Position p){
         this.idObjet = "Objet"+id;
         this.p = p;
-        this.type = type;
         id++;
+    }
+
+    public ObjetRecuperables(){
+        this(new Position(0,0));
     }
 
     public Position getP() {
@@ -27,14 +29,6 @@ public abstract class ObjetRecuperables {
 
     public boolean memeID(ObjetRecuperables o){
         return this.idObjet.equals(o.getIdObjet());
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public boolean deMemeType(ObjetRecuperables obj){
-        return this.type == obj.getType();
     }
 
     @Override

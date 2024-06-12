@@ -1,28 +1,53 @@
 package com.example.zeldalike.controlleurs;
 
 import com.example.zeldalike.modele.*;
+import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.*;
+import com.example.zeldalike.vues.InventaireVue;
 import com.example.zeldalike.vues.JoueurVue;
 import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import static com.example.zeldalike.Main.main;
+import static com.example.zeldalike.Main.stg;
 
 public class Controlleur implements Initializable {
 
     private final Set<String> pressedKeys = new HashSet<>();
     @FXML
+    private HBox info_joueur;
+    @FXML
+    private HBox coeurBox;
+    @FXML
+    private Label nbArgent;
+    @FXML
     private TilePane terrain_affichage;
+
+    @FXML
+    private TilePane inventairepane;
+    @FXML
+    private TilePane inventaireobjets;
+    private InventaireVue inv;
+
     @FXML
     private Pane carte_interaction;
     private long lastTime;
@@ -31,7 +56,7 @@ public class Controlleur implements Initializable {
     private Timeline gameLoop;
     private int temps_gameloop;
     private boolean cooldown = true;
-
+    private boolean inventaire_ouvert = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -42,6 +67,13 @@ public class Controlleur implements Initializable {
         terrain_affichage.setFocusTraversable(true);
         terrrainVue.creeMap();
         joueurVue = new JoueurVue(this.env.getJ1(), this.env.getJ1().getArme());
+
+        coeurBox.getChildren().add(joueurVue.getCoeurN1());
+        coeurBox.getChildren().add(joueurVue.getCoeurN2());
+        coeurBox.getChildren().add(joueurVue.getCoeurN3());
+
+        // Lier la propriété argent avec le texte du Label
+        nbArgent.textProperty().bind(env.getJ1().argentProperty().asString());
 
         carte_interaction.getChildren().add(joueurVue.getMac());
         carte_interaction.getChildren().add(joueurVue.getArmeView());
@@ -63,7 +95,6 @@ public class Controlleur implements Initializable {
             }
         }));
 
-
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
         Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
@@ -72,12 +103,17 @@ public class Controlleur implements Initializable {
         this.env.ajouterEnnemis(man);
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
-        Position PP1 = new Position(310,310);
+        Position PP1 = new Position(310, 310);
         PotionVitale p1 = new PotionVitale(PP1);
         this.env.ajouterObjet(p1);
+        this.env.ajouterObjet(new PotionVitale(new Position(510, 510)));
 
-        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
-        this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
+        //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
+        //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
+        this.env.getJ1().getSac().ajoutInventaire(new Cle(new Position(0,0)));
+        this.inventairepane.setVisible(false);
+        this.inv = new InventaireVue(inventairepane, inventaireobjets, env.getJ1().getSac());
+
 
         System.out.println(this.env.getJ1().getSac().toString());
 
@@ -90,19 +126,15 @@ public class Controlleur implements Initializable {
 
     private void onKeyPressed(KeyEvent event) {
         pressedKeys.add(event.getCode().toString());
-        System.out.println("je suis dans onKeyPressed");
         handleMovement();
-
     }
 
     private void onKeyReleased(KeyEvent event) {
         pressedKeys.remove(event.getCode().toString());
-        System.out.println("je suis dans onKeyReleased");
-
         this.env.getJ1().ajouterDirection(5);
         handleMovement();
-        //
     }
+
 
     private void handleMovement() {
         boolean movingUp = pressedKeys.contains("UP");
@@ -111,20 +143,21 @@ public class Controlleur implements Initializable {
         boolean movingRight = pressedKeys.contains("RIGHT");
         boolean interact = pressedKeys.contains("E");
         boolean attaque = pressedKeys.contains("X");
+        boolean inventaire = pressedKeys.contains("A");
 
-
-
-        if (movingRight && movingLeft ||movingDown && movingUp){
+        if (this.env.getJ1().isFaitUnAttaque()) {
+        }
+        if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {
             this.env.getJ1().ajouterDirection(9);
         } else if (movingUp && movingLeft) {
             this.env.getJ1().ajouterDirection(7);
-        }  else if (movingDown && movingLeft) {
+        } else if (movingDown && movingLeft) {
             this.env.getJ1().ajouterDirection(1);
         } else if (movingDown && movingRight) {
             this.env.getJ1().ajouterDirection(3);
-        } else if (movingUp){
+        } else if (movingUp) {
             this.env.getJ1().ajouterDirection(8);
         } else if (movingRight) {
             this.env.getJ1().ajouterDirection(6);
@@ -133,19 +166,21 @@ public class Controlleur implements Initializable {
         } else if (movingLeft) {
             this.env.getJ1().ajouterDirection(4);
         }
-
         if (attaque && cooldown) {
-            System.out.println("faire une attauque");
+            this.env.getJ1().ajouterDirection(5);
             this.joueurVue.afficherArmeView();
             this.env.getJ1().attaquer();
             cooldown = false;
-        }
-
-        if (interact){
+        } else if (interact) {
             this.env.getJ1().setInteraction(true);
+        } else if (inventaire) {
+            pressedKeys.remove("A");
+            //lanceMenuPause();
+            inventaire_ouvert = this.inv.ouvrirInventaire();
         }
 
     }
+
 
     private void initAnimation() {
         gameLoop = new Timeline();
@@ -159,16 +194,23 @@ public class Controlleur implements Initializable {
                     long currentTime = System.currentTimeMillis();
                     lastTime = currentTime;
 
-                    this.env.unTour();
+                    if (!inventaire_ouvert){
+                        this.env.unTour();
 
-                    if (this.joueurVue.isVisible()){
-                        if (temps_gameloop %70 == 0){
+                        if (this.joueurVue.isVisible()) {
+                            if (temps_gameloop % 30 == 0) {
+                                this.joueurVue.getArmeView().setVisible(false);
+                                cooldown = true;
+                            }
+                        }
+                    if (this.joueurVue.isVisible()) { // Si le joueur fait une attaque alors pendant qu"elle que seconde l'arme s'affichera
+                        if (temps_gameloop % 30 == 0) {
                             this.joueurVue.getArmeView().setVisible(false);
                             cooldown = true;
                         }
                     }
+                    }
                     temps_gameloop++;
-
                 }
         );
 
