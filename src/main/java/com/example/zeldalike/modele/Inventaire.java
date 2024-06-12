@@ -11,52 +11,49 @@ public class Inventaire {
         this.articles = new ArrayList<>();
     }
 
-    public ObjetRecuperables getUnePotion(){
-        boolean obtenu = false;
-        ObjetRecuperables potion = null;
-        int i = 0;
-        while (!obtenu && i< this.articles.size()){
-            potion = this.articles.get(i);
-            if (potion instanceof PotionVitale){
-                obtenu = true;
+
+
+    public ArrayList<ObjetRecuperables> getListePotion(){
+        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof PotionVitale){
+                liste.add(obj);
             }
-            i++;
         }
-        return potion;
+        return liste;
+    }
+
+    public ArrayList<ObjetRecuperables> getListeCle(){
+        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof Cle){
+                liste.add(obj);
+            }
+        }
+        return liste;
+    }
+
+
+    public ObjetRecuperables getUnePotion(){
+        ArrayList<ObjetRecuperables> liste = getListePotion();
+        if (!liste.isEmpty()){
+            return getListePotion().get(0);
+        }
+        return null;
+    }
+    public int getQuantitePotion() {
+        return getListePotion().size();
     }
 
     public ObjetRecuperables getUneCle(){
-        boolean obtenu = false;
-        ObjetRecuperables cle = null;
-        int i = 0;
-        while (!obtenu && i< this.articles.size()){
-            cle = this.articles.get(i);
-            if (cle instanceof Cle){
-                obtenu = true;
-            }
-            i++;
+        ArrayList<ObjetRecuperables> liste = getListeCle();
+        if (!liste.isEmpty()){
+            return getListeCle().get(0);
         }
-        return cle;
+        return null;
     }
-
-    public int getQuantitePotion() {
-        int quantite = 0;
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof PotionVitale){
-                quantite++;
-            }
-        }
-        return quantite;
-    }
-
     public int getQuantiteCle() {
-        int quantite = 0;
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof Cle){
-                quantite++;
-            }
-        }
-        return quantite;
+        return getListeCle().size();
     }
 
     public HashMap<ObjetRecuperables, Integer> getQuantiteTout(){
