@@ -1,10 +1,10 @@
 package com.example.zeldalike.modele;
 
-public class cle extends ObjetRecuperables{
+public class Cle extends ObjetRecuperables{
 
 
-        public cle(Position p){
-            super(p);
+        public Cle(Position p){
+            super(p,2);
         }
         public boolean collisionJoueur(Joueur j){
             return false;

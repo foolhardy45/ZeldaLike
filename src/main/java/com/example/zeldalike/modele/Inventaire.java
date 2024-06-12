@@ -49,10 +49,10 @@ public class Inventaire {
         return quantite;
     }
 
-    public int getQuantitecle() {
+    public int getQuantiteCle() {
         int quantite = 0;
         for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof cle){
+            if (obj instanceof Cle){
                 quantite++;
             }
         }

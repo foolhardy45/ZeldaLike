@@ -14,30 +14,24 @@ public abstract class Personnage {
     private final Terrain terrain;
     private final int hitbox;
     private final IntegerProperty direction;
-    private Arme arme;
-    private int atk;
 
-    public Personnage(int hp, int def, int vitesse,int atk, Position p, Environnement env, Terrain terrain) {
+
+    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
         this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
-        this.atk = atk;
         this.env = env;
-        this.arme = new Poing();
         this.terrain = terrain;
         this.hitbox = 31;
         this.direction = new SimpleIntegerProperty();
     }
 
+
+
     public int getHitbox() {
         return hitbox;
     }
-
-    public Arme getArme() {
-        return arme;
-    }
-
 
     public int getDirection() {
         return direction.get();
@@ -47,24 +41,12 @@ public abstract class Personnage {
         this.direction.set(direction);
     }
 
-    public void frapper(Personnage p) {
-        if (enVie() && p.enVie()) {
-            int degats = this.arme.getAttaque();
-            if (p.getDef() < degats) {
-                degats -= p.getDef();
-            } else {
-                degats = 0;
-            }
-            p.setHp(p.getHp() - degats);
-            System.out.println("Dégâts infligés: " + degats);
-        }
-    }
-
     public int distanceEntreDeuxPersonnages(Personnage p1, Personnage p2) {
         int super_x = (p1.getP().getX() - p2.getP().getX()) * (p1.getP().getX() - p2.getP().getX());
         int super_y = (p1.getP().getY() - p2.getP().getY()) * (p1.getP().getY() - p2.getP().getY());
         return (int) Math.sqrt(super_x + super_y);
     }
+
     public void repousserPersonnages(Personnage p1, Personnage p2) {
         int dx = p1.getP().getX() - p2.getP().getX();
         int dy = p1.getP().getY() - p2.getP().getY();
@@ -224,14 +206,14 @@ public abstract class Personnage {
     }
 
     private int getWidth() {
-        return 32; // Ajuster selon vos dimensions
+        return 32;
     }
 
     private int getHeight() {
-        return 32; // Ajuster selon vos dimensions
+        return 32;
     }
 
-    /*public boolean verificationCollision(Personnage perso) {
+    public boolean verificationCollision(Personnage perso) {
         boolean touche = false;
         if (this.p.collisionEntreSprites(perso.getP())) {
             this.personnageTouche(perso);
@@ -239,7 +221,7 @@ public abstract class Personnage {
             touche = true;
         }
         return touche;
-    }*/
+    }
 
     public boolean enVie() {
         return this.getHp() > 0;
