@@ -1,5 +1,6 @@
 package com.example.zeldalike.controlleurs;
 
+import com.example.zeldalike.modele.*;
 import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.*;
 import com.example.zeldalike.vues.InventaireVue;
@@ -98,6 +99,8 @@ public class Controlleur implements Initializable {
         this.env.getEnnemis().addListener(observateurlisteennemi);
         Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
+        BusinessMan man = new BusinessMan(new Position(640,640), this.env);
+        this.env.ajouterEnnemis(man);
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(310, 310);
@@ -113,6 +116,7 @@ public class Controlleur implements Initializable {
 
 
         System.out.println(this.env.getJ1().getSac().toString());
+
 
         terrain_affichage.requestFocus();
 
@@ -174,8 +178,6 @@ public class Controlleur implements Initializable {
             //lanceMenuPause();
             inventaire_ouvert = this.inv.ouvrirInventaire();
         }
-
-
 
     }
 
