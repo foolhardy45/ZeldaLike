@@ -7,11 +7,20 @@ import com.example.zeldalike.modele.Arme.gun.Munition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
+import com.example.zeldalike.vues.JoueurVue;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.util.Duration;
 
 public class Joueur extends Personnage {
     private Queue<Character> déplacement;
@@ -22,6 +31,7 @@ public class Joueur extends Personnage {
     private ObservableList<Munition> munitionObservableList;
     private int direction = this.getPositionPre();
 
+    private IntegerProperty argent;
 
     public void setInteraction(boolean interaction) {
         this.interaction = interaction;
@@ -43,6 +53,11 @@ public class Joueur extends Personnage {
         this.arme = a;
     }
 
+    public IntegerProperty argentProperty() {
+        return argent;
+    }
+
+
     public void donnerMunition() {
         if (this.arme instanceof Gun) {
             System.out.println("Munitions dans le sac avant transfert : " + this.sac.getListeMunition());
@@ -58,10 +73,15 @@ public class Joueur extends Personnage {
             System.out.println("Munitions dans le Gun après transfert : " + ((Gun) this.arme).getMunitionObservableList());
         }
     }
-
-
     public Arme getArme() {
         return arme;
+    }
+    public int getArgent() {
+        return argent.get();
+    }
+
+    public void setArgent(int argent) {
+        this.argent.set(argent);
     }
 
     public void setArme(Arme arme) {

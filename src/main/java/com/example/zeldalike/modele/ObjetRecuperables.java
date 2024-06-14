@@ -12,7 +12,9 @@ public abstract class ObjetRecuperables {
         id++;
     }
 
-
+    public ObjetRecuperables(){
+        this(new Position(0,0));
+    }
 
     public Position getP() {
         return p;

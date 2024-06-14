@@ -242,9 +242,10 @@ public abstract class Personnage {
         return touche;
     }
 
+
     public boolean enVie() {
         return this.getHp() > 0;
     }
-    
+
     public abstract void personnageTouche(Personnage p);
 }

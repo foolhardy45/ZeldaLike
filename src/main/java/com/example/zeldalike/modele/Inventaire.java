@@ -3,6 +3,7 @@ package com.example.zeldalike.modele;
 import com.example.zeldalike.modele.Arme.gun.Munition;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Inventaire {
     private final ArrayList<ObjetRecuperables> articles;
@@ -13,24 +14,26 @@ public class Inventaire {
         this.articles = new ArrayList<>();
     }
 
-    public int getQuantitePotion() {
-        int quantite = 0;
+
+
+    public ArrayList<ObjetRecuperables> getListePotion(){
+        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
         for (ObjetRecuperables obj : this.articles){
             if (obj instanceof PotionVitale){
-                quantite++;
+                liste.add(obj);
             }
         }
-        return quantite;
+        return liste;
     }
 
-    public int getQuantiteCle() {
-        int quantite = 0;
+    public ArrayList<ObjetRecuperables> getListeCle(){
+        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
         for (ObjetRecuperables obj : this.articles){
             if (obj instanceof Cle){
-                quantite++;
+                liste.add(obj);
             }
         }
-        return quantite;
+        return liste;
     }
 
     public int getQuantiteMunition() {
@@ -57,15 +60,7 @@ public class Inventaire {
         return munition;
     }
 
-    public ArrayList<ObjetRecuperables> getListePotion(){
-        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof PotionVitale){
-                liste.add(obj);
-            }
-        }
-        return liste;
-    }
+
 
     public ArrayList<Munition> getListeMunition(){
         ArrayList<Munition> liste = new ArrayList<>();
@@ -80,6 +75,31 @@ public class Inventaire {
 
 
 
+    public ObjetRecuperables getUnePotion(){
+        ArrayList<ObjetRecuperables> liste = getListePotion();
+        if (!liste.isEmpty()){
+            return getListePotion().get(0);
+        }
+        return null;
+    }
+    public int getQuantitePotion() {
+        return getListePotion().size();
+    }
+    public int getQuantiteCle() {
+        return getListeCle().size();
+    }
+
+    public HashMap<ObjetRecuperables, Integer> getQuantiteTout(){
+        HashMap<ObjetRecuperables, Integer> quantites = new HashMap<>();
+        ObjetRecuperables objet;
+        if (getQuantitePotion()>0){
+            quantites.put(getUnePotion(), getQuantitePotion());
+        }
+        if (getQuantiteCle()>0) {
+            quantites.put(getUneCle(), getQuantiteCle());
+        }
+        return quantites;
+    }
 
 
  /*   public int indiceInventaire(ObjetRecuperables obj) {
@@ -99,17 +119,20 @@ public class Inventaire {
     }*/
 
     public void ajoutInventaire(ObjetRecuperables obj) {
+        obj.setP(new Position(0,0));
         this.articles.add(obj);
     }
 
 
+
+
     @Override
     public String toString() {
-        String tout = "";
-        for (ObjetRecuperables a : this.articles) {
-            tout += a.toString();
-            tout += "\n";
+        HashMap<ObjetRecuperables, Integer> tout = getQuantiteTout();
+        String texte = "";
+        for (ObjetRecuperables o : tout.keySet()){
+            texte += o +" : "+ tout.get(o) + "\n";
         }
-        return tout;
+        return texte;
     }
 }

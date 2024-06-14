@@ -8,6 +8,10 @@ public class PotionVitale extends ObjetRecuperables {
         super(p);
     }
 
+    public PotionVitale(){
+        super();
+    }
+
     public boolean collisionJoueur(Joueur j) {
         return false;
     }
