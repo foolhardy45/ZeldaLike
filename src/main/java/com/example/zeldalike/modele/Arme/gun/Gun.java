@@ -3,7 +3,6 @@ package com.example.zeldalike.modele.Arme.gun;
 import com.example.zeldalike.modele.Arme.Arme;
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Position;
-import com.sun.management.UnixOperatingSystemMXBean;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -45,7 +44,7 @@ private ObservableList<Munition> munitionObservableList;
     public void faireUneAttaque() {
         if (!this.munitionObservableList.isEmpty()) {
             // Récupère la première munition de la liste
-            Munition mune = this.munitionObservableList.getFirst();
+            Munition mune = this.munitionObservableList.get(0);
             System.out.println("Préparation à tirer la munition : " + mune);
 
             // Met à jour la position de la munition
@@ -62,7 +61,7 @@ private ObservableList<Munition> munitionObservableList;
             }
 
             // Retire la munition de la liste originale
-            this.munitionObservableList.removeFirst();
+            this.munitionObservableList.remove(0);
             System.out.println("Munition retirée de la liste des munitions disponibles : " + mune);
         } else {
             System.out.println("tu n'as aucune balle");

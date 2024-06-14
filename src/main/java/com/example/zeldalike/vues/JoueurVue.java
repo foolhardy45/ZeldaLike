@@ -41,7 +41,7 @@ public class JoueurVue extends JPanel {
 
         spriteGunUp = new Image(String.valueOf(Main.class.getResource("images/gressifgun/gressifGun_Haut.png")));
         spriteGunDown = new Image(String.valueOf(Main.class.getResource("images/gressifgun/GressifGun_Bas.png")));
-        spriteGunLeft = new Image(String.valueOf(Main.class.getResource("images/gressifgun/gressifGun_Gauche.png")));
+        spriteGunLeft = new Image(String.valueOf(Main.class.getResource("images/gressifgun/GressifGun_Gauche.png")));
         spriteGunRight = new Image(String.valueOf(Main.class.getResource("images/gressifgun/GressifGun_Droite.png")));
 
         Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_bas.png")));
