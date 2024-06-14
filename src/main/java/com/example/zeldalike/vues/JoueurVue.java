@@ -53,10 +53,10 @@ public class JoueurVue extends JPanel {
         //position du joueur
 
         j.getP().xProperty().addListener((obs,old,n)->{
-            mac.setTranslateX((int)n % 2048);
+            mac.setTranslateX((int)n % 4096);
         });
         j.getP().yProperty().addListener((obs,old,n)->{
-            mac.setTranslateY((int)n % 1024);
+            mac.setTranslateY((int)n % 2048);
         });
 
         mac.translateXProperty().bind(joueur.getP().xProperty());

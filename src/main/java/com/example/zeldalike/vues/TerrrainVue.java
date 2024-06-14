@@ -3,44 +3,49 @@ package com.example.zeldalike.vues;
 import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Terrain;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 
 import java.util.Random;
 
 public class TerrrainVue {
     private final TilePane affichage;
+    private final Pane affichageElement;
     private final Terrain terrrain;
 
-    public TerrrainVue(TilePane affichage, Terrain terrrain, Joueur mac) {
+    public TerrrainVue(TilePane affichage,Pane affichageElement, Terrain terrrain, Joueur mac) {
         this.affichage = affichage;
+        this.affichageElement=affichageElement;
         this.terrrain = terrrain;
 
         final int zoneTemp=32;
         final int decalageX=2048;
-        final int decalageY=1024;
+        final int decalageY=1224;
 
         mac.getP().xProperty().addListener((obs,old,n)->{
             if ((int)n % decalageX> decalageX-zoneTemp ) {
-                affichage.setTranslateX(affichage.getTranslateX()-decalageX);
+                affichageElement.setTranslateX(affichageElement.getTranslateX()-decalageX);
                 mac.getP().setX(mac.getP().getX()+2*zoneTemp);
             }
             else if ((int)n>decalageX && (int)n % decalageX < zoneTemp ) {
-                affichage.setTranslateX(affichage.getTranslateX()+decalageX);
-                mac.getP().setX(mac.getP().getX()-6*zoneTemp);
+                affichageElement.setTranslateX(affichageElement.getTranslateX()+decalageX);
+                mac.getP().setX(mac.getP().getX()-2*zoneTemp);
             }
         });
         mac.getP().yProperty().addListener((obs,old,n)->{
             if ((int)n % decalageY > decalageY-5) {
-                affichage.setTranslateY(affichage.getTranslateY()-decalageY);
+                affichageElement.setTranslateY(affichageElement.getTranslateY()-decalageY);
                 mac.getP().setY(mac.getP().getY()+2*zoneTemp);
             }
             else if ((int)n > decalageY && (int)n % decalageY < 5) {
-                affichage.setTranslateY(affichage.getTranslateY()+decalageY);
+                affichageElement.setTranslateY(affichageElement.getTranslateY()+decalageY);
                 mac.getP().setY(mac.getP().getY()-2*zoneTemp);
             }
-        });;
+        });
     }
 
     public void creeMap() {
@@ -80,5 +85,6 @@ public class TerrrainVue {
         }
 
     }
+
 }
 

@@ -68,7 +68,7 @@ public class Controlleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.env = new Environnement(2048, 4096);
-        TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage, this.env.getTerrain(), this.env.getJ1());
+        TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage,carte_interaction, this.env.getTerrain(), this.env.getJ1());
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);
         terrain_affichage.setOnKeyReleased(this::onKeyReleased);
         terrain_affichage.setFocusTraversable(true);
