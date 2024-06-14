@@ -7,10 +7,13 @@
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <center>
-            <Pane fx:id="carte_interaction" maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0">
+            <Pane maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0">
                <children>
-
-                  <TilePane fx:id="terrain_affichage" alignment="BOTTOM_CENTER" maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0" />
+                  <Pane fx:id="carte_interaction" maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0">
+                     <children>
+                        <TilePane fx:id="terrain_affichage" alignment="BOTTOM_CENTER" maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0" />
+                     </children>
+                  </Pane>
                   <Pane layoutY="-1.0" opacity="0.8">
                      <children>
                         <TilePane fx:id="inventairepane" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" />
@@ -18,7 +21,6 @@
                      </children>
                   </Pane>
                </children>
-
             </Pane>
          </center>
          <top>
