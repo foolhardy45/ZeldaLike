@@ -101,6 +101,9 @@ public class Controlleur implements Initializable {
         this.env.ajouterEnnemis(ennemipuissant);
         BusinessMan man = new BusinessMan(new Position(640,640), this.env);
         this.env.ajouterEnnemis(man);
+        Boss pumkin = new BossSamurai(new Position(320, 320), this.env);
+        this.env.ajouterEnnemis(pumkin);
+
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(310, 310);

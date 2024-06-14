@@ -1,6 +1,7 @@
 package com.example.zeldalike.controlleurs;
 
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.Boss;
 import com.example.zeldalike.modele.BusinessMan;
 import com.example.zeldalike.modele.Citron;
 import com.example.zeldalike.modele.Ennemis;
@@ -26,8 +27,14 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
                     ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/citron.png")));
                 } else if (e instanceof BusinessMan) {
                     ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/businessman2.png")));
+                } else if (e instanceof Boss) {
+                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/bosstemp.png")));
                 }
+
+
                 this.panneauDeJeu.getChildren().add(ennemisVue.getI());
+
+
 
             }
             for (Ennemis mort : change.getRemoved()) {

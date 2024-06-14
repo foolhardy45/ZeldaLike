@@ -12,8 +12,8 @@ public abstract class Ennemis extends Personnage{
 
     private final int aireDetection;
 
-    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain, int detection) {
-        super(hp, def, vitesse, p, env, terrain);
+    public Ennemis(int hp, int def, int vitesse, Position p,int hitbox, Environnement env, Terrain terrain, int detection) {
+        super(hp, def, vitesse, p,hitbox, env, terrain);
         id++;
         this.idEnnemi = "E" + id;
         this.setValeurDirection(8); // 8 = haut, 4 = gauche, 2 = bas, 6 = droite

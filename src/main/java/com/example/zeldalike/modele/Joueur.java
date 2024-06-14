@@ -27,7 +27,7 @@ public class Joueur extends Personnage {
     }
 
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
-        super(2, def, 4, p, env, terrain);
+        super(2, def, 4, p,31, env, terrain);
         this.sac = new Inventaire();
         this.arme = new Poing(this);
         this.argent = new SimpleIntegerProperty(5);

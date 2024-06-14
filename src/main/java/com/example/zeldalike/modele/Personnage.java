@@ -16,14 +16,14 @@ public abstract class Personnage {
     private final IntegerProperty direction;
 
 
-    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
+    public Personnage(int hp, int def, int vitesse, Position p,int hitbox, Environnement env, Terrain terrain) {
         this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
         this.env = env;
         this.terrain = terrain;
-        this.hitbox = 31;
+        this.hitbox = hitbox;
         this.direction = new SimpleIntegerProperty();
     }
 
@@ -201,11 +201,11 @@ public abstract class Personnage {
     }
 
     private int getWidth() {
-        return 32;
+        return this.hitbox;
     }
 
     private int getHeight() {
-        return 32;
+        return this.hitbox;
     }
 
     public boolean verificationCollision(Personnage perso) {
