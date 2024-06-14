@@ -1,5 +1,12 @@
 package com.example.zeldalike.controlleurs;
 
+import com.example.zeldalike.modele.Arme.Poing;
+import com.example.zeldalike.modele.Arme.gun.Gun;
+import com.example.zeldalike.modele.Arme.gun.Munition;
+import com.example.zeldalike.modele.Citron;
+import com.example.zeldalike.modele.Environnement;
+import com.example.zeldalike.modele.Position;
+import com.example.zeldalike.modele.PotionVitale;
 import com.example.zeldalike.modele.*;
 import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.*;
@@ -9,7 +16,6 @@ import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -78,25 +84,40 @@ public class Controlleur implements Initializable {
         carte_interaction.getChildren().add(joueurVue.getMac());
         carte_interaction.getChildren().add(joueurVue.getArmeView());
 
+
         this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
-            switch ((int) newValue) {
-                case 8:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
+            if (this.env.getJ1().getArme() instanceof Poing) {
+                switch ((int) newValue) {
+                    case 8:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
+                        break;
+                    case 2:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
+                        break;
+                    case 4:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
+                        break;
+                    case 6:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
+                        break;
+                }
+            } else if (this.env.getJ1().getArme() instanceof Gun) {
+                switch ((int) newValue) {
+                    case 8: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunUp());
                     break;
-                case 2:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
+                    case 2: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunDown());
                     break;
-                case 4:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
+                    case 4: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunLeft());
                     break;
-                case 6:
-                    this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
-                    break;
+                    case 6 : this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunRight());
+
+                }
             }
         }));
-
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
+        MonObservateurMunition observateurMunition = new MonObservateurMunition(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
+        this.env.getJ1().getMunitionObservableList().addListener(observateurMunition);
         Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
         BusinessMan man = new BusinessMan(new Position(640,640), this.env);
@@ -104,9 +125,14 @@ public class Controlleur implements Initializable {
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(310, 310);
-        PotionVitale p1 = new PotionVitale(PP1);
+        Position PP2 = new Position(310, 311);
+        Munition p1 = new Munition(PP1,this.env.getJ1(),0);
+        Munition p2 = new Munition(PP2,this.env.getJ1(),0);
         this.env.ajouterObjet(p1);
         this.env.ajouterObjet(new PotionVitale(new Position(510, 510)));
+        this.env.ajouterObjet(p2);
+        System.out.println(p1.getIdObjet() + "muni 1");
+        System.out.println(p2.getIdObjet() + "muni 2");
 
         //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
         //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
@@ -131,7 +157,7 @@ public class Controlleur implements Initializable {
 
     private void onKeyReleased(KeyEvent event) {
         pressedKeys.remove(event.getCode().toString());
-        this.env.getJ1().ajouterDirection(5);
+        this.env.getJ1().ajouterDirection(0);
         handleMovement();
     }
 
@@ -145,8 +171,6 @@ public class Controlleur implements Initializable {
         boolean attaque = pressedKeys.contains("X");
         boolean inventaire = pressedKeys.contains("A");
 
-        if (this.env.getJ1().isFaitUnAttaque()) {
-        }
         if (movingRight && movingLeft || movingDown && movingUp) {
             this.env.getJ1().ajouterDirection(5);
         } else if (movingUp && movingRight) {

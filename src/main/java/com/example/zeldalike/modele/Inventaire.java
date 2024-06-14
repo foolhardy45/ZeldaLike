@@ -1,10 +1,13 @@
 package com.example.zeldalike.modele;
 
+import com.example.zeldalike.modele.Arme.gun.Munition;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventaire {
     private final ArrayList<ObjetRecuperables> articles;
+
 
 
     public Inventaire() {
@@ -32,6 +35,52 @@ public class Inventaire {
         }
         return liste;
     }
+
+    public int getQuantiteMunition() {
+        int quantite = 0;
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof Munition){
+                quantite++;
+            }
+        }
+        return quantite;
+    }
+
+    public ObjetRecuperables getUneCle(){
+        boolean obtenu = false;
+        ObjetRecuperables munition = null;
+        int i = 0;
+        while (!obtenu && i< this.articles.size()){
+            munition = this.articles.get(i);
+            if (munition instanceof Munition){
+                obtenu = true;
+            }
+            i++;
+        }
+        return munition;
+    }
+
+    public ArrayList<ObjetRecuperables> getListePotion(){
+        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof PotionVitale){
+                liste.add(obj);
+            }
+        }
+        return liste;
+    }
+
+    public ArrayList<Munition> getListeMunition(){
+        ArrayList<Munition> liste = new ArrayList<>();
+        for (ObjetRecuperables obj : this.articles){
+            if (obj instanceof Munition){
+                liste.add((Munition) obj);
+            }
+        }
+        return liste;
+    }
+
+
 
 
     public ObjetRecuperables getUnePotion(){

@@ -48,6 +48,7 @@ public class Environnement {
 
     public void ajouterObjet(ObjetRecuperables objet) {
         this.objet.add(objet);
+        System.out.println("la");
     }
 
     public void sortirObjet(ObjetRecuperables objet) {
@@ -84,6 +85,8 @@ public class Environnement {
         this.getJ1().move();
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
+        this.getJ1().updateProjectiles();
+
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 ennemis.get(i).deplacementBFS();

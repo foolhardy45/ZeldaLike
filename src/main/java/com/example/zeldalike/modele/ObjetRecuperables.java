@@ -35,4 +35,5 @@ public abstract class ObjetRecuperables {
     public String toString() {
         return this.idObjet;
     }
+
 }

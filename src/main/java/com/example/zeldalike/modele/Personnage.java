@@ -14,6 +14,7 @@ public abstract class Personnage {
     private final Terrain terrain;
     private final int hitbox;
     private final IntegerProperty direction;
+    public  int positionPre;
 
 
     public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
@@ -28,6 +29,13 @@ public abstract class Personnage {
     }
 
 
+    public int getPositionPre() {
+        return positionPre;
+    }
+
+    public Terrain getTerrain() {
+        return terrain;
+    }
     public int getDirection() {
         return direction.get();
     }
@@ -115,6 +123,9 @@ public abstract class Personnage {
         return vitesse;
     }
 
+    public void setPositionPre (int position){
+        positionPre = position;
+    }
 
     public void move() {
         switch (this.getDirection()) {
@@ -149,6 +160,14 @@ public abstract class Personnage {
                 moveRight();
                 break;
         }
+        if (this.getDirection() != positionPre && this.getDirection() != 0) {
+            setPositionPre(this.getDirection());
+            System.out.println(positionPre);
+        }
+    }
+
+    public void subirDegats(int degats){
+        this.setHp(this.getHp() - degats);
     }
 
     private void moveUp() {
@@ -191,7 +210,7 @@ public abstract class Personnage {
         return this.getBounds().intersects(other.getBounds());
     }
 
-    private Rectangle getBounds() {
+    public Rectangle getBounds() {
         return new Rectangle(this.getP().getX(), this.getP().getY(), this.getWidth(), this.getHeight());
     }
 
