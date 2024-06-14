@@ -57,6 +57,7 @@ public class Controlleur implements Initializable {
         carte_interaction.getChildren().add(joueurVue.getMac());
         carte_interaction.getChildren().add(joueurVue.getArmeView());
 
+
         this.env.getJ1().directionProperty().addListener(((observable, oldValue, newValue) -> {
             if (this.env.getJ1().getArme() instanceof Poing) {
                 switch ((int) newValue) {
@@ -75,9 +76,7 @@ public class Controlleur implements Initializable {
                 }
             } else if (this.env.getJ1().getArme() instanceof Gun) {
                 switch ((int) newValue) {
-
                     case 8: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunUp());
-                        System.out.println("la");
                     break;
                     case 2: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunDown());
                     break;
@@ -86,19 +85,24 @@ public class Controlleur implements Initializable {
                     case 6 : this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunRight());
 
                 }
-
             }
         }));
-
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
+        MonObservateurMunition observateurMunition = new MonObservateurMunition(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
+        this.env.getJ1().getMunitionObservableList().addListener(observateurMunition);
         Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
         this.env.ajouterEnnemis(ennemipuissant);
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(310, 310);
-        Munition p1 = new Munition(PP1,0);
+        Position PP2 = new Position(310, 311);
+        Munition p1 = new Munition(PP1,this.env.getJ1(),0);
+        Munition p2 = new Munition(PP2,this.env.getJ1(),0);
         this.env.ajouterObjet(p1);
+        this.env.ajouterObjet(p2);
+        System.out.println(p1.getIdObjet() + "muni 1");
+        System.out.println(p2.getIdObjet() + "muni 2");
 
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
         this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));

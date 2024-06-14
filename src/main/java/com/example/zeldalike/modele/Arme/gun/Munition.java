@@ -1,65 +1,91 @@
 package com.example.zeldalike.modele.Arme.gun;
 
+import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.ObjetRecuperables;
-import com.example.zeldalike.modele.Parametre;
+import com.example.zeldalike.modele.Personnage;
 import com.example.zeldalike.modele.Position;
 
+import java.awt.*;
+
 public class Munition extends ObjetRecuperables {
+    private static int id = 0;
     private int degats;
     private int vitesse;
+    private String idMunition;
+    private Joueur j;
     private int direction;
-    private static int id = 0;
-    private  String idMunition;
 
-    public Munition(Position position, int direction) {
+
+
+    public Munition(Position position, Joueur j, int direction) {
         super(position);
+        this.j = j;
         this.degats = 4;
-        this.direction = direction;
         this.vitesse = 2;
         id++;
         this.idMunition = "E" + id;
+        this.direction = direction;
     }
 
     public int getDirection() {
         return direction;
     }
 
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public Joueur getJ() {
+        return j;
+    }
+
     public int getDegats() {
         return degats;
     }
-    public void move(){
-        switch (direction){
+
+    private Rectangle getBouds(){
+        return   new Rectangle(this.getP().getX(), this.getP().getY(),  32,  32);
+    }
+    public boolean collidesWith(Personnage other) {
+        return this.getBouds().intersects(other.getBounds());
+    }
+
+
+
+    public void move() {
+        switch (this.direction) {
             case 1:
-                this.getP().setY(getP().getY() + vitesse);
-                getP().setX(getP().getX() - vitesse);
+                this.getP().setX(this.getP().getX() - vitesse);
+                this.getP().setY(this.getP().getY() + vitesse);
                 break;
             case 2:
-                getP().setY(getP().getY() + vitesse);
+                this.getP().setY(this.getP().getY() + vitesse);
                 break;
             case 3:
-                getP().setY(getP().getY() + vitesse);
-                getP().setX(getP().getX() + vitesse);
+                this.getP().setX(this.getP().getX() + vitesse);
+                this.getP().setY(this.getP().getY() + vitesse);
                 break;
             case 4:
-                getP().setX(getP().getX() - vitesse);
+                this.getP().setX(this.getP().getX() - vitesse);
                 break;
             case 5:
                 break;
             case 6:
-                getP().setX(getP().getX() + vitesse);
+                this.getP().setX(this.getP().getX() + vitesse);
                 break;
             case 7:
-                getP().setY(getP().getY() - vitesse);
-                getP().setX(getP().getX() - vitesse);
+                this.getP().setX(this.getP().getX() - vitesse);
+                this.getP().setY(this.getP().getY() - vitesse);
                 break;
             case 8:
-                getP().setY(getP().getY() - vitesse);
+                this.getP().setY(this.getP().getY() - vitesse);
                 break;
             case 9:
-                getP().setY(getP().getY() - vitesse);
-                getP().setX(getP().getX() + vitesse);
+                this.getP().setX(this.getP().getX() + vitesse);
+                this.getP().setY(this.getP().getY() - vitesse);
                 break;
         }
     }
+
 
 }

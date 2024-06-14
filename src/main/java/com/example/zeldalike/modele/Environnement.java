@@ -86,6 +86,7 @@ public class Environnement {
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
         this.getJ1().updateProjectiles();
+
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 ennemis.get(i).deplacementBFS();

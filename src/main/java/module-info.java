@@ -3,6 +3,7 @@ module com.example.zeldalike {
     requires javafx.fxml;
     requires java.desktop;
     requires jdk.management;
+    requires java.sql;
 
 
     opens com.example.zeldalike to javafx.fxml;

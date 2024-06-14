@@ -171,6 +171,10 @@ public abstract class Personnage {
         }
     }
 
+    public void subirDegats(int degats){
+        this.setHp(this.getHp() - degats);
+    }
+
     private void moveUp() {
         double nouvellePosY = this.getP().getY() - this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
