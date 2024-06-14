@@ -52,12 +52,7 @@ public class JoueurVue extends JPanel {
         this.armeView = new ArmeVue(joueur, arme);
         //position du joueur
 
-        j.getP().xProperty().addListener((obs,old,n)->{
-            mac.setTranslateX((int)n % 4096);
-        });
-        j.getP().yProperty().addListener((obs,old,n)->{
-            mac.setTranslateY((int)n % 2048);
-        });
+
 
         mac.translateXProperty().bind(joueur.getP().xProperty());
         mac.translateYProperty().bind(joueur.getP().yProperty());
