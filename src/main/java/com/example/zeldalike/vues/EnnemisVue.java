@@ -21,4 +21,8 @@ public class EnnemisVue {
     public ImageView getI() {
         return i;
     }
+
+    public Ennemis getEnnemis(){
+        return this.ennemis;
+    }
 }

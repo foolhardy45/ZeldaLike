@@ -14,7 +14,6 @@ public abstract class Boss extends Ennemis{
     public void deplacementBFS(){
         action = action%150;
         if (action == 0){
-            System.out.println("Action now");
             faireuneattaque();
         }
         action++;
@@ -26,7 +25,15 @@ public abstract class Boss extends Ennemis{
         this.phase++;
     }
 
-    public void faireuneattaque(){
-
+    public int getPhase() {
+        return phase;
     }
+
+    public void verifiephase(){
+        if (this.getHp()<40){
+            changeDePhase();
+        }
+    }
+
+    public abstract void faireuneattaque();
 }

@@ -1,10 +1,8 @@
 package com.example.zeldalike.controlleurs;
 
 import com.example.zeldalike.Main;
-import com.example.zeldalike.modele.Boss;
-import com.example.zeldalike.modele.BusinessMan;
-import com.example.zeldalike.modele.Citron;
-import com.example.zeldalike.modele.Ennemis;
+import com.example.zeldalike.modele.*;
+import com.example.zeldalike.vues.BossSamuraiVue;
 import com.example.zeldalike.vues.EnnemisVue;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
@@ -28,7 +26,9 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
                 } else if (e instanceof BusinessMan) {
                     ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/businessman2.png")));
                 } else if (e instanceof Boss) {
-                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/bosstemp.png")));
+                    ennemisVue = new BossSamuraiVue(e, String.valueOf(Main.class.getResource("images/ennemis/bosstemp.png")));
+                } else if (e instanceof ProjectileBoss) {
+                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/blade-2.png")));
                 }
 
 
