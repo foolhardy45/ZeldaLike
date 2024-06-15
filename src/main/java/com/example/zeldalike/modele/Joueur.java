@@ -180,7 +180,7 @@ public class Joueur extends Personnage {
                 if (objet instanceof PotionVitale || objet instanceof Cle ) {
                     this.getSac().ajoutInventaire(objet);
 
-                } else if (objet instanceof chaussuresHydrophobes) {
+                } else if (objet instanceof ChaussuresHydrophobes) {
                     this.getSac().ajoutInventaire(objet);
                     hydrophobe=true;
                 }

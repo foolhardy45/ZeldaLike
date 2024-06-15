@@ -23,7 +23,7 @@ public class MonObservateurObjet implements ListChangeListener<ObjetRecuperables
                     objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/objets/potion.png")));
                 } else if (o instanceof Munition) {
                     objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/gressif_gun/munitionHaut.png")));
-                } else if (o instanceof chaussuresHydrophobes) {
+                } else if (o instanceof ChaussuresHydrophobes) {
                     objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/objets/chaussuresHydrophobes.png")));
                 }
                 this.panneauDeJeu.getChildren().add(objetVue.getI());
