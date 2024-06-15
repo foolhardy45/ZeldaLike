@@ -4,6 +4,7 @@ public abstract class Boss extends Ennemis{
     private int phase;
     private int action;
 
+
     public Boss(int hp, int def, int vitesse, Position p, Environnement env, int detection){
         super(hp, def, vitesse, p,63, env, env.getTerrain(), detection);
         this.phase = 1;
@@ -11,7 +12,7 @@ public abstract class Boss extends Ennemis{
     }
 
     @Override
-    public void deplacementBFS(){
+    public void agir(){
         action = action%150;
         if (action == 0){
             faireuneattaque();
@@ -19,6 +20,10 @@ public abstract class Boss extends Ennemis{
         action++;
         super.deplacementBFS();
     }
+
+    //todo : creation d'une liste de projectile de boss
+    //todo : pour chaque projectile de la liste, les faire avancer ici (ne plus les considérer comme des ennemis)
+
 
 
     public void changeDePhase(){

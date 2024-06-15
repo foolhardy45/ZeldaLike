@@ -21,4 +21,6 @@ public class ProjectileBoss extends Ennemis {
     public void personnageTouche(Personnage p) {
         //enlever pv au personnage sauf si boss
     }
+
+    //todo : les faire avancer sans collisions, puis disparaitre à la limite de l'écran.
 }

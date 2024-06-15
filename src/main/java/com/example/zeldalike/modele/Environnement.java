@@ -89,7 +89,7 @@ public class Environnement {
 
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
-                ennemis.get(i).deplacementBFS();
+                ennemis.get(i).agir();
 
                 if (!ennemis.get(i).enVie()) {
                     sortirEnnemis(ennemis.get(i));
