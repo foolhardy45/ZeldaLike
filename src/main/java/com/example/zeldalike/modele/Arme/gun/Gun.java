@@ -40,12 +40,16 @@ private ObservableList<Munition> munitionObservableList;
         return munitionObservableList;
     }
 
+    public void ajouterMunition(Munition munition) {
+        this.munitionObservableList.add(munition);
+    }
+
     @Override
     public void faireUneAttaque() {
         if (!this.munitionObservableList.isEmpty()) {
             // Récupère la première munition de la liste
             Munition mune = this.munitionObservableList.get(0);
-            System.out.println("Préparation à tirer la munition : " + mune);
+
 
             // Met à jour la position de la munition
             mune.setP(new Position(this.getJoueur().getP().getX(), this.getJoueur().getP().getY()));
@@ -55,14 +59,14 @@ private ObservableList<Munition> munitionObservableList;
             // Ajoute la munition à la liste de munitions du joueur seulement si elle n'y est pas déjà
             if (!this.getJoueur().getMunitionObservableList().contains(mune)) {
                 this.getJoueur().getMunitionObservableList().add(mune);
-                System.out.println("Munition ajoutée à la liste du joueur : " + mune);
+
             } else {
-                System.out.println("Munition déjà présente dans la liste du joueur : " + mune);
+
             }
 
             // Retire la munition de la liste originale
             this.munitionObservableList.remove(0);
-            System.out.println("Munition retirée de la liste des munitions disponibles : " + mune);
+
         } else {
             System.out.println("tu n'as aucune balle");
         }

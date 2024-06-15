@@ -86,21 +86,31 @@ public class Controlleur implements Initializable {
             if (this.env.getJ1().getArme() instanceof Poing) {
                 switch ((int) newValue) {
                     case 8:
+                        System.out.println("haut");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
+                        System.out.println(this.joueurVue.getMac().getImage());
+
                         break;
                     case 2:
+                        System.out.println("bas");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
+                        System.out.println(this.joueurVue.getMac().getImage());
                         break;
                     case 4:
+                        System.out.println("gauche");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
+                        System.out.println(this.joueurVue.getMac().getImage());
                         break;
                     case 6:
+                        System.out.println("droite");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
+                        System.out.println(this.joueurVue.getMac().getImage());
                         break;
                 }
             } else if (this.env.getJ1().getArme() instanceof Gun) {
                 switch ((int) newValue) {
                     case 8: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunUp());
+                        System.out.println();
                     break;
                     case 2: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunDown());
                     break;
@@ -115,14 +125,16 @@ public class Controlleur implements Initializable {
         MonObservateurMunition observateurMunition = new MonObservateurMunition(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
         this.env.getJ1().getMunitionObservableList().addListener(observateurMunition);
-        Citron ennemipuissant = new Citron(new Position(320, 320), this.env);
+        Citron ennemipuissant = new Citron(new Position(20, 20), this.env);
+        Macarena maca = new Macarena(new Position(30,30),this.env);
         this.env.ajouterEnnemis(ennemipuissant);
+        //this.env.ajouterEnnemis(maca);
         BusinessMan man = new BusinessMan(new Position(640,640), this.env);
         this.env.ajouterEnnemis(man);
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
-        Position PP1 = new Position(310, 310);
-        Position PP2 = new Position(310, 311);
+        Position PP1 = new Position(0, 0);
+        Position PP2 = new Position(0, 0);
         Munition p1 = new Munition(PP1,this.env.getJ1(),0);
         Munition p2 = new Munition(PP2,this.env.getJ1(),0);
         this.env.ajouterObjet(p1);

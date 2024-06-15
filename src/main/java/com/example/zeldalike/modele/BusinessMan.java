@@ -12,4 +12,9 @@ public class BusinessMan extends Ennemis {
 
 
     }
+
+    @Override
+    public void compétence() {
+
+    }
 }

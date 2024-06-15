@@ -4,6 +4,7 @@ import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.BusinessMan;
 import com.example.zeldalike.modele.Citron;
 import com.example.zeldalike.modele.Ennemis;
+import com.example.zeldalike.modele.Macarena;
 import com.example.zeldalike.vues.EnnemisVue;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
@@ -26,6 +27,8 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
                     ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/citron.png")));
                 } else if (e instanceof BusinessMan) {
                     ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/businessman2.png")));
+                } else if (e instanceof Macarena) {
+                    ennemisVue = new EnnemisVue(e,String.valueOf(Main.class.getResource("images/ennemis/macarena.gif")));
                 }
                 this.panneauDeJeu.getChildren().add(ennemisVue.getI());
 

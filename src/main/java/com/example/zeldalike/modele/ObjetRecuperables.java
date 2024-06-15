@@ -1,5 +1,7 @@
 package com.example.zeldalike.modele;
 
+import com.example.zeldalike.modele.Arme.gun.Munition;
+
 public abstract class ObjetRecuperables {
     private static int id = 0;
     private String idObjet;
@@ -30,6 +32,8 @@ public abstract class ObjetRecuperables {
     public boolean memeID(ObjetRecuperables o){
         return this.idObjet.equals(o.getIdObjet());
     }
+
+
 
     @Override
     public String toString() {

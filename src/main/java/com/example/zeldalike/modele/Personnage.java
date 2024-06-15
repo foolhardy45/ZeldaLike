@@ -15,6 +15,7 @@ public abstract class Personnage {
     private final int hitbox;
     private final IntegerProperty direction;
     public  int positionPre;
+    private boolean bouclierActif = false;
 
 
     public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
@@ -28,6 +29,17 @@ public abstract class Personnage {
         this.direction = new SimpleIntegerProperty();
     }
 
+    public boolean isBouclierActif() {
+        return bouclierActif;
+    }
+
+    public void setBouclierActif(boolean bouclierActif) {
+        this.bouclierActif = bouclierActif;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
+    }
 
     public int getPositionPre() {
         return positionPre;
@@ -165,14 +177,18 @@ public abstract class Personnage {
                 moveRight();
                 break;
         }
-        if (this.getDirection() != positionPre && this.getDirection() != 0) {
+        if (this.getDirection() != positionPre && this.getDirection() != 0 && this.getDirection() != 5) {
             setPositionPre(this.getDirection());
-            System.out.println(positionPre);
+
         }
     }
 
     public void subirDegats(int degats){
-        this.setHp(this.getHp() - degats);
+        if (!this.isBouclierActif()) {
+            this.setHp(this.getHp() - degats);
+        }else {
+            System.out.println("il ne peut pas recevoir de dégats");
+        }
     }
 
     private void moveUp() {

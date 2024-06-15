@@ -26,6 +26,15 @@ public class Munition extends ObjetRecuperables {
         this.idMunition = "E" + id;
         this.direction = direction;
     }
+    public Munition(Position position){
+        super(position);
+        this.degats = 4;
+        this.vitesse = 10;
+        id++;
+        this.idMunition = "E" + id;
+        this.direction = 0;
+        this.j = null;
+    }
 
     public int getDirection() {
         return direction;
@@ -42,6 +51,7 @@ public class Munition extends ObjetRecuperables {
     public int getDegats() {
         return degats;
     }
+
 
     private Rectangle getBouds(){
         return   new Rectangle(this.getP().getX(), this.getP().getY(),  32,  32);

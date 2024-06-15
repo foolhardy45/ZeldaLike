@@ -1,5 +1,6 @@
 package com.example.zeldalike.modele;
 
+import com.example.zeldalike.modele.Arme.gun.Munition;
 import javafx.beans.property.IntegerProperty;
 
 import java.util.ArrayList;
@@ -9,20 +10,42 @@ public abstract class Ennemis extends Personnage{
     private static int id = 0;
     private final String idEnnemi;
     private int degats;
+    private ObjetRecuperables objetMort;
+
+
 
     private final int aireDetection;
 
     public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain, int detection) {
         super(hp, def, vitesse, p, env, terrain);
         id++;
+        this.objetMort = objetAléatoire();
         this.idEnnemi = "E" + id;
         this.setValeurDirection(8); // 8 = haut, 4 = gauche, 2 = bas, 6 = droite
         this.aireDetection = detection;
         this.degats = degats;
     }
 
+    public ObjetRecuperables objetAléatoire() {
+        ObjetRecuperables objet;
+        double chance = Math.random();
+
+        if (chance < 0.3) { // 30% de chances pour une Munition
+            objet = new Munition(new Position(0, 0));
+        } else { // 70% de chances pour une PotionVitale
+            objet = new PotionVitale(new Position(0, 0));
+        }
+        return objet;
+    }
+
+
     public static int getId() {
         return id;
+    }
+
+    public void dropObjet(){
+        objetMort.setP(this.getP());
+        this.getEnv().ajouterObjet(objetMort);
     }
 
     public String getIdEnnemi() {
@@ -94,4 +117,6 @@ public abstract class Ennemis extends Personnage{
         }
 
     }
+
+    public abstract void compétence();
 }

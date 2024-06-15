@@ -12,7 +12,7 @@ public class Environnement {
     private int width;
     private Terrain terrain;
     private CarteBFS bfs_joueur;
-    private int deltaTime;
+    private static int cooldown = 0;
 
     public Environnement(int height, int width) {
         Position p = new Position(0, 0);
@@ -23,7 +23,7 @@ public class Environnement {
         this.objet = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
-        this.deltaTime = 0;
+
     }
 
     public Joueur getJ1() {
@@ -87,16 +87,19 @@ public class Environnement {
         this.getJ1().interact();
         this.getJ1().updateProjectiles();
 
+
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 ennemis.get(i).deplacementBFS();
-
+                ennemis.get(i).compétence();
                 if (!ennemis.get(i).enVie()) {
+                    ennemis.get(i).dropObjet();
                     sortirEnnemis(ennemis.get(i));
                 }
             }
         }
         verifierCollisions();
-        deltaTime++;
+        cooldown++;
+
     }
 }

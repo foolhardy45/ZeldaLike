@@ -132,18 +132,18 @@ public class Joueur extends Personnage {
     }
 
     public void updateProjectiles() {
-        System.out.println("Munitions avant mise à jour : " + munitionObservableList);
+
         Iterator<Munition> iterator = this.munitionObservableList.iterator();
         while (iterator.hasNext()) {
             Munition munition = iterator.next();
             munition.move();
-            System.out.println("La balle bouge : " + munition);
+
 
             boolean removed = false;
             for (Ennemis ennemi : this.getEnv().getEnnemis()) {
                 if (munition.collidesWith(ennemi)) {
                     ennemi.subirDegats(munition.getDegats());
-                    System.out.println("Ennemi touché : " + ennemi);
+
                     iterator.remove(); // Utilisez l'iterator pour éviter ConcurrentModificationException
                     removed = true;
                     break; // Sortir de la boucle des ennemis, car la munition a été supprimée
@@ -152,11 +152,10 @@ public class Joueur extends Personnage {
             if (removed) {
                 continue; // Si la munition a été supprimée, passez à la suivante
             }
-            System.out.println("Position précédente : " + this.positionPre);
+
         }
         // Supprimer les projectiles qui sortent du terrain
         munitionObservableList.removeIf(munition -> !this.getTerrain().estDansTerrain(munition.getP().getX(), munition.getP().getY()));
-        System.out.println("Munitions après mise à jour : " + munitionObservableList);
     }
 
 

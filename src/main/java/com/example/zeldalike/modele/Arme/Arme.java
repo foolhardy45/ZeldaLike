@@ -35,8 +35,9 @@ public abstract class Arme {
     }
 
     public void hit(Personnage p) {
-
-        if (this.joueur.enVie() && p.enVie()) {
+    if (p.isBouclierActif()){
+        System.out.println("aucun dégats reçue");
+    }else if (this.joueur.enVie() && p.enVie()) {
             int degats = attaque;
             if (p.getDef() < degats) {
                 degats -= p.getDef();
