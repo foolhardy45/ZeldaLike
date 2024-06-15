@@ -83,7 +83,6 @@ public class Environnement {
 
     public void unTour() {
         this.getJ1().move();
-        System.out.println(this.j1.getHydrophobe());
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
         this.getJ1().updateProjectiles();
