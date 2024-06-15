@@ -33,13 +33,16 @@ public class JoueurVue extends JPanel {
         this.joueur = joueur;
         this.arme = arme;
         this.visible = true;
-        //sprite du joueur
+
         spriteUp = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_haut.png")));
         spriteDown = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_bas.png")));
         spriteLeft = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_gauche.png")));
         spriteRight = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_droite.png")));
 
-
+        spriteGunUp = new Image(String.valueOf(Main.class.getResource("images/gressifgun/gressifGun_Haut.png")));
+        spriteGunDown = new Image(String.valueOf(Main.class.getResource("images/gressifgun/GressifGun_Bas.png")));
+        spriteGunLeft = new Image(String.valueOf(Main.class.getResource("images/gressifgun/GressifGun_Gauche.png")));
+        spriteGunRight = new Image(String.valueOf(Main.class.getResource("images/gressifgun/GressifGun_Droite.png")));
 
         Image gressif_neutral = new Image(String.valueOf(Main.class.getResource("images/gressif_simple/gressif_bas.png")));
 
@@ -47,6 +50,9 @@ public class JoueurVue extends JPanel {
 
         this.coeurVue = new CoeurVue(joueur);
         this.armeView = new ArmeVue(joueur, arme);
+        //position du joueur
+
+
 
         mac.translateXProperty().bind(joueur.getP().xProperty());
         mac.translateYProperty().bind(joueur.getP().yProperty());

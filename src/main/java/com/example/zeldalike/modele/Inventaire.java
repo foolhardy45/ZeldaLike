@@ -60,15 +60,7 @@ public class Inventaire {
         return munition;
     }
 
-    public ArrayList<ObjetRecuperables> getListePotion(){
-        ArrayList<ObjetRecuperables> liste = new ArrayList<>();
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof PotionVitale){
-                liste.add(obj);
-            }
-        }
-        return liste;
-    }
+
 
     public ArrayList<Munition> getListeMunition(){
         ArrayList<Munition> liste = new ArrayList<>();
@@ -92,14 +84,6 @@ public class Inventaire {
     }
     public int getQuantitePotion() {
         return getListePotion().size();
-    }
-
-    public ObjetRecuperables getUneCle(){
-        ArrayList<ObjetRecuperables> liste = getListeCle();
-        if (!liste.isEmpty()){
-            return getListeCle().get(0);
-        }
-        return null;
     }
     public int getQuantiteCle() {
         return getListeCle().size();

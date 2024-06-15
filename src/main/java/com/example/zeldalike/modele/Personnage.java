@@ -36,6 +36,11 @@ public abstract class Personnage {
     public Terrain getTerrain() {
         return terrain;
     }
+
+    public int getHitbox() {
+        return hitbox;
+    }
+
     public int getDirection() {
         return direction.get();
     }
@@ -237,9 +242,6 @@ public abstract class Personnage {
         return touche;
     }
 
-    public int getHitbox(){
-        return this.hitbox;
-    }
 
     public boolean enVie() {
         return this.getHp() > 0;

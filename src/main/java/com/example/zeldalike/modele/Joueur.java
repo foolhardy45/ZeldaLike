@@ -28,20 +28,19 @@ public class Joueur extends Personnage {
     private Inventaire sac;
     private Arme arme;
     private boolean faitUneAttaque = false;
-    private IntegerProperty argent;
     private ObservableList<Munition> munitionObservableList;
     private int direction = this.getPositionPre();
 
+    private IntegerProperty argent;
 
     public void setInteraction(boolean interaction) {
         this.interaction = interaction;
     }
 
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
-        super(2, def, 4, p, env, terrain);
+        super(4, def, 4, p, env, terrain);
         this.sac = new Inventaire();
         this.arme = new Gun(this);
-        this.argent = new SimpleIntegerProperty(5);
         this.munitionObservableList = FXCollections.observableArrayList();
 
     }
@@ -58,6 +57,7 @@ public class Joueur extends Personnage {
         return argent;
     }
 
+
     public void donnerMunition() {
         if (this.arme instanceof Gun) {
             System.out.println("Munitions dans le sac avant transfert : " + this.sac.getListeMunition());
@@ -73,8 +73,6 @@ public class Joueur extends Personnage {
             System.out.println("Munitions dans le Gun après transfert : " + ((Gun) this.arme).getMunitionObservableList());
         }
     }
-
-
     public Arme getArme() {
         return arme;
     }
