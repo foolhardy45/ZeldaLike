@@ -2,6 +2,8 @@ module com.example.zeldalike {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires jdk.management;
+    requires java.sql;
 
 
     opens com.example.zeldalike to javafx.fxml;
@@ -12,4 +14,6 @@ module com.example.zeldalike {
     opens com.example.zeldalike.modele to javafx.fxml;
     exports com.example.zeldalike.modele.Arme;
     opens com.example.zeldalike.modele.Arme to javafx.fxml;
+    exports com.example.zeldalike.modele.Arme.gun;
+    opens com.example.zeldalike.modele.Arme.gun to javafx.fxml;
 }

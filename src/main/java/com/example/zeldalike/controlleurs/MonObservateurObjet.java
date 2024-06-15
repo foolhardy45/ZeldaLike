@@ -1,5 +1,6 @@
 package com.example.zeldalike.controlleurs;
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.Arme.gun.Munition;
 import com.example.zeldalike.modele.Citron;
 import com.example.zeldalike.modele.Ennemis;
 import com.example.zeldalike.modele.ObjetRecuperables;
@@ -24,6 +25,8 @@ public class MonObservateurObjet implements ListChangeListener<ObjetRecuperables
             for (ObjetRecuperables o : change.getAddedSubList()){
                 if (o instanceof PotionVitale){
                     objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/objets/potion.png")));
+                } else if (o instanceof Munition) {
+                    objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/gressif_gun/munitionHaut.png")));
                 }
                 this.panneauDeJeu.getChildren().add(objetVue.getI());
 

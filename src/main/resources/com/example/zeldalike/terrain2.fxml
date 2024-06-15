@@ -6,22 +6,14 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zeldalike.controlleurs.Controlleur">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
-         <top>
-            <HBox fx:id="info_joueur" alignment="CENTER" maxWidth="384.0" minWidth="384.0" prefWidth="384.0" spacing="10.0" BorderPane.alignment="CENTER">
-               <children>
-                  <HBox fx:id="coeurBox" spacing="10.0" />
-                  <Region HBox.hgrow="ALWAYS" />
-                  <VBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="1600.0">
-                     <Label text="Argent" />
-                     <Label fx:id="nbArgent" contentDisplay="RIGHT" prefHeight="31.0" prefWidth="69.0" style="-fx-border-color: red;" text="0" />
-                  </VBox>
-               </children>
-            </HBox>
-         </top>
          <center>
-            <Pane fx:id="carte_interaction" maxHeight="416.0" maxWidth="384.0" minHeight="416.0" minWidth="384.0" prefHeight="416.0" prefWidth="384.0" BorderPane.alignment="CENTER">
+            <Pane maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0">
                <children>
-                  <TilePane fx:id="terrain_affichage" alignment="BOTTOM_CENTER" maxHeight="832.0" maxWidth="768.0" minHeight="416.0" minWidth="384.0" prefHeight="832.0" prefWidth="768.0" />
+                  <Pane fx:id="carte_interaction" maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0">
+                     <children>
+                        <TilePane fx:id="terrain_affichage" alignment="BOTTOM_CENTER" maxHeight="2048.0" maxWidth="4096.0" minHeight="2048.0" minWidth="4096.0" prefHeight="2048.0" prefWidth="4096.0" />
+                     </children>
+                  </Pane>
                   <Pane layoutY="-1.0" opacity="0.8">
                      <children>
                         <TilePane fx:id="inventairepane" alignment="CENTER" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" />
@@ -31,6 +23,18 @@
                </children>
             </Pane>
          </center>
+         <top>
+            <HBox fx:id="info_joueur" alignment="TOP_LEFT" spacing="10.0" BorderPane.alignment="TOP_LEFT" maxWidth="384.0" minWidth="384.0" prefWidth="384.0">
+               <children>
+                  <HBox fx:id="coeurBox" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <VBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="1600.0">
+                     <Label text="Argent" />
+                     <Label fx:id="nbArgent" contentDisplay="RIGHT" prefHeight="31.0" prefWidth="69.0" style="-fx-border-color: red;" text="0" />
+                  </VBox>
+               </children>
+            </HBox>
+         </top>
       </BorderPane>
    </children>
 </Pane>

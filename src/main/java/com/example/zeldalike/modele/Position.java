@@ -43,4 +43,12 @@ public class Position {
     public boolean surSprites(Position p){
         return (this.x.get()>= p.getX()) && (this.x.get() <= p.getX()) && (this.y.get() >= p.getY()) && (this.y.get() <= p.getY());
     }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

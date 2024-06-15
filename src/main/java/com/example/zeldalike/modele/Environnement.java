@@ -17,7 +17,7 @@ public class Environnement {
     public Environnement(int height, int width) {
         Position p = new Position(0, 0);
         this.terrain = new Terrain();
-        this.j1 = new Joueur(10,p,this, terrain);
+        this.j1 = new Joueur(12,p,this, terrain);
         this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
         this.ennemis = FXCollections.observableArrayList();
         this.objet = FXCollections.observableArrayList();
@@ -48,6 +48,7 @@ public class Environnement {
 
     public void ajouterObjet(ObjetRecuperables objet) {
         this.objet.add(objet);
+        System.out.println("la");
     }
 
     public void sortirObjet(ObjetRecuperables objet) {
@@ -84,6 +85,8 @@ public class Environnement {
         this.getJ1().move();
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
+        this.getJ1().updateProjectiles();
+
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 ennemis.get(i).deplacementBFS();
