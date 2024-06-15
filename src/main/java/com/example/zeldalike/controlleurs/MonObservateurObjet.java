@@ -1,11 +1,7 @@
 package com.example.zeldalike.controlleurs;
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.*;
 import com.example.zeldalike.modele.Arme.gun.Munition;
-import com.example.zeldalike.modele.Citron;
-import com.example.zeldalike.modele.Ennemis;
-import com.example.zeldalike.modele.ObjetRecuperables;
-import com.example.zeldalike.modele.PotionVitale;
-import com.example.zeldalike.vues.EnnemisVue;
 import com.example.zeldalike.vues.ObjetVue;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
@@ -27,6 +23,8 @@ public class MonObservateurObjet implements ListChangeListener<ObjetRecuperables
                     objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/objets/potion.png")));
                 } else if (o instanceof Munition) {
                     objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/gressif_gun/munitionHaut.png")));
+                } else if (o instanceof chaussuresHydrophobes) {
+                    objetVue = new ObjetVue(o,String.valueOf(Main.class.getResource("images/objets/chaussuresHydrophobes.png")));
                 }
                 this.panneauDeJeu.getChildren().add(objetVue.getI());
 

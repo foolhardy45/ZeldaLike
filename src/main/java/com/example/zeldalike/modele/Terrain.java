@@ -7,6 +7,8 @@ public class Terrain {
     private int tailleLargeur;
     private int tailleTuile;
     private int tailleHauteur;
+    int[] case_autorisé = new int[]{2};
+    int[] case_autoriséH = new int[]{1,2};
 
     public Terrain() {
          this.carte_terrain = new int[]{
@@ -279,11 +281,41 @@ public class Terrain {
     Retourne true si la tuile sur laquelle est le point (x,y) est une tuile sur laquelle on a le droit de marcher.
      */
     public boolean estAutorisé(int x, int y) {
+        int codeCase = codeCaseI(getIndiceCaseSousPosition(x, y));
         if (estDansTerrain(x, y)) {
-            return codeCaseI(getIndiceCaseSousPosition(x, y)) == 2;
+            for (int autorise : case_autorisé) {
+                if (codeCase == autorise) {
+                    return true;
+                }
+            }
         }
         return false;
     }
+    public boolean estAutorisé(int x, int y,boolean Hydrophobe) {
+        int codeCase = codeCaseI(getIndiceCaseSousPosition(x, y));
+        if (Hydrophobe){
+            if (estDansTerrain(x, y)) {
+                for (int autorise : case_autoriséH) {
+                    if (codeCase == autorise) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        else {
+            if (estDansTerrain(x, y)) {
+                for (int autorise : case_autorisé) {
+                    if (codeCase == autorise) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+    }
+
 
     public boolean estAutoriséIndice(int indice){
         if (estDansTerrainIndice(indice)){

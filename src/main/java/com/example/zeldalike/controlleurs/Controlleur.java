@@ -128,6 +128,7 @@ public class Controlleur implements Initializable {
         Munition p2 = new Munition(PP2,this.env.getJ1(),0);
         this.env.ajouterObjet(p1);
         this.env.ajouterObjet(new PotionVitale(new Position(510, 510)));
+        this.env.ajouterObjet(new chaussuresHydrophobes(new Position(200, 5)));
         this.env.ajouterObjet(p2);
         System.out.println(p1.getIdObjet() + "muni 1");
         System.out.println(p2.getIdObjet() + "muni 2");

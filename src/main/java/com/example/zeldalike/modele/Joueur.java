@@ -32,6 +32,7 @@ public class Joueur extends Personnage {
     private int direction = this.getPositionPre();
 
     private IntegerProperty argent;
+    private boolean hydrophobe;
 
     public void setInteraction(boolean interaction) {
         this.interaction = interaction;
@@ -42,7 +43,7 @@ public class Joueur extends Personnage {
         this.sac = new Inventaire();
         this.arme = new Gun(this);
         this.munitionObservableList = FXCollections.observableArrayList();
-
+        this.hydrophobe=false;
     }
 
     public ObservableList<Munition> getMunitionObservableList() {
@@ -95,6 +96,10 @@ public class Joueur extends Personnage {
 
     public void setFaitUnAttaque(boolean faitUnAttaque) {
         this.faitUneAttaque = faitUnAttaque;
+    }
+
+    public boolean getHydrophobe() {
+        return this.hydrophobe;
     }
 
     @Override
@@ -172,9 +177,14 @@ public class Joueur extends Personnage {
                 }
             }
             if (objet != null) {
-                if (objet instanceof PotionVitale || objet instanceof Cle) {
+                if (objet instanceof PotionVitale || objet instanceof Cle ) {
                     this.getSac().ajoutInventaire(objet);
-                } else if (objet instanceof Munition) {
+
+                } else if (objet instanceof chaussuresHydrophobes) {
+                    this.getSac().ajoutInventaire(objet);
+                    hydrophobe=true;
+                }
+                else if (objet instanceof Munition) {
                     this.getSac().ajoutInventaire(objet);
                     this.donnerMunition();
                     System.out.println("Munition ramassée et ajoutée au sac : " + objet);
@@ -188,5 +198,78 @@ public class Joueur extends Personnage {
 
     public Inventaire getSac() {
         return sac;
+    }
+    public void move() {
+        switch (this.getDirection()) {
+            case 1:
+                jMoveDown();
+                jMoveLeft();
+                break;
+            case 2:
+                jMoveDown();
+                break;
+            case 3:
+                jMoveDown();
+                jMoveRight();
+                break;
+            case 4:
+                jMoveLeft();
+                break;
+            case 5:
+                break;
+            case 6:
+                jMoveRight();
+                break;
+            case 7:
+                jMoveUp();
+                jMoveLeft();
+                break;
+            case 8:
+                jMoveUp();
+                break;
+            case 9:
+                jMoveUp();
+                jMoveRight();
+                break;
+        }
+        if (this.getDirection() != positionPre && this.getDirection() != 0) {
+            setPositionPre(this.getDirection());
+            System.out.println(positionPre);
+        }
+    }
+    private void jMoveUp() {
+        double nouvellePosY = this.getP().getY() - this.getVitesse();
+        int newY = (int) Math.round(nouvellePosY);
+        int PosX = this.getP().getX();
+        if (this.getTerrain().estDansTerrain(PosX, newY) && getTerrain().estAutorisé(PosX + 1, newY + getHitbox(),hydrophobe) && getTerrain().estAutorisé(PosX + getHitbox(), newY + getHitbox(),hydrophobe)) {
+            this.getP().setY(newY);
+        }
+    }
+
+    private void jMoveDown() {
+        double nouvellePosY = this.getP().getY() + this.getVitesse();
+        int newY = (int) Math.round(nouvellePosY);
+        int PosX = this.getP().getX();
+        if (this.getTerrain().estDansTerrain(PosX, newY) && getTerrain().estAutorisé(PosX + 1, newY + getHitbox(),hydrophobe) && getTerrain().estAutorisé(PosX + getHitbox(), newY + getHitbox(),hydrophobe)) {
+            this.getP().setY(newY);
+        }
+    }
+
+    private void jMoveLeft() {
+        double nouvellePosX = this.getP().getX() - this.getVitesse();
+        int newX = (int) Math.round(nouvellePosX);
+        int PosY = this.getP().getY();
+        if (this.getTerrain().estDansTerrain(newX, PosY) && this.getTerrain().estAutorisé(newX, PosY + getHitbox(),hydrophobe)) {
+            this.getP().setX(newX);
+        }
+    }
+
+    private void jMoveRight() {
+        double nouvellePosX = this.getP().getX() + this.getVitesse();
+        int newX = (int) Math.round(nouvellePosX);
+        int PosY = this.getP().getY();
+        if (this.getTerrain().estDansTerrain(newX, PosY) && this.getTerrain().estAutorisé(newX + getHitbox(), PosY + getHitbox(),hydrophobe)) {
+            this.getP().setX(newX);
+        }
     }
 }
