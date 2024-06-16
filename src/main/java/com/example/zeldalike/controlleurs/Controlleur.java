@@ -171,33 +171,49 @@ public class Controlleur implements Initializable {
         boolean attaque = pressedKeys.contains("X");
         boolean inventaire = pressedKeys.contains("A");
 
-        if (movingRight && movingLeft || movingDown && movingUp) {
-            this.env.getJ1().ajouterDirection(5);
-        } else if (movingUp && movingRight) {
-            this.env.getJ1().ajouterDirection(9);
-        } else if (movingUp && movingLeft) {
-            this.env.getJ1().ajouterDirection(7);
-        } else if (movingDown && movingLeft) {
-            this.env.getJ1().ajouterDirection(1);
-        } else if (movingDown && movingRight) {
-            this.env.getJ1().ajouterDirection(3);
-        } else if (movingUp) {
-            this.env.getJ1().ajouterDirection(8);
-        } else if (movingRight) {
-            this.env.getJ1().ajouterDirection(6);
-        } else if (movingDown) {
-            this.env.getJ1().ajouterDirection(2);
-        } else if (movingLeft) {
-            this.env.getJ1().ajouterDirection(4);
+        if (!this.inventaire_ouvert) {
+            if (movingRight && movingLeft || movingDown && movingUp) {
+                this.env.getJ1().ajouterDirection(5);
+            } else if (movingUp && movingRight) {
+                this.env.getJ1().ajouterDirection(9);
+            } else if (movingUp && movingLeft) {
+                this.env.getJ1().ajouterDirection(7);
+            } else if (movingDown && movingLeft) {
+                this.env.getJ1().ajouterDirection(1);
+            } else if (movingDown && movingRight) {
+                this.env.getJ1().ajouterDirection(3);
+            } else if (movingUp) {
+                this.env.getJ1().ajouterDirection(8);
+            } else if (movingRight) {
+                this.env.getJ1().ajouterDirection(6);
+            } else if (movingDown) {
+                this.env.getJ1().ajouterDirection(2);
+            } else if (movingLeft) {
+                this.env.getJ1().ajouterDirection(4);
+            }
+            if (attaque && cooldown) {
+                this.env.getJ1().ajouterDirection(5);
+                this.joueurVue.afficherArmeView();
+                this.env.getJ1().attaquer();
+                cooldown = false;
+            } else if (interact) {
+                this.env.getJ1().setInteraction(true);
+            }
+        } else {
+            if (movingUp) {
+                this.inv.deplacerSelect(8);
+            } else if (movingRight) {
+                this.inv.deplacerSelect(6);
+            } else if (movingDown) {
+                this.inv.deplacerSelect(2);
+            } else if (movingLeft) {
+                this.inv.deplacerSelect(4);
+            }
+            else if (interact) {
+                this.inv.utiliserObjetSelect();
+            }
         }
-        if (attaque && cooldown) {
-            this.env.getJ1().ajouterDirection(5);
-            this.joueurVue.afficherArmeView();
-            this.env.getJ1().attaquer();
-            cooldown = false;
-        } else if (interact) {
-            this.env.getJ1().setInteraction(true);
-        } else if (inventaire) {
+        if (inventaire) {
             pressedKeys.remove("A");
             //lanceMenuPause();
             inventaire_ouvert = this.inv.ouvrirInventaire();

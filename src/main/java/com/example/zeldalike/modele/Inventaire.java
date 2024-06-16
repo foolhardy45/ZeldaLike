@@ -141,6 +141,9 @@ public class Inventaire {
         }
     }
 
+    public void utiliserObjet(int indice){
+    }
+
 
     @Override
     public String toString() {
