@@ -34,10 +34,10 @@ public class TerrrainVue {
             }
         });
         mac.getP().yProperty().addListener((obs, old, n) -> {
-            if ((int) n % decalageY > decalageY - 5) {
+            if ((int) n % decalageY > decalageY - zoneTemp) {
                 affichageElement.setTranslateY(affichageElement.getTranslateY() - decalageY);
                 mac.getP().setY(mac.getP().getY() + 2 * zoneTemp);
-            } else if ((int) n > decalageY && (int) n % decalageY < 5) {
+            } else if ((int) n > decalageY && (int) n % decalageY < zoneTemp) {
                 affichageElement.setTranslateY(affichageElement.getTranslateY() + decalageY);
                 mac.getP().setY(mac.getP().getY() - 2 * zoneTemp);
             }

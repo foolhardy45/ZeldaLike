@@ -12,7 +12,7 @@ public class Gun extends Arme {
     private ArrayList<Munition> listemunitions;
 
     public Gun(Joueur j) {
-        super(5, j);
+        super(50, j);
         this.listemunitions = new ArrayList<Munition>();
     }
 

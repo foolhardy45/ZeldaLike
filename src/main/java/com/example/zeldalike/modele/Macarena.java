@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Macarena extends Ennemis {
     public Macarena(Position p, Environnement env) {
-        super(5, 5, 1, p, env, env.getTerrain(), 6);
+        super(50, 5, 1, p, env, env.getTerrain(), 6);
     }
 
     public void boostArmure() {

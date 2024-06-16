@@ -102,8 +102,8 @@ public class CoeurVue {
                 coeurN1.setImage(coeur0);
                 coeurN2.setImage(coeur0);
                 coeurN3.setImage(coeur0);
-                joueur.getP().setX(0);
-                joueur.getP().setY(0);
+                joueur.getP().setX(96);
+                joueur.getP().setY(65);
                 joueur.setHp(4);
             }
         }
