@@ -6,9 +6,13 @@ import com.example.zeldalike.modele.Cle;
 import com.example.zeldalike.modele.Inventaire;
 import com.example.zeldalike.modele.ObjetRecuperables;
 import com.example.zeldalike.modele.PotionVitale;
+import com.example.zeldalike.modele.*;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+
+import java.awt.*;
 
 public class InventaireVue {
 
@@ -32,6 +36,9 @@ public class InventaireVue {
         } else if (objet instanceof Munition) {
             image = String.valueOf(Main.class.getResource("images/marchand.png"));
         }
+        else if (objet instanceof ChaussuresHydrophobes){
+            image = String.valueOf(Main.class.getResource("images/objets/chaussuresHydrophobes.png"));
+        }
 
 
         return image;
@@ -41,7 +48,7 @@ public class InventaireVue {
         Image cases = new Image(String.valueOf(Main.class.getResource("images/case_inventaire.png")));
         this.affichage.setPrefColumns(tailleInventaire);
         System.out.println(this.inv);
-        for (ObjetRecuperables objet : this.inv.getQuantiteTout().keySet()) {
+        for (ObjetRecuperables objet : this.inv.getQuantiteTout().keySet()){
             affichage.getChildren().add(new ImageView(cases));
             ObjetVue obj = new ObjetVue(objet, getImageObjet(objet));
             objets.getChildren().add(obj.getI());
@@ -53,14 +60,13 @@ public class InventaireVue {
         //todo : appeler inventairevue deja dans la scene normale/ essayer de centrer l'inventaire/A voir
     }
 
-    public void supprimeAffichage() {
+    public void supprimeAffichage(){
 
         int taille = this.affichage.getChildren().size();
-        for (int n = 0; n < taille; n++) {
+        for (int n=0 ; n<taille ; n++){
             this.affichage.getChildren().remove(0);
-            System.out.println("enleve elem inv");
         }
-        for (int n = 0; n < taille; n++) {
+        for (int n=0 ; n<taille ; n++){
             this.objets.getChildren().remove(0);
         }
         this.affichage.setVisible(false);
@@ -68,11 +74,12 @@ public class InventaireVue {
     }
 
 
-    public boolean ouvrirInventaire() {
+    public boolean ouvrirInventaire(){
         if (!this.affichage.isVisible()) {
             creeAffichage();
             return true;
-        } else {
+        }
+        else {
             supprimeAffichage();
             return false;
         }
