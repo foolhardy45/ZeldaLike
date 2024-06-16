@@ -105,12 +105,15 @@ public class Controlleur implements Initializable {
         }));
         MonObservateurEnnemis observateurlisteennemi = new MonObservateurEnnemis(carte_interaction);
         MonObservateurMunition observateurMunition = new MonObservateurMunition(carte_interaction);
+        MonObservateurMarchand observateurMarchand = new MonObservateurMarchand(carte_interaction, inventairepane, inventaireobjets);
         this.env.getEnnemis().addListener(observateurlisteennemi);
         this.env.getJ1().getMunitionObservableList().addListener(observateurMunition);
+        this.env.getMarchandsdetoushorizons().addListener(observateurMarchand);
         Citron ennemipuissant = new Citron(new Position(20, 20), this.env);
         Macarena maca = new Macarena(new Position(30, 30), this.env);
         //this.env.ajouterEnnemis(ennemipuissant);
         //this.env.ajouterEnnemis(maca);
+        this.env.ajouterMarchand(new Marchand(new Position(128,128), this.env));
         BusinessMan man = new BusinessMan(new Position(640, 640), this.env);
         this.env.ajouterEnnemis(man);
         Boss pumkin = new BossSamurai(new Position(288, 544), this.env);
@@ -196,6 +199,9 @@ public class Controlleur implements Initializable {
                 cooldown = false;
             } else if (interact) {
                 this.env.getJ1().setInteraction(true);
+                if (this.inventaireobjets.isVisible()){
+                    this.inventaire_ouvert = true;
+                }
             }
         } else {
             if (movingUp) {

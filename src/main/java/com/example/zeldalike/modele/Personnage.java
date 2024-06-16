@@ -64,6 +64,7 @@ public abstract class Personnage {
     public int distanceEntreDeuxPersonnages(Personnage p1, Personnage p2) {
         int super_x = (p1.getP().getX() - p2.getP().getX()) * (p1.getP().getX() - p2.getP().getX());
         int super_y = (p1.getP().getY() - p2.getP().getY()) * (p1.getP().getY() - p2.getP().getY());
+        
         return (int) Math.sqrt(super_x + super_y);
     }
 

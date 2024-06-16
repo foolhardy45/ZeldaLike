@@ -4,6 +4,7 @@ module com.example.zeldalike {
     requires java.desktop;
     requires jdk.management;
     requires java.sql;
+    requires junit;
 
 
     opens com.example.zeldalike to javafx.fxml;
@@ -16,4 +17,6 @@ module com.example.zeldalike {
     opens com.example.zeldalike.modele.Arme to javafx.fxml;
     exports com.example.zeldalike.modele.Arme.gun;
     opens com.example.zeldalike.modele.Arme.gun to javafx.fxml;
+    exports com.example.zeldalike.JunitTest;
+    opens com.example.zeldalike.JunitTest to javafx.fxml;
 }

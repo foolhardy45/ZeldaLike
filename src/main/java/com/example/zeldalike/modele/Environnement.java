@@ -4,11 +4,14 @@ import com.example.zeldalike.algos.CarteBFS;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class Environnement {
     private static int cooldown = 0;
     private Joueur j1;
     private ObservableList<Ennemis> ennemis;
     private ObservableList<ObjetRecuperables> objet;
+    private ObservableList<Marchand> marchandsdetoushorizons;
     private int height;
     private int width;
     private Terrain terrain;
@@ -21,6 +24,7 @@ public class Environnement {
         this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
         this.ennemis = FXCollections.observableArrayList();
         this.objet = FXCollections.observableArrayList();
+        this.marchandsdetoushorizons = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
 
@@ -36,6 +40,13 @@ public class Environnement {
 
     public void ajouterEnnemis(Ennemis ennemis) {
         this.ennemis.add(ennemis);
+    }
+    public void ajouterMarchand(Marchand marchand){
+        this.marchandsdetoushorizons.add(marchand);
+    }
+
+    public ObservableList<Marchand> getMarchandsdetoushorizons() {
+        return marchandsdetoushorizons;
     }
 
     public void sortirEnnemis(Ennemis ennemis) {

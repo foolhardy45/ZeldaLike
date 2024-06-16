@@ -51,6 +51,8 @@ public class Joueur extends Personnage {
     }
 
 
+
+
     public void donnerMunition() {
         if (this.arme instanceof Gun || this.sac.ArmeDansInventaire(2) != null) {
             System.out.println("Munitions dans le sac avant transfert : " + this.sac.getListeMunition());
@@ -127,7 +129,7 @@ public class Joueur extends Personnage {
     public ArrayList<Personnage> getEnnemisProches() {
         ArrayList<Personnage> ennemisProches = new ArrayList<>();
         for (Personnage ennemi : this.getEnv().getEnnemis()) {
-            if (ennemi.enVie() && distanceEntreDeuxPersonnages(this, ennemi) < 50) {
+            if (ennemi.enVie() && distanceEntreDeuxPersonnages(this, ennemi) <= 50) {
                 ennemisProches.add(ennemi);
             }
         }
@@ -164,6 +166,7 @@ public class Joueur extends Personnage {
 
     public void interact() {
         ObjetRecuperables objet = null;
+        Marchand marchand = null;
         if (this.interaction) {
             for (ObjetRecuperables o : this.getEnv().getObjet()) {
                 if (this.getP().collisionEntreSprites(o.getP()) || this.getP().surSprites(o.getP())) {
@@ -171,6 +174,13 @@ public class Joueur extends Personnage {
                     break; // Sortir de la boucle dès qu'un objet est trouvé
                 }
             }
+            for (Marchand m : this.getEnv().getMarchandsdetoushorizons()) {
+                if (this.getP().collisionEntreSprites(m.getP()) || this.getP().surSprites(m.getP())) {
+                    marchand = m;
+                    break; // Sortir de la boucle dès qu'un objet est trouvé
+                }
+            }
+
             if (objet != null) {
                 if (objet instanceof PotionVitale || objet instanceof Cle ) {
                     this.getSac().ajoutInventaire(objet);
@@ -185,6 +195,9 @@ public class Joueur extends Personnage {
                     System.out.println("Munition ramassée et ajoutée au sac : " + objet);
                 }
                 this.getEnv().sortirObjet(objet);
+            }
+            if (marchand != null){
+                marchand.ouvrirBoutique();
             }
             interaction = false;
         }
