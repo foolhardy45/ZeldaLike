@@ -35,6 +35,9 @@ public class InventaireVue {
         } else if (objet instanceof Munition) {
             image = String.valueOf(Main.class.getResource("images/marchand.png"));
         }
+        else if (objet instanceof ChaussuresHydrophobes){
+            image = String.valueOf(Main.class.getResource("images/objets/chaussuresHydrophobes.png"));
+        }
 
 
         return image;
