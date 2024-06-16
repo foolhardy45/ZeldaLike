@@ -124,25 +124,14 @@ public class Joueur extends Personnage {
         this.getArme().faireUneAttaque();
     }
 
-    public Personnage getEnnemiProche() {
-        Personnage ennemiProche = null;
-        int distanceMin = 50;
-
+    public ArrayList<Personnage> getEnnemisProches() {
+        ArrayList<Personnage> ennemisProches = new ArrayList<>();
         for (Personnage ennemi : this.getEnv().getEnnemis()) {
-            if (ennemi.enVie()) {
-                int distance = distanceEntreDeuxPersonnages(this, ennemi);
-                if (ennemi instanceof Ennemis) {
-                    if (distance < distanceMin) {
-
-                        System.out.println("il est a " + distance);
-                        distanceMin = distance;
-                        ennemiProche = ennemi;
-                    }
-                }
+            if (ennemi.enVie() && distanceEntreDeuxPersonnages(this, ennemi) < 50) {
+                ennemisProches.add(ennemi);
             }
         }
-
-        return ennemiProche;
+        return ennemisProches;
     }
 
     public void updateProjectiles() {

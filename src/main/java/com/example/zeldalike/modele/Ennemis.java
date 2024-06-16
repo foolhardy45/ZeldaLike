@@ -29,9 +29,9 @@ public abstract class Ennemis extends Personnage {
         ObjetRecuperables objet;
         double chance = Math.random();
 
-        if (chance < 0.3) { // 30% de chances pour une Munition
+        if (chance < 0.7) { // 70% de chances pour une Munition
             objet = new Munition(new Position(0, 0));
-        } else { // 70% de chances pour une PotionVitale
+        } else { // 30% de chances pour une PotionVitale
             objet = new PotionVitale(new Position(0, 0));
         }
         return objet;

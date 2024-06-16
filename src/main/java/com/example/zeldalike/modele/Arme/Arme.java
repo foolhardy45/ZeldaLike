@@ -5,6 +5,7 @@ import com.example.zeldalike.modele.Personnage;
 import com.example.zeldalike.modele.Position;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class Arme {
     private final int attaque;
@@ -58,20 +59,25 @@ public abstract class Arme {
         return this.getBouds().intersects(other.getBounds());
     }
 
-    public Personnage toucherPersonnage() {
-        Personnage ennemisProche = this.getJoueur().getEnnemiProche();
-        System.out.println(ennemisProche);
-        if (ennemisProche != null) {
-            this.directionPersonnage();
-            if (collidesWith(ennemisProche)) {
-                System.out.println(" la");
-                System.out.println(this.p.toString());
-                System.out.println(this.joueur.getP().toString());
-                return ennemisProche;
+    public ArrayList<Personnage> toucherPersonnage() {
+        ArrayList<Personnage> ennemisProches = this.joueur.getEnnemisProches();
+        ArrayList<Personnage> ennemisToucher = new ArrayList<Personnage>();// Supposons que cette méthode renvoie une ArrayList de Personnage.
+        for (Personnage ennemi : ennemisProches) {
+            System.out.println(ennemi);
+            if (ennemi != null) {
+                this.directionPersonnage(); // Ajustez la direction du personnage courant, si nécessaire.
+                if (collidesWith(ennemi)) {
+                    System.out.println(" la");
+                    System.out.println(this.p.toString());
+                    System.out.println(this.joueur.getP().toString());
+                    ennemisToucher.add(ennemi);
+                }
             }
         }
-        return null;
+        System.out.println(ennemisToucher.toString());
+        return ennemisToucher;
     }
+
 
     public void directionPersonnage() {
         Position positionHaut = new Position(this.joueur.getP().getX(), this.joueur.getP().getY() - 32);

@@ -3,17 +3,19 @@ package com.example.zeldalike.modele.Arme;
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Personnage;
 
+import java.util.ArrayList;
+
 public class Poing extends Arme {
     public Poing(Joueur joueur) {
-        super(5, joueur);
+        super(999, joueur);
     }
 
 
     @Override
     public void faireUneAttaque() {
-        Personnage ennemisProche = this.toucherPersonnage();
-        if (ennemisProche != null) {
-            hit(ennemisProche);
+        ArrayList<Personnage> ennemisProche = this.toucherPersonnage();
+        for (Personnage personnage : ennemisProche) {
+            hit(personnage);
         }
     }
 
