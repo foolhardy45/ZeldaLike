@@ -58,6 +58,7 @@ public class InventaireVue {
         int taille = this.affichage.getChildren().size();
         for (int n = 0; n < taille; n++) {
             this.affichage.getChildren().remove(0);
+            System.out.println("enleve elem inv");
         }
         for (int n = 0; n < taille; n++) {
             this.objets.getChildren().remove(0);

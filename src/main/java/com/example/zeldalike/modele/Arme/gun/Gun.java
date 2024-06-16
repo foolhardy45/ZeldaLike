@@ -62,7 +62,9 @@ public class Gun extends Arme {
             }
 
             // Retire la munition de la liste originale
-            this.munitionObservableList.remove(0);
+            this.munitionObservableList.remove(mune);
+            //retire la munition du sac
+            this.getJoueur().getSac().retireInventaire(mune);
 
         } else {
             System.out.println("tu n'as aucune balle");

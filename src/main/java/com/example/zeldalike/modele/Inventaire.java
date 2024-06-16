@@ -11,6 +11,7 @@ public class Inventaire {
 
     public Inventaire() {
         this.articles = new ArrayList<>();
+        this.articles.addFirst(new Munition(new Position(0,0)));
     }
 
 
@@ -41,10 +42,10 @@ public class Inventaire {
                 quantite++;
             }
         }
-        return quantite;
+        return quantite-1;
     }
 
-    public ObjetRecuperables getUneCle() {
+    public ObjetRecuperables getUneMunition() {
         boolean obtenu = false;
         ObjetRecuperables munition = null;
         int i = 0;
@@ -61,19 +62,28 @@ public class Inventaire {
 
     public ArrayList<Munition> getListeMunition() {
         ArrayList<Munition> liste = new ArrayList<>();
-        for (ObjetRecuperables obj : this.articles) {
+        for (int i=1; i<this.articles.size(); i++){
+        //for (ObjetRecuperables obj : this.articles) {
+            ObjetRecuperables obj = this.articles.get(i);
             if (obj instanceof Munition) {
                 liste.add((Munition) obj);
             }
         }
         return liste;
     }
+    public ObjetRecuperables getUneCle(){
+        ArrayList<ObjetRecuperables> liste = getListeCle();
+        if (!liste.isEmpty()) {
+            return liste.get(0);
+        }
+        return null;
+    }
 
 
     public ObjetRecuperables getUnePotion() {
         ArrayList<ObjetRecuperables> liste = getListePotion();
         if (!liste.isEmpty()) {
-            return getListePotion().get(0);
+            return liste.get(0);
         }
         return null;
     }
@@ -94,6 +104,9 @@ public class Inventaire {
         }
         if (getQuantiteCle() > 0) {
             quantites.put(getUneCle(), getQuantiteCle());
+        }
+        if (getQuantiteMunition() > 0){
+            quantites.put(getUneMunition(), getQuantiteMunition());
         }
         return quantites;
     }
@@ -117,7 +130,15 @@ public class Inventaire {
 
     public void ajoutInventaire(ObjetRecuperables obj) {
         obj.setP(new Position(0, 0));
+        System.out.println(this);
         this.articles.add(obj);
+        System.out.println();
+        System.out.println(this);
+    }
+    public void retireInventaire(ObjetRecuperables obj){
+        if (this.articles.contains(obj)){
+            this.articles.remove(obj);
+        }
     }
 
 
