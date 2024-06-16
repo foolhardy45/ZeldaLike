@@ -115,13 +115,17 @@ public class Controlleur implements Initializable {
         this.env.ajouterEnnemis(man2);
         BusinessMan man3 = new BusinessMan(new Position(3000, 540), this.env);
         this.env.ajouterEnnemis(man3);
+        BusinessMan man4 = new BusinessMan(new Position(1179, 1722), this.env);
+        this.env.ajouterEnnemis(man4);
+        BusinessMan man5 = new BusinessMan(new Position(759, 1692), this.env);
+        this.env.ajouterEnnemis(man5);
         Boss pumkin = new BossSamurai(new Position(192, 1888), this.env);
         this.env.ajouterEnnemis(pumkin);
 
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(3775, 1345);
-        Position PP2 = new Position(0, 0);
+        Position PP2 = new Position(400, 64);
         Munition p1 = new Munition(PP1, this.env.getJ1(), 0);
         Munition p2 = new Munition(PP2, this.env.getJ1(), 0);
         this.env.ajouterObjet(p1);
@@ -130,7 +134,7 @@ public class Controlleur implements Initializable {
         this.env.ajouterObjet(new PotionVitale(new Position(256, 64)));
         this.env.ajouterObjet(new PotionVitale(new Position(3910, 1749)));
 
-        this.env.ajouterObjet(new ChaussuresHydrophobes(new Position(200, 5)));
+        this.env.ajouterObjet(new ChaussuresHydrophobes(new Position(2500, 1299)));
         this.env.ajouterObjet(p2);
         System.out.println(p1.getIdObjet() + "muni 1");
         System.out.println(p2.getIdObjet() + "muni 2");
