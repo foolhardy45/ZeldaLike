@@ -213,8 +213,7 @@ public class Controlleur implements Initializable {
                 this.inv.deplacerSelect(2);
             } else if (movingLeft) {
                 this.inv.deplacerSelect(4);
-            }
-            else if (interact) {
+            } else if (interact) {
                 this.inv.utiliserObjetSelect();
             }
         }

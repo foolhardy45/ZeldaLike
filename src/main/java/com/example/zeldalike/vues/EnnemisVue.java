@@ -23,7 +23,7 @@ public class EnnemisVue {
         return i;
     }
 
-    public Ennemis getEnnemis(){
+    public Ennemis getEnnemis() {
         return this.ennemis;
     }
 }

@@ -21,7 +21,7 @@ public class MonObservateurMunition implements ListChangeListener<Munition> {
     public void onChanged(Change<? extends Munition> change) {
         while (change.next()) {
             for (Munition munition : change.getAddedSubList()) {
-                if (munition.getDirection() == 5){
+                if (munition.getDirection() == 5) {
                     munition.setDirection(directionPrecedente);
                 }
 

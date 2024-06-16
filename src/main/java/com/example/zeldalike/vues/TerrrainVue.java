@@ -43,7 +43,7 @@ public class TerrrainVue {
             }
         });
         mac.hpProperty().addListener((obs, old, n) -> {
-            if (mac.getHp()==0) {
+            if (mac.getHp() == 0) {
                 affichageElement.setTranslateX(0);
                 affichageElement.setTranslateY(0);
             }

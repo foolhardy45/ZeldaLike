@@ -3,10 +3,6 @@ package com.example.zeldalike.controlleurs;
 import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.*;
 import com.example.zeldalike.vues.BossSamuraiVue;
-import com.example.zeldalike.modele.BusinessMan;
-import com.example.zeldalike.modele.Citron;
-import com.example.zeldalike.modele.Ennemis;
-import com.example.zeldalike.modele.Macarena;
 import com.example.zeldalike.vues.EnnemisVue;
 import javafx.collections.ListChangeListener;
 import javafx.scene.layout.Pane;
@@ -39,7 +35,6 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
 
 
                 this.panneauDeJeu.getChildren().add(ennemisVue.getI());
-
 
 
             }

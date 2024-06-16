@@ -1,7 +1,7 @@
 package com.example.zeldalike.modele;
 
-public class BossSamurai extends Boss{
-    public BossSamurai(Position p, Environnement env){
+public class BossSamurai extends Boss {
+    public BossSamurai(Position p, Environnement env) {
         super(500, 20, 0, p, env, 10);
     }
 
@@ -11,7 +11,7 @@ public class BossSamurai extends Boss{
         this.verifiephase();
     }
 
-    public void faireuneattaque(){
+    public void faireuneattaque() {
         int indiceposition = this.getEnv().getTerrain().getIndiceCaseSousPosition(this.getP().getX() + getHitbox(), this.getP().getY() + getHitbox());
         int indicevalmin = this.getEnv().getBfs_joueur().indiceMinimumVal(indiceposition);
 
@@ -30,14 +30,12 @@ public class BossSamurai extends Boss{
     }
 
 
-
-
-    public void lanceprojectile(){
-    //lance une lame dans la direction du joueur
+    public void lanceprojectile() {
+        //lance une lame dans la direction du joueur
         this.getEnv().ajouterEnnemis(new ProjectileBoss(new Position(this.getP().getX(), this.getP().getY()), this.getEnv()));
     }
 
-    public void bombechapeau(){
+    public void bombechapeau() {
         //ombre de chapeau apparait sur la map, puis explose
     }
 

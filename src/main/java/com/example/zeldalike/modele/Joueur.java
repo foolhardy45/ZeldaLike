@@ -31,7 +31,7 @@ public class Joueur extends Personnage {
         this.arme = new Poing(this);
         this.sac.ajouterArme(new Gun(this));
         this.munitionObservableList = FXCollections.observableArrayList();
-        this.hydrophobe=false;
+        this.hydrophobe = false;
     }
 
     public void setInteraction(boolean interaction) {
@@ -74,9 +74,8 @@ public class Joueur extends Personnage {
             }
             System.out.println("Munitions dans le sac après transfert : " + this.sac.getListeMunition());
             //System.out.println("Munitions dans le Gun après transfert : " + ((Gun) this.arme).getListeMunitions());
-        }
-        else {
-            if (this.sac.ArmeDansInventaire(2) != null){
+        } else {
+            if (this.sac.ArmeDansInventaire(2) != null) {
 
             }
         }
@@ -172,14 +171,13 @@ public class Joueur extends Personnage {
                 }
             }
             if (objet != null) {
-                if (objet instanceof PotionVitale || objet instanceof Cle ) {
+                if (objet instanceof PotionVitale || objet instanceof Cle) {
                     this.getSac().ajoutInventaire(objet);
 
                 } else if (objet instanceof ChaussuresHydrophobes) {
                     this.getSac().ajoutInventaire(objet);
-                    hydrophobe=true;
-                }
-                else if (objet instanceof Munition) {
+                    hydrophobe = true;
+                } else if (objet instanceof Munition) {
                     this.getSac().ajoutInventaire(objet);
                     this.donnerMunition();
                     System.out.println("Munition ramassée et ajoutée au sac : " + objet);
@@ -194,6 +192,7 @@ public class Joueur extends Personnage {
     public Inventaire getSac() {
         return sac;
     }
+
     public void move() {
         switch (this.getDirection()) {
             case 1:
@@ -232,11 +231,12 @@ public class Joueur extends Personnage {
             System.out.println(positionPre);
         }
     }
+
     private void jMoveUp() {
         double nouvellePosY = this.getP().getY() - this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
-        if (this.getTerrain().estDansTerrain(PosX, newY) && getTerrain().estAutorisé(PosX + 1, newY + getHitbox(),hydrophobe) && getTerrain().estAutorisé(PosX + getHitbox(), newY + getHitbox(),hydrophobe)) {
+        if (this.getTerrain().estDansTerrain(PosX, newY) && getTerrain().estAutorisé(PosX + 1, newY + getHitbox(), hydrophobe) && getTerrain().estAutorisé(PosX + getHitbox(), newY + getHitbox(), hydrophobe)) {
             this.getP().setY(newY);
         }
     }
@@ -245,7 +245,7 @@ public class Joueur extends Personnage {
         double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
-        if (this.getTerrain().estDansTerrain(PosX, newY) && getTerrain().estAutorisé(PosX + 1, newY + getHitbox(),hydrophobe) && getTerrain().estAutorisé(PosX + getHitbox(), newY + getHitbox(),hydrophobe)) {
+        if (this.getTerrain().estDansTerrain(PosX, newY) && getTerrain().estAutorisé(PosX + 1, newY + getHitbox(), hydrophobe) && getTerrain().estAutorisé(PosX + getHitbox(), newY + getHitbox(), hydrophobe)) {
             this.getP().setY(newY);
         }
     }
@@ -254,7 +254,7 @@ public class Joueur extends Personnage {
         double nouvellePosX = this.getP().getX() - this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        if (this.getTerrain().estDansTerrain(newX, PosY) && this.getTerrain().estAutorisé(newX, PosY + getHitbox(),hydrophobe)) {
+        if (this.getTerrain().estDansTerrain(newX, PosY) && this.getTerrain().estAutorisé(newX, PosY + getHitbox(), hydrophobe)) {
             this.getP().setX(newX);
         }
     }
@@ -263,7 +263,7 @@ public class Joueur extends Personnage {
         double nouvellePosX = this.getP().getX() + this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
-        if (this.getTerrain().estDansTerrain(newX, PosY) && this.getTerrain().estAutorisé(newX + getHitbox(), PosY + getHitbox(),hydrophobe)) {
+        if (this.getTerrain().estDansTerrain(newX, PosY) && this.getTerrain().estAutorisé(newX + getHitbox(), PosY + getHitbox(), hydrophobe)) {
             this.getP().setX(newX);
         }
     }

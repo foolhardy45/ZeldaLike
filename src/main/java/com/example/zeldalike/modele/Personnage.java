@@ -264,10 +264,10 @@ public abstract class Personnage {
 
     public abstract void personnageTouche(Personnage p);
 
-    public void recevoirSoins(int pv){
-        if (getHp()<=10) {
+    public void recevoirSoins(int pv) {
+        if (getHp() <= 10) {
             setHp(getHp() + pv);
-        } else if (getHp()==11) {
+        } else if (getHp() == 11) {
             setHp(getHp() + 1);
         }
     }

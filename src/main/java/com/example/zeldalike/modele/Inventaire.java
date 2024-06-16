@@ -9,16 +9,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventaire {
-    private  ArrayList<ObjetRecuperables> articles;
-    private ArrayList<Arme> armespossedees;
     private final Joueur j;
+    private ArrayList<ObjetRecuperables> articles;
+    private ArrayList<Arme> armespossedees;
 
 
     public Inventaire(Joueur j) {
         this.j = j;
         this.articles = new ArrayList<>();
         this.armespossedees = new ArrayList<>();
-        this.articles.addFirst(new Munition(new Position(0,0)));
+        this.articles.addFirst(new Munition(new Position(0, 0)));
     }
 
 
@@ -49,7 +49,7 @@ public class Inventaire {
                 quantite++;
             }
         }
-        return quantite-1;
+        return quantite - 1;
     }
 
     public ObjetRecuperables getUneMunition() {
@@ -69,8 +69,8 @@ public class Inventaire {
 
     public ArrayList<Munition> getListeMunition() {
         ArrayList<Munition> liste = new ArrayList<>();
-        for (int i=1; i<this.articles.size(); i++){
-        //for (ObjetRecuperables obj : this.articles) {
+        for (int i = 1; i < this.articles.size(); i++) {
+            //for (ObjetRecuperables obj : this.articles) {
             ObjetRecuperables obj = this.articles.get(i);
             if (obj instanceof Munition) {
                 liste.add((Munition) obj);
@@ -78,7 +78,8 @@ public class Inventaire {
         }
         return liste;
     }
-    public ObjetRecuperables getUneCle(){
+
+    public ObjetRecuperables getUneCle() {
         ArrayList<ObjetRecuperables> liste = getListeCle();
         if (!liste.isEmpty()) {
             return liste.get(0);
@@ -112,7 +113,7 @@ public class Inventaire {
         if (getQuantiteCle() > 0) {
             quantites.put(getUneCle(), getQuantiteCle());
         }
-        if (getQuantiteMunition() > 0){
+        if (getQuantiteMunition() > 0) {
             quantites.put(getUneMunition(), getQuantiteMunition());
         }
         return quantites;
@@ -142,15 +143,16 @@ public class Inventaire {
         System.out.println();
         System.out.println(this);
     }
-    public void retireInventaire(ObjetRecuperables obj){
-        if (this.articles.contains(obj)){
+
+    public void retireInventaire(ObjetRecuperables obj) {
+        if (this.articles.contains(obj)) {
             this.articles.remove(obj);
         }
     }
 
-    public void utiliserPotion(){
-        if (this.getQuantitePotion()>0){
-            PotionVitale potion = (PotionVitale)getUnePotion();
+    public void utiliserPotion() {
+        if (this.getQuantitePotion() > 0) {
+            PotionVitale potion = (PotionVitale) getUnePotion();
             this.j.recevoirSoins(potion.getPouvoir());
             this.retireInventaire(potion);
         }
@@ -170,23 +172,23 @@ public class Inventaire {
         return texte;
     }
 
-    public void ajouterArme(Arme objet){
+    public void ajouterArme(Arme objet) {
         this.armespossedees.add(objet);
     }
 
-    public Arme ArmeDansInventaire(int numeroArme){
+    public Arme ArmeDansInventaire(int numeroArme) {
         Arme retour = null;
-        switch (numeroArme){
+        switch (numeroArme) {
             case 1:
-                for (Arme a : this.armespossedees){//poing
-                    if (a instanceof Poing){
+                for (Arme a : this.armespossedees) {//poing
+                    if (a instanceof Poing) {
                         retour = a;
                     }
                 }
                 break;
             case 2:
-                for (Arme a : this.armespossedees){//gun
-                    if (a instanceof Gun){
+                for (Arme a : this.armespossedees) {//gun
+                    if (a instanceof Gun) {
                         retour = a;
                     }
                 }
@@ -201,7 +203,7 @@ public class Inventaire {
         return armespossedees;
     }
 
-    public Arme remplacerArme(Arme a, int numeroArme){
+    public Arme remplacerArme(Arme a, int numeroArme) {
         Arme ar = ArmeDansInventaire(numeroArme);
         this.armespossedees.add(a);
         System.out.println("arme remplacee");

@@ -3,8 +3,6 @@ package com.example.zeldalike.modele.Arme.gun;
 import com.example.zeldalike.modele.Arme.Arme;
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Position;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 

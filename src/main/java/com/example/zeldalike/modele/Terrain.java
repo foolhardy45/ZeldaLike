@@ -3,12 +3,12 @@ package com.example.zeldalike.modele;
 import java.util.ArrayList;
 
 public class Terrain {
+    int[] case_autorisé = new int[]{2};
+    int[] case_autoriséH = new int[]{1, 2};
     private int[] carte_terrain;
     private int tailleLargeur;
     private int tailleTuile;
     private int tailleHauteur;
-    int[] case_autorisé = new int[]{2};
-    int[] case_autoriséH = new int[]{1,2};
 
     public Terrain() {
         this.carte_terrain = new int[]{
@@ -77,7 +77,7 @@ public class Terrain {
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
                 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3};
 
-            this.tailleLargeur = 128;
+        this.tailleLargeur = 128;
         this.tailleTuile = 32;
         this.tailleHauteur = 64
         ;
@@ -106,9 +106,10 @@ public class Terrain {
         }
         return false;
     }
-    public boolean estAutorisé(int x, int y,boolean Hydrophobe) {
+
+    public boolean estAutorisé(int x, int y, boolean Hydrophobe) {
         int codeCase = codeCaseI(getIndiceCaseSousPosition(x, y));
-        if (Hydrophobe){
+        if (Hydrophobe) {
             if (estDansTerrain(x, y)) {
                 for (int autorise : case_autoriséH) {
                     if (codeCase == autorise) {
@@ -117,8 +118,7 @@ public class Terrain {
                 }
             }
             return false;
-        }
-        else {
+        } else {
             if (estDansTerrain(x, y)) {
                 for (int autorise : case_autorisé) {
                     if (codeCase == autorise) {

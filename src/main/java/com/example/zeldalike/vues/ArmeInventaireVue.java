@@ -1,7 +1,6 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.modele.Arme.Arme;
-import com.example.zeldalike.modele.ObjetRecuperables;
 import javafx.scene.image.ImageView;
 
 public class ArmeInventaireVue {

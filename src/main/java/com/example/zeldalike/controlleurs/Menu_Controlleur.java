@@ -1,7 +1,6 @@
 package com.example.zeldalike.controlleurs;
 
 import com.example.zeldalike.Main;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

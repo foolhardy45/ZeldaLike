@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zeldalike.controlleurs.Credit_Controlleur">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="com.example.zeldalike.controlleurs.Credit_Controlleur">
     <children>
         <Label layoutX="195.0" layoutY="95.0" text="Crédits" textAlignment="CENTER">
             <font>
-                <Font size="24.0" />
+                <Font size="24.0"/>
             </font>
         </Label>
-        <Label layoutX="50.0" layoutY="160.0" text="Tayrell Ajinca" />
-        <Label layoutX="50.0" layoutY="200.0" text="Leny Denoyelle" />
-        <Label layoutX="50.0" layoutY="240.0" text="Jordan Horbacz" />
-      <Button fx:id="retour" layoutX="206.0" layoutY="338.0" mnemonicParsing="false" onAction="#retour" text="retour" />
+        <Label layoutX="50.0" layoutY="160.0" text="Tayrell Ajinca"/>
+        <Label layoutX="50.0" layoutY="200.0" text="Leny Denoyelle"/>
+        <Label layoutX="50.0" layoutY="240.0" text="Jordan Horbacz"/>
+        <Button fx:id="retour" layoutX="206.0" layoutY="338.0" mnemonicParsing="false" onAction="#retour"
+                text="retour"/>
     </children>
 
 </AnchorPane>

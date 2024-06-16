@@ -2,6 +2,7 @@ package com.example.zeldalike.modele;
 
 public class ProjectileBoss extends Ennemis {
     private boolean bordtouche;
+
     public ProjectileBoss(Position p, Environnement env) {
         super(1, 0, 2, p, env, env.getTerrain(), 0);
         this.bordtouche = false;
@@ -14,7 +15,7 @@ public class ProjectileBoss extends Ennemis {
 
     @Override
     public int getHp() {
-        if (bordtouche){
+        if (bordtouche) {
             return 0;
         }
         return 1;
@@ -42,7 +43,7 @@ public class ProjectileBoss extends Ennemis {
         int PosX = this.getP().getX();
         if (this.getTerrain().estDansTerrain(PosX, newY)) {
             this.getP().setY(newY);
-            if (collidesWith(getEnv().getJ1())){
+            if (collidesWith(getEnv().getJ1())) {
                 this.bordtouche = true;
                 personnageTouche(this.getEnv().getJ1());
             }
@@ -58,7 +59,7 @@ public class ProjectileBoss extends Ennemis {
         int PosY = this.getP().getY();
         if (this.getTerrain().estDansTerrain(newX, PosY)) {
             this.getP().setX(newX);
-            if (collidesWith(getEnv().getJ1())){
+            if (collidesWith(getEnv().getJ1())) {
                 this.bordtouche = true;
                 personnageTouche(this.getEnv().getJ1());
             }
@@ -66,6 +67,7 @@ public class ProjectileBoss extends Ennemis {
             this.bordtouche = true;
         }
     }
+
     @Override
     public void moveLeft() {
         double nouvellePosX = this.getP().getX() - this.getVitesse();
@@ -73,7 +75,7 @@ public class ProjectileBoss extends Ennemis {
         int PosY = this.getP().getY();
         if (this.getTerrain().estDansTerrain(newX, PosY)) {
             this.getP().setX(newX);
-            if (collidesWith(getEnv().getJ1())){
+            if (collidesWith(getEnv().getJ1())) {
                 this.bordtouche = true;
                 personnageTouche(this.getEnv().getJ1());
             }
@@ -87,9 +89,9 @@ public class ProjectileBoss extends Ennemis {
         double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
-        if (this.getTerrain().estDansTerrain(PosX, newY) ) {
+        if (this.getTerrain().estDansTerrain(PosX, newY)) {
             this.getP().setY(newY);
-            if (collidesWith(getEnv().getJ1())){
+            if (collidesWith(getEnv().getJ1())) {
                 this.bordtouche = true;
                 personnageTouche(this.getEnv().getJ1());
             }
@@ -99,7 +101,7 @@ public class ProjectileBoss extends Ennemis {
     }
 
     @Override
-    public void dropObjet(){
+    public void dropObjet() {
         // ne rien faire
     }
 }
