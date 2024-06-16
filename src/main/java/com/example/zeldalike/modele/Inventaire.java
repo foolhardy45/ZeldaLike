@@ -7,9 +7,11 @@ import java.util.HashMap;
 
 public class Inventaire {
     private final ArrayList<ObjetRecuperables> articles;
+    private final Personnage j;
 
 
-    public Inventaire() {
+    public Inventaire(Personnage j) {
+        this.j = j;
         this.articles = new ArrayList<>();
         this.articles.addFirst(new Munition(new Position(0,0)));
     }
@@ -144,7 +146,7 @@ public class Inventaire {
     public void utiliserPotion(){
         if (this.getQuantitePotion()>0){
             PotionVitale potion = (PotionVitale)getUnePotion();
-            //agir
+            this.j.recevoirSoins(potion.getPouvoir());
             this.retireInventaire(potion);
         }
     }

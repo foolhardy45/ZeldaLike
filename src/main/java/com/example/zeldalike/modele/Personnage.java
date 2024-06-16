@@ -263,4 +263,8 @@ public abstract class Personnage {
     }
 
     public abstract void personnageTouche(Personnage p);
+
+    public void recevoirSoins(int pv){
+        this.hp.add(pv);
+    }
 }

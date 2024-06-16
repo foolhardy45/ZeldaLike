@@ -25,7 +25,7 @@ public class Joueur extends Personnage {
 
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
         super(4, def, 4, p, env, terrain);
-        this.sac = new Inventaire();
+        this.sac = new Inventaire(this);
         this.arme = new Gun(this);
         this.munitionObservableList = FXCollections.observableArrayList();
 

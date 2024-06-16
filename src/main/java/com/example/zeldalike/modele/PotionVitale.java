@@ -12,6 +12,10 @@ public class PotionVitale extends ObjetRecuperables {
         super();
     }
 
+    public int getPouvoir() {
+        return pouvoir;
+    }
+
     public boolean collisionJoueur(Joueur j) {
         return false;
     }
