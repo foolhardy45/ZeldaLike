@@ -1,26 +1,16 @@
 package com.example.zeldalike.modele;
 
 import com.example.zeldalike.modele.Arme.Arme;
-import com.example.zeldalike.modele.Arme.Poing;
 import com.example.zeldalike.modele.Arme.gun.Gun;
 import com.example.zeldalike.modele.Arme.gun.Munition;
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
-import com.example.zeldalike.vues.JoueurVue;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.util.Duration;
 
 public class Joueur extends Personnage {
     private Queue<Character> déplacement;
@@ -33,10 +23,6 @@ public class Joueur extends Personnage {
 
     private IntegerProperty argent;
 
-    public void setInteraction(boolean interaction) {
-        this.interaction = interaction;
-    }
-
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
         super(4, def, 4, p, env, terrain);
         this.sac = new Inventaire();
@@ -45,11 +31,15 @@ public class Joueur extends Personnage {
 
     }
 
+    public void setInteraction(boolean interaction) {
+        this.interaction = interaction;
+    }
+
     public ObservableList<Munition> getMunitionObservableList() {
         return munitionObservableList;
     }
 
-    public void changerArme(Arme a){
+    public void changerArme(Arme a) {
         this.arme = a;
     }
 
@@ -73,9 +63,15 @@ public class Joueur extends Personnage {
             System.out.println("Munitions dans le Gun après transfert : " + ((Gun) this.arme).getMunitionObservableList());
         }
     }
+
     public Arme getArme() {
         return arme;
     }
+
+    public void setArme(Arme arme) {
+        this.arme = arme;
+    }
+
     public int getArgent() {
         return argent.get();
     }
@@ -83,11 +79,6 @@ public class Joueur extends Personnage {
     public void setArgent(int argent) {
         this.argent.set(argent);
     }
-
-    public void setArme(Arme arme) {
-        this.arme = arme;
-    }
-
 
     public boolean isFaitUnAttaque() {
         return faitUneAttaque;
@@ -117,7 +108,7 @@ public class Joueur extends Personnage {
         for (Personnage ennemi : this.getEnv().getEnnemis()) {
             if (ennemi.enVie()) {
                 int distance = distanceEntreDeuxPersonnages(this, ennemi);
-                if(ennemi instanceof Ennemis) {
+                if (ennemi instanceof Ennemis) {
                     if (distance < distanceMin) {
 
                         System.out.println("il est a " + distance);
@@ -157,8 +148,6 @@ public class Joueur extends Personnage {
         // Supprimer les projectiles qui sortent du terrain
         munitionObservableList.removeIf(munition -> !this.getTerrain().estDansTerrain(munition.getP().getX(), munition.getP().getY()));
     }
-
-
 
 
     public void interact() {

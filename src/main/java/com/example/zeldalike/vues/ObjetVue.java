@@ -1,6 +1,5 @@
 package com.example.zeldalike.vues;
 
-import com.example.zeldalike.modele.Ennemis;
 import com.example.zeldalike.modele.ObjetRecuperables;
 import javafx.scene.image.ImageView;
 
@@ -8,6 +7,7 @@ public class ObjetVue {
     private ObjetRecuperables objetRecuperables;
     private String file;
     private ImageView i;
+
     public ObjetVue(ObjetRecuperables objetRecuperables, String file) {
         this.objetRecuperables = objetRecuperables;
         this.file = file;
@@ -17,7 +17,8 @@ public class ObjetVue {
         i.translateYProperty().bind(objetRecuperables.getP().yProperty());
 
     }
-    public ImageView getI(){
-        return  i;
+
+    public ImageView getI() {
+        return i;
     }
 }

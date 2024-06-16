@@ -18,7 +18,7 @@ public class CoeurVue {
 
     private final Joueur joueur;
 
-    public CoeurVue(Joueur joueur){
+    public CoeurVue(Joueur joueur) {
         this.joueur = joueur;
 
         coeur0 = new Image(String.valueOf(Main.class.getResource("images/coeurs/coeur0.png")));

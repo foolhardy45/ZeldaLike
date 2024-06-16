@@ -16,7 +16,6 @@ public class Munition extends ObjetRecuperables {
     private int direction;
 
 
-
     public Munition(Position position, Joueur j, int direction) {
         super(position);
         this.j = j;
@@ -26,7 +25,8 @@ public class Munition extends ObjetRecuperables {
         this.idMunition = "E" + id;
         this.direction = direction;
     }
-    public Munition(Position position){
+
+    public Munition(Position position) {
         super(position);
         this.degats = 4;
         this.vitesse = 10;
@@ -53,13 +53,13 @@ public class Munition extends ObjetRecuperables {
     }
 
 
-    private Rectangle getBouds(){
-        return   new Rectangle(this.getP().getX(), this.getP().getY(),  32,  32);
+    private Rectangle getBouds() {
+        return new Rectangle(this.getP().getX(), this.getP().getY(), 32, 32);
     }
+
     public boolean collidesWith(Personnage other) {
         return this.getBouds().intersects(other.getBounds());
     }
-
 
 
     public void move() {

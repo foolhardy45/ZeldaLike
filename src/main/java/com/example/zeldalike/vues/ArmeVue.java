@@ -6,18 +6,16 @@ import com.example.zeldalike.modele.Arme.Poing;
 import com.example.zeldalike.modele.Arme.gun.Gun;
 import com.example.zeldalike.modele.Joueur;
 import javafx.scene.image.Image;
-
 import javafx.scene.image.ImageView;
 
 public class ArmeVue {
     private final Joueur joueur;
     private final Arme arme;
-    private  ImageView armeVue;
-
     private final Image poingDroit;
     private final Image poingGauche;
     private final Image poingHaut;
     private final Image poingBas;
+    private ImageView armeVue;
 
     public ArmeVue(Joueur joueur, Arme arme) {
         this.joueur = joueur;
@@ -59,7 +57,7 @@ public class ArmeVue {
             // Logique pour afficher l'arme Gun
         }
     }
-    
+
 
     public ImageView getArmeVue() {
         return armeVue;

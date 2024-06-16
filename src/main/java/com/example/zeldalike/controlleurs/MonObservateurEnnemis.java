@@ -28,7 +28,7 @@ public class MonObservateurEnnemis implements ListChangeListener<Ennemis> {
                 } else if (e instanceof BusinessMan) {
                     ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/businessman2.png")));
                 } else if (e instanceof Macarena) {
-                    ennemisVue = new EnnemisVue(e,String.valueOf(Main.class.getResource("images/ennemis/macarena.gif")));
+                    ennemisVue = new EnnemisVue(e, String.valueOf(Main.class.getResource("images/ennemis/macarena.gif")));
                 }
                 this.panneauDeJeu.getChildren().add(ennemisVue.getI());
 

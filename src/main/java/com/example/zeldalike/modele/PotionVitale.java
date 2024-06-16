@@ -8,7 +8,7 @@ public class PotionVitale extends ObjetRecuperables {
         super(p);
     }
 
-    public PotionVitale(){
+    public PotionVitale() {
         super();
     }
 

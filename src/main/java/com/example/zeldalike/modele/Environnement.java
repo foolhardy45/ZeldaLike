@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Environnement {
+    private static int cooldown = 0;
     private Joueur j1;
     private ObservableList<Ennemis> ennemis;
     private ObservableList<ObjetRecuperables> objet;
@@ -12,12 +13,11 @@ public class Environnement {
     private int width;
     private Terrain terrain;
     private CarteBFS bfs_joueur;
-    private static int cooldown = 0;
 
     public Environnement(int height, int width) {
         Position p = new Position(0, 0);
         this.terrain = new Terrain();
-        this.j1 = new Joueur(12,p,this, terrain);
+        this.j1 = new Joueur(12, p, this, terrain);
         this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
         this.ennemis = FXCollections.observableArrayList();
         this.objet = FXCollections.observableArrayList();
@@ -78,7 +78,6 @@ public class Environnement {
             }
         }
     }
-
 
 
     public void unTour() {

@@ -9,25 +9,22 @@ import javafx.scene.image.ImageView;
 import javax.swing.*;
 
 public class JoueurVue extends JPanel {
-    private boolean visible;
     private final Joueur joueur;
     private final Arme arme;
     private final ImageView mac;
-
     // Sprite joueur sans arme
     private final Image spriteUp;
     private final Image spriteDown;
     private final Image spriteLeft;
     private final Image spriteRight;
-
+    private final CoeurVue coeurVue;
+    private final ArmeVue armeView;
+    private boolean visible;
     //Sprite avec arme
     private Image spriteGunUp;
     private Image spriteGunDown;
     private Image spriteGunLeft;
     private Image spriteGunRight;
-
-    private final CoeurVue coeurVue;
-    private final ArmeVue armeView;
 
     public JoueurVue(Joueur joueur, Arme arme) {
         this.joueur = joueur;
@@ -51,7 +48,6 @@ public class JoueurVue extends JPanel {
         this.coeurVue = new CoeurVue(joueur);
         this.armeView = new ArmeVue(joueur, arme);
         //position du joueur
-
 
 
         mac.translateXProperty().bind(joueur.getP().xProperty());

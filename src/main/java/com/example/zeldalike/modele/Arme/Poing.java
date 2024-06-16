@@ -2,11 +2,10 @@ package com.example.zeldalike.modele.Arme;
 
 import com.example.zeldalike.modele.Joueur;
 import com.example.zeldalike.modele.Personnage;
-import com.example.zeldalike.modele.Position;
 
 public class Poing extends Arme {
     public Poing(Joueur joueur) {
-        super(5,joueur);
+        super(5, joueur);
     }
 
 

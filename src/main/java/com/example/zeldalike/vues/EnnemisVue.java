@@ -17,7 +17,6 @@ public class EnnemisVue {
         i.translateYProperty().bind(ennemis.getP().yProperty());
 
 
-
     }
 
     public ImageView getI() {

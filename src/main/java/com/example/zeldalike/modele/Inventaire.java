@@ -9,27 +9,25 @@ public class Inventaire {
     private final ArrayList<ObjetRecuperables> articles;
 
 
-
     public Inventaire() {
         this.articles = new ArrayList<>();
     }
 
 
-
-    public ArrayList<ObjetRecuperables> getListePotion(){
+    public ArrayList<ObjetRecuperables> getListePotion() {
         ArrayList<ObjetRecuperables> liste = new ArrayList<>();
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof PotionVitale){
+        for (ObjetRecuperables obj : this.articles) {
+            if (obj instanceof PotionVitale) {
                 liste.add(obj);
             }
         }
         return liste;
     }
 
-    public ArrayList<ObjetRecuperables> getListeCle(){
+    public ArrayList<ObjetRecuperables> getListeCle() {
         ArrayList<ObjetRecuperables> liste = new ArrayList<>();
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof Cle){
+        for (ObjetRecuperables obj : this.articles) {
+            if (obj instanceof Cle) {
                 liste.add(obj);
             }
         }
@@ -38,21 +36,21 @@ public class Inventaire {
 
     public int getQuantiteMunition() {
         int quantite = 0;
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof Munition){
+        for (ObjetRecuperables obj : this.articles) {
+            if (obj instanceof Munition) {
                 quantite++;
             }
         }
         return quantite;
     }
 
-    public ObjetRecuperables getUneCle(){
+    public ObjetRecuperables getUneCle() {
         boolean obtenu = false;
         ObjetRecuperables munition = null;
         int i = 0;
-        while (!obtenu && i< this.articles.size()){
+        while (!obtenu && i < this.articles.size()) {
             munition = this.articles.get(i);
-            if (munition instanceof Munition){
+            if (munition instanceof Munition) {
                 obtenu = true;
             }
             i++;
@@ -61,11 +59,10 @@ public class Inventaire {
     }
 
 
-
-    public ArrayList<Munition> getListeMunition(){
+    public ArrayList<Munition> getListeMunition() {
         ArrayList<Munition> liste = new ArrayList<>();
-        for (ObjetRecuperables obj : this.articles){
-            if (obj instanceof Munition){
+        for (ObjetRecuperables obj : this.articles) {
+            if (obj instanceof Munition) {
                 liste.add((Munition) obj);
             }
         }
@@ -73,29 +70,29 @@ public class Inventaire {
     }
 
 
-
-
-    public ObjetRecuperables getUnePotion(){
+    public ObjetRecuperables getUnePotion() {
         ArrayList<ObjetRecuperables> liste = getListePotion();
-        if (!liste.isEmpty()){
+        if (!liste.isEmpty()) {
             return getListePotion().get(0);
         }
         return null;
     }
+
     public int getQuantitePotion() {
         return getListePotion().size();
     }
+
     public int getQuantiteCle() {
         return getListeCle().size();
     }
 
-    public HashMap<ObjetRecuperables, Integer> getQuantiteTout(){
+    public HashMap<ObjetRecuperables, Integer> getQuantiteTout() {
         HashMap<ObjetRecuperables, Integer> quantites = new HashMap<>();
         ObjetRecuperables objet;
-        if (getQuantitePotion()>0){
+        if (getQuantitePotion() > 0) {
             quantites.put(getUnePotion(), getQuantitePotion());
         }
-        if (getQuantiteCle()>0) {
+        if (getQuantiteCle() > 0) {
             quantites.put(getUneCle(), getQuantiteCle());
         }
         return quantites;
@@ -119,19 +116,17 @@ public class Inventaire {
     }*/
 
     public void ajoutInventaire(ObjetRecuperables obj) {
-        obj.setP(new Position(0,0));
+        obj.setP(new Position(0, 0));
         this.articles.add(obj);
     }
-
-
 
 
     @Override
     public String toString() {
         HashMap<ObjetRecuperables, Integer> tout = getQuantiteTout();
         String texte = "";
-        for (ObjetRecuperables o : tout.keySet()){
-            texte += o +" : "+ tout.get(o) + "\n";
+        for (ObjetRecuperables o : tout.keySet()) {
+            texte += o + " : " + tout.get(o) + "\n";
         }
         return texte;
     }

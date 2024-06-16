@@ -6,11 +6,8 @@ import com.example.zeldalike.modele.Position;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Gun extends Arme {
-private ObservableList<Munition> munitionObservableList;
+    private ObservableList<Munition> munitionObservableList;
 
     public Gun(Joueur j) {
         super(5, j);

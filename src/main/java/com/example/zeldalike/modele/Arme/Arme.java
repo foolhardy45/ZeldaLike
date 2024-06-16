@@ -15,7 +15,8 @@ public abstract class Arme {
 
         this.attaque = attaque;
         this.joueur = j;
-        this.p = new Position(this.joueur.getP().getX(), this.joueur.getP().getY());;
+        this.p = new Position(this.joueur.getP().getX(), this.joueur.getP().getY());
+        ;
     }
 
     public Position getP() {
@@ -35,9 +36,9 @@ public abstract class Arme {
     }
 
     public void hit(Personnage p) {
-    if (p.isBouclierActif()){
-        System.out.println("aucun dégats reçue");
-    }else if (this.joueur.enVie() && p.enVie()) {
+        if (p.isBouclierActif()) {
+            System.out.println("aucun dégats reçue");
+        } else if (this.joueur.enVie() && p.enVie()) {
             int degats = attaque;
             if (p.getDef() < degats) {
                 degats -= p.getDef();
@@ -49,14 +50,15 @@ public abstract class Arme {
         }
     }
 
-    private Rectangle getBouds(){
-        return   new Rectangle(this.getP().getX(), this.getP().getY(),  32,  32);
+    private Rectangle getBouds() {
+        return new Rectangle(this.getP().getX(), this.getP().getY(), 32, 32);
     }
+
     public boolean collidesWith(Personnage other) {
         return this.getBouds().intersects(other.getBounds());
     }
 
-    public Personnage toucherPersonnage(){
+    public Personnage toucherPersonnage() {
         Personnage ennemisProche = this.getJoueur().getEnnemiProche();
         System.out.println(ennemisProche);
         if (ennemisProche != null) {
@@ -71,20 +73,24 @@ public abstract class Arme {
         return null;
     }
 
-    public void directionPersonnage(){
-        Position positionHaut = new Position(this.joueur.getP().getX(), this.joueur.getP().getY() -32);
+    public void directionPersonnage() {
+        Position positionHaut = new Position(this.joueur.getP().getX(), this.joueur.getP().getY() - 32);
         Position positionBas = new Position(this.joueur.getP().getX(), this.joueur.getP().getY() + 32);
         Position positionGauche = new Position(this.joueur.getP().getX() - 32, this.joueur.getP().getY());
         Position positionDroite = new Position(this.joueur.getP().getX() + 32, this.joueur.getP().getY());
 
-        switch (this.joueur.getPositionPre()){
-            case 6 :this.setP(positionDroite);
+        switch (this.joueur.getPositionPre()) {
+            case 6:
+                this.setP(positionDroite);
                 break;
-            case 2 : this.setP(positionBas);
+            case 2:
+                this.setP(positionBas);
                 break;
-            case 4 : this.setP(positionGauche);
+            case 4:
+                this.setP(positionGauche);
                 break;
-            case 8 :this.setP(positionHaut);
+            case 8:
+                this.setP(positionHaut);
                 break;
         }
     }

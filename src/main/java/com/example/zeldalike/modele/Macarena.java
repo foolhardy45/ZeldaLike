@@ -3,18 +3,18 @@ package com.example.zeldalike.modele;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Macarena extends Ennemis{
-    public Macarena( Position p, Environnement env) {
-        super(5, 5, 1, p, env, env.getTerrain(),6);
+public class Macarena extends Ennemis {
+    public Macarena(Position p, Environnement env) {
+        super(5, 5, 1, p, env, env.getTerrain(), 6);
     }
 
-    public void boostArmure(){
+    public void boostArmure() {
         List<Personnage> allièsDuMale = this.getEnnemisProches();
 
         for (int i = 0; i < allièsDuMale.size(); i++) {
-            if (allièsDuMale.get(i) instanceof Macarena){
+            if (allièsDuMale.get(i) instanceof Macarena) {
                 //System.out.println("nada");
-            }else if (allièsDuMale.get(i) instanceof Ennemis){
+            } else if (allièsDuMale.get(i) instanceof Ennemis) {
                 ((Ennemis) allièsDuMale.get(i)).setBouclierActif(true);
                 //System.out.println(allièsDuMale.get(i).getDef());
             }
