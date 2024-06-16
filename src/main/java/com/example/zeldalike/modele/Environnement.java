@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Environnement {
+    private static int cooldown = 0;
     private Joueur j1;
     private ObservableList<Ennemis> ennemis;
     private ObservableList<ObjetRecuperables> objet;
@@ -12,18 +13,17 @@ public class Environnement {
     private int width;
     private Terrain terrain;
     private CarteBFS bfs_joueur;
-    private int deltaTime;
 
     public Environnement(int height, int width) {
         Position p = new Position(0, 0);
         this.terrain = new Terrain();
-        this.j1 = new Joueur(12,p,this, terrain);
+        this.j1 = new Joueur(12, p, this, terrain);
         this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
         this.ennemis = FXCollections.observableArrayList();
         this.objet = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
-        this.deltaTime = 0;
+
     }
 
     public Joueur getJ1() {
@@ -80,23 +80,26 @@ public class Environnement {
     }
 
 
-
     public void unTour() {
         this.getJ1().move();
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
         this.getJ1().updateProjectiles();
 
+
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
                 ennemis.get(i).agir();
-
+                ennemis.get(i).compétence();
                 if (!ennemis.get(i).enVie()) {
+                    ennemis.get(i).désacCompétence();
+                    ennemis.get(i).dropObjet();
                     sortirEnnemis(ennemis.get(i));
                 }
             }
         }
         verifierCollisions();
-        deltaTime++;
+        cooldown++;
+
     }
 }

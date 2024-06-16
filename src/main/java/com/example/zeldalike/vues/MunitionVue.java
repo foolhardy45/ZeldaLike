@@ -1,7 +1,6 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.modele.Arme.gun.Munition;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class MunitionVue {

@@ -6,18 +6,16 @@ import com.example.zeldalike.modele.Arme.Poing;
 import com.example.zeldalike.modele.Arme.gun.Gun;
 import com.example.zeldalike.modele.Joueur;
 import javafx.scene.image.Image;
-
 import javafx.scene.image.ImageView;
 
 public class ArmeVue {
     private final Joueur joueur;
     private final Arme arme;
-    private  ImageView armeVue;
-
     private final Image poingDroit;
     private final Image poingGauche;
     private final Image poingHaut;
     private final Image poingBas;
+    private ImageView armeVue;
 
     public ArmeVue(Joueur joueur, Arme arme) {
         this.joueur = joueur;
@@ -31,32 +29,33 @@ public class ArmeVue {
     }
 
     public void afficherarmeVue(ImageView mac) {
-        if (arme instanceof Poing) {
+        if (this.joueur.getArme() instanceof Poing) {
             if (joueur.getPositionPre() == 8) {
-                armeVue.isVisible();
+                armeVue.setImage(poingHaut);
+                armeVue.setVisible(true);
                 armeVue.setX(joueur.getP().xProperty().get());
                 armeVue.setY(joueur.getP().yProperty().get() - 32);
             } else if (joueur.getPositionPre() == 2) {
                 armeVue.setImage(poingBas);
-                armeVue.isVisible();
+                armeVue.setVisible(true);
                 armeVue.setX(joueur.getP().xProperty().get());
                 armeVue.setY(joueur.getP().yProperty().get() + 32);
             } else if (joueur.getPositionPre() == 4) {
                 armeVue.setImage(poingGauche);
-                armeVue.isVisible();
+                armeVue.setVisible(true);
                 armeVue.setX(joueur.getP().xProperty().get() - 32);
                 armeVue.setY(joueur.getP().yProperty().get());
             } else if (joueur.getPositionPre() == 6) {
                 armeVue.setImage(poingDroit);
-                armeVue.isVisible();
+                armeVue.setVisible(true);
                 armeVue.setX(joueur.getP().xProperty().get() + 32);
                 armeVue.setY(joueur.getP().yProperty().get());
             }
-        } else if (arme instanceof Gun) {
+        } else if (this.joueur.getArme() instanceof Gun) {
             // Logique pour afficher l'arme Gun
         }
     }
-    
+
 
     public ImageView getArmeVue() {
         return armeVue;

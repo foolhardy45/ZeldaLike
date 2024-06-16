@@ -3,12 +3,6 @@ package com.example.zeldalike.controlleurs;
 import com.example.zeldalike.modele.Arme.Poing;
 import com.example.zeldalike.modele.Arme.gun.Gun;
 import com.example.zeldalike.modele.Arme.gun.Munition;
-import com.example.zeldalike.modele.Citron;
-import com.example.zeldalike.modele.Environnement;
-import com.example.zeldalike.modele.Position;
-import com.example.zeldalike.modele.PotionVitale;
-import com.example.zeldalike.modele.*;
-import com.example.zeldalike.Main;
 import com.example.zeldalike.modele.*;
 import com.example.zeldalike.vues.InventaireVue;
 import com.example.zeldalike.vues.JoueurVue;
@@ -16,26 +10,18 @@ import com.example.zeldalike.vues.TerrrainVue;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
-
-import static com.example.zeldalike.Main.main;
-import static com.example.zeldalike.Main.stg;
 
 public class Controlleur implements Initializable {
 
@@ -68,7 +54,7 @@ public class Controlleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.env = new Environnement(2048, 4096);
-        TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage,carte_interaction, this.env.getTerrain(), this.env.getJ1());
+        TerrrainVue terrrainVue = new TerrrainVue(terrain_affichage, carte_interaction, this.env.getTerrain(), this.env.getJ1());
         terrain_affichage.setOnKeyPressed(this::onKeyPressed);
         terrain_affichage.setOnKeyReleased(this::onKeyReleased);
         terrain_affichage.setFocusTraversable(true);
@@ -101,13 +87,18 @@ public class Controlleur implements Initializable {
                 }
             } else if (this.env.getJ1().getArme() instanceof Gun) {
                 switch ((int) newValue) {
-                    case 8: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunUp());
-                    break;
-                    case 2: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunDown());
-                    break;
-                    case 4: this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunLeft());
-                    break;
-                    case 6 : this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunRight());
+                    case 8:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunUp());
+                        System.out.println();
+                        break;
+                    case 2:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunDown());
+                        break;
+                    case 4:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunLeft());
+                        break;
+                    case 6:
+                        this.joueurVue.getMac().setImage(this.joueurVue.getSpriteGunRight());
 
                 }
             }
@@ -116,28 +107,34 @@ public class Controlleur implements Initializable {
         MonObservateurMunition observateurMunition = new MonObservateurMunition(carte_interaction);
         this.env.getEnnemis().addListener(observateurlisteennemi);
         this.env.getJ1().getMunitionObservableList().addListener(observateurMunition);
-        Citron ennemipuissant = new Citron(new Position(64, 64), this.env);
-        this.env.ajouterEnnemis(ennemipuissant);
-        //BusinessMan man = new BusinessMan(new Position(640,640), this.env);
-        //this.env.ajouterEnnemis(man);
+        Citron ennemipuissant = new Citron(new Position(20, 20), this.env);
+        Macarena maca = new Macarena(new Position(30, 30), this.env);
+        //this.env.ajouterEnnemis(ennemipuissant);
+        //this.env.ajouterEnnemis(maca);
+        BusinessMan man = new BusinessMan(new Position(640, 640), this.env);
+        this.env.ajouterEnnemis(man);
         Boss pumkin = new BossSamurai(new Position(288, 544), this.env);
         this.env.ajouterEnnemis(pumkin);
 
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
-        Position PP1 = new Position(310, 310);
-        Position PP2 = new Position(310, 311);
-        Munition p1 = new Munition(PP1,this.env.getJ1(),0);
-        Munition p2 = new Munition(PP2,this.env.getJ1(),0);
+        Position PP1 = new Position(0, 0);
+        Position PP2 = new Position(0, 0);
+        Munition p1 = new Munition(PP1, this.env.getJ1(), 0);
+        Munition p2 = new Munition(PP2, this.env.getJ1(), 0);
         this.env.ajouterObjet(p1);
         this.env.ajouterObjet(new PotionVitale(new Position(510, 510)));
+        this.env.ajouterObjet(new PotionVitale(new Position(128, 128)));
+        this.env.ajouterObjet(new PotionVitale(new Position(256, 0)));
+
+        this.env.ajouterObjet(new ChaussuresHydrophobes(new Position(200, 5)));
         this.env.ajouterObjet(p2);
         System.out.println(p1.getIdObjet() + "muni 1");
         System.out.println(p2.getIdObjet() + "muni 2");
 
         //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
         //this.env.getJ1().getSac().ajoutInventaire(new PotionVitale(new Position(5, 5)));
-        this.env.getJ1().getSac().ajoutInventaire(new Cle(new Position(0,0)));
+        //this.env.getJ1().getSac().ajoutInventaire(new Cle(new Position(0, 0)));
         this.inventairepane.setVisible(false);
         this.inv = new InventaireVue(inventairepane, inventaireobjets, env.getJ1().getSac());
 
@@ -172,33 +169,49 @@ public class Controlleur implements Initializable {
         boolean attaque = pressedKeys.contains("X");
         boolean inventaire = pressedKeys.contains("A");
 
-        if (movingRight && movingLeft || movingDown && movingUp) {
-            this.env.getJ1().ajouterDirection(5);
-        } else if (movingUp && movingRight) {
-            this.env.getJ1().ajouterDirection(9);
-        } else if (movingUp && movingLeft) {
-            this.env.getJ1().ajouterDirection(7);
-        } else if (movingDown && movingLeft) {
-            this.env.getJ1().ajouterDirection(1);
-        } else if (movingDown && movingRight) {
-            this.env.getJ1().ajouterDirection(3);
-        } else if (movingUp) {
-            this.env.getJ1().ajouterDirection(8);
-        } else if (movingRight) {
-            this.env.getJ1().ajouterDirection(6);
-        } else if (movingDown) {
-            this.env.getJ1().ajouterDirection(2);
-        } else if (movingLeft) {
-            this.env.getJ1().ajouterDirection(4);
+        if (!this.inventaire_ouvert) {
+            if (movingRight && movingLeft || movingDown && movingUp) {
+                this.env.getJ1().ajouterDirection(5);
+            } else if (movingUp && movingRight) {
+                this.env.getJ1().ajouterDirection(9);
+            } else if (movingUp && movingLeft) {
+                this.env.getJ1().ajouterDirection(7);
+            } else if (movingDown && movingLeft) {
+                this.env.getJ1().ajouterDirection(1);
+            } else if (movingDown && movingRight) {
+                this.env.getJ1().ajouterDirection(3);
+            } else if (movingUp) {
+                this.env.getJ1().ajouterDirection(8);
+            } else if (movingRight) {
+                this.env.getJ1().ajouterDirection(6);
+            } else if (movingDown) {
+                this.env.getJ1().ajouterDirection(2);
+            } else if (movingLeft) {
+                this.env.getJ1().ajouterDirection(4);
+            }
+            if (attaque && cooldown) {
+                this.env.getJ1().ajouterDirection(5);
+                this.joueurVue.afficherArmeView();
+                this.env.getJ1().attaquer();
+                cooldown = false;
+            } else if (interact) {
+                this.env.getJ1().setInteraction(true);
+            }
+        } else {
+            if (movingUp) {
+                this.inv.deplacerSelect(8);
+            } else if (movingRight) {
+                this.inv.deplacerSelect(6);
+            } else if (movingDown) {
+                this.inv.deplacerSelect(2);
+            } else if (movingLeft) {
+                this.inv.deplacerSelect(4);
+            }
+            else if (interact) {
+                this.inv.utiliserObjetSelect();
+            }
         }
-        if (attaque && cooldown) {
-            this.env.getJ1().ajouterDirection(5);
-            this.joueurVue.afficherArmeView();
-            this.env.getJ1().attaquer();
-            cooldown = false;
-        } else if (interact) {
-            this.env.getJ1().setInteraction(true);
-        } else if (inventaire) {
+        if (inventaire) {
             pressedKeys.remove("A");
             //lanceMenuPause();
             inventaire_ouvert = this.inv.ouvrirInventaire();
@@ -219,7 +232,7 @@ public class Controlleur implements Initializable {
                     long currentTime = System.currentTimeMillis();
                     lastTime = currentTime;
 
-                    if (!inventaire_ouvert){
+                    if (!inventaire_ouvert) {
                         this.env.unTour();
 
                         if (this.joueurVue.isVisible()) {
@@ -228,12 +241,12 @@ public class Controlleur implements Initializable {
                                 cooldown = true;
                             }
                         }
-                    if (this.joueurVue.isVisible()) { // Si le joueur fait une attaque alors pendant qu"elle que seconde l'arme s'affichera
-                        if (temps_gameloop % 30 == 0) {
-                            this.joueurVue.getArmeView().setVisible(false);
-                            cooldown = true;
+                        if (this.joueurVue.isVisible()) { // Si le joueur fait une attaque alors pendant qu"elle que seconde l'arme s'affichera
+                            if (temps_gameloop % 30 == 0) {
+                                this.joueurVue.getArmeView().setVisible(false);
+                                cooldown = true;
+                            }
                         }
-                    }
                     }
                     temps_gameloop++;
                 }

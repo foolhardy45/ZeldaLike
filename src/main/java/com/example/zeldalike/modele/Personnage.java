@@ -6,15 +6,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import java.awt.*;
 
 public abstract class Personnage {
-    private IntegerProperty hp;
-    private int def;
-    private int vitesse;
-    private Position p;
     private final Environnement env;
     private final Terrain terrain;
     private final int hitbox;
     private final IntegerProperty direction;
-    public  int positionPre;
+    public int positionPre;
+    private IntegerProperty hp;
+    private int def;
+    private int vitesse;
+    private Position p;
+    private boolean bouclierActif = false;
 
 
     public Personnage(int hp, int def, int vitesse, Position p,int hitbox, Environnement env, Terrain terrain) {
@@ -28,9 +29,20 @@ public abstract class Personnage {
         this.direction = new SimpleIntegerProperty();
     }
 
+    public boolean isBouclierActif() {
+        return bouclierActif;
+    }
+
+    public void setBouclierActif(boolean bouclierActif) {
+        this.bouclierActif = bouclierActif;
+    }
 
     public int getPositionPre() {
         return positionPre;
+    }
+
+    public void setPositionPre(int position) {
+        positionPre = position;
     }
 
     public Terrain getTerrain() {
@@ -58,7 +70,7 @@ public abstract class Personnage {
     public void repousserPersonnages(Personnage p1, Personnage p2) {
         int dx = p1.getP().getX() - p2.getP().getX();
         int dy = p1.getP().getY() - p2.getP().getY();
-        int distance = p1.distanceEntreDeuxPersonnages(p1,p2);
+        int distance = p1.distanceEntreDeuxPersonnages(p1, p2);
         if (distance == 0) return;
 
         int repulsionForce = 12;
@@ -68,13 +80,13 @@ public abstract class Personnage {
         boolean p1CanMove =
                 terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY() + repulsionY) &&
                         terrain.estAutorisé(p1.getP().getX() + p1.getHitbox() + repulsionX, p1.getP().getY() + repulsionY) &&
-                        terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY()+ p1.getHitbox() + repulsionY) &&
-                        terrain.estAutorisé(p1.getP().getX()+ p1.getHitbox() + repulsionX, p1.getP().getY() +p1.getHitbox()+ repulsionY);
+                        terrain.estAutorisé(p1.getP().getX() + repulsionX, p1.getP().getY() + p1.getHitbox() + repulsionY) &&
+                        terrain.estAutorisé(p1.getP().getX() + p1.getHitbox() + repulsionX, p1.getP().getY() + p1.getHitbox() + repulsionY);
         boolean p2CanMove =
                 terrain.estAutorisé(p2.getP().getX() - repulsionX, p2.getP().getY() - repulsionY) &&
-                        terrain.estAutorisé(p2.getP().getX()+ p2.getHitbox()-repulsionX,p2.getP().getY() - repulsionY ) &&
-                        terrain.estAutorisé(p2.getP().getX()-repulsionX,p2.getP().getY()+ p2.getHitbox() - repulsionY ) &&
-                        terrain.estAutorisé(p2.getP().getX()+p2.getHitbox()-repulsionX,p2.getP().getY() + p2.getHitbox()-repulsionY);
+                        terrain.estAutorisé(p2.getP().getX() + p2.getHitbox() - repulsionX, p2.getP().getY() - repulsionY) &&
+                        terrain.estAutorisé(p2.getP().getX() - repulsionX, p2.getP().getY() + p2.getHitbox() - repulsionY) &&
+                        terrain.estAutorisé(p2.getP().getX() + p2.getHitbox() - repulsionX, p2.getP().getY() + p2.getHitbox() - repulsionY);
 
 
         if (p1CanMove && p2CanMove) {
@@ -123,13 +135,12 @@ public abstract class Personnage {
         return def;
     }
 
+    public void setDef(int def) {
+        this.def = def;
+    }
 
     public int getVitesse() {
         return vitesse;
-    }
-
-    public void setPositionPre (int position){
-        positionPre = position;
     }
 
     public void move() {
@@ -165,14 +176,18 @@ public abstract class Personnage {
                 moveRight();
                 break;
         }
-        if (this.getDirection() != positionPre && this.getDirection() != 0) {
+        if (this.getDirection() != positionPre && this.getDirection() != 0 && this.getDirection() != 5) {
             setPositionPre(this.getDirection());
-            System.out.println(positionPre);
+
         }
     }
 
-    public void subirDegats(int degats){
-        this.setHp(this.getHp() - degats);
+    public void subirDegats(int degats) {
+        if (!this.isBouclierActif()) {
+            this.setHp(this.getHp() - degats);
+        } else {
+            System.out.println("il ne peut pas recevoir de dégats");
+        }
     }
 
     private void moveUp() {
@@ -248,4 +263,12 @@ public abstract class Personnage {
     }
 
     public abstract void personnageTouche(Personnage p);
+
+    public void recevoirSoins(int pv){
+        if (getHp()<=10) {
+            setHp(getHp() + pv);
+        } else if (getHp()==11) {
+            setHp(getHp() + 1);
+        }
+    }
 }
