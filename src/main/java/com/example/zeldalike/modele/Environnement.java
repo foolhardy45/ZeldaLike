@@ -15,7 +15,7 @@ public class Environnement {
     private CarteBFS bfs_joueur;
 
     public Environnement(int height, int width) {
-        Position p = new Position(0, 0);
+        Position p = new Position(96, 65);
         this.terrain = new Terrain();
         this.j1 = new Joueur(12, p, this, terrain);
         this.bfs_joueur = new CarteBFS(this.terrain, this.j1);
@@ -85,7 +85,8 @@ public class Environnement {
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
         this.getJ1().updateProjectiles();
-
+        System.out.println(this.getJ1().getP().getX());
+        System.out.println(this.getJ1().getP().getY());
 
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {

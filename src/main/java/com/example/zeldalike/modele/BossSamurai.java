@@ -2,7 +2,7 @@ package com.example.zeldalike.modele;
 
 public class BossSamurai extends Boss{
     public BossSamurai(Position p, Environnement env){
-        super(50, 0, 0, p, env, 10);
+        super(500, 20, 0, p, env, 10);
     }
 
 

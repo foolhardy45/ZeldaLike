@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Poing extends Arme {
     public Poing(Joueur joueur) {
-        super(999, joueur);
+        super(30, joueur);
     }
 
 
