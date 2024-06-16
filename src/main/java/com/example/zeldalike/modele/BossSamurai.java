@@ -33,4 +33,14 @@ public class BossSamurai extends Boss{
     public void bombechapeau(){
         //ombre de chapeau apparait sur la map, puis explose
     }
+
+    @Override
+    public void compétence() {
+        //mange
+    }
+
+    @Override
+    public void désacCompétence() {
+        //ne mange plus
+    }
 }

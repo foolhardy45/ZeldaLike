@@ -11,8 +11,8 @@ public abstract class Ennemis extends Personnage {
     private int degats;
     private ObjetRecuperables objetMort;
 
-    public Ennemis(int hp, int def, int vitesse, Position p,int hitbox, Environnement env, Terrain terrain, int detection) {
-        super(hp, def, vitesse, p,hitbox, env, terrain);
+    public Ennemis(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain, int detection) {
+        super(hp, def, vitesse, p, env, terrain);
         id++;
         this.objetMort = objetAléatoire();
         this.idEnnemi = "E" + id;
@@ -115,6 +115,8 @@ public abstract class Ennemis extends Personnage {
         }
 
     }
+
+
 
     public abstract void compétence();
     public abstract void désacCompétence();

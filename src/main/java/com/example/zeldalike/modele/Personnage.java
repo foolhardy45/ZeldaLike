@@ -18,14 +18,14 @@ public abstract class Personnage {
     private boolean bouclierActif = false;
 
 
-    public Personnage(int hp, int def, int vitesse, Position p,int hitbox, Environnement env, Terrain terrain) {
+    public Personnage(int hp, int def, int vitesse, Position p, Environnement env, Terrain terrain) {
         this.hp = new SimpleIntegerProperty(hp);
         this.def = def;
         this.vitesse = vitesse;
         this.p = p;
         this.env = env;
         this.terrain = terrain;
-        this.hitbox = hitbox;
+        hitbox = 31;
         this.direction = new SimpleIntegerProperty();
     }
 
@@ -190,7 +190,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveUp() {
+    public void moveUp() {
         double nouvellePosY = this.getP().getY() - this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
@@ -199,7 +199,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveDown() {
+    public void moveDown() {
         double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
@@ -208,7 +208,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveLeft() {
+    public void moveLeft() {
         double nouvellePosX = this.getP().getX() - this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
@@ -217,7 +217,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveRight() {
+    public void moveRight() {
         double nouvellePosX = this.getP().getX() + this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();

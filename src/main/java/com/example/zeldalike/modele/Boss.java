@@ -6,7 +6,7 @@ public abstract class Boss extends Ennemis{
 
 
     public Boss(int hp, int def, int vitesse, Position p, Environnement env, int detection){
-        super(hp, def, vitesse, p,63, env, env.getTerrain(), detection);
+        super(hp, def, vitesse, p, env, env.getTerrain(), detection);
         this.phase = 1;
         action = 0;
     }
