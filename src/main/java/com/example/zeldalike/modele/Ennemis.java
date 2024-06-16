@@ -46,6 +46,10 @@ public abstract class Ennemis extends Personnage {
         return idEnnemi;
     }
 
+    public void agir(){
+        deplacementBFS();
+    }
+
     public void deplacementAleatoire() {
         Random quelleDirection = new Random();
         int t = quelleDirection.nextInt(500);
@@ -111,6 +115,8 @@ public abstract class Ennemis extends Personnage {
         }
 
     }
+
+
 
     public abstract void compétence();
     public abstract void désacCompétence();

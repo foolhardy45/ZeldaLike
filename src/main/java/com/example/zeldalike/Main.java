@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static Stage stg;
-    public static Scene jeu;
 
 
     public static void main(String[] args) {

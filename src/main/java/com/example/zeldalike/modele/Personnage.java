@@ -25,7 +25,7 @@ public abstract class Personnage {
         this.p = p;
         this.env = env;
         this.terrain = terrain;
-        this.hitbox = 31;
+        hitbox = 31;
         this.direction = new SimpleIntegerProperty();
     }
 
@@ -190,7 +190,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveUp() {
+    public void moveUp() {
         double nouvellePosY = this.getP().getY() - this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
@@ -199,7 +199,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveDown() {
+    public void moveDown() {
         double nouvellePosY = this.getP().getY() + this.getVitesse();
         int newY = (int) Math.round(nouvellePosY);
         int PosX = this.getP().getX();
@@ -208,7 +208,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveLeft() {
+    public void moveLeft() {
         double nouvellePosX = this.getP().getX() - this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
@@ -217,7 +217,7 @@ public abstract class Personnage {
         }
     }
 
-    private void moveRight() {
+    public void moveRight() {
         double nouvellePosX = this.getP().getX() + this.getVitesse();
         int newX = (int) Math.round(nouvellePosX);
         int PosY = this.getP().getY();
@@ -240,11 +240,11 @@ public abstract class Personnage {
     }
 
     private int getWidth() {
-        return 32;
+        return this.hitbox;
     }
 
     private int getHeight() {
-        return 32;
+        return this.hitbox;
     }
 
     public boolean verificationCollision(Personnage perso) {

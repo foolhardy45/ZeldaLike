@@ -73,25 +73,16 @@ public class Controlleur implements Initializable {
             if (this.env.getJ1().getArme() instanceof Poing) {
                 switch ((int) newValue) {
                     case 8:
-                        System.out.println("haut");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteUp());
-                        System.out.println(this.joueurVue.getMac().getImage());
-
                         break;
                     case 2:
-                        System.out.println("bas");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteDown());
-                        System.out.println(this.joueurVue.getMac().getImage());
                         break;
                     case 4:
-                        System.out.println("gauche");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteLeft());
-                        System.out.println(this.joueurVue.getMac().getImage());
                         break;
                     case 6:
-                        System.out.println("droite");
                         this.joueurVue.getMac().setImage(this.joueurVue.getSpriteRight());
-                        System.out.println(this.joueurVue.getMac().getImage());
                         break;
                 }
             } else if (this.env.getJ1().getArme() instanceof Gun) {
@@ -118,10 +109,13 @@ public class Controlleur implements Initializable {
         this.env.getJ1().getMunitionObservableList().addListener(observateurMunition);
         Citron ennemipuissant = new Citron(new Position(20, 20), this.env);
         Macarena maca = new Macarena(new Position(30, 30), this.env);
-        this.env.ajouterEnnemis(ennemipuissant);
-        this.env.ajouterEnnemis(maca);
+        //this.env.ajouterEnnemis(ennemipuissant);
+        //this.env.ajouterEnnemis(maca);
         BusinessMan man = new BusinessMan(new Position(640, 640), this.env);
         this.env.ajouterEnnemis(man);
+        Boss pumkin = new BossSamurai(new Position(288, 544), this.env);
+        this.env.ajouterEnnemis(pumkin);
+
         MonObservateurObjet observateurlisteobjet = new MonObservateurObjet(carte_interaction);
         this.env.getObjet().addListener(observateurlisteobjet);
         Position PP1 = new Position(0, 0);
