@@ -1,6 +1,7 @@
 package com.example.zeldalike.vues;
 
 import com.example.zeldalike.Main;
+import com.example.zeldalike.modele.Arme.gun.Munition;
 import com.example.zeldalike.modele.Cle;
 import com.example.zeldalike.modele.Inventaire;
 import com.example.zeldalike.modele.ObjetRecuperables;
@@ -28,6 +29,8 @@ public class InventaireVue {
             image = String.valueOf(Main.class.getResource("images/objets/potion.png"));
         } else if (objet instanceof Cle) {
             image = String.valueOf(Main.class.getResource("images/coins.gif"));
+        } else if (objet instanceof Munition) {
+            image = String.valueOf(Main.class.getResource("images/marchand.png"));
         }
 
 
