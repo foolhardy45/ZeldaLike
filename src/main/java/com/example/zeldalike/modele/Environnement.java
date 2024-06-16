@@ -92,6 +92,7 @@ public class Environnement {
                 ennemis.get(i).deplacementBFS();
                 ennemis.get(i).compétence();
                 if (!ennemis.get(i).enVie()) {
+                    ennemis.get(i).désacCompétence();
                     ennemis.get(i).dropObjet();
                     sortirEnnemis(ennemis.get(i));
                 }
