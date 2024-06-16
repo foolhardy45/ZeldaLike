@@ -12,13 +12,20 @@ public class BossSamurai extends Boss{
     }
 
     public void faireuneattaque(){
-        switch (this.getPhase()){
-            case 1: lanceprojectile();
-                System.out.println("hiyaa");
-            break;
-            case 2: bombechapeau();
-                System.out.println("grenade lancée");
-            break;
+        int indiceposition = this.getEnv().getTerrain().getIndiceCaseSousPosition(this.getP().getX() + getHitbox(), this.getP().getY() + getHitbox());
+        int indicevalmin = this.getEnv().getBfs_joueur().indiceMinimumVal(indiceposition);
+
+        if (this.getEnv().getBfs_joueur().getValeurCaseI(indicevalmin) < this.getEnv().getBfs_joueur().getValeurCaseI(indiceposition)) {
+            switch (this.getPhase()) {
+                case 1:
+                    lanceprojectile();
+                    System.out.println("hiyaa");
+                    break;
+                case 2:
+                    bombechapeau();
+                    System.out.println("grenade lancée");
+                    break;
+            }
         }
     }
 
