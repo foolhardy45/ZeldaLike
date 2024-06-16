@@ -42,6 +42,12 @@ public class TerrrainVue {
                 mac.getP().setY(mac.getP().getY() - 2 * zoneTemp);
             }
         });
+        mac.hpProperty().addListener((obs, old, n) -> {
+            if (mac.getHp()==0) {
+                affichageElement.setTranslateX(0);
+                affichageElement.setTranslateY(0);
+            }
+        });
     }
 
     public void creeMap() {
