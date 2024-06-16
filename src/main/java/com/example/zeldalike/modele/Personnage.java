@@ -265,6 +265,10 @@ public abstract class Personnage {
     public abstract void personnageTouche(Personnage p);
 
     public void recevoirSoins(int pv){
-        this.hp.add(pv);
+        if (getHp()<=10) {
+            setHp(getHp() + pv);
+        } else if (getHp()==11) {
+            setHp(getHp() + 1);
+        }
     }
 }
