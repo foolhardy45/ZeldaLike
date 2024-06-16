@@ -1,6 +1,7 @@
 package com.example.zeldalike.controlleurs;
 
 import com.example.zeldalike.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +32,14 @@ public class Menu_Controlleur implements Initializable {
     public void jouer(javafx.event.ActionEvent actionEvent) throws IOException {
         System.out.println("menu controller");
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/zeldalike/terrain2.fxml"));
+        root = fxmlLoader.load();
+        Main.stg.setScene(new Scene(root, 500, 500));
+        Main.stg.show();
+    }
+
+    public void creditsButton(javafx.event.ActionEvent actionEvent) throws IOException {
+        System.out.println("menu Credit");
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/zeldalike/Crédit.fxml"));
         root = fxmlLoader.load();
         Main.stg.setScene(new Scene(root, 500, 500));
         Main.stg.show();
