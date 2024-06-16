@@ -113,4 +113,5 @@ public abstract class Ennemis extends Personnage {
     }
 
     public abstract void compétence();
+    public abstract void désacCompétence();
 }

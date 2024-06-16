@@ -9,12 +9,15 @@ public class BusinessMan extends Ennemis {
 
     public void personnageTouche(Personnage p) {
         //System.out.println("Personnage Touché - BusinessMan");
-
-
     }
 
     @Override
     public void compétence() {
+
+    }
+
+    @Override
+    public void désacCompétence() {
 
     }
 }

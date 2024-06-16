@@ -22,6 +22,19 @@ public class Macarena extends Ennemis {
 
     }
 
+    public void désactiverBoostArmure() {
+        List<Personnage> allièsDuMale = this.getEnnemisProches();
+
+        for (int i = 0; i < allièsDuMale.size(); i++) {
+            if (allièsDuMale.get(i) instanceof Macarena) {
+                //System.out.println("nada");
+            } else if (allièsDuMale.get(i) instanceof Ennemis) {
+                ((Ennemis) allièsDuMale.get(i)).setBouclierActif(false);
+                //System.out.println(allièsDuMale.get(i).getDef());
+            }
+        }
+    }
+
     public List<Personnage> getEnnemisProches() {
         List<Personnage> ennemisProches = new ArrayList<>();
         int distanceSeuil = 50;
@@ -46,5 +59,10 @@ public class Macarena extends Ennemis {
     @Override
     public void compétence() {
         this.boostArmure();
+    }
+
+    @Override
+    public void désacCompétence() {
+        this.désactiverBoostArmure();
     }
 }

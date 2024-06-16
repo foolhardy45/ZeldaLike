@@ -17,4 +17,9 @@ public class Citron extends Ennemis {
     public void compétence() {
 
     }
+
+    @Override
+    public void désacCompétence() {
+
+    }
 }
