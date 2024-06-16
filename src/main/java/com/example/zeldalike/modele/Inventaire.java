@@ -141,7 +141,12 @@ public class Inventaire {
         }
     }
 
-    public void utiliserObjet(int indice){
+    public void utiliserPotion(){
+        if (this.getQuantitePotion()>0){
+            PotionVitale potion = (PotionVitale)getUnePotion();
+            //agir
+            this.retireInventaire(potion);
+        }
     }
 
 
