@@ -17,5 +17,8 @@ public class Poing extends Arme {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + "Poing";
+    }
 }

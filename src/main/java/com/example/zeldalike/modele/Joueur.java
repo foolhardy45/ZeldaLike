@@ -1,6 +1,7 @@
 package com.example.zeldalike.modele;
 
 import com.example.zeldalike.modele.Arme.Arme;
+import com.example.zeldalike.modele.Arme.Poing;
 import com.example.zeldalike.modele.Arme.gun.Gun;
 import com.example.zeldalike.modele.Arme.gun.Munition;
 import javafx.beans.property.IntegerProperty;
@@ -27,7 +28,8 @@ public class Joueur extends Personnage {
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
         super(4, def, 4, p, env, terrain);
         this.sac = new Inventaire(this);
-        this.arme = new Gun(this);
+        this.arme = new Poing(this);
+        this.sac.ajouterArme(new Gun(this));
         this.munitionObservableList = FXCollections.observableArrayList();
         this.hydrophobe=false;
     }
@@ -50,19 +52,35 @@ public class Joueur extends Personnage {
 
 
     public void donnerMunition() {
-        if (this.arme instanceof Gun) {
+        if (this.arme instanceof Gun || this.sac.ArmeDansInventaire(2) != null) {
             System.out.println("Munitions dans le sac avant transfert : " + this.sac.getListeMunition());
             List<Munition> munitions = new ArrayList<>(this.sac.getListeMunition()); // Copier la liste pour éviter ConcurrentModificationException
-            for (Munition munition : munitions) {
-                if (!((Gun) this.arme).getMunitionObservableList().contains(munition)) {
-                    ((Gun) this.arme).getMunitionObservableList().add(munition);
-                    this.sac.getListeMunition().remove(munition);
-                    System.out.println("Munition transférée au Gun : " + munition);
+            if (this.arme instanceof Gun) {
+                for (Munition munition : munitions) {
+                    if (!((Gun) this.arme).getListeMunitions().contains(munition)) {
+                        ((Gun) this.arme).getListeMunitions().add(munition);
+                        this.sac.getListeMunition().remove(munition);
+                        System.out.println("Munition transférée au Gun : " + munition);
+                    }
+                }
+            } else {
+                for (Munition munition : munitions) {
+                    if (!((Gun) this.sac.ArmeDansInventaire(2)).getListeMunitions().contains(munition)) {
+                        ((Gun) this.sac.ArmeDansInventaire(2)).getListeMunitions().add(munition);
+                        this.sac.getListeMunition().remove(munition);
+                        System.out.println("Munition transférée au Gun : " + munition);
+                    }
                 }
             }
             System.out.println("Munitions dans le sac après transfert : " + this.sac.getListeMunition());
-            System.out.println("Munitions dans le Gun après transfert : " + ((Gun) this.arme).getMunitionObservableList());
+            //System.out.println("Munitions dans le Gun après transfert : " + ((Gun) this.arme).getListeMunitions());
         }
+        else {
+            if (this.sac.ArmeDansInventaire(2) != null){
+
+            }
+        }
+
     }
 
     public Arme getArme() {

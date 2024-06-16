@@ -118,7 +118,7 @@ public class Controlleur implements Initializable {
         this.env.getJ1().getMunitionObservableList().addListener(observateurMunition);
         Citron ennemipuissant = new Citron(new Position(20, 20), this.env);
         Macarena maca = new Macarena(new Position(30, 30), this.env);
-        this.env.ajouterEnnemis(ennemipuissant);
+        //this.env.ajouterEnnemis(ennemipuissant);
         //this.env.ajouterEnnemis(maca);
         BusinessMan man = new BusinessMan(new Position(640, 640), this.env);
         this.env.ajouterEnnemis(man);

@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 public class MonObservateurMunition implements ListChangeListener<Munition> {
     private Pane panneauDeJeu;
     private MunitionVue munitionVue;
+    private int directionPrecedente;
 
 
     public MonObservateurMunition(Pane pane) {
@@ -20,6 +21,10 @@ public class MonObservateurMunition implements ListChangeListener<Munition> {
     public void onChanged(Change<? extends Munition> change) {
         while (change.next()) {
             for (Munition munition : change.getAddedSubList()) {
+                if (munition.getDirection() == 5){
+                    munition.setDirection(directionPrecedente);
+                }
+
                 switch (munition.getDirection()) {
                     case 1:
                         munitionVue = new MunitionVue(munition, String.valueOf(Main.class.getResource("images/gressif_gun/munitionGaucheBas.png")));
@@ -33,7 +38,8 @@ public class MonObservateurMunition implements ListChangeListener<Munition> {
                     case 4:
                         munitionVue = new MunitionVue(munition, String.valueOf(Main.class.getResource("images/gressif_gun/munitionGauche.png")));
                         break;
-                    case 5:  //munitionVue = new MunitionVue(munition,String.valueOf(Main.class.getResource("images/gressif_gun/munitionBas.png")));
+                    case 5:
+                        munitionVue = new MunitionVue(munition, String.valueOf(Main.class.getResource("images/gressif_gun/munitionGauche.png")));
                         break;
                     case 6:
                         munitionVue = new MunitionVue(munition, String.valueOf(Main.class.getResource("images/gressif_gun/munitionDroite.png")));
@@ -49,6 +55,7 @@ public class MonObservateurMunition implements ListChangeListener<Munition> {
                         munitionVue = new MunitionVue(munition, String.valueOf(Main.class.getResource("images/gressif_gun/munitionDroiteHaut.png")));
                         break;
                 }
+                directionPrecedente = munition.getDirection();
 
                 this.panneauDeJeu.getChildren().add(munitionVue.getImage());
                 System.out.println();

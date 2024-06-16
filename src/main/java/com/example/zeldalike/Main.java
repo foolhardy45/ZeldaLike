@@ -23,7 +23,7 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/zeldalike/Menu.fxml"));
         Parent root = fxmlLoader.load();
         Menu_Controlleur controlleur = fxmlLoader.getController();
-        Scene scene = new Scene(root, 2560, 1440);
+        Scene scene = new Scene(root, 600, 600);
         stage.setScene(scene);
         stage.setTitle("KKDK!");
         stg = stage;

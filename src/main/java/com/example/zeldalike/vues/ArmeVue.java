@@ -29,9 +29,7 @@ public class ArmeVue {
     }
 
     public void afficherarmeVue(ImageView mac) {
-        if (arme instanceof Poing) {
-            System.out.println("je passe dans le sout");
-            System.out.println(joueur.getPositionPre());
+        if (this.joueur.getArme() instanceof Poing) {
             if (joueur.getPositionPre() == 8) {
                 armeVue.setImage(poingHaut);
                 armeVue.setVisible(true);
@@ -53,7 +51,7 @@ public class ArmeVue {
                 armeVue.setX(joueur.getP().xProperty().get() + 32);
                 armeVue.setY(joueur.getP().yProperty().get());
             }
-        } else if (arme instanceof Gun) {
+        } else if (this.joueur.getArme() instanceof Gun) {
             // Logique pour afficher l'arme Gun
         }
     }

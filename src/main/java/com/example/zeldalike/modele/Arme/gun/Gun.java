@@ -6,12 +6,14 @@ import com.example.zeldalike.modele.Position;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class Gun extends Arme {
-    private ObservableList<Munition> munitionObservableList;
+    private ArrayList<Munition> listemunitions;
 
     public Gun(Joueur j) {
         super(5, j);
-        this.munitionObservableList = FXCollections.observableArrayList();
+        this.listemunitions = new ArrayList<Munition>();
     }
 
    /* public boolean aMuni(){
@@ -33,19 +35,24 @@ public class Gun extends Arme {
     }
 */
 
-    public ObservableList<Munition> getMunitionObservableList() {
-        return munitionObservableList;
+    public ArrayList<Munition> getListeMunitions() {
+        return listemunitions;
+    }
+
+    public void setListeMunitions(ArrayList<Munition> listemunitions) {
+        this.listemunitions = listemunitions;
     }
 
     public void ajouterMunition(Munition munition) {
-        this.munitionObservableList.add(munition);
+        this.listemunitions.add(munition);
     }
 
     @Override
     public void faireUneAttaque() {
-        if (!this.munitionObservableList.isEmpty()) {
+        if (!this.listemunitions.isEmpty()) {
             // Récupère la première munition de la liste
-            Munition mune = this.munitionObservableList.get(0);
+            System.out.println(this.listemunitions);
+            Munition mune = this.listemunitions.getFirst();
 
 
             // Met à jour la position de la munition
@@ -62,7 +69,7 @@ public class Gun extends Arme {
             }
 
             // Retire la munition de la liste originale
-            this.munitionObservableList.remove(mune);
+            this.listemunitions.remove(mune);
             //retire la munition du sac
             this.getJoueur().getSac().retireInventaire(mune);
 
@@ -71,5 +78,8 @@ public class Gun extends Arme {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString() + "GUN";
+    }
 }

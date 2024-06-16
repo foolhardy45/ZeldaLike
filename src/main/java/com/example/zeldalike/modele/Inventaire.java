@@ -1,18 +1,23 @@
 package com.example.zeldalike.modele;
 
+import com.example.zeldalike.modele.Arme.Arme;
+import com.example.zeldalike.modele.Arme.Poing;
+import com.example.zeldalike.modele.Arme.gun.Gun;
 import com.example.zeldalike.modele.Arme.gun.Munition;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Inventaire {
-    private final ArrayList<ObjetRecuperables> articles;
-    private final Personnage j;
+    private  ArrayList<ObjetRecuperables> articles;
+    private ArrayList<Arme> armespossedees;
+    private final Joueur j;
 
 
-    public Inventaire(Personnage j) {
+    public Inventaire(Joueur j) {
         this.j = j;
         this.articles = new ArrayList<>();
+        this.armespossedees = new ArrayList<>();
         this.articles.addFirst(new Munition(new Position(0,0)));
     }
 
@@ -159,6 +164,52 @@ public class Inventaire {
         for (ObjetRecuperables o : tout.keySet()) {
             texte += o + " : " + tout.get(o) + "\n";
         }
+        for (Arme o : this.armespossedees) {
+            texte += o + " : " + tout.get(o) + "\n";
+        }
         return texte;
+    }
+
+    public void ajouterArme(Arme objet){
+        this.armespossedees.add(objet);
+    }
+
+    public Arme ArmeDansInventaire(int numeroArme){
+        Arme retour = null;
+        switch (numeroArme){
+            case 1:
+                for (Arme a : this.armespossedees){//poing
+                    if (a instanceof Poing){
+                        retour = a;
+                    }
+                }
+                break;
+            case 2:
+                for (Arme a : this.armespossedees){//gun
+                    if (a instanceof Gun){
+                        retour = a;
+                    }
+                }
+                break;
+            case 3:
+                //katana
+        }
+        return retour;
+    }
+
+    public ArrayList<Arme> getArmespossedees() {
+        return armespossedees;
+    }
+
+    public Arme remplacerArme(Arme a, int numeroArme){
+        Arme ar = ArmeDansInventaire(numeroArme);
+        this.armespossedees.add(a);
+        System.out.println("arme remplacee");
+        this.armespossedees.remove(ar);
+        return ar;
+    }
+
+    public Joueur getJ() {
+        return j;
     }
 }

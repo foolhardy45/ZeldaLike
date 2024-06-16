@@ -97,4 +97,8 @@ public abstract class Arme {
 
     public abstract void faireUneAttaque();
 
+    @Override
+    public String toString() {
+        return "Arme ";
+    }
 }
