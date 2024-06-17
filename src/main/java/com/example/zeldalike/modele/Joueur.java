@@ -26,7 +26,7 @@ public class Joueur extends Personnage {
     private boolean hydrophobe;
 
     public Joueur(int def, Position p, Environnement env, Terrain terrain) {
-        super(4, def, 15, p, env, terrain);
+        super(4, def, 6, p, env, terrain);
         this.sac = new Inventaire(this);
         this.arme = new Poing(this);
         this.sac.ajouterArme(new Gun(this));

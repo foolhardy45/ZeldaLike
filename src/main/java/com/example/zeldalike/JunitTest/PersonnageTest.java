@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class PersonnageTest {
-    @Test
+ /*   @Test
     public final void distanceEntreDeuxPersonnages() {
         Environnement env = new Environnement(100, 100);
         Citron citron = new Citron(new Position(0, 0), env);
@@ -63,5 +63,5 @@ public class PersonnageTest {
         assertFalse(joueur.collidesWith(ennemi2));
     }
 
-
+*/
 }

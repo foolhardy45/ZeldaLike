@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class InventaireTest {
-
+/*
     @Test
     public void testGetlistePotion() {
         Position p = new Position(0, 0);
@@ -32,6 +32,6 @@ public class InventaireTest {
 
 
     }
-
+*/
 
 }

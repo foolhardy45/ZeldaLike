@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Macarena extends Ennemis {
     public Macarena(Position p, Environnement env) {
-        super(50, 5, 1, p, env, env.getTerrain(), 6);
+        super(50, 5, 0, p, env, env.getTerrain(), 6);
     }
 
     public void boostArmure() {
@@ -23,13 +23,13 @@ public class Macarena extends Ennemis {
     }
 
     public void désactiverBoostArmure() {
-        List<Personnage> allièsDuMale = this.getEnnemisProches();
 
-        for (int i = 0; i < allièsDuMale.size(); i++) {
-            if (allièsDuMale.get(i) instanceof Macarena) {
+
+        for (int i = 0; i < this.getEnv().getEnnemis().size(); i++) {
+            if (this.getEnv().getEnnemis().get(i) instanceof Macarena) {
                 //System.out.println("nada");
-            } else if (allièsDuMale.get(i) instanceof Ennemis) {
-                ((Ennemis) allièsDuMale.get(i)).setBouclierActif(false);
+            } else if (this.getEnv().getEnnemis().get(i) instanceof Ennemis) {
+                ((Ennemis) this.getEnv().getEnnemis().get(i)).setBouclierActif(false);
                 //System.out.println(allièsDuMale.get(i).getDef());
             }
         }

@@ -14,6 +14,9 @@ public class Environnement {
     private Terrain terrain;
     private CarteBFS bfs_joueur;
 
+    private static  int compteur;
+    private boolean subircout;
+
     public Environnement(int height, int width) {
         Position p = new Position(96, 65);
         this.terrain = new Terrain();
@@ -23,6 +26,8 @@ public class Environnement {
         this.objet = FXCollections.observableArrayList();
         this.height = height;
         this.width = width;
+        this.subircout = true;
+        compteur = 0;
 
     }
 
@@ -72,9 +77,20 @@ public class Environnement {
     }
 
     public void verifierCollisions() {
+
         for (int i = 0; i < ennemis.size(); i++) {
+            if (compteur %150 ==0){
+                subircout = true;
+            }
             if (ennemis.get(i).collidesWith(j1)) {
                 ennemis.get(i).repousserPersonnages(j1, ennemis.get(i));
+                if (subircout) {
+                    j1.subirDegats(1);
+                    subircout = false;
+                }
+
+
+
             }
         }
     }
@@ -85,8 +101,8 @@ public class Environnement {
         this.bfs_joueur.miseAJourCarte();
         this.getJ1().interact();
         this.getJ1().updateProjectiles();
-        System.out.println(this.getJ1().getP().getX());
-        System.out.println(this.getJ1().getP().getY());
+        //System.out.println(this.getJ1().getP().getX());
+        //System.out.println(this.getJ1().getP().getY());
 
         if (!ennemis.isEmpty()) {
             for (int i = 0; i < ennemis.size(); i++) {
@@ -100,6 +116,7 @@ public class Environnement {
             }
         }
         verifierCollisions();
+        compteur++;
         cooldown++;
 
     }

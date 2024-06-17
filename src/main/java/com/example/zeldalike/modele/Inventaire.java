@@ -18,7 +18,7 @@ public class Inventaire {
         this.j = j;
         this.articles = new ArrayList<>();
         this.armespossedees = new ArrayList<>();
-        this.articles.addFirst(new Munition(new Position(0, 0)));
+        this.articles.add(0,new Munition(new Position(0, 0)));
     }
 
 

@@ -20,7 +20,7 @@ public class Munition extends ObjetRecuperables {
         super(position);
         this.j = j;
         this.degats = 4;
-        this.vitesse = 2;
+        this.vitesse = 8;
         id++;
         this.idMunition = "E" + id;
         this.direction = direction;

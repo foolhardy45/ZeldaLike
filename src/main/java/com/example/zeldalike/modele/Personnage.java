@@ -73,7 +73,7 @@ public abstract class Personnage {
         int distance = p1.distanceEntreDeuxPersonnages(p1, p2);
         if (distance == 0) return;
 
-        int repulsionForce = 12;
+        int repulsionForce = 16;
         int repulsionX = (dx / distance) * repulsionForce;
         int repulsionY = (dy / distance) * repulsionForce;
 
@@ -97,6 +97,7 @@ public abstract class Personnage {
         } else if (p2CanMove) {
             p2.moveDe(-repulsionX, -repulsionY);
         }
+
     }
 
     public IntegerProperty directionProperty() {

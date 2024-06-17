@@ -50,7 +50,7 @@ public class Gun extends Arme {
         if (!this.listemunitions.isEmpty()) {
             // Récupère la première munition de la liste
             System.out.println(this.listemunitions);
-            Munition mune = this.listemunitions.getFirst();
+            Munition mune = this.listemunitions.get(0);
 
 
             // Met à jour la position de la munition
